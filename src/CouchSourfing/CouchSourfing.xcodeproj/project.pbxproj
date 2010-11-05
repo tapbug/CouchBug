@@ -13,7 +13,48 @@
 		2860E328111B887F00E27156 /* AppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E326111B887F00E27156 /* AppDelegate_iPhone.m */; };
 		2860E32E111B888700E27156 /* AppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E32C111B888700E27156 /* AppDelegate_iPad.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA91E71284A0E700CB1737 /* libIOC.a */; };
+		6CAA922D12852D4C00CB1737 /* XPathFinder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922B12852D3800CB1737 /* XPathFinder.a */; };
+		6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922E12852D6E00CB1737 /* libxml2.dylib */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		6CAA91E41284A0E700CB1737 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6C1D739511F21E8400F0EFC2;
+			remoteInfo = UnitTests;
+		};
+		6CAA91E61284A0E700CB1737 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 6C07A88211FEDDCA00358364;
+			remoteInfo = IOC;
+		};
+		6CAA91EC1284A18800CB1737 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 6C07A88111FEDDCA00358364;
+			remoteInfo = IOC;
+		};
+		6CAA922A12852D3800CB1737 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = D2AAC07E0554694100DB518D /* XPathFinder.a */;
+			remoteInfo = XPathFinder;
+		};
+		6CAA926912852E8300CB1737 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = D2AAC07D0554694100DB518D /* XPathFinder */;
+			remoteInfo = XPathFinder;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -26,6 +67,9 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Shared/main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* CouchSourfing_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSourfing_Prefix.pch; sourceTree = "<group>"; };
+		6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IOC.xcodeproj; path = ../../libs/objectiveioc/src/IOC.xcodeproj; sourceTree = SOURCE_ROOT; };
+		6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XPathFinder.xcodeproj; path = ../../libs/xpathfinder/XPathFinder.xcodeproj; sourceTree = SOURCE_ROOT; };
+		6CAA922E12852D6E00CB1737 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		8D1107310486CEB800E47090 /* CouchSourfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSourfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -37,6 +81,9 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
+				6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */,
+				6CAA922D12852D4C00CB1737 /* XPathFinder.a in Frameworks */,
+				6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -80,6 +127,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */,
+				6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */,
 				2860E32A111B888700E27156 /* iPad */,
 				2860E324111B887F00E27156 /* iPhone */,
 				28EEBF621118D79A00187D67 /* Shared */,
@@ -102,11 +151,29 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6CAA922E12852D6E00CB1737 /* libxml2.dylib */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6CAA91DD1284A0E700CB1737 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA91E51284A0E700CB1737 /* UnitTests.octest */,
+				6CAA91E71284A0E700CB1737 /* libIOC.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		6CAA922412852D3800CB1737 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA922B12852D3800CB1737 /* XPathFinder.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -123,6 +190,8 @@
 			buildRules = (
 			);
 			dependencies = (
+				6CAA91ED1284A18800CB1737 /* PBXTargetDependency */,
+				6CAA926A12852E8300CB1737 /* PBXTargetDependency */,
 			);
 			name = CouchSourfing;
 			productName = CouchSourfing;
@@ -146,12 +215,46 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 6CAA91DD1284A0E700CB1737 /* Products */;
+					ProjectRef = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
+				},
+				{
+					ProductGroup = 6CAA922412852D3800CB1737 /* Products */;
+					ProjectRef = 6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* CouchSourfing */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		6CAA91E51284A0E700CB1737 /* UnitTests.octest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = UnitTests.octest;
+			remoteRef = 6CAA91E41284A0E700CB1737 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6CAA91E71284A0E700CB1737 /* libIOC.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libIOC.a;
+			remoteRef = 6CAA91E61284A0E700CB1737 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		6CAA922B12852D3800CB1737 /* XPathFinder.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = XPathFinder.a;
+			remoteRef = 6CAA922A12852D3800CB1737 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -175,6 +278,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		6CAA91ED1284A18800CB1737 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = IOC;
+			targetProxy = 6CAA91EC1284A18800CB1737 /* PBXContainerItemProxy */;
+		};
+		6CAA926A12852E8300CB1737 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = XPathFinder;
+			targetProxy = 6CAA926912852E8300CB1737 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
@@ -212,7 +328,15 @@
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					../../libs/xpathfinder/Classes,
+					../../libs/objectiveioc/src/Classes,
+				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				OTHER_LDFLAGS = (
+					"-all_load",
+					"-ObjC",
+				);
 				PREBINDING = NO;
 				SDKROOT = iphoneos4.1;
 				TARGETED_DEVICE_FAMILY = "1,2";

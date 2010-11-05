@@ -17,7 +17,7 @@
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    
+    MVIOCContainer *container = [[[MVIOCContainer alloc] init] autorelease];
     // Override point for customization after application launch.
     
     [window makeKeyAndVisible];
