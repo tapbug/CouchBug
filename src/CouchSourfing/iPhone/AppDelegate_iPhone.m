@@ -8,19 +8,30 @@
 
 #import "AppDelegate_iPhone.h"
 
+#import "LauncherController.h"
+#import "CouchSearchFormController.h"
+
 @implementation AppDelegate_iPhone
 
-@synthesize window;
-
+@synthesize window = _window;
+@synthesize container = _container;
+@synthesize navController = _navController;
 
 #pragma mark -
 #pragma mark Application lifecycle
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
-    MVIOCContainer *container = [[[MVIOCContainer alloc] init] autorelease];
-    // Override point for customization after application launch.
+    self.container = [[[MVIOCContainer alloc] init] autorelease];
+
+    [self.container addComponent:[LauncherController class]];
+    [self.container addComponent:[CouchSearchFormController class]];
+    LauncherController *launcherController = [self.container getComponent:[LauncherController class]];
     
-    [window makeKeyAndVisible];
+    self.navController = [[[UINavigationController alloc] initWithRootViewController:launcherController] autorelease];
+    
+    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    [self.window addSubview:self.navController.view];
+    [self.window makeKeyAndVisible];
     
     return YES;
 }
@@ -75,7 +86,8 @@
 
 
 - (void)dealloc {
-    [window release];
+    self.window = nil;
+    self.container = nil;
     [super dealloc];
 }
 

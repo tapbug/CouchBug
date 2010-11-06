@@ -10,10 +10,14 @@
 #import "MVIOC/MVIOC.h"
 
 @interface AppDelegate_iPhone : NSObject <UIApplicationDelegate> {
-    UIWindow *window;
+    UIWindow *_window;
+    MVIOCContainer *_container;
+    UINavigationController *_navController;
 }
 
-@property (nonatomic, retain) IBOutlet UIWindow *window;
+@property (nonatomic, retain) UIWindow *window;
+@property (nonatomic, retain) MVIOCContainer *container;
+@property (nonatomic, retain) UINavigationController *navController;
 
 @end
 

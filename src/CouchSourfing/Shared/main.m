@@ -8,10 +8,23 @@
 
 #import <UIKit/UIKit.h>
 
+BOOL isDeviceAniPad() {
+#ifdef UI_USER_INTERFACE_IDIOM()
+    return UI_USER_INTERFACE_IDIOM();
+#else
+    return NO;
+#endif
+} 
+
 int main(int argc, char *argv[]) {
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
-    int retVal = UIApplicationMain(argc, argv, nil, nil);
+    NSString *delegateClassName = @"AppDelegate_iPhone";
+    if (isDeviceAniPad()) {
+        delegateClassName = @"AppDelegate_iPad";
+    }
+
+    int retVal = UIApplicationMain(argc, argv, nil, delegateClassName);
     [pool release];
     return retVal;
 }

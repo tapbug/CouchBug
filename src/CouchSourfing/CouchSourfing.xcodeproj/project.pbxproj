@@ -16,6 +16,8 @@
 		6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA91E71284A0E700CB1737 /* libIOC.a */; };
 		6CAA922D12852D4C00CB1737 /* XPathFinder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922B12852D3800CB1737 /* XPathFinder.a */; };
 		6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922E12852D6E00CB1737 /* libxml2.dylib */; };
+		6CAA9275128535E700CB1737 /* LauncherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA9274128535E700CB1737 /* LauncherController.m */; };
+		6CAA9306128546F200CB1737 /* CouchSearchFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA9305128546F200CB1737 /* CouchSearchFormController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -70,6 +72,10 @@
 		6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IOC.xcodeproj; path = ../../libs/objectiveioc/src/IOC.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XPathFinder.xcodeproj; path = ../../libs/xpathfinder/XPathFinder.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6CAA922E12852D6E00CB1737 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
+		6CAA9273128535E700CB1737 /* LauncherController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LauncherController.h; sourceTree = "<group>"; };
+		6CAA9274128535E700CB1737 /* LauncherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherController.m; sourceTree = "<group>"; };
+		6CAA9304128546F200CB1737 /* CouchSearchFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFormController.h; sourceTree = "<group>"; };
+		6CAA9305128546F200CB1737 /* CouchSearchFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormController.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSourfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSourfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -101,8 +107,11 @@
 		2860E324111B887F00E27156 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				6CAA9303128546B900CB1737 /* CouchSearch */,
 				2860E325111B887F00E27156 /* AppDelegate_iPhone.h */,
 				2860E326111B887F00E27156 /* AppDelegate_iPhone.m */,
+				6CAA9273128535E700CB1737 /* LauncherController.h */,
+				6CAA9274128535E700CB1737 /* LauncherController.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -174,6 +183,15 @@
 				6CAA922B12852D3800CB1737 /* XPathFinder.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		6CAA9303128546B900CB1737 /* CouchSearch */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA9304128546F200CB1737 /* CouchSearchFormController.h */,
+				6CAA9305128546F200CB1737 /* CouchSearchFormController.m */,
+			);
+			name = CouchSearch;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -274,6 +292,8 @@
 				1D60589B0D05DD56006BFB54 /* main.m in Sources */,
 				2860E328111B887F00E27156 /* AppDelegate_iPhone.m in Sources */,
 				2860E32E111B888700E27156 /* AppDelegate_iPad.m in Sources */,
+				6CAA9275128535E700CB1737 /* LauncherController.m in Sources */,
+				6CAA9306128546F200CB1737 /* CouchSearchFormController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
