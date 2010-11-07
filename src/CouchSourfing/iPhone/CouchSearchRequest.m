@@ -51,7 +51,7 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
 
 
 - (void)send {
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.couchsurfing.org/mapsurf.html"]];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.couchsurfing.org/mapsurf.html?SEARCH[skip]=25&SEARCH[show]=25"]];
     [urlRequest setHTTPMethod:@"POST"];
     
     NSMutableString *bodyString = [NSMutableString string];
@@ -68,6 +68,9 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
     [bodyString appendString:[self parameter:@"radius" value:self.radius]];
     [bodyString appendString:[self parameter:@"radius_type" value:self.radiusType]];
 
+    [bodyString appendString:[self parameter:@"skip" value:@"25"]];
+    [bodyString appendString:[self parameter:@"show" value:@"5"]];    
+    
     [bodyString appendString:[self parameter:@"action" value:@"List surfers on next page..."]];
     [bodyString appendString:@"form=basic"];
         
