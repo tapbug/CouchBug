@@ -1,0 +1,28 @@
+//
+//  CouchSearchResultController.h
+//  CouchSourfing
+//
+//  Created by Michal Vašíček on 11/6/10.
+//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//
+
+#import <UIKit/UIKit.h>
+
+#import "CouchSearchRequest.h"
+#import "CSImageDownloader.h"
+
+@class CoachSearchRequestFactory;
+@class CouchSearchRequest;
+
+@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
+    CouchSearchRequest *_request;
+    
+    UITableView *_tableView;
+    NSMutableArray *_imageDownloaders;
+    
+    NSArray *_sourfers;
+}
+
+- (id)initWithRequest:(CouchSearchRequest *)request;
+
+@end

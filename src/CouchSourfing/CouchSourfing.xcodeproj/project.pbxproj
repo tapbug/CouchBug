@@ -18,6 +18,13 @@
 		6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922E12852D6E00CB1737 /* libxml2.dylib */; };
 		6CAA9275128535E700CB1737 /* LauncherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA9274128535E700CB1737 /* LauncherController.m */; };
 		6CAA9306128546F200CB1737 /* CouchSearchFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA9305128546F200CB1737 /* CouchSearchFormController.m */; };
+		6CAA940412858FCF00CB1737 /* CouchSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA940312858FCF00CB1737 /* CouchSearchRequest.m */; };
+		6CAA94071285914E00CB1737 /* CouchSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94061285914E00CB1737 /* CouchSearchResultController.m */; };
+		6CAA940C128591BD00CB1737 /* CouchSearchResultControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */; };
+		6CAA94151285943800CB1737 /* CouchSearchRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94141285943800CB1737 /* CouchSearchRequestFactory.m */; };
+		6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */; };
+		6CAA96DD1285EFBA00CB1737 /* CouchSourfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA96DC1285EFBA00CB1737 /* CouchSourfer.m */; };
+		6CAA97E31286B79C00CB1737 /* CSImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA97E21286B79C00CB1737 /* CSImageDownloader.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +83,20 @@
 		6CAA9274128535E700CB1737 /* LauncherController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LauncherController.m; sourceTree = "<group>"; };
 		6CAA9304128546F200CB1737 /* CouchSearchFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFormController.h; sourceTree = "<group>"; };
 		6CAA9305128546F200CB1737 /* CouchSearchFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormController.m; sourceTree = "<group>"; };
+		6CAA940212858FCF00CB1737 /* CouchSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchRequest.h; sourceTree = "<group>"; };
+		6CAA940312858FCF00CB1737 /* CouchSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchRequest.m; sourceTree = "<group>"; };
+		6CAA94051285914E00CB1737 /* CouchSearchResultController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchResultController.h; sourceTree = "<group>"; };
+		6CAA94061285914E00CB1737 /* CouchSearchResultController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchResultController.m; sourceTree = "<group>"; };
+		6CAA940A128591BD00CB1737 /* CouchSearchResultControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchResultControllerFactory.h; sourceTree = "<group>"; };
+		6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchResultControllerFactory.m; sourceTree = "<group>"; };
+		6CAA94131285943800CB1737 /* CouchSearchRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchRequestFactory.h; sourceTree = "<group>"; };
+		6CAA94141285943800CB1737 /* CouchSearchRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchRequestFactory.m; sourceTree = "<group>"; };
+		6CAA94D61285A07E00CB1737 /* CouchSearchFormControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFormControllerFactory.h; sourceTree = "<group>"; };
+		6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormControllerFactory.m; sourceTree = "<group>"; };
+		6CAA96DB1285EFBA00CB1737 /* CouchSourfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSourfer.h; sourceTree = "<group>"; };
+		6CAA96DC1285EFBA00CB1737 /* CouchSourfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSourfer.m; sourceTree = "<group>"; };
+		6CAA97E11286B79C00CB1737 /* CSImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSImageDownloader.h; sourceTree = "<group>"; };
+		6CAA97E21286B79C00CB1737 /* CSImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSImageDownloader.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSourfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSourfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -112,6 +133,10 @@
 				2860E326111B887F00E27156 /* AppDelegate_iPhone.m */,
 				6CAA9273128535E700CB1737 /* LauncherController.h */,
 				6CAA9274128535E700CB1737 /* LauncherController.m */,
+				6CAA96DB1285EFBA00CB1737 /* CouchSourfer.h */,
+				6CAA96DC1285EFBA00CB1737 /* CouchSourfer.m */,
+				6CAA97E11286B79C00CB1737 /* CSImageDownloader.h */,
+				6CAA97E21286B79C00CB1737 /* CSImageDownloader.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -188,10 +213,36 @@
 		6CAA9303128546B900CB1737 /* CouchSearch */ = {
 			isa = PBXGroup;
 			children = (
-				6CAA9304128546F200CB1737 /* CouchSearchFormController.h */,
-				6CAA9305128546F200CB1737 /* CouchSearchFormController.m */,
+				6CAA94D51285A06200CB1737 /* Form */,
+				6CAA941A1285955000CB1737 /* Request */,
+				6CAA94051285914E00CB1737 /* CouchSearchResultController.h */,
+				6CAA94061285914E00CB1737 /* CouchSearchResultController.m */,
+				6CAA940A128591BD00CB1737 /* CouchSearchResultControllerFactory.h */,
+				6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */,
 			);
 			name = CouchSearch;
+			sourceTree = "<group>";
+		};
+		6CAA941A1285955000CB1737 /* Request */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA940212858FCF00CB1737 /* CouchSearchRequest.h */,
+				6CAA940312858FCF00CB1737 /* CouchSearchRequest.m */,
+				6CAA94131285943800CB1737 /* CouchSearchRequestFactory.h */,
+				6CAA94141285943800CB1737 /* CouchSearchRequestFactory.m */,
+			);
+			name = Request;
+			sourceTree = "<group>";
+		};
+		6CAA94D51285A06200CB1737 /* Form */ = {
+			isa = PBXGroup;
+			children = (
+				6CAA9304128546F200CB1737 /* CouchSearchFormController.h */,
+				6CAA9305128546F200CB1737 /* CouchSearchFormController.m */,
+				6CAA94D61285A07E00CB1737 /* CouchSearchFormControllerFactory.h */,
+				6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */,
+			);
+			name = Form;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +345,13 @@
 				2860E32E111B888700E27156 /* AppDelegate_iPad.m in Sources */,
 				6CAA9275128535E700CB1737 /* LauncherController.m in Sources */,
 				6CAA9306128546F200CB1737 /* CouchSearchFormController.m in Sources */,
+				6CAA940412858FCF00CB1737 /* CouchSearchRequest.m in Sources */,
+				6CAA94071285914E00CB1737 /* CouchSearchResultController.m in Sources */,
+				6CAA940C128591BD00CB1737 /* CouchSearchResultControllerFactory.m in Sources */,
+				6CAA94151285943800CB1737 /* CouchSearchRequestFactory.m in Sources */,
+				6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */,
+				6CAA96DD1285EFBA00CB1737 /* CouchSourfer.m in Sources */,
+				6CAA97E31286B79C00CB1737 /* CSImageDownloader.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -351,6 +409,7 @@
 				HEADER_SEARCH_PATHS = (
 					../../libs/xpathfinder/Classes,
 					../../libs/objectiveioc/src/Classes,
+					/usr/include/libxml2,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
 				OTHER_LDFLAGS = (

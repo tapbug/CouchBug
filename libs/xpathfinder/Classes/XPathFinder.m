@@ -18,7 +18,7 @@
 	if (self != nil) {
 		
 		// Read XML string into memory
-		XMLDocument = xmlReadMemory([anXMLDocument bytes], [anXMLDocument length], "", NULL, XML_PARSE_RECOVER);
+		XMLDocument = htmlReadMemory([anXMLDocument bytes], [anXMLDocument length], "", NULL, XML_PARSE_RECOVER);
 		
 		if (XMLDocument == NULL) {
 			return nil;

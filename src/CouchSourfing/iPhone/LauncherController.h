@@ -8,11 +8,12 @@
 
 #import <UIKit/UIKit.h>
 
-@class CouchSearchFormController;
+@class CouchSearchFormControllerFactory;
 
 @interface LauncherController : UIViewController {
+
 }
 
-@property (nonatomic, retain) CouchSearchFormController *searchController;
+@property (nonatomic, retain) CouchSearchFormControllerFactory *searchControllerFactory;
 
 @end

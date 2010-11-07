@@ -9,7 +9,20 @@
 #import "AppDelegate_iPhone.h"
 
 #import "LauncherController.h"
-#import "CouchSearchFormController.h"
+
+#import "CouchSearchFormControllerFactory.h"
+#import "CouchSearchResultControllerFactory.h"
+
+#import "CouchSearchRequestFactory.h"
+
+
+@interface AppDelegate_iPhone ()
+
+- (void)injectCouchSearch;
+- (void)injectCouchSearchRequest;
+
+@end
+
 
 @implementation AppDelegate_iPhone
 
@@ -17,14 +30,15 @@
 @synthesize container = _container;
 @synthesize navController = _navController;
 
-#pragma mark -
-#pragma mark Application lifecycle
-
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
+    //Base controller
     [self.container addComponent:[LauncherController class]];
-    [self.container addComponent:[CouchSearchFormController class]];
+    
+    [self injectCouchSearch];
+    [self injectCouchSearchRequest];
+    
     LauncherController *launcherController = [self.container getComponent:[LauncherController class]];
     
     self.navController = [[[UINavigationController alloc] initWithRootViewController:launcherController] autorelease];
@@ -36,6 +50,19 @@
     return YES;
 }
 
+#pragma mark Injections methods
+
+- (void)injectCouchSearch {
+    [self.container addComponent:[CouchSearchResultControllerFactory class]];
+    [self.container addComponent:[CouchSearchFormControllerFactory class]];
+}
+
+- (void)injectCouchSearchRequest {
+    [self.container addComponent:[CouchSearchRequestFactory class]];
+}
+
+#pragma mark -
+#pragma mark Application lifecycle
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     /*

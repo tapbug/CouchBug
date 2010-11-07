@@ -8,7 +8,7 @@
 
 #import "LauncherController.h"
 
-#import "CouchSearchFormController.h"
+#import "CouchSearchFormControllerFactory.h"
 
 @interface LauncherController ()
 
@@ -19,13 +19,13 @@
 
 @implementation LauncherController
 
-@dynamic searchController;
+@dynamic searchControllerFactory;
 
 - (void)viewDidLoad {
     UIButton *button = [UIButton buttonWithType:UIButtonTypeRoundedRect];
     [button setTitle:NSLocalizedString(@"Couch search", @"") forState:UIControlStateNormal];
     [button sizeToFit];
-    [button addTarget:self action:@selector(couchSearchAction) forControlEvents:UIControlEventTouchDown];
+    [button addTarget:self action:@selector(couchSearchAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self.view addSubview:button];
     self.view.backgroundColor = [UIColor whiteColor];
@@ -58,7 +58,8 @@
 #pragma mark Action methods
 
 - (void)couchSearchAction {
-    [self.navigationController pushViewController:self.searchController animated:YES];
+    //TODO predelat na ControllerFactory
+    [self.navigationController pushViewController:[self.searchControllerFactory createController] animated:YES];
 }
 
 @end

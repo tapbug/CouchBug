@@ -8,9 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class CouchSearchResultControllerFactory;
+@class CoachSearchRequestFactory;
 
 @interface CouchSearchFormController : UIViewController {
-
+    CouchSearchResultControllerFactory *_resultControllerFactory;
+    CoachSearchRequestFactory *_requestFactory;
 }
+
+@property (nonatomic, retain) CoachSearchRequestFactory *requestFactory;
+@property (nonatomic, retain) CouchSearchResultControllerFactory *resultControllerFactory;
 
 @end
