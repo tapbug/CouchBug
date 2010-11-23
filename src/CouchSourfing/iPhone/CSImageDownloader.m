@@ -42,7 +42,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    UIImage *image = [self scaleToSize:CGSizeMake(50, 50) image:[UIImage imageWithData:self.data]];
+    UIImage *image = [self scaleToSize:CGSizeMake(75, 75) image:[UIImage imageWithData:self.data]];
     
     if ([self.delegate respondsToSelector:@selector(imageDownloader:didDownloadImage:forPosition:)]) {
         [self.delegate imageDownloader:self didDownloadImage:image forPosition:_position];
@@ -62,57 +62,52 @@
 
 #pragma mark Private methods
 
-- (UIImage*)scaleToSize:(CGSize)maxSize image:(UIImage *)image {
-    CGImageRef cgImage = image.CGImage;
-    
-    size_t originalWidth = CGImageGetWidth(cgImage);
-    size_t originalHeight = CGImageGetHeight(cgImage);
-    
-    CGFloat widthRatio = maxSize.width / originalWidth;
-    CGFloat heightRatio = maxSize.height / originalHeight;
-    
-    CGFloat newWidth;
-    CGFloat newHeight;
-    
-    if (widthRatio < 1) {
-        newWidth = originalWidth * widthRatio;
-        newHeight = originalHeight * widthRatio;
-        
-        CGFloat newHeightRatio = maxSize.height / newHeight;
-        
-        if (newHeightRatio < 1) {
-            newWidth *= newHeightRatio;
-            newHeight *= newHeightRatio;
-        }
-    } else if (heightRatio < 1) {
-        newWidth = originalWidth * heightRatio;
-        newHeight = originalHeight * heightRatio;
-        
-        CGFloat newWidthRatio = maxSize.width / newWidth;
-        
-        if (newWidth < 1) {
-            newWidth *= newWidthRatio;
-            newHeight *= newWidthRatio;
-        }
-    } else {
-        newWidth = originalWidth;
-        newHeight = originalHeight;
-    }
+- (UIImage*)scaleToSize:(CGSize)targetSize image:(UIImage *)sourceImage {
+	CGSize imageSize = sourceImage.size;
+	CGFloat width = imageSize.width;
+	CGFloat height = imageSize.height;
+	CGFloat targetWidth = targetSize.width;
+	CGFloat targetHeight = targetSize.height;
+	CGFloat scaleFactor = 0.0;
+	CGFloat scaledWidth = targetWidth;
+	CGFloat scaledHeight = targetHeight;
+	CGPoint thumbnailPoint = CGPointMake(0.0,0.0);
 
-    CGSize size = CGSizeMake(newWidth, newHeight);
-	UIGraphicsBeginImageContext(size);
+	if (CGSizeEqualToSize(imageSize, targetSize) == NO)	{
+        CGFloat widthFactor = targetWidth / width;
+        CGFloat heightFactor = targetHeight / height;
+
+        if (widthFactor > heightFactor)
+			scaleFactor = widthFactor; // scale to fit height
+        else
+			scaleFactor = heightFactor; // scale to fit width
+        scaledWidth  = width * scaleFactor;
+        scaledHeight = height * scaleFactor;
+        
+        // center the image
+        if (widthFactor > heightFactor) {
+			thumbnailPoint.y = (targetHeight - scaledHeight) * 0.5;
+		} else {
+			if (widthFactor < heightFactor) {
+				thumbnailPoint.x = (targetWidth - scaledWidth) * 0.5;
+			}
+		}
+	}
 	
-	CGContextRef context = UIGraphicsGetCurrentContext();
-	CGContextTranslateCTM(context, 0.0, size.height);
-	CGContextScaleCTM(context, 1.0, -1.0);
+	UIGraphicsBeginImageContextWithOptions(targetSize, NO, 0.0); // this will crop
 	
-	CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, size.width, size.height), image.CGImage);
+	CGRect thumbnailRect = CGRectZero;
+	thumbnailRect.origin = thumbnailPoint;
+	thumbnailRect.size.width  = scaledWidth;
+	thumbnailRect.size.height = scaledHeight;
 	
-	UIImage* scaledImage = UIGraphicsGetImageFromCurrentImageContext();
+	[sourceImage drawInRect:thumbnailRect];
 	
+	UIImage *resultImage = UIGraphicsGetImageFromCurrentImageContext();
+	
+	//pop the context to get back to the default
 	UIGraphicsEndImageContext();
-	
-	return scaledImage;
+    return resultImage;
 }
 
 
