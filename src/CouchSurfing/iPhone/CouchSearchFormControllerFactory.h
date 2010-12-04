@@ -10,14 +10,22 @@
 
 @class CouchSearchRequestFactory;
 @class CouchSearchResultControllerFactory;
+@class CouchSearchBasicFormVariant;
+@class CouchSearchAdvancedFormVariant;
 
 @interface CouchSearchFormControllerFactory : NSObject {
     CouchSearchRequestFactory *injRequestFactory;
     CouchSearchResultControllerFactory *injResultControllerFactory;
+    
+    CouchSearchBasicFormVariant *injBasicVariant;
+    CouchSearchAdvancedFormVariant *injAdvancedVariant;
 }
 
 @property (nonatomic, retain) CouchSearchRequestFactory *requestFactory;
 @property (nonatomic, retain) CouchSearchResultControllerFactory *resultControllerFactory;
+
+@property (nonatomic, retain) CouchSearchBasicFormVariant *basicVariant;
+@property (nonatomic, retain) CouchSearchAdvancedFormVariant *advancedVariant;
 
 - (id)createController;
 

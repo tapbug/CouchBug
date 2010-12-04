@@ -25,6 +25,8 @@
 		6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */; };
 		6CAA96DD1285EFBA00CB1737 /* CouchSourfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA96DC1285EFBA00CB1737 /* CouchSourfer.m */; };
 		6CAA97E31286B79C00CB1737 /* CSImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA97E21286B79C00CB1737 /* CSImageDownloader.m */; };
+		6CED519F12A59FEE006CB99C /* CouchSearchBasicFormVariant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CED519E12A59FEE006CB99C /* CouchSearchBasicFormVariant.m */; };
+		6CED51A212A5A010006CB99C /* CouchSearchAdvancedFormVariant.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CED51A112A5A010006CB99C /* CouchSearchAdvancedFormVariant.m */; };
 		D026C76712A9D8D700914B32 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76112A9D8D700914B32 /* Icon-72.png */; };
 		D026C76812A9D8D700914B32 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76212A9D8D700914B32 /* Icon-Small-50.png */; };
 		D026C76912A9D8D700914B32 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76312A9D8D700914B32 /* Icon-Small.png */; };
@@ -103,6 +105,11 @@
 		6CAA96DC1285EFBA00CB1737 /* CouchSourfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSourfer.m; sourceTree = "<group>"; };
 		6CAA97E11286B79C00CB1737 /* CSImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSImageDownloader.h; sourceTree = "<group>"; };
 		6CAA97E21286B79C00CB1737 /* CSImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSImageDownloader.m; sourceTree = "<group>"; };
+		6CED516412A594C4006CB99C /* CouchSearchFormVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFormVariant.h; sourceTree = "<group>"; };
+		6CED519D12A59FEE006CB99C /* CouchSearchBasicFormVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchBasicFormVariant.h; sourceTree = "<group>"; };
+		6CED519E12A59FEE006CB99C /* CouchSearchBasicFormVariant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchBasicFormVariant.m; sourceTree = "<group>"; };
+		6CED51A012A5A010006CB99C /* CouchSearchAdvancedFormVariant.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchAdvancedFormVariant.h; sourceTree = "<group>"; };
+		6CED51A112A5A010006CB99C /* CouchSearchAdvancedFormVariant.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchAdvancedFormVariant.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSurfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSurfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D026C76112A9D8D700914B32 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Shared/Icon-72.png"; sourceTree = "<group>"; };
 		D026C76212A9D8D700914B32 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Shared/Icon-Small-50.png"; sourceTree = "<group>"; };
@@ -259,6 +266,11 @@
 				6CAA9305128546F200CB1737 /* CouchSearchFormController.m */,
 				6CAA94D61285A07E00CB1737 /* CouchSearchFormControllerFactory.h */,
 				6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */,
+				6CED516412A594C4006CB99C /* CouchSearchFormVariant.h */,
+				6CED519D12A59FEE006CB99C /* CouchSearchBasicFormVariant.h */,
+				6CED519E12A59FEE006CB99C /* CouchSearchBasicFormVariant.m */,
+				6CED51A012A5A010006CB99C /* CouchSearchAdvancedFormVariant.h */,
+				6CED51A112A5A010006CB99C /* CouchSearchAdvancedFormVariant.m */,
 			);
 			name = Form;
 			sourceTree = "<group>";
@@ -376,6 +388,8 @@
 				6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */,
 				6CAA96DD1285EFBA00CB1737 /* CouchSourfer.m in Sources */,
 				6CAA97E31286B79C00CB1737 /* CSImageDownloader.m in Sources */,
+				6CED519F12A59FEE006CB99C /* CouchSearchBasicFormVariant.m in Sources */,
+				6CED51A212A5A010006CB99C /* CouchSearchAdvancedFormVariant.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -440,6 +454,7 @@
 					/usr/include/libxml2,
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-ObjC",

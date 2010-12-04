@@ -11,6 +11,9 @@
 #import "LauncherController.h"
 
 #import "CouchSearchFormControllerFactory.h"
+#import "CouchSearchBasicFormVariant.h"
+#import "CouchSearchAdvancedFormVariant.h"
+
 #import "CouchSearchResultControllerFactory.h"
 
 #import "CouchSearchRequestFactory.h"
@@ -55,6 +58,8 @@
 - (void)injectCouchSearch {
     [self.container addComponent:[CouchSearchResultControllerFactory class]];
     [self.container addComponent:[CouchSearchFormControllerFactory class]];
+    [self.container addComponent:[CouchSearchBasicFormVariant class]];
+    [self.container addComponent:[CouchSearchAdvancedFormVariant class]];
 }
 
 - (void)injectCouchSearchRequest {

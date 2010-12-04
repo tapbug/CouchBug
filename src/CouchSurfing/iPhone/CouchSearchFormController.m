@@ -12,9 +12,13 @@
 #import "CouchSearchResultController.h"
 #import "CouchSearchRequestFactory.h"
 #import "CouchSearchRequest.h"
+#import "CouchSearchFormVariant.h"
 
 @interface CouchSearchFormController ()
 
+- (void)showForm;
+
+- (void)variantChanged;
 - (void)searchAction;
 
 @end
@@ -24,15 +28,26 @@
 
 @synthesize requestFactory = _requestFactory;
 @synthesize resultControllerFactory = _resultControllerFactory;
+@synthesize variants = _variants;
 
-- (void)viewDidLoad {    
-    UIButton *searchButton = [UIButton buttonWithType:UIButtonTypeRoundedRect];
-    [searchButton setTitle:NSLocalizedString(@"Search", @"") forState:UIControlStateNormal];
-    [searchButton sizeToFit];
-    [searchButton addTarget:self action:@selector(searchAction) forControlEvents:UIControlEventTouchUpInside];
+- (void)viewDidLoad {
+    NSMutableArray *variantSCItems = [NSMutableArray array];
+    for (id<CouchSearchFormVariant> variant in self.variants) {
+        [variantSCItems addObject:[variant name]];
+    }
+                                    
+    _variantSC = [[[UISegmentedControl alloc] initWithItems:variantSCItems] autorelease];
+    _variantSC.selectedSegmentIndex = 0;
+    [_variantSC addTarget:self action:@selector(variantChanged) forControlEvents:UIControlEventValueChanged];
+    _variantSC.segmentedControlStyle = UISegmentedControlStyleBar;
+    _variantSC.tintColor = self.navigationController.navigationBar.tintColor;
+    self.navigationItem.titleView = _variantSC;
     
-    self.view.backgroundColor = [UIColor blueColor];    
-    [self.view addSubview:searchButton];
+    self.navigationItem.rightBarButtonItem = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
+                                                                                            target:self
+                                                                                            action:@selector(searchAction)] autorelease];
+    [self showForm];
+    
     [super viewDidLoad];
 }
 
@@ -52,10 +67,24 @@
 
 - (void)dealloc {
     self.resultControllerFactory = nil;
+    self.requestFactory = nil;
+    self.variants = nil;
     [super dealloc];
 }
 
+#pragma mark Private methods
+
+- (void)showForm {
+    /*NSInteger selectedIndex = _variantSC.selectedSegmentIndex;
+    id<CouchSearchFormVariant> variantToSelect = [self.variants objectAtIndex:selectedIndex];
+    asd*/
+}
+
 #pragma mark Action methods
+
+- (void)variantChanged {
+    [self showForm];
+}
 
 - (void)searchAction {
     CouchSearchRequest *request = [self.requestFactory createRequest];
