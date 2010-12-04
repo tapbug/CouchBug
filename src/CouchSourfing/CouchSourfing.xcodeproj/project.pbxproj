@@ -25,6 +25,12 @@
 		6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */; };
 		6CAA96DD1285EFBA00CB1737 /* CouchSourfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA96DC1285EFBA00CB1737 /* CouchSourfer.m */; };
 		6CAA97E31286B79C00CB1737 /* CSImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA97E21286B79C00CB1737 /* CSImageDownloader.m */; };
+		D026C76712A9D8D700914B32 /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76112A9D8D700914B32 /* Icon-72.png */; };
+		D026C76812A9D8D700914B32 /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76212A9D8D700914B32 /* Icon-Small-50.png */; };
+		D026C76912A9D8D700914B32 /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76312A9D8D700914B32 /* Icon-Small.png */; };
+		D026C76A12A9D8D700914B32 /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76412A9D8D700914B32 /* Icon-Small@2x.png */; };
+		D026C76B12A9D8D700914B32 /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76512A9D8D700914B32 /* Icon.png */; };
+		D026C76C12A9D8D700914B32 /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D026C76612A9D8D700914B32 /* Icon@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -98,6 +104,12 @@
 		6CAA97E11286B79C00CB1737 /* CSImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSImageDownloader.h; sourceTree = "<group>"; };
 		6CAA97E21286B79C00CB1737 /* CSImageDownloader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSImageDownloader.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSourfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSourfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		D026C76112A9D8D700914B32 /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-72.png"; path = "Shared/Icon-72.png"; sourceTree = "<group>"; };
+		D026C76212A9D8D700914B32 /* Icon-Small-50.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small-50.png"; path = "Shared/Icon-Small-50.png"; sourceTree = "<group>"; };
+		D026C76312A9D8D700914B32 /* Icon-Small.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small.png"; path = "Shared/Icon-Small.png"; sourceTree = "<group>"; };
+		D026C76412A9D8D700914B32 /* Icon-Small@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon-Small@2x.png"; path = "Shared/Icon-Small@2x.png"; sourceTree = "<group>"; };
+		D026C76512A9D8D700914B32 /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Icon.png; path = Shared/Icon.png; sourceTree = "<group>"; };
+		D026C76612A9D8D700914B32 /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "Icon@2x.png"; path = "Shared/Icon@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -154,6 +166,12 @@
 			isa = PBXGroup;
 			children = (
 				8D1107310486CEB800E47090 /* CouchSourfing-Info.plist */,
+				D026C76512A9D8D700914B32 /* Icon.png */,
+				D026C76612A9D8D700914B32 /* Icon@2x.png */,
+				D026C76112A9D8D700914B32 /* Icon-72.png */,
+				D026C76312A9D8D700914B32 /* Icon-Small.png */,
+				D026C76412A9D8D700914B32 /* Icon-Small@2x.png */,
+				D026C76212A9D8D700914B32 /* Icon-Small-50.png */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -330,6 +348,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D026C76712A9D8D700914B32 /* Icon-72.png in Resources */,
+				D026C76812A9D8D700914B32 /* Icon-Small-50.png in Resources */,
+				D026C76912A9D8D700914B32 /* Icon-Small.png in Resources */,
+				D026C76A12A9D8D700914B32 /* Icon-Small@2x.png in Resources */,
+				D026C76B12A9D8D700914B32 /* Icon.png in Resources */,
+				D026C76C12A9D8D700914B32 /* Icon@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
