@@ -112,7 +112,7 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
         
         CouchSourfer *sourfer = [[[CouchSourfer alloc] init] autorelease];
         sourfer.name = name;
-        sourfer.imageSrc = imageSrc;
+        sourfer.imageSrc = [imageSrc stringByReplacingOccurrencesOfString:@"_t_" withString:@"_m_"];
         [sourfers addObject:sourfer];
     }
     
