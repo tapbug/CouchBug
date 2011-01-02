@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 #import "CouchSearchFormVariant.h"
 
-@interface CouchSearchBasicFormVariant : UIViewController <CouchSearchFormVariant> {
-
+@interface CouchSearchBasicFormVariant : NSObject <CouchSearchFormVariant> {
+    NSArray *_items;
 }
 
 @end

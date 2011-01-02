@@ -13,12 +13,14 @@
 @protocol CouchSearchFormVariant;
 
 
-@interface CouchSearchFormController : UIViewController {
+@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
     CouchSearchResultControllerFactory *_resultControllerFactory;
     CoachSearchRequestFactory *_requestFactory;
         
     UISegmentedControl *_variantSC;
+    UITableView *_formTableView;
     NSArray *_variants;
+    id<CouchSearchFormVariant> _currentVariant;
 }
 
 @property (nonatomic, retain) CoachSearchRequestFactory *requestFactory;
