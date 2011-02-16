@@ -17,12 +17,15 @@
 #import "CouchSearchResultControllerFactory.h"
 
 #import "CouchSearchRequestFactory.h"
-
+#import "LoginControllerFactory.h"
+#import "LoginAnnouncer.h"
+#import "IdentityManager.h"
 
 @interface AppDelegate_iPhone ()
 
 - (void)injectCouchSearch;
 - (void)injectCouchSearchRequest;
+- (void)injectLogin;
 
 @end
 
@@ -41,6 +44,7 @@
     
     [self injectCouchSearch];
     [self injectCouchSearchRequest];
+    [self injectLogin];
     
     LauncherController *launcherController = [self.container getComponent:[LauncherController class]];
     
@@ -49,7 +53,7 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     [self.window addSubview:self.navController.view];
     [self.window makeKeyAndVisible];
-    
+        
     return YES;
 }
 
@@ -64,6 +68,12 @@
 
 - (void)injectCouchSearchRequest {
     [self.container addComponent:[CouchSearchRequestFactory class]];
+}
+
+- (void)injectLogin {
+    [self.container addComponent:[LoginControllerFactory class]];
+    [[self.container withCache] addComponent:[IdentityManager class] 
+                                representing:[NSArray arrayWithObjects:@protocol(LoginAnnouncer), @protocol(LoginInformation), nil]];
 }
 
 #pragma mark -

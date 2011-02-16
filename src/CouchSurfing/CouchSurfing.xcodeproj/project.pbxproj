@@ -13,6 +13,10 @@
 		2860E328111B887F00E27156 /* AppDelegate_iPhone.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E326111B887F00E27156 /* AppDelegate_iPhone.m */; };
 		2860E32E111B888700E27156 /* AppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E32C111B888700E27156 /* AppDelegate_iPad.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
+		6C54BD7512F36ACC003BEC9D /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C54BD7412F36ACC003BEC9D /* LoginRequest.m */; };
+		6C87AEF2130BB8420015B471 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87AEF1130BB8420015B471 /* LoginController.m */; };
+		6C87AFCB130BD4CB0015B471 /* LoginControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87AFCA130BD4CB0015B471 /* LoginControllerFactory.m */; };
+		6C87AFD9130BD8060015B471 /* IdentityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87AFD8130BD8060015B471 /* IdentityManager.m */; };
 		6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA91E71284A0E700CB1737 /* libIOC.a */; };
 		6CAA922D12852D4C00CB1737 /* XPathFinder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922B12852D3800CB1737 /* XPathFinder.a */; };
 		6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922E12852D6E00CB1737 /* libxml2.dylib */; };
@@ -84,6 +88,16 @@
 		288765FC0DF74451002DB57D /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		29B97316FDCFA39411CA2CEA /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = main.m; path = Shared/main.m; sourceTree = "<group>"; };
 		32CA4F630368D1EE00C91783 /* CouchSurfing_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSurfing_Prefix.pch; sourceTree = "<group>"; };
+		6C54BD7312F36ACC003BEC9D /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginRequest.h; sourceTree = "<group>"; };
+		6C54BD7412F36ACC003BEC9D /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginRequest.m; sourceTree = "<group>"; };
+		6C87AEF0130BB8420015B471 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
+		6C87AEF1130BB8420015B471 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
+		6C87AFC9130BD4CB0015B471 /* LoginControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginControllerFactory.h; sourceTree = "<group>"; };
+		6C87AFCA130BD4CB0015B471 /* LoginControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginControllerFactory.m; sourceTree = "<group>"; };
+		6C87AFD4130BD7AF0015B471 /* LoginAnnouncer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginAnnouncer.h; sourceTree = "<group>"; };
+		6C87AFD7130BD8060015B471 /* IdentityManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IdentityManager.h; sourceTree = "<group>"; };
+		6C87AFD8130BD8060015B471 /* IdentityManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = IdentityManager.m; sourceTree = "<group>"; };
+		6C87B00A130BDD730015B471 /* LoginInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginInformation.h; sourceTree = "<group>"; };
 		6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IOC.xcodeproj; path = ../../libs/objectiveioc/src/IOC.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XPathFinder.xcodeproj; path = ../../libs/xpathfinder/XPathFinder.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6CAA922E12852D6E00CB1737 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -147,6 +161,7 @@
 		2860E324111B887F00E27156 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
+				6C87AEE1130BB61D0015B471 /* Login */,
 				6CAA9303128546B900CB1737 /* CouchSearch */,
 				2860E325111B887F00E27156 /* AppDelegate_iPhone.h */,
 				2860E326111B887F00E27156 /* AppDelegate_iPhone.m */,
@@ -216,6 +231,23 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6C87AEE1130BB61D0015B471 /* Login */ = {
+			isa = PBXGroup;
+			children = (
+				6C54BD7312F36ACC003BEC9D /* LoginRequest.h */,
+				6C54BD7412F36ACC003BEC9D /* LoginRequest.m */,
+				6C87AEF0130BB8420015B471 /* LoginController.h */,
+				6C87AEF1130BB8420015B471 /* LoginController.m */,
+				6C87AFC9130BD4CB0015B471 /* LoginControllerFactory.h */,
+				6C87AFCA130BD4CB0015B471 /* LoginControllerFactory.m */,
+				6C87AFD4130BD7AF0015B471 /* LoginAnnouncer.h */,
+				6C87AFD7130BD8060015B471 /* IdentityManager.h */,
+				6C87AFD8130BD8060015B471 /* IdentityManager.m */,
+				6C87B00A130BDD730015B471 /* LoginInformation.h */,
+			);
+			name = Login;
 			sourceTree = "<group>";
 		};
 		6CAA91DD1284A0E700CB1737 /* Products */ = {
@@ -390,6 +422,10 @@
 				6CAA97E31286B79C00CB1737 /* CSImageDownloader.m in Sources */,
 				6CED519F12A59FEE006CB99C /* CouchSearchBasicFormVariant.m in Sources */,
 				6CED51A212A5A010006CB99C /* CouchSearchAdvancedFormVariant.m in Sources */,
+				6C54BD7512F36ACC003BEC9D /* LoginRequest.m in Sources */,
+				6C87AEF2130BB8420015B471 /* LoginController.m in Sources */,
+				6C87AFCB130BD4CB0015B471 /* LoginControllerFactory.m in Sources */,
+				6C87AFD9130BD8060015B471 /* IdentityManager.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
