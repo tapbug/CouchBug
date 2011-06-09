@@ -34,6 +34,8 @@
 		6C9EAD0C13A0FCF900C1B19D /* CSImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD0213A0FCF900C1B19D /* CSImageDownloader.m */; };
 		6C9EAD0D13A0FCF900C1B19D /* IdentityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD0413A0FCF900C1B19D /* IdentityManager.m */; };
 		6C9EAD0E13A0FCF900C1B19D /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD0813A0FCF900C1B19D /* LoginRequest.m */; };
+		6C9EAD1313A1009700C1B19D /* MVUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD1213A1009700C1B19D /* MVUrlConnection.m */; };
+		6C9EAD1613A1438800C1B19D /* ActivityOverlap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */; };
 		6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA91E71284A0E700CB1737 /* libIOC.a */; };
 		6CAA922D12852D4C00CB1737 /* XPathFinder.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922B12852D3800CB1737 /* XPathFinder.a */; };
 		6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922E12852D6E00CB1737 /* libxml2.dylib */; };
@@ -127,6 +129,10 @@
 		6C9EAD0613A0FCF900C1B19D /* LoginInformation.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginInformation.h; path = Shared/Classes/LoginInformation.h; sourceTree = "<group>"; };
 		6C9EAD0713A0FCF900C1B19D /* LoginRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LoginRequest.h; path = Shared/Classes/LoginRequest.h; sourceTree = "<group>"; };
 		6C9EAD0813A0FCF900C1B19D /* LoginRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LoginRequest.m; path = Shared/Classes/LoginRequest.m; sourceTree = "<group>"; };
+		6C9EAD1113A1009700C1B19D /* MVUrlConnection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = MVUrlConnection.h; path = Shared/Classes/MVUrlConnection.h; sourceTree = "<group>"; };
+		6C9EAD1213A1009700C1B19D /* MVUrlConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MVUrlConnection.m; path = Shared/Classes/MVUrlConnection.m; sourceTree = "<group>"; };
+		6C9EAD1413A1438700C1B19D /* ActivityOverlap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityOverlap.h; sourceTree = "<group>"; };
+		6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityOverlap.m; sourceTree = "<group>"; };
 		6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IOC.xcodeproj; path = ../../libs/objectiveioc/src/IOC.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6CAA922312852D3800CB1737 /* XPathFinder.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = XPathFinder.xcodeproj; path = ../../libs/xpathfinder/XPathFinder.xcodeproj; sourceTree = SOURCE_ROOT; };
 		6CAA922E12852D6E00CB1737 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
@@ -179,6 +185,8 @@
 				2860E326111B887F00E27156 /* AppDelegate_iPhone.m */,
 				6C9EACE613A0D1AB00C1B19D /* MoreController.h */,
 				6C9EACE713A0D1AC00C1B19D /* MoreController.m */,
+				6C9EAD1413A1438700C1B19D /* ActivityOverlap.h */,
+				6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -208,10 +216,10 @@
 				6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */,
 				2860E32A111B888700E27156 /* iPad */,
 				2860E324111B887F00E27156 /* iPhone */,
-				28EEBF621118D79A00187D67 /* Shared */,
-				29B97323FDCFA39411CA2CEA /* Frameworks */,
-				19C28FACFE9D520D11CA2CBB /* Products */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
+				28EEBF621118D79A00187D67 /* Shared */,
+				19C28FACFE9D520D11CA2CBB /* Products */,
+				29B97323FDCFA39411CA2CEA /* Frameworks */,
 			);
 			name = CustomTemplate;
 			sourceTree = "<group>";
@@ -223,6 +231,8 @@
 				6CC1DA1013A09276008F659F /* JSONKit */,
 				6C9EAD0113A0FCF900C1B19D /* CSImageDownloader.h */,
 				6C9EAD0213A0FCF900C1B19D /* CSImageDownloader.m */,
+				6C9EAD1113A1009700C1B19D /* MVUrlConnection.h */,
+				6C9EAD1213A1009700C1B19D /* MVUrlConnection.m */,
 				32CA4F630368D1EE00C91783 /* CouchSurfing_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
 			);
@@ -496,6 +506,8 @@
 				6C9EAD0C13A0FCF900C1B19D /* CSImageDownloader.m in Sources */,
 				6C9EAD0D13A0FCF900C1B19D /* IdentityManager.m in Sources */,
 				6C9EAD0E13A0FCF900C1B19D /* LoginRequest.m in Sources */,
+				6C9EAD1313A1009700C1B19D /* MVUrlConnection.m in Sources */,
+				6C9EAD1613A1438800C1B19D /* ActivityOverlap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -582,6 +594,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D2DC60A-E598-49D3-B465-82E4997F2A43";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
 		};
@@ -605,6 +618,7 @@
 				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D2DC60A-E598-49D3-B465-82E4997F2A43";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
 		};

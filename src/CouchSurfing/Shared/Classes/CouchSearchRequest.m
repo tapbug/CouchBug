@@ -150,7 +150,7 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
 }
 
 //  Vrati dotaz na jakoukoliv hodnotu uzivatele zadanou poddotazem ve stringu append
-- (NSString *)sourfersValueQueryFor:(NSString *)append position:(NSInteger)position{
+- (NSString *)sourfersValueQueryFor:(NSString *)append position:(NSInteger)position {
     return [[NSString stringWithFormat:xpathBaseFormat, [NSString stringWithFormat:@"[%i]", position]] stringByAppendingString:append];
 }
 

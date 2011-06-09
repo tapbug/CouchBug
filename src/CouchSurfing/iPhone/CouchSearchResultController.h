@@ -23,6 +23,6 @@
     NSArray *_sourfers;
 }
 
-- (void)searchResultForRequest:(CouchSearchRequest *)request;
+@property (nonatomic, retain) CouchSearchRequest *request;
 
 @end

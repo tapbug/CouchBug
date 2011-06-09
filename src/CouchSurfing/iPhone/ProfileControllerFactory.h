@@ -11,7 +11,6 @@
 @class ProfileController;
 
 @interface ProfileControllerFactory : NSObject {
-    
 }
 
 - (ProfileController *)createProfileController;

@@ -13,6 +13,7 @@
 @protocol LoginAnnouncer;
 @protocol LoginInformation;
 @class ProfileControllerFactory;
+@class ActivityOverlap;
 
 @interface LoginController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, LoginRequestDelegate, UIAlertViewDelegate> {
     UITableView *_loginTabel;
@@ -20,9 +21,7 @@
     UITextField *_passwordField;
     UITextField *_activeTextField;
     
-    UIView *_activityView;
-    UIActivityIndicatorView *_activityIndicator;
-    UILabel *_activityLabel;
+    ActivityOverlap *_activityOverlap;
     
     UIAlertView *_loggedAlert;
 

@@ -8,6 +8,8 @@
 
 #import "LoginController.h"
 
+#import "ActivityOverlap.h"
+
 #import "LoginAnnouncer.h"
 #import "LoginInformation.h"
 #import "ProfileControllerFactory.h"
@@ -22,7 +24,7 @@
 
 @property(nonatomic, retain) UITextField *usernameField;
 @property(nonatomic, retain) UITextField *passwordField;
-@property(nonatomic, retain) UIView *activityView;
+@property(nonatomic, retain) ActivityOverlap *activityOverlap;
 
 - (void)loginAction;
 - (void)hideLoading;
@@ -40,7 +42,7 @@
 
 @synthesize usernameField = _usernameField;
 @synthesize passwordField = _passwordField;
-@synthesize activityView = _activityView;
+@synthesize activityOverlap = _activityOverlap;
 
 - (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer
             loginInformation:(id<LoginInformation>)loginInformation
@@ -60,7 +62,7 @@
     self.profileCF = nil;
     self.usernameField = nil;
     self.passwordField = nil;
-    self.activityView = nil;
+    self.activityOverlap = nil;
     [super dealloc];
 }
 
@@ -78,21 +80,8 @@
     
     self.view.backgroundColor = [UIColor whiteColor];
         
-    self.activityView = [[[UIView alloc] init] autorelease];
-    self.activityView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    self.activityView.backgroundColor = [UIColor whiteColor];
-    
-    _activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
-    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [self.activityView addSubview:_activityIndicator];
-    
-    _activityLabel = [[[UILabel alloc] init] autorelease];
-    _activityLabel.text = NSLocalizedString(@"Try to login to CouchSurfing", @"");
-    _activityLabel.backgroundColor = [UIColor whiteColor];
-    _activityLabel.textColor = [UIColor grayColor];
-    [_activityLabel sizeToFit];
-    _activityLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-    [self.activityView addSubview:_activityLabel];
+    self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view
+                                                           title:NSLocalizedString(@"Try to login to CouchSurfing", @"Logging activity message")];
     
     self.usernameField = [[[UITextField alloc] init] autorelease];
     self.usernameField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -100,6 +89,7 @@
     self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
     self.usernameField.delegate = self;
     self.usernameField.returnKeyType = UIReturnKeyNext;
+    self.usernameField.text = self.loginInformation.username;
     
     self.passwordField = [[[UITextField alloc] init] autorelease];
     self.passwordField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -107,6 +97,7 @@
     self.passwordField.secureTextEntry = YES;
     self.passwordField.delegate = self;
     self.passwordField.returnKeyType = UIReturnKeyJoin;
+    self.passwordField.text = self.loginInformation.password;
     
     _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 108) / 2), self.view.frame.size.width - 20, 108)
                                                 style:UITableViewStyleGrouped] autorelease];    
@@ -189,6 +180,7 @@
 #pragma mark LoginRequestDelegate
 
 - (void)loginRequestDidFinnishLogin:(LoginRequest *)request {
+    [self.loginAnnouncer user:request.username hasLoggedWithPassword:request.password];
     [self hideLoading];
     id profileController = [self.profileCF createProfileController];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:profileController] animated:YES];
@@ -262,8 +254,7 @@
 }
 
 - (void)hideLoading {
-    [_activityIndicator stopAnimating];
-    [self.activityView removeFromSuperview];
+    [self.activityOverlap removeOverlap];
 }
 
 
@@ -273,18 +264,7 @@
     
     [self hideKeyboard];
     
-    self.activityView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
-    CGRect activityIndicatorFrame = _activityIndicator.frame;
-    CGRect activityLabelFrame = _activityLabel.frame;
-    activityIndicatorFrame.origin.x = (int)((self.activityView.frame.size.width - activityIndicatorFrame.size.width) / 2);
-    activityIndicatorFrame.origin.y = (int)((self.activityView.frame.size.height - activityIndicatorFrame.size.height - 3 - activityLabelFrame.size.height) / 2);
-    activityLabelFrame.origin.x = (int)((self.activityView.frame.size.width - activityLabelFrame.size.width) / 2);
-    activityLabelFrame.origin.y = (int)((self.activityView.frame.size.height - activityLabelFrame.size.height) / 2 + activityIndicatorFrame.size.height - 3);
-    _activityIndicator.frame = activityIndicatorFrame;
-    _activityLabel.frame = activityLabelFrame;
-    
-    [self.view addSubview:self.activityView];
-    [_activityIndicator startAnimating];
+    [self.activityOverlap overlapView];
     
     self.loginRequest = [[[LoginRequest alloc] init] autorelease];
     self.loginRequest.delegate = self;

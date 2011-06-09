@@ -7,10 +7,14 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MVUrlConnection.h"
 
+@class MVUrlConnection;
+@class ActivityOverlap;
 
-@interface ProfileController : UIViewController {
-    
+@interface ProfileController : UIViewController <MVUrlConnectionDelegate>{
+    ActivityOverlap *_activityOverlap;
+    MVUrlConnection *_urlConnection;
 }
 
 @end

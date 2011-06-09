@@ -12,7 +12,8 @@
 @implementation ProfileControllerFactory
 
 - (ProfileController *)createProfileController {
-    return [[[ProfileController alloc] init] autorelease];
+    ProfileController *profileController = [[[ProfileController alloc] init] autorelease];
+    return profileController;
 }
 
 @end

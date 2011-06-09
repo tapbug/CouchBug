@@ -7,9 +7,20 @@
 //
 
 #import "ProfileController.h"
+#import "ActivityOverlap.h"
+#import "XPathFinder.h"
 
+@interface ProfileController ()
+
+@property (nonatomic, retain) MVUrlConnection *urlConnection;
+@property (nonatomic, retain) ActivityOverlap *activityOverlap;
+
+@end
 
 @implementation ProfileController
+
+@synthesize urlConnection = _urlConnection;
+@synthesize activityOverlap = _activityOverlap;
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -22,6 +33,8 @@
 
 - (void)dealloc
 {
+    self.urlConnection = nil;
+    self.activityOverlap = nil;
     [super dealloc];
 }
 
@@ -37,8 +50,16 @@
 
 - (void)viewDidLoad
 {
+    self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view
+                                                           title:NSLocalizedString(@"Loading profile ...", @"Loading profile message")];
     
+    [self.activityOverlap overlapView];
+    NSString *profileUrl = @"https://www.couchsurfing.org/editprofile.html?edit=general";
+    self.urlConnection = [[[MVUrlConnection alloc] initWithUrlString:profileUrl] autorelease];
+    self.urlConnection.delegate = self;
+    [self.urlConnection sendRequest];
     [super viewDidLoad];
+     
 }
 
 - (void)viewDidUnload
@@ -52,6 +73,18 @@
 {
     // Return YES for supported orientations
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
+}
+
+#pragma mark MVUrlConnectionDelegate methods
+
+- (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
+    XPathFinder *xpathFinder = [[[XPathFinder alloc] initWithData:responseData] autorelease];
+    NSString *firstname = [xpathFinder nodeValueForXPath:@"//input[@id='profilefirst_name']/@value"];
+    NSString *lastname = [xpathFinder nodeValueForXPath:@"//input[@id='profilelast_name']/@value"];
+        
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", firstname, lastname];
+    
+    [self.activityOverlap removeOverlap];
 }
 
 @end

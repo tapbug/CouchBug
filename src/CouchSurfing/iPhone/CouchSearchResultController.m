@@ -13,7 +13,7 @@
 
 @interface CouchSearchResultController ()
 
-@property (nonatomic, retain) CouchSearchRequest *request;
+
 @property (nonatomic, retain) NSArray *sourfers;
 @property (nonatomic, retain) NSMutableArray *imageDownloaders;
 
@@ -24,12 +24,11 @@
 
 @implementation CouchSearchResultController
 
-@synthesize request = _request;
 @synthesize sourfers = _sourfers;
 @synthesize imageDownloaders = _imageDownloaders;
+@synthesize request = _request;
 
 - (void)viewDidLoad {
-    
     _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
     _tableView.autoresizingMask = self.view.autoresizingMask;
     _tableView.delegate = self;
@@ -44,16 +43,20 @@
     [super viewDidLoad];
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+    [self.request send];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
 }
 
 #pragma mark Public methods
 
-- (void)searchResultForRequest:(CouchSearchRequest *)request {
-    self.request = request;
+- (void)setRequest:(CouchSearchRequest *)request {
+    [_request autorelease];
+    _request = [request retain];
     request.delegate = self;
-    [request send];
 }
 
 #pragma mark CoachSearchRequest methods
@@ -61,6 +64,7 @@
 - (void)couchSearchRequest:(CouchSearchRequest *)request didRecieveResult:(NSArray *)sourfers {
     self.sourfers = sourfers;
     [_tableView reloadData];
+    self.request = nil;
 }
 
 #pragma mark UITableViewDataSource methods
