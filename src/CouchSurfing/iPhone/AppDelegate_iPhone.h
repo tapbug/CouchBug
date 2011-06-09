@@ -12,12 +12,12 @@
 @interface AppDelegate_iPhone : NSObject <UIApplicationDelegate> {
     UIWindow *_window;
     MVIOCContainer *_container;
-    UINavigationController *_navController;
+    UITabBarController *_tabBarController;
 }
 
 @property (nonatomic, retain) UIWindow *window;
 @property (nonatomic, retain) MVIOCContainer *container;
-@property (nonatomic, retain) UINavigationController *navController;
+@property (nonatomic, retain) UITabBarController *tabBarController;
 
 @end
 

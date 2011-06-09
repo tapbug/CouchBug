@@ -10,22 +10,15 @@
 
 @class CouchSearchResultControllerFactory;
 @class CoachSearchRequestFactory;
-@protocol CouchSearchFormVariant;
 
-
-@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource>{
+@interface CouchSearchFormController : UIViewController {
     CouchSearchResultControllerFactory *_resultControllerFactory;
     CoachSearchRequestFactory *_requestFactory;
         
-    UISegmentedControl *_variantSC;
     UITableView *_formTableView;
-    NSArray *_variants;
-    id<CouchSearchFormVariant> _currentVariant;
 }
 
 @property (nonatomic, retain) CoachSearchRequestFactory *requestFactory;
 @property (nonatomic, retain) CouchSearchResultControllerFactory *resultControllerFactory;
-
-@property (nonatomic, retain) NSArray *variants;
 
 @end

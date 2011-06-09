@@ -23,6 +23,6 @@
     NSArray *_sourfers;
 }
 
-- (id)initWithRequest:(CouchSearchRequest *)request;
+- (void)searchResultForRequest:(CouchSearchRequest *)request;
 
 @end

@@ -28,13 +28,6 @@
 @synthesize sourfers = _sourfers;
 @synthesize imageDownloaders = _imageDownloaders;
 
-- (id)initWithRequest:(CouchSearchRequest *)request {
-    if (self = [super init]) {
-        self.request = request;
-    }
-    return self;
-}
-
 - (void)viewDidLoad {
     
     _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
@@ -49,6 +42,18 @@
     [self.request send];
     
     [super viewDidLoad];
+}
+
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
+#pragma mark Public methods
+
+- (void)searchResultForRequest:(CouchSearchRequest *)request {
+    self.request = request;
+    request.delegate = self;
+    [request send];
 }
 
 #pragma mark CoachSearchRequest methods

@@ -13,6 +13,6 @@
 @interface CouchSearchResultControllerFactory : NSObject {
 }
 
-- (id)createControllerWithRequest:(CouchSearchRequest *)request;
+- (id)createController;
 
 @end

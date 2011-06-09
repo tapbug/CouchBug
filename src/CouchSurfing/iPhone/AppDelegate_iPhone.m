@@ -8,13 +8,11 @@
 
 #import "AppDelegate_iPhone.h"
 
-#import "LauncherController.h"
-
 #import "CouchSearchFormControllerFactory.h"
-#import "CouchSearchBasicFormVariant.h"
-#import "CouchSearchAdvancedFormVariant.h"
 
+#import "CouchSearchResultController.h"
 #import "CouchSearchResultControllerFactory.h"
+#import "MoreController.h"
 
 #import "CouchSearchRequestFactory.h"
 #import "LoginControllerFactory.h"
@@ -34,24 +32,53 @@
 
 @synthesize window = _window;
 @synthesize container = _container;
-@synthesize navController = _navController;
+@synthesize tabBarController = _tabBarController;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
-    //Base controller
-    [self.container addComponent:[LauncherController class]];
-    
     [self injectCouchSearch];
     [self injectCouchSearchRequest];
     [self injectLogin];
     
-    LauncherController *launcherController = [self.container getComponent:[LauncherController class]];
+    //Tvorba Profile Tabu
+    LoginControllerFactory *loginControllerFactory = [self.container getComponent:[LoginControllerFactory class]];
+    LoginController *loginController = [loginControllerFactory createController];
+    UINavigationController *loginNavigationController = 
+        [[[UINavigationController alloc] initWithRootViewController:(UIViewController *)loginController] autorelease];
+    UITabBarItem *loginTabBarItem =
+        [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Profile", @"Profile tabBar icon") 
+                                       image:[UIImage imageNamed:@"profileCard.png"]
+                                         tag:0] autorelease];
+    [loginNavigationController setTabBarItem: loginTabBarItem];
     
-    self.navController = [[[UINavigationController alloc] initWithRootViewController:launcherController] autorelease];
+    //Tvorba CouchSearchTabu
+    CouchSearchResultControllerFactory *resultControllerFactory =
+        [self.container getComponent:[CouchSearchResultControllerFactory class]];
+    CouchSearchResultController *searchResultController = [resultControllerFactory createController];
+    UITabBarItem *searchTabBarItem =
+        [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Search", @"Search tabBar icon")
+                                       image:[UIImage imageNamed:@"search.png"]
+                                         tag:1] autorelease];
+    [searchResultController setTabBarItem:searchTabBarItem];
+    
+    //Tvorba MoreTabu
+    UIViewController *moreController = [[[MoreController alloc] init] autorelease];
+    UITabBarItem *moreTabBarItem =
+        [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:2] autorelease];
+    [moreController setTabBarItem:moreTabBarItem];
+    
+    //Nastaveni TabBar controlleru
+    self.tabBarController = [[[UITabBarController alloc] init] autorelease];
+    self.tabBarController.viewControllers = [NSArray arrayWithObjects:
+                                             loginNavigationController,
+                                             searchResultController,//s navigationem prejmenovat promenou na nazev tabu na profile
+                                             moreController,
+                                             nil];
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    [self.window addSubview:self.navController.view];
+    self.window.backgroundColor = [UIColor whiteColor];
+    [self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
         
     return YES;
@@ -62,8 +89,6 @@
 - (void)injectCouchSearch {
     [self.container addComponent:[CouchSearchResultControllerFactory class]];
     [self.container addComponent:[CouchSearchFormControllerFactory class]];
-    [self.container addComponent:[CouchSearchBasicFormVariant class]];
-    [self.container addComponent:[CouchSearchAdvancedFormVariant class]];
 }
 
 - (void)injectCouchSearchRequest {

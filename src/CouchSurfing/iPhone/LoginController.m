@@ -17,10 +17,12 @@
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 
-@property (nonatomic, retain) UIAlertView *loggedAlert;
-@property (nonatomic, retain) UIAlertView *logFailedAlert;
+@property(nonatomic, retain) UITextField *usernameField;
+@property(nonatomic, retain) UITextField *passwordField;
+@property(nonatomic, retain) UIView *activityView;
 
 - (void)loginAction;
+- (void)hideLoading;
 
 @end
 
@@ -31,11 +33,12 @@
 @synthesize loginAnnouncer = _loginAnnouncer;
 @synthesize loginInformation = _loginInformation;
 
-@synthesize loggedAlert = _loggedAlert;
-@synthesize logFailedAlert = _logFailAlert;
+@synthesize usernameField = _usernameField;
+@synthesize passwordField = _passwordField;
+@synthesize activityView = _activityView;
 
 - (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer loginInformation:(id<LoginInformation>)loginInformation {
-    if (self = [super init]) {
+    if ((self = [super init])) {
         self.loginAnnouncer = loginAnnouncer;
         self.loginInformation = loginInformation;
     }
@@ -44,44 +47,97 @@
 }
 
 - (void)dealloc {
-    [_reuseIdentifiers release]; _reuseIdentifiers = nil;
-    [_fields release]; _fields = nil;
     self.loginRequest = nil;
-    self.loggedAlert = nil;
-    self.logFailedAlert = nil;
+    self.usernameField = nil;
+    self.passwordField = nil;
+    self.activityView = nil;
     [super dealloc];
 }
 
 - (void)viewDidLoad {
-    _reuseIdentifiers = [[NSArray arrayWithObjects:@"usernameCell", @"passwordCell", nil] retain];
-
-    _tableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height) style:UITableViewStyleGrouped];
-    _tableView.delegate = self;
-    _tableView.dataSource = self;
+    [super viewDidLoad];
+    self.view.backgroundColor = [UIColor whiteColor];
+        
+    self.activityView = [[[UIView alloc] init] autorelease];
+    self.activityView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.activityView.backgroundColor = [UIColor whiteColor];
     
-    _usernameInput = [[[UITextField alloc] init] autorelease];
-    _usernameInput.delegate = self;
-    _usernameInput.returnKeyType = UIReturnKeyNext;
-    _usernameInput.placeholder = NSLocalizedString(@"username", @"");
-    _usernameInput.autocorrectionType = UITextAutocorrectionTypeNo;
-    _usernameInput.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _usernameInput.text = self.loginInformation.username;
-    _passwordInput = [[[UITextField alloc] init] autorelease];
-    _passwordInput.delegate = self;
-    _passwordInput.returnKeyType = UIReturnKeyGo;
-    _passwordInput.placeholder = NSLocalizedString(@"password", @"");
-    _passwordInput.autocorrectionType = UITextAutocorrectionTypeNo;
-    _passwordInput.secureTextEntry = YES;
-    _passwordInput.clearButtonMode = UITextFieldViewModeWhileEditing;
-    _passwordInput.text = self.loginInformation.password;
-    _fields = [[NSArray arrayWithObjects:_usernameInput, _passwordInput, nil] retain];
-
+    _activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    [self.activityView addSubview:_activityIndicator];
     
-    [self.view addSubview:_tableView];
+    _activityLabel = [[[UILabel alloc] init] autorelease];
+    _activityLabel.text = NSLocalizedString(@"Try to login to CouchSurf", @"");
+    _activityLabel.backgroundColor = [UIColor whiteColor];
+    _activityLabel.textColor = [UIColor grayColor];
+    [_activityLabel sizeToFit];
+    _activityLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+    [self.activityView addSubview:_activityLabel];
     
+    self.usernameField = [[[UITextField alloc] init] autorelease];
+    self.usernameField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.usernameField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.usernameField.autocapitalizationType = UITextAutocapitalizationTypeNone;
+    self.usernameField.delegate = self;
+    self.usernameField.returnKeyType = UIReturnKeyNext;
+    
+    self.passwordField = [[[UITextField alloc] init] autorelease];
+    self.passwordField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+    self.passwordField.contentVerticalAlignment = UIControlContentVerticalAlignmentCenter;
+    self.passwordField.secureTextEntry = YES;
+    self.passwordField.delegate = self;
+    self.passwordField.returnKeyType = UIReturnKeyJoin;
+    
+    _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 108) / 2), self.view.frame.size.width - 20, 108)
+                                                style:UITableViewStyleGrouped] autorelease];
+    
+    _loginTabel.backgroundView = nil;
+    _loginTabel.backgroundColor = [UIColor clearColor];
+    
+    [_loginTabel setScrollEnabled:NO];
+    _loginTabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
+    _loginTabel.delegate = self;
+    _loginTabel.dataSource = self;
+    
+    [self.view addSubview:_loginTabel];
+    
+    NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];    
 }
 
-#pragma mark UITableViewDataSource methods
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+    return YES;
+}
+
+#pragma UITableViewDataSource methods
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell;
+    
+    if (indexPath.row == 0) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"usernameCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"usernameCell"];
+            self.usernameField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
+            [cell.contentView addSubview:self.usernameField];
+        }
+        cell.textLabel.text = NSLocalizedString(@"Username", @"user name in login screen");
+    } else if (indexPath.row == 1) {
+        cell = [tableView dequeueReusableCellWithIdentifier:@"passwordCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"passwordCell"];
+            self.passwordField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
+            [cell.contentView addSubview:self.passwordField];
+        }
+        cell.textLabel.text = NSLocalizedString(@"Password", @"password in login screen");
+        
+    }
+    
+    cell.textLabel.textColor = [UIColor grayColor];
+    cell.selectionStyle = UITableViewCellEditingStyleNone;
+    return cell;
+}
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
@@ -91,70 +147,123 @@
     return 2;
 }
 
-- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSString *reuseIdentifier = [_reuseIdentifiers objectAtIndex:indexPath.row];
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:reuseIdentifier];
-    if (cell == nil) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier] autorelease];
-        UITextField *textField = [_fields objectAtIndex:indexPath.row];
-        textField.frame = CGRectMake(10, 10, cell.contentView.frame.size.width - 20, cell.contentView.frame.size.height - 20);
-        textField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-        [cell.contentView addSubview:textField];
-    }
-        
-    return cell;
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    return nil;
 }
 
-#pragma mark UITextFieldDelegate
+
+#pragma mark UITextFieldDelegate methods
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
-    if (textField == _usernameInput) {
-        [_usernameInput resignFirstResponder];
-        [_passwordInput becomeFirstResponder];
-    } else if (textField == _passwordInput) {
+    if (textField == self.usernameField) {
+        [self.passwordField becomeFirstResponder];
+    } else if (textField == self.passwordField) {
         [self loginAction];
     }
     return YES;
 }
 
+
 #pragma mark LoginRequestDelegate
 
 - (void)loginRequestDidFinnishLogin:(LoginRequest *)request {
-    [self.loginAnnouncer user:_usernameInput.text hasLoggedWithPassword:_passwordInput.text];
-    
-    self.loggedAlert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Welcome ...", @"") 
-                                              message:NSLocalizedString(@"Sucessfully logged", @"")
-                                             delegate:self cancelButtonTitle:NSLocalizedString(@"ok", @"")
-                                    otherButtonTitles:nil] autorelease];
-    [self.loggedAlert show];
+    [self hideLoading];
+    _loggedAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Logged in", @"")
+                                              message:NSLocalizedString(@"You are logged in deviantART", @"")
+                                             delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"")
+                                    otherButtonTitles:nil];
+    _loggedAlert.delegate = self;
+    [_loggedAlert show];
+    [_loggedAlert release];
 }
 
 - (void)loginRequestDidFail:(LoginRequest *)request {
-    self.logFailedAlert = [[[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Sorry ...", @"") 
-                                               message:NSLocalizedString(@"Login failed", @"")
-                                              delegate:self cancelButtonTitle:NSLocalizedString(@"cancel", @"")
-                                     otherButtonTitles:nil] autorelease];
-    [self.logFailedAlert show];
+    [self hideLoading];
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Login failed", @"")
+                                                    message:NSLocalizedString(@"Bad username or password", @"")
+                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"")
+                                          otherButtonTitles:nil];
+    [alert show];
+    [alert release];
 }
 
 #pragma mark UIAlertViewDelegate
 
-- (void) alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
-    if (self.loggedAlert == alertView) {
+- (void)alertView:(UIAlertView *)alertView willDismissWithButtonIndex:(NSInteger)buttonIndex {
+    if (alertView == _loggedAlert) {
         [self.navigationController popViewControllerAnimated:YES];
-    } else if (self.logFailedAlert == alertView) {
-        [_usernameInput becomeFirstResponder];
     }
 }
 
 #pragma mark Private methods
 
+- (void)keyboardDidShow:(NSNotification *)notification {
+    CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];    
+    
+    CGFloat keyboardHeigh = 0;
+    if (UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
+        keyboardHeigh = addFrame.size.height;
+    } else {
+        keyboardHeigh = addFrame.size.width;
+    }
+    
+    CGRect viewFrame = self.view.frame;
+    
+    [UIView beginAnimations:@"showKeyboard" context:nil];
+    [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
+    [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    
+    viewFrame.size.height -= keyboardHeigh - self.tabBarController.tabBar.frame.size.height;
+    self.view.frame = viewFrame;
+    
+    [UIView commitAnimations];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification {
+    CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    
+    CGFloat keyboardHeigh = 0;
+    if (UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
+        keyboardHeigh = addFrame.size.height;
+    } else {
+        keyboardHeigh = addFrame.size.width;
+    }
+    
+    
+    CGRect viewFrame = self.view.frame;
+    viewFrame.size.height += keyboardHeigh - self.tabBarController.tabBar.frame.size.height;
+    self.view.frame = viewFrame;    
+}
+
+- (void)hideLoading {
+    [_activityIndicator stopAnimating];
+    [self.activityView removeFromSuperview];
+}
+
+
+#pragma mark Private methods
+
 - (void)loginAction {
+    
+    [self.passwordField resignFirstResponder];
+    
+    self.activityView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
+    CGRect activityIndicatorFrame = _activityIndicator.frame;
+    CGRect activityLabelFrame = _activityLabel.frame;
+    activityIndicatorFrame.origin.x = (int)((self.activityView.frame.size.width - activityIndicatorFrame.size.width) / 2);
+    activityIndicatorFrame.origin.y = (int)((self.activityView.frame.size.height - activityIndicatorFrame.size.height - 3 - activityLabelFrame.size.height) / 2);
+    activityLabelFrame.origin.x = (int)((self.activityView.frame.size.width - activityLabelFrame.size.width) / 2);
+    activityLabelFrame.origin.y = (int)((self.activityView.frame.size.height - activityLabelFrame.size.height) / 2 + activityIndicatorFrame.size.height - 3);
+    _activityIndicator.frame = activityIndicatorFrame;
+    _activityLabel.frame = activityLabelFrame;
+    
+    [self.view addSubview:self.activityView];
+    [_activityIndicator startAnimating];
+    
     self.loginRequest = [[[LoginRequest alloc] init] autorelease];
     self.loginRequest.delegate = self;
-    self.loginRequest.username = _usernameInput.text;
-    self.loginRequest.password = _passwordInput.text;
+    self.loginRequest.username = self.usernameField.text;
+    self.loginRequest.password = self.passwordField.text;
     [self.loginRequest login];
 }
 

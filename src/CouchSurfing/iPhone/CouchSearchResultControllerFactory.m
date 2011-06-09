@@ -12,8 +12,8 @@
 
 @implementation CouchSearchResultControllerFactory
 
-- (id)createControllerWithRequest:(CouchSearchRequest *)request {
-    CouchSearchResultController *controller = [[[CouchSearchResultController alloc] initWithRequest:request] autorelease];
+- (id)createController {
+    CouchSearchResultController *controller = [[[CouchSearchResultController alloc] init] autorelease];
     return controller;
 }
 
