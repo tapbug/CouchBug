@@ -15,10 +15,13 @@
 
 @synthesize loginAnnouncer = injLoginAnnouncer;
 @synthesize loginInformation = injLoginInformation;
+@synthesize profileCF = injProfileCF;
 
 - (id)createController {
-    LoginController *controller = [[[LoginController alloc] initWithLoginAnnouncer: self.loginAnnouncer
-                                                                  loginInformation:self.loginInformation] autorelease];
+    LoginController *controller =
+        [[[LoginController alloc] initWithLoginAnnouncer: self.loginAnnouncer
+                                        loginInformation:self.loginInformation
+                                profileControllerFactory:self.profileCF] autorelease];
     
     return controller;
 }

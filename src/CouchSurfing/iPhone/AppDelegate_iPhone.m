@@ -9,21 +9,24 @@
 #import "AppDelegate_iPhone.h"
 
 #import "CouchSearchFormControllerFactory.h"
-
 #import "CouchSearchResultController.h"
 #import "CouchSearchResultControllerFactory.h"
+#import "CouchSearchRequestFactory.h"
+
+#import "ProfileControllerFactory.h"
+
 #import "MoreController.h"
 
-#import "CouchSearchRequestFactory.h"
 #import "LoginControllerFactory.h"
 #import "LoginAnnouncer.h"
 #import "IdentityManager.h"
 
 @interface AppDelegate_iPhone ()
 
+- (void)injectLogin;
+- (void)injectProfile;
 - (void)injectCouchSearch;
 - (void)injectCouchSearchRequest;
-- (void)injectLogin;
 
 @end
 
@@ -37,9 +40,10 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
+    [self injectLogin];
+    [self injectProfile];
     [self injectCouchSearch];
     [self injectCouchSearchRequest];
-    [self injectLogin];
     
     //Tvorba Profile Tabu
     LoginControllerFactory *loginControllerFactory = [self.container getComponent:[LoginControllerFactory class]];
@@ -99,6 +103,10 @@
     [self.container addComponent:[LoginControllerFactory class]];
     [[self.container withCache] addComponent:[IdentityManager class] 
                                 representing:[NSArray arrayWithObjects:@protocol(LoginAnnouncer), @protocol(LoginInformation), nil]];
+}
+
+- (void)injectProfile {
+    [self.container addComponent:[ProfileControllerFactory class]];
 }
 
 #pragma mark -

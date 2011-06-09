@@ -10,12 +10,15 @@
 
 #import "LoginAnnouncer.h"
 #import "LoginInformation.h"
+#import "ProfileControllerFactory.h"
 
 @interface LoginController ()
 
 @property (nonatomic, retain) LoginRequest *loginRequest;
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
+@property (nonatomic, retain) ProfileControllerFactory *profileCF;
+
 
 @property(nonatomic, retain) UITextField *usernameField;
 @property(nonatomic, retain) UITextField *passwordField;
@@ -23,6 +26,7 @@
 
 - (void)loginAction;
 - (void)hideLoading;
+- (void)hideKeyboard;
 
 @end
 
@@ -32,15 +36,20 @@
 @synthesize loginRequest = _loginRequest;
 @synthesize loginAnnouncer = _loginAnnouncer;
 @synthesize loginInformation = _loginInformation;
+@synthesize profileCF = _profileCF;
 
 @synthesize usernameField = _usernameField;
 @synthesize passwordField = _passwordField;
 @synthesize activityView = _activityView;
 
-- (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer loginInformation:(id<LoginInformation>)loginInformation {
+- (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer
+            loginInformation:(id<LoginInformation>)loginInformation
+    profileControllerFactory:(ProfileControllerFactory *)profileCF {
+    
     if ((self = [super init])) {
         self.loginAnnouncer = loginAnnouncer;
         self.loginInformation = loginInformation;
+        self.profileCF = profileCF;
     }
     
     return self;
@@ -48,6 +57,7 @@
 
 - (void)dealloc {
     self.loginRequest = nil;
+    self.profileCF = nil;
     self.usernameField = nil;
     self.passwordField = nil;
     self.activityView = nil;
@@ -56,6 +66,16 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    //Setup navigation baru
+    
+    self.navigationItem.title = NSLocalizedString(@"Login form", @"Login form navigation title");
+    self.navigationItem.rightBarButtonItem = 
+        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"login", @"login button in navigation bar")
+                                         style:UIBarButtonItemStyleBordered
+                                        target:self
+                                        action:@selector(loginAction)];
+    
     self.view.backgroundColor = [UIColor whiteColor];
         
     self.activityView = [[[UIView alloc] init] autorelease];
@@ -67,7 +87,7 @@
     [self.activityView addSubview:_activityIndicator];
     
     _activityLabel = [[[UILabel alloc] init] autorelease];
-    _activityLabel.text = NSLocalizedString(@"Try to login to CouchSurf", @"");
+    _activityLabel.text = NSLocalizedString(@"Try to login to CouchSurfing", @"");
     _activityLabel.backgroundColor = [UIColor whiteColor];
     _activityLabel.textColor = [UIColor grayColor];
     [_activityLabel sizeToFit];
@@ -89,8 +109,7 @@
     self.passwordField.returnKeyType = UIReturnKeyJoin;
     
     _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 108) / 2), self.view.frame.size.width - 20, 108)
-                                                style:UITableViewStyleGrouped] autorelease];
-    
+                                                style:UITableViewStyleGrouped] autorelease];    
     _loginTabel.backgroundView = nil;
     _loginTabel.backgroundColor = [UIColor clearColor];
     
@@ -163,18 +182,16 @@
     return YES;
 }
 
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    _activeTextField = textField;
+}
 
 #pragma mark LoginRequestDelegate
 
 - (void)loginRequestDidFinnishLogin:(LoginRequest *)request {
     [self hideLoading];
-    _loggedAlert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"Logged in", @"")
-                                              message:NSLocalizedString(@"You are logged in deviantART", @"")
-                                             delegate:self cancelButtonTitle:NSLocalizedString(@"Ok", @"")
-                                    otherButtonTitles:nil];
-    _loggedAlert.delegate = self;
-    [_loggedAlert show];
-    [_loggedAlert release];
+    id profileController = [self.profileCF createProfileController];
+    [self.navigationController setViewControllers:[NSArray arrayWithObject:profileController] animated:YES];
 }
 
 - (void)loginRequestDidFail:(LoginRequest *)request {
@@ -217,6 +234,13 @@
     self.view.frame = viewFrame;
     
     [UIView commitAnimations];
+    
+    self.navigationItem.leftBarButtonItem =
+        [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"hide", @"hide button in login form")
+                                          style:UIBarButtonItemStyleBordered
+                                         target:self
+                                         action:@selector(hideKeyboard)] autorelease];
+
 }
 
 - (void)keyboardDidHide:(NSNotification *)notification {
@@ -232,7 +256,9 @@
     
     CGRect viewFrame = self.view.frame;
     viewFrame.size.height += keyboardHeigh - self.tabBarController.tabBar.frame.size.height;
-    self.view.frame = viewFrame;    
+    self.view.frame = viewFrame;
+    
+    self.navigationItem.leftBarButtonItem = nil;
 }
 
 - (void)hideLoading {
@@ -241,11 +267,11 @@
 }
 
 
-#pragma mark Private methods
-
+#pragma mark Action methods
+// Provede prihlaseni
 - (void)loginAction {
     
-    [self.passwordField resignFirstResponder];
+    [self hideKeyboard];
     
     self.activityView.frame = CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height);
     CGRect activityIndicatorFrame = _activityIndicator.frame;
@@ -265,6 +291,10 @@
     self.loginRequest.username = self.usernameField.text;
     self.loginRequest.password = self.passwordField.text;
     [self.loginRequest login];
+}
+
+- (void)hideKeyboard {
+    [_activeTextField resignFirstResponder];
 }
 
 @end

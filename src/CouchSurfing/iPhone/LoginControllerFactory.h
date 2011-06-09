@@ -11,14 +11,17 @@
 @class LoginController;
 @protocol LoginAnnouncer;
 @protocol LoginInformation;
+@class ProfileControllerFactory;
 
 @interface LoginControllerFactory : NSObject {
     id<LoginAnnouncer> injLoginAnnouncer;
     id<LoginInformation> injLoginInformation;
+    ProfileControllerFactory *injProfileCF;
 }
 
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
+@property (nonatomic, retain) ProfileControllerFactory *profileCF;
 
 - (id)createController;
 
