@@ -7,18 +7,14 @@
 //
 
 #import "CouchSearchRequest.h"
-#import "XpathFinder.h"
 #import "CouchSourfer.h"
 
-NSString * const CouchSearchRequestHasCouchYes = @"Y";
-NSString * const CouchSearchRequestHasCouchDefinitely = @"D";
-NSString * const CouchSearchRequestHasCouchMaybe = @"M";
-NSString * const CouchSearchRequestHasCouchCoffeeMaybe = @"CM";
-NSString * const CouchSearchRequestHasCouchCoffeDrink = @"C";
-NSString * const CouchSearchRequestHasCouchNo = @"N";
-NSString * const CouchSearchRequestHasCouchTraveling = @"T";
+#import "TouchXML.h"
 
-static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/table[2]/tr%@/td/table/tr";
+NSString * const CouchSearchRequestHasCouchYes = @"Y";
+NSString * const CouchSearchRequestHasCouchMaybe = @"M";
+NSString * const CouchSearchRequestHasCouchCoffeDrink = @"C";
+NSString * const CouchSearchRequestHasCouchTraveling = @"T";
 
 @interface CouchSearchRequest ()
 
@@ -26,8 +22,7 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
 @property (nonatomic, retain) NSMutableData *data;
 
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value;
-- (NSString *)sourfersCountQuery;
-- (NSString *)sourfersValueQueryFor:(NSString *)append position:(NSInteger)position;
+- (NSString *)parameter:(NSString *)parameter value:(NSString *)value key:(NSString *)key;
 
 @end
 
@@ -37,43 +32,68 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
 @synthesize delegate = _delegate;
 @synthesize connection = _connection;
 @synthesize data = _data;
-@synthesize hasCouch = _hasCouch;
-@synthesize maxSurfers = _maxSurfers;
-@synthesize keyword = _keyword;
-@synthesize keywordOrAnd = _keywordOrAnd;
-@synthesize cityCountry = _cityCountry;
-@synthesize regionId = _regionId;
-@synthesize countryId = _countryId;
-@synthesize stateId = _stateId;
-@synthesize cityId = _cityId;
-@synthesize radius = _radius;
-@synthesize radiusType = _radiusType;    
 
+@synthesize page = _page;
+@synthesize location = _location;
+@synthesize mapEdges = _mapEdges;
+@synthesize couchStatuses = _couchStatuses;
+@synthesize ageLow = _ageLow;
+@synthesize ageHigh = _ageHigh;
+@synthesize maxSurfers = _maxSurfers;
+@synthesize languageId = _languageId;
+@synthesize lastLoginDays = _lastLoginDays;
+@synthesize male = _male;
+@synthesize female = _female;
+@synthesize severalPeople = _severalPeople;
+@synthesize hasPhoto = _hasPhoto;
+@synthesize wheelchairAccessible = _wheelchairAccessible;
+@synthesize username = _username;
+@synthesize keyword = _keyword;
 
 - (void)send {
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.couchsurfing.org/mapsurf.html?SEARCH[skip]=25&SEARCH[show]=25"]];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.couchsurfing.org/search/get_more_results"]];
     [urlRequest setHTTPMethod:@"POST"];
     
     NSMutableString *bodyString = [NSMutableString string];
     
-    [bodyString appendString:[self parameter:@"has_couch" value:self.hasCouch]];
-    [bodyString appendString:[self parameter:@"max_surfers" value:self.maxSurfers]];
-    [bodyString appendString:[self parameter:@"keyword" value:self.keyword]];
-    [bodyString appendString:[self parameter:@"keyword_search_or_and" value:self.keywordOrAnd]];
-    [bodyString appendString:[self parameter:@"city_country" value:self.cityCountry]];
-    [bodyString appendString:[self parameter:@"region_id" value:self.regionId]];
-    [bodyString appendString:[self parameter:@"country_id" value:self.countryId]];
-    [bodyString appendString:[self parameter:@"state_id" value:self.stateId]];
-    [bodyString appendString:[self parameter:@"city_id" value:self.cityId]];
-    [bodyString appendString:[self parameter:@"radius" value:self.radius]];
-    [bodyString appendString:[self parameter:@"radius_type" value:self.radiusType]];
-
-    [bodyString appendString:[self parameter:@"skip" value:@"25"]];
-    [bodyString appendString:[self parameter:@"show" value:@"5"]];    
+    [bodyString appendString:[self parameter:@"page" value:self.page]];
+    [bodyString appendString:[self parameter:@"location" value:[self.location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
+    [bodyString appendString:[self parameter:@"location" value:[self.location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];    
+    [bodyString appendString:[self parameter:@"order_by" value:@"Search!"]];
     
-    [bodyString appendString:[self parameter:@"action" value:@"List surfers on next page..."]];
-    [bodyString appendString:@"form=basic"];
-        
+    for (int i = 0; i < [self.couchStatuses count]; i++) {
+        [bodyString appendString:[self parameter:@"couchstatuses"
+                                           value:[self.couchStatuses objectAtIndex:i] 
+                                             key:[NSString stringWithFormat:@"%d", i]]];
+    }
+    
+    [bodyString appendString:[self parameter:@"age_low" value:self.ageLow]];
+    [bodyString appendString:[self parameter:@"age_high" value:self.ageHigh]];
+    [bodyString appendString:[self parameter:@"max_surfers" value:self.maxSurfers]];
+    [bodyString appendString:[self parameter:@"language_id" value:self.languageId]];
+    [bodyString appendString:[self parameter:@"last_login_days" value:self.lastLoginDays]];
+    [bodyString appendString:[self parameter:@"male" value:self.male]];
+    [bodyString appendString:[self parameter:@"female" value:self.female]];
+    [bodyString appendString:[self parameter:@"several_people" value:self.severalPeople]];
+    [bodyString appendString:[self parameter:@"has_photo" value:self.hasPhoto]];
+    [bodyString appendString:[self parameter:@"wheelchair_accessible" value:self.wheelchairAccessible]];
+    [bodyString appendString:[self parameter:@"username" value:self.username]];    
+    [bodyString appendString:[self parameter:@"keyword" value:self.keyword]];
+    [bodyString appendString:[self parameter:@"submitted" value:@"manual"]];
+    [bodyString appendString:[self parameter:@"submit_button" value:@"submit"]];
+    [bodyString appendString:[self parameter:@"search_type" value:@"user"]];
+    [bodyString appendString:[self parameter:@"data_only" value:@"false"]];
+    [bodyString appendString:[self parameter:@"cssstandart_request" value:@"true"]];
+    [bodyString appendString:[self parameter:@"type" value:@"json"]];
+    
+    //podivat se na zbytek parametru
+    
+    [urlRequest setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
+    [urlRequest setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:@"text/javascript, text/html, application/xml, text/xml, */*" forHTTPHeaderField:@"Accept"];
+    [urlRequest setValue:@"1.7" forHTTPHeaderField:@"X-Prototype-Version"];
+    
+     
     NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
     [urlRequest setHTTPBody:bodyData];
     self.connection = [NSURLConnection connectionWithRequest:urlRequest delegate:self];
@@ -82,42 +102,55 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
 - (void)dealloc {
     self.connection = nil;
     self.data = nil;
-    self.hasCouch = nil;
+
+    
+    self.page = nil;
+    self.location = nil;
+    self.mapEdges = nil;
+    self.couchStatuses = nil;
+    self.ageLow = nil;
+    self.ageHigh = nil;
     self.maxSurfers = nil;
+    self.languageId = nil;
+    self.lastLoginDays = nil;
+    self.male = nil;
+    self.female = nil;
+    self.severalPeople = nil;
+    self.hasPhoto = nil;
+    self.wheelchairAccessible = nil;
+    self.username = nil;
     self.keyword = nil;
-    self.keywordOrAnd = nil;
-    self.cityCountry = nil;
-    self.regionId = nil;
-    self.countryId = nil;
-    self.stateId = nil;
-    self.cityId = nil;
-    self.radius = nil;
-    self.radiusType = nil;
+
     [super dealloc];
 }
 
 #pragma mark NSURLConnectionDelegate methods
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSString *xpathNameAppend = @"/td[2]/b/font/a";
-    NSString *xpathImageAppend = @"/td[1]/a/img/@src";    
+    NSError *error;
+    CXMLDocument *doc = [[CXMLDocument alloc] initWithData:self.data options:0 error:&error];
+    NSArray *nodes = [doc nodesForXPath:@"//div[@class='mod simple profile_result_item']" error:&error];
     
-    XPathFinder *xpathFinder = [[[XPathFinder alloc] initWithData:self.data] autorelease];
-    NSInteger sourfersCount = [xpathFinder numberOfNodesForXPath:[self sourfersCountQuery]];
+    NSMutableArray *surfers = [NSMutableArray array];
     
-    NSMutableArray *sourfers = [NSMutableArray arrayWithCapacity:sourfersCount];
-    for (int i = 1; i <= sourfersCount; i++) {
-        NSString *name = [xpathFinder nodeValueForXPath:[self sourfersValueQueryFor:xpathNameAppend position:i]];
-        NSString *imageSrc = [xpathFinder nodeValueForXPath:[self sourfersValueQueryFor:xpathImageAppend position:i]];
+    for (CXMLNode *node in nodes) {
+        CouchSourfer *surfer = [[[CouchSourfer alloc] init] autorelease];
+        NSArray *nameNodes = [node nodesForXPath:@".//span[@class='result_username']/a/text()" error:&error];
+        if ([nameNodes count] > 0) {
+            surfer.name = [[nameNodes objectAtIndex:0] stringValue];
+        }
         
-        CouchSourfer *sourfer = [[[CouchSourfer alloc] init] autorelease];
-        sourfer.name = name;
-        sourfer.imageSrc = [imageSrc stringByReplacingOccurrencesOfString:@"_t_" withString:@"_m_"];
-        [sourfers addObject:sourfer];
+        NSArray *imageSrcNodes = [node nodesForXPath:@".//img[@class='profile_result_link_img']/@src" error:&error];
+        if ([imageSrcNodes count] > 0) {
+            surfer.imageSrc = [[imageSrcNodes objectAtIndex:0] stringValue];
+        }
+        
+        [surfers addObject:surfer];
+        
     }
-    
+        
     if ([self.delegate respondsToSelector:@selector(couchSearchRequest:didRecieveResult:)]) {
-        [self.delegate couchSearchRequest:self didRecieveResult:sourfers];
+        [self.delegate couchSearchRequest:self didRecieveResult:surfers];
     }
     
     self.connection = nil;
@@ -141,17 +174,12 @@ static NSString * const xpathBaseFormat = @"/html/body/div[2]/div/table/tr/td/ta
 //  Vytvori parametr pro pridani do POST body
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value {
     value = value == nil ? @"" : value;
-    return [NSString stringWithFormat:@"SEARCH%@%@%@=%@&", @"%5B",parameter, @"%5D", value];
+    return [NSString stringWithFormat:@"%@=%@&", parameter, value];
 }
 
-//  Vrati dotaz na pocet uzivatelu
-- (NSString *)sourfersCountQuery {
-    return [NSString stringWithFormat:xpathBaseFormat, @""];
-}
-
-//  Vrati dotaz na jakoukoliv hodnotu uzivatele zadanou poddotazem ve stringu append
-- (NSString *)sourfersValueQueryFor:(NSString *)append position:(NSInteger)position {
-    return [[NSString stringWithFormat:xpathBaseFormat, [NSString stringWithFormat:@"[%i]", position]] stringByAppendingString:append];
+- (NSString *)parameter:(NSString *)parameter value:(NSString *)value key:(NSString *)key {
+    value = value == nil ? @"" : value;
+    return [NSString stringWithFormat:@"%@%@%@%@=%@&", parameter, @"%5B", key, @"%5D", value];
 }
 
 @end

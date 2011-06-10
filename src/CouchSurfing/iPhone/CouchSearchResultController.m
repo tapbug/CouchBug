@@ -29,6 +29,10 @@
 @synthesize request = _request;
 
 - (void)viewDidLoad {
+    self.navigationItem.rightBarButtonItem =
+        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
+                                                      target:self
+                                                      action:@selector(showSearchForm)];
     _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
     _tableView.autoresizingMask = self.view.autoresizingMask;
     _tableView.delegate = self;
@@ -37,8 +41,12 @@
     
     self.imageDownloaders = [NSMutableArray array];
     
-    self.request.delegate = self;
-    [self.request send];
+    CouchSearchRequest *request = [[[CouchSearchRequest alloc] init] autorelease];
+    request.page = @"2";
+    request.location = @"%7B%22city_id%22%3A%226064086%22%2C%22city%22%3A%22Prague%22%2C%22latitude%22%3A%2250.085785%22%2C%22longitude%22%3A%2214.443588%22%2C%22type%22%3A%22city%22%2C%22state_id%22%3A%224384%22%2C%22state%22%3A%22Praha%22%2C%22country_id%22%3A%2275%22%2C%22country%22%3A%22Czech%2BRepublic%22%2C%22region_id%22%3A%226%22%2C%22region%22%3A%22Europe%22%7D";
+    request.mapEdges = @"%7B%22northEast%22%3A%7B%22lat%22%3A43.48552433447044%2C%22lng%22%3A-74.10790995312499%7D%2C%22southWest%22%3A%7B%22lat%22%3A41.54221236978597%2C%22lng%22%3A-76.72265604687499%7D%7D";
+    request.couchStatuses = [NSArray arrayWithObject:CouchSearchRequestHasCouchYes];
+    self.request = request;
     
     [super viewDidLoad];
 }

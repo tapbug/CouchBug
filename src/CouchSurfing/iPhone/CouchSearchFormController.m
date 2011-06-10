@@ -54,11 +54,6 @@
 
 - (void)searchAction {
     CouchSearchRequest *request = [self.requestFactory createRequest];
-    
-    request.hasCouch = @"";
-    request.keywordOrAnd = @"0";
-    request.regionId = @"0";
-    request.radiusType = @"M";
 }
 
 @end

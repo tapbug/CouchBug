@@ -60,11 +60,13 @@
     CouchSearchResultControllerFactory *resultControllerFactory =
         [self.container getComponent:[CouchSearchResultControllerFactory class]];
     CouchSearchResultController *searchResultController = [resultControllerFactory createController];
+    UINavigationController *searchNavigationController = 
+    [[[UINavigationController alloc] initWithRootViewController:searchResultController] autorelease];
     UITabBarItem *searchTabBarItem =
         [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Search", @"Search tabBar icon")
                                        image:[UIImage imageNamed:@"search.png"]
                                          tag:1] autorelease];
-    [searchResultController setTabBarItem:searchTabBarItem];
+    [searchNavigationController setTabBarItem:searchTabBarItem];
     
     //Tvorba MoreTabu
     UIViewController *moreController = [[[MoreController alloc] init] autorelease];
@@ -76,7 +78,7 @@
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
                                              loginNavigationController,
-                                             searchResultController,//s navigationem prejmenovat promenou na nazev tabu na profile
+                                             searchNavigationController,//s navigationem prejmenovat promenou na nazev tabu na profile
                                              moreController,
                                              nil];
     

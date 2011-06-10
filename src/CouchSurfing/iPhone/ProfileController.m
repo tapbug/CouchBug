@@ -8,8 +8,7 @@
 
 #import "ProfileController.h"
 #import "ActivityOverlap.h"
-#import "XPathFinder.h"
-
+#import "TouchXML.h"
 @interface ProfileController ()
 
 @property (nonatomic, retain) MVUrlConnection *urlConnection;
@@ -78,9 +77,9 @@
 #pragma mark MVUrlConnectionDelegate methods
 
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
-    XPathFinder *xpathFinder = [[[XPathFinder alloc] initWithData:responseData] autorelease];
-    NSString *firstname = [xpathFinder nodeValueForXPath:@"//input[@id='profilefirst_name']/@value"];
-    NSString *lastname = [xpathFinder nodeValueForXPath:@"//input[@id='profilelast_name']/@value"];
+    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:responseData options:0 error:nil];
+    NSString *firstname = [[doc nodeForXPath:@"//input[@id='profilefirst_name']/@value" error:nil] stringValue];
+    NSString *lastname = [[doc nodeForXPath:@"//input[@id='profilelast_name']/@value" error:nil] stringValue];
         
     self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", firstname, lastname];
     

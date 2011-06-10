@@ -65,7 +65,7 @@
 
 - (void)removeOverlap {
     [_activityIndicator stopAnimating];
-    [_view removeFromSuperview];
+    [_activityView removeFromSuperview];
 }
 
 @end
