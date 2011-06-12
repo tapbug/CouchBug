@@ -8,18 +8,24 @@
 
 #import <Foundation/Foundation.h>
 #import "MVUrlConnection.h"
+#import "LoginRequest.h"
 
 //  Nacita profil prihlaseneho uzivatele
 
 @protocol ProfileRequestDelegate;
+@protocol LoginInformation;
 
-@interface ProfileRequest : NSObject <MVUrlConnectionDelegate> {
+@interface ProfileRequest : NSObject <MVUrlConnectionDelegate, LoginRequestDelegate> {
     id<ProfileRequestDelegate> _delegate;
-    MVUrlConnection *_loadingConnection;    
+    id<LoginInformation> _loginInformation;
+    MVUrlConnection *_loadingConnection;
+    
+    LoginRequest *_loginRequest;
 }
 
 @property(nonatomic, assign) id<ProfileRequestDelegate> delegate;
 
+- (id)initWithLoginInformation:(id<LoginInformation>)loginInformation;
 - (void)loadProfile;
 
 @end
@@ -27,5 +33,6 @@
 @protocol ProfileRequestDelegate <NSObject>
 
 - (void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile;
+- (void)profileRequestFailedToLogin:(ProfileRequest *)profileRequest;
 
 @end

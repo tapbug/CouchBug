@@ -13,6 +13,7 @@
 @interface ProfileController ()
 
 @property (nonatomic, retain) AuthControllersFactory *authControllersFactory;
+@property (nonatomic, retain) ProfileRequestFactory *profileRequestFactory;
 
 @property (nonatomic, retain) ActivityOverlap *loadingOverlap;
 @property (nonatomic, retain) ProfileRequest *profileRequest;
@@ -27,6 +28,7 @@
 @implementation ProfileController
 
 @synthesize authControllersFactory = _authControllersFactory;
+@synthesize profileRequestFactory = _profileRequestFactory;
 
 @synthesize loadingOverlap = _loadingOverlap;
 @synthesize profileRequest = _profileRequest;
@@ -34,10 +36,13 @@
 @synthesize logoutOverlap = _logoutOverlap;
 @synthesize logoutRequest = _logoutRequest;
 
-- (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory {
+- (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory
+               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory {
+    
     self = [super init];
     if (self) {
         self.authControllersFactory = authControllersFactory;
+        self.profileRequestFactory = profileRequestFactory;
     }
     return self;
 }
@@ -45,6 +50,7 @@
 - (void)dealloc
 {
     self.authControllersFactory = nil;
+    self.profileRequestFactory = nil;
     self.loadingOverlap = nil;
     self.profileRequest.delegate = nil;
     self.profileRequest = nil;
@@ -84,7 +90,7 @@
     
     self.navigationItem.leftBarButtonItem.enabled = NO;
     
-    self.profileRequest = [[[ProfileRequest alloc] init] autorelease];
+    self.profileRequest = [self.profileRequestFactory createProfileRequest];
     self.profileRequest.delegate = self;
     [self.profileRequest loadProfile];
     
@@ -107,10 +113,14 @@
 
 #pragma Mark ProfileRequestDelegate methods
 
--(void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
+- (void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
     self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", [profile objectForKey:@"firstname"], [profile objectForKey:@"lastname"]];
     self.navigationItem.leftBarButtonItem.enabled = YES;
     [self.loadingOverlap removeOverlap];
+}
+
+- (void)profileRequestFailedToLogin:(ProfileRequest *)profileRequest {
+    
 }
 
 #pragma Mark LogoutRequestDelegate methods

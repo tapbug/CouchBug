@@ -12,11 +12,18 @@
 #import "LoginAnnouncer.h"
 
 #import "ProfileController.h"
+#import "ProfileRequestFactory.h"
 
 @implementation AuthControllersFactory
 
 @synthesize loginAnnouncer = injLoginAnnouncer;
 @synthesize loginInformation = injLoginInformation;
+@synthesize profileRequestFactory = injProfileRequestFactory;
+
+- (void)dealloc {
+    self.profileRequestFactory = nil;
+    [super dealloc];
+}
 
 - (LoginController *)createLoginController {
     return [[[LoginController alloc] initWithLoginAnnouncer:self.loginAnnouncer
@@ -25,7 +32,8 @@
 }
 
 - (ProfileController *)createProfileController {
-    return [[[ProfileController alloc] initWithAuthControllersFactory:self] autorelease];
+    return [[[ProfileController alloc] initWithAuthControllersFactory:self
+                                                profileRequestFactory:self.profileRequestFactory] autorelease];
 }
 
 @end

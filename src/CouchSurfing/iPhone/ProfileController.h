@@ -10,12 +10,16 @@
 
 #import "LogoutRequest.h"
 #import "ProfileRequest.h"
+//nejde dat do .m????
+#import "ProfileRequestFactory.h"
 
 @class ActivityOverlap;
 @class AuthControllersFactory;
+@class ProfileRequestFactory;
 
 @interface ProfileController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate>{
     AuthControllersFactory *_authControllersFactory;
+    ProfileRequestFactory *_profileRequestFactory;
     
     ActivityOverlap *_loadingOverlap;
     ProfileRequest *_profileRequest;
@@ -24,6 +28,7 @@
     LogoutRequest *_logoutRequest;
 }
 
-- (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory;
+- (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory 
+               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory;
 
 @end

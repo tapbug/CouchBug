@@ -57,6 +57,7 @@
 		6CDE85C713A50DB80065A991 /* LogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85C613A50DB70065A991 /* LogoutRequest.m */; };
 		6CDE85CA13A51AE70065A991 /* AuthControllersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */; };
 		6CDE85CD13A52D2B0065A991 /* ProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85CC13A52D2B0065A991 /* ProfileRequest.m */; };
+		6CDE85D013A537880065A991 /* ProfileRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85CF13A537880065A991 /* ProfileRequestFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,8 @@
 		6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthControllersFactory.m; sourceTree = "<group>"; };
 		6CDE85CB13A52D2B0065A991 /* ProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileRequest.h; sourceTree = "<group>"; };
 		6CDE85CC13A52D2B0065A991 /* ProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileRequest.m; sourceTree = "<group>"; };
+		6CDE85CE13A537880065A991 /* ProfileRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileRequestFactory.h; sourceTree = "<group>"; };
+		6CDE85CF13A537880065A991 /* ProfileRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileRequestFactory.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSurfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSurfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -399,6 +402,8 @@
 				6CDE85C613A50DB70065A991 /* LogoutRequest.m */,
 				6CDE85CB13A52D2B0065A991 /* ProfileRequest.h */,
 				6CDE85CC13A52D2B0065A991 /* ProfileRequest.m */,
+				6CDE85CE13A537880065A991 /* ProfileRequestFactory.h */,
+				6CDE85CF13A537880065A991 /* ProfileRequestFactory.m */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 				6CDE85C713A50DB80065A991 /* LogoutRequest.m in Sources */,
 				6CDE85CA13A51AE70065A991 /* AuthControllersFactory.m in Sources */,
 				6CDE85CD13A52D2B0065A991 /* ProfileRequest.m in Sources */,
+				6CDE85D013A537880065A991 /* ProfileRequestFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
