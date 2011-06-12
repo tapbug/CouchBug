@@ -12,7 +12,7 @@
 
 @protocol LoginAnnouncer;
 @protocol LoginInformation;
-@class ProfileControllerFactory;
+@class AuthControllersFactory;
 @class ActivityOverlap;
 
 @interface LoginController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, LoginRequestDelegate, UIAlertViewDelegate> {
@@ -30,11 +30,11 @@
     id<LoginAnnouncer> _loginAnnouncer;
     id<LoginInformation> _loginInformation;
     
-    ProfileControllerFactory *_profileCF;
+    AuthControllersFactory *_authControllerFactory;
 }
 
 - (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer
             loginInformation:(id<LoginInformation>)loginInformation
-    profileControllerFactory:(ProfileControllerFactory *)profileCF;
+    authControllerFactory:(AuthControllersFactory *)authControllerFactory;
 
 @end

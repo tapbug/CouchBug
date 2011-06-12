@@ -8,6 +8,10 @@
 
 #import "AppDelegate_iPhone.h"
 
+#import "AuthControllersFactory.h"
+#import "LoginAnnouncer.h"
+#import "IdentityManager.h"
+
 //Couchsearch UI modules
 #import "CouchSearchFormControllerFactory.h"
 #import "CouchSearchResultController.h"
@@ -15,18 +19,12 @@
 //Couchsearch core modules
 #import "CouchSearchFilter.h"
 
-#import "ProfileControllerFactory.h"
 
 #import "MoreController.h"
 
-#import "LoginControllerFactory.h"
-#import "LoginAnnouncer.h"
-#import "IdentityManager.h"
-
 @interface AppDelegate_iPhone ()
 
-- (void)injectLogin;
-- (void)injectProfile;
+- (void)injectAuth;
 - (void)injectCouchSearch;
 
 @end
@@ -41,13 +39,13 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
-    [self injectLogin];
-    [self injectProfile];
+    
+    [self injectAuth];
     [self injectCouchSearch];
     
     //Tvorba Profile Tabu
-    LoginControllerFactory *loginControllerFactory = [self.container getComponent:[LoginControllerFactory class]];
-    LoginController *loginController = [loginControllerFactory createController];
+    AuthControllersFactory *authControllerFactory = [self.container getComponent:[AuthControllersFactory class]];
+    LoginController *loginController = [authControllerFactory createLoginController];
     UINavigationController *loginNavigationController = 
         [[[UINavigationController alloc] initWithRootViewController:(UIViewController *)loginController] autorelease];
     UITabBarItem *loginTabBarItem =
@@ -100,15 +98,12 @@
     [[self.container withCache] addComponent:[CouchSearchFilter class]];
 }
 
-- (void)injectLogin {
-    [self.container addComponent:[LoginControllerFactory class]];
+- (void)injectAuth {
+    [self.container addComponent:[AuthControllersFactory class]];
     [[self.container withCache] addComponent:[IdentityManager class] 
                                 representing:[NSArray arrayWithObjects:@protocol(LoginAnnouncer), @protocol(LoginInformation), nil]];
 }
 
-- (void)injectProfile {
-    [self.container addComponent:[ProfileControllerFactory class]];
-}
 
 #pragma mark -
 #pragma mark Application lifecycle

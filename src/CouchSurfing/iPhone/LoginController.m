@@ -12,14 +12,14 @@
 
 #import "LoginAnnouncer.h"
 #import "LoginInformation.h"
-#import "ProfileControllerFactory.h"
+#import "AuthControllersFactory.h"
 
 @interface LoginController ()
 
 @property (nonatomic, retain) LoginRequest *loginRequest;
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
-@property (nonatomic, retain) ProfileControllerFactory *profileCF;
+@property (nonatomic, retain) AuthControllersFactory *authControllerFactory;
 
 
 @property(nonatomic, retain) UITextField *usernameField;
@@ -38,7 +38,7 @@
 @synthesize loginRequest = _loginRequest;
 @synthesize loginAnnouncer = _loginAnnouncer;
 @synthesize loginInformation = _loginInformation;
-@synthesize profileCF = _profileCF;
+@synthesize authControllerFactory = _authControllerFactory;
 
 @synthesize usernameField = _usernameField;
 @synthesize passwordField = _passwordField;
@@ -46,12 +46,12 @@
 
 - (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer
             loginInformation:(id<LoginInformation>)loginInformation
-    profileControllerFactory:(ProfileControllerFactory *)profileCF {
+    authControllerFactory:(AuthControllersFactory *)authControllerFactory {
     
     if ((self = [super init])) {
         self.loginAnnouncer = loginAnnouncer;
         self.loginInformation = loginInformation;
-        self.profileCF = profileCF;
+        self.authControllerFactory = authControllerFactory;
     }
     
     return self;
@@ -59,7 +59,7 @@
 
 - (void)dealloc {
     self.loginRequest = nil;
-    self.profileCF = nil;
+    self.authControllerFactory = nil;
     self.usernameField = nil;
     self.passwordField = nil;
     self.activityOverlap = nil;
@@ -182,7 +182,7 @@
 - (void)loginRequestDidFinnishLogin:(LoginRequest *)request {
     [self.loginAnnouncer user:request.username hasLoggedWithPassword:request.password];
     [self hideLoading];
-    id profileController = [self.profileCF createProfileController];
+    id profileController = [self.authControllerFactory createProfileController];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:profileController] animated:YES];
 }
 

@@ -7,33 +7,52 @@
 //
 
 #import "ProfileController.h"
+#import "AuthControllersFactory.h"
 #import "ActivityOverlap.h"
 #import "TouchXML.h"
+
 @interface ProfileController ()
 
-@property (nonatomic, retain) MVUrlConnection *urlConnection;
-@property (nonatomic, retain) ActivityOverlap *activityOverlap;
+@property (nonatomic, retain) AuthControllersFactory *authControllersFactory;
+
+@property (nonatomic, retain) MVUrlConnection *loadingConnection;
+@property (nonatomic, retain) ActivityOverlap *loadingOverlap;
+
+@property (nonatomic, retain) ActivityOverlap *logoutOverlap;
+@property (nonatomic, retain) LogoutRequest *logoutRequest;
+
+-(void)logoutAction;
 
 @end
 
 @implementation ProfileController
 
-@synthesize urlConnection = _urlConnection;
-@synthesize activityOverlap = _activityOverlap;
+@synthesize authControllersFactory = _authControllersFactory;
 
-- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
-{
-    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+@synthesize loadingConnection = _loadingConnection;
+@synthesize loadingOverlap = _loadingOverlap;
+@synthesize logoutOverlap = _logoutOverlap;
+@synthesize logoutRequest = _logoutRequest;
+
+- (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory {
+    self = [super init];
     if (self) {
-        // Custom initialization
+        self.authControllersFactory = authControllersFactory;
     }
     return self;
 }
 
 - (void)dealloc
 {
-    self.urlConnection = nil;
-    self.activityOverlap = nil;
+    self.authControllersFactory = nil;
+    self.loadingConnection.delegate = nil;
+    self.loadingConnection = nil;
+    self.loadingOverlap = nil;
+    
+    self.logoutRequest.delegate = nil;
+    self.logoutRequest = nil;
+    self.logoutOverlap = nil;
+    
     [super dealloc];
 }
 
@@ -49,14 +68,26 @@
 
 - (void)viewDidLoad
 {
-    self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view
-                                                           title:NSLocalizedString(@"Loading profile ...", @"Loading profile message")];
+    self.loadingOverlap = 
+        [[[ActivityOverlap alloc] initWithView:self.view
+                                        title:NSLocalizedString(@"Loading profile ...", @"Loading profile message")] autorelease];
+    self.logoutOverlap = 
+        [[[ActivityOverlap alloc] initWithView:self.view
+                                         title:NSLocalizedString(@"Logout ...", @"Logout from profile activity label")] autorelease];
     
-    [self.activityOverlap overlapView];
+    [self.loadingOverlap overlapView];
+    self.navigationItem.leftBarButtonItem = 
+        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Logout", @"Logout button in profile")
+                                         style:UIBarButtonItemStyleBordered
+                                        target:self
+                                        action:@selector(logoutAction)];
+    
+    self.navigationItem.leftBarButtonItem.enabled = NO;
+    
     NSString *profileUrl = @"https://www.couchsurfing.org/editprofile.html?edit=general";
-    self.urlConnection = [[[MVUrlConnection alloc] initWithUrlString:profileUrl] autorelease];
-    self.urlConnection.delegate = self;
-    [self.urlConnection sendRequest];
+    self.loadingConnection = [[[MVUrlConnection alloc] initWithUrlString:profileUrl] autorelease];
+    self.loadingConnection.delegate = self;
+    [self.loadingConnection sendRequest];
     [super viewDidLoad];
      
 }
@@ -83,7 +114,27 @@
         
     self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", firstname, lastname];
     
-    [self.activityOverlap removeOverlap];
+    [self.loadingOverlap removeOverlap];
+    self.navigationItem.leftBarButtonItem.enabled = YES;
+    
+}
+
+#pragma Mark LogoutRequestDelegate methods
+
+- (void)logoutDidFinnish:(LogoutRequest *)logoutReqeust {
+    [self.logoutOverlap removeOverlap];
+    id loginController = [self.authControllersFactory createLoginController];
+    [self.navigationController setViewControllers:[NSArray arrayWithObject:loginController] animated:YES];
+}
+
+#pragma Mark Action methods
+
+- (void)logoutAction {
+    [self.logoutOverlap overlapView];
+    
+    self.logoutRequest = [[[LogoutRequest alloc] init] autorelease];
+    self.logoutRequest.delegate = self;
+    [self.logoutRequest logout];
 }
 
 @end
