@@ -44,10 +44,16 @@
     [self injectCouchSearch];
     
     //Tvorba Profile Tabu
+    id<LoginInformation> loginInformation = [self.container getComponent:@protocol(LoginInformation)];
     AuthControllersFactory *authControllerFactory = [self.container getComponent:[AuthControllersFactory class]];
-    LoginController *loginController = [authControllerFactory createLoginController];
+    id authController = nil;
+    if (loginInformation.username && loginInformation.password) {
+        authController = [authControllerFactory createProfileController];
+    } else {
+        authController = [authControllerFactory createLoginController];
+    }
     UINavigationController *loginNavigationController = 
-        [[[UINavigationController alloc] initWithRootViewController:(UIViewController *)loginController] autorelease];
+        [[[UINavigationController alloc] initWithRootViewController:(UIViewController *)authController] autorelease];
     UITabBarItem *loginTabBarItem =
         [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Profile", @"Profile tabBar icon") 
                                        image:[UIImage imageNamed:@"profileCard.png"]

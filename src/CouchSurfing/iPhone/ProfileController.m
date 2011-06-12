@@ -9,14 +9,13 @@
 #import "ProfileController.h"
 #import "AuthControllersFactory.h"
 #import "ActivityOverlap.h"
-#import "TouchXML.h"
 
 @interface ProfileController ()
 
 @property (nonatomic, retain) AuthControllersFactory *authControllersFactory;
 
-@property (nonatomic, retain) MVUrlConnection *loadingConnection;
 @property (nonatomic, retain) ActivityOverlap *loadingOverlap;
+@property (nonatomic, retain) ProfileRequest *profileRequest;
 
 @property (nonatomic, retain) ActivityOverlap *logoutOverlap;
 @property (nonatomic, retain) LogoutRequest *logoutRequest;
@@ -29,8 +28,9 @@
 
 @synthesize authControllersFactory = _authControllersFactory;
 
-@synthesize loadingConnection = _loadingConnection;
 @synthesize loadingOverlap = _loadingOverlap;
+@synthesize profileRequest = _profileRequest;
+
 @synthesize logoutOverlap = _logoutOverlap;
 @synthesize logoutRequest = _logoutRequest;
 
@@ -45,9 +45,9 @@
 - (void)dealloc
 {
     self.authControllersFactory = nil;
-    self.loadingConnection.delegate = nil;
-    self.loadingConnection = nil;
     self.loadingOverlap = nil;
+    self.profileRequest.delegate = nil;
+    self.profileRequest = nil;
     
     self.logoutRequest.delegate = nil;
     self.logoutRequest = nil;
@@ -84,10 +84,10 @@
     
     self.navigationItem.leftBarButtonItem.enabled = NO;
     
-    NSString *profileUrl = @"https://www.couchsurfing.org/editprofile.html?edit=general";
-    self.loadingConnection = [[[MVUrlConnection alloc] initWithUrlString:profileUrl] autorelease];
-    self.loadingConnection.delegate = self;
-    [self.loadingConnection sendRequest];
+    self.profileRequest = [[[ProfileRequest alloc] init] autorelease];
+    self.profileRequest.delegate = self;
+    [self.profileRequest loadProfile];
+    
     [super viewDidLoad];
      
 }
@@ -105,18 +105,12 @@
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
 }
 
-#pragma mark MVUrlConnectionDelegate methods
+#pragma Mark ProfileRequestDelegate methods
 
-- (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
-    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:responseData options:0 error:nil];
-    NSString *firstname = [[doc nodeForXPath:@"//input[@id='profilefirst_name']/@value" error:nil] stringValue];
-    NSString *lastname = [[doc nodeForXPath:@"//input[@id='profilelast_name']/@value" error:nil] stringValue];
-        
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", firstname, lastname];
-    
-    [self.loadingOverlap removeOverlap];
+-(void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
+    self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", [profile objectForKey:@"firstname"], [profile objectForKey:@"lastname"]];
     self.navigationItem.leftBarButtonItem.enabled = YES;
-    
+    [self.loadingOverlap removeOverlap];
 }
 
 #pragma Mark LogoutRequestDelegate methods

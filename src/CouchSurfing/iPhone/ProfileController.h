@@ -7,18 +7,18 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MVUrlConnection.h"
-#import "LogoutRequest.h"
 
-@class MVUrlConnection;
+#import "LogoutRequest.h"
+#import "ProfileRequest.h"
+
 @class ActivityOverlap;
 @class AuthControllersFactory;
 
-@interface ProfileController : UIViewController <MVUrlConnectionDelegate, LogoutRequestDelegate>{
+@interface ProfileController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate>{
     AuthControllersFactory *_authControllersFactory;
     
     ActivityOverlap *_loadingOverlap;
-    MVUrlConnection *_loadingConnection;
+    ProfileRequest *_profileRequest;
     
     ActivityOverlap *_logoutOverlap;
     LogoutRequest *_logoutRequest;
