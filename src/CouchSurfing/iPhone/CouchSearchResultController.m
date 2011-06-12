@@ -79,7 +79,7 @@
         self.sourfers = [self.sourfers arrayByAddingObjectsFromArray:sourfers];
     }
     
-    if ([_sourfers count] <10) {
+    if ([sourfers count] <10) {
         _tryLoadMore = NO;
     } else {
         _tryLoadMore = YES;
