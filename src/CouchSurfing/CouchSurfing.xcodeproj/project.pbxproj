@@ -27,7 +27,6 @@
 		6C93662213A22EA700FA8960 /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661113A22EA700FA8960 /* CXMLNode_PrivateExtensions.m */; };
 		6C93662313A22EA700FA8960 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661313A22EA700FA8960 /* CXMLNode_XPathExtensions.m */; };
 		6C93662413A22EA700FA8960 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661613A22EA700FA8960 /* CTidy.m */; };
-		6C93662713A2826800FA8960 /* CouchSearchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93662613A2826800FA8960 /* CouchSearchFilter.m */; };
 		6C9EACDD13A09ECA00C1B19D /* profileCard.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACD913A09ECA00C1B19D /* profileCard.png */; };
 		6C9EACDE13A09ECA00C1B19D /* profileCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */; };
 		6C9EACDF13A09ECA00C1B19D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDB13A09ECA00C1B19D /* search.png */; };
@@ -54,10 +53,11 @@
 		6CAA940C128591BD00CB1737 /* CouchSearchResultControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */; };
 		6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */; };
 		6CC1DA1313A09276008F659F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC1DA1213A09276008F659F /* JSONKit.m */; };
-		6CDE85C713A50DB80065A991 /* LogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85C613A50DB70065A991 /* LogoutRequest.m */; };
 		6CDE85CA13A51AE70065A991 /* AuthControllersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */; };
-		6CDE85CD13A52D2B0065A991 /* ProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85CC13A52D2B0065A991 /* ProfileRequest.m */; };
-		6CDE85D013A537880065A991 /* ProfileRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85CF13A537880065A991 /* ProfileRequestFactory.m */; };
+		6CDE85D313A547510065A991 /* CouchSearchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D213A547510065A991 /* CouchSearchFilter.m */; };
+		6CDE85DA13A547610065A991 /* LogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D513A547610065A991 /* LogoutRequest.m */; };
+		6CDE85DB13A547610065A991 /* ProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D713A547610065A991 /* ProfileRequest.m */; };
+		6CDE85DC13A547610065A991 /* ProfileRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D913A547610065A991 /* ProfileRequestFactory.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -124,8 +124,6 @@
 		6C93661513A22EA700FA8960 /* CTidy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTidy.h; sourceTree = "<group>"; };
 		6C93661613A22EA700FA8960 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
 		6C93661713A22EA700FA8960 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
-		6C93662513A2826800FA8960 /* CouchSearchFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFilter.h; sourceTree = "<group>"; };
-		6C93662613A2826800FA8960 /* CouchSearchFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFilter.m; sourceTree = "<group>"; };
 		6C9EACD913A09ECA00C1B19D /* profileCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileCard.png; sourceTree = "<group>"; };
 		6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCard@2x.png"; sourceTree = "<group>"; };
 		6C9EACDB13A09ECA00C1B19D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -168,14 +166,16 @@
 		6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormControllerFactory.m; sourceTree = "<group>"; };
 		6CC1DA1113A09276008F659F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		6CC1DA1213A09276008F659F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
-		6CDE85C513A50DB70065A991 /* LogoutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LogoutRequest.h; sourceTree = "<group>"; };
-		6CDE85C613A50DB70065A991 /* LogoutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LogoutRequest.m; sourceTree = "<group>"; };
 		6CDE85C813A51AE70065A991 /* AuthControllersFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthControllersFactory.h; sourceTree = "<group>"; };
 		6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthControllersFactory.m; sourceTree = "<group>"; };
-		6CDE85CB13A52D2B0065A991 /* ProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileRequest.h; sourceTree = "<group>"; };
-		6CDE85CC13A52D2B0065A991 /* ProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileRequest.m; sourceTree = "<group>"; };
-		6CDE85CE13A537880065A991 /* ProfileRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileRequestFactory.h; sourceTree = "<group>"; };
-		6CDE85CF13A537880065A991 /* ProfileRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileRequestFactory.m; sourceTree = "<group>"; };
+		6CDE85D113A547510065A991 /* CouchSearchFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouchSearchFilter.h; path = Shared/Classes/CouchSearchFilter.h; sourceTree = "<group>"; };
+		6CDE85D213A547510065A991 /* CouchSearchFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CouchSearchFilter.m; path = Shared/Classes/CouchSearchFilter.m; sourceTree = "<group>"; };
+		6CDE85D413A547610065A991 /* LogoutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoutRequest.h; path = Shared/Classes/LogoutRequest.h; sourceTree = "<group>"; };
+		6CDE85D513A547610065A991 /* LogoutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoutRequest.m; path = Shared/Classes/LogoutRequest.m; sourceTree = "<group>"; };
+		6CDE85D613A547610065A991 /* ProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileRequest.h; path = Shared/Classes/ProfileRequest.h; sourceTree = "<group>"; };
+		6CDE85D713A547610065A991 /* ProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileRequest.m; path = Shared/Classes/ProfileRequest.m; sourceTree = "<group>"; };
+		6CDE85D813A547610065A991 /* ProfileRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileRequestFactory.h; path = Shared/Classes/ProfileRequestFactory.h; sourceTree = "<group>"; };
+		6CDE85D913A547610065A991 /* ProfileRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileRequestFactory.m; path = Shared/Classes/ProfileRequestFactory.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSurfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSurfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -381,10 +381,10 @@
 		6C9EAD0F13A0FD0200C1B19D /* CouchSearch */ = {
 			isa = PBXGroup;
 			children = (
+				6CDE85D113A547510065A991 /* CouchSearchFilter.h */,
+				6CDE85D213A547510065A991 /* CouchSearchFilter.m */,
 				6C9EACFB13A0FCF900C1B19D /* CouchSearchRequest.h */,
 				6C9EACFC13A0FCF900C1B19D /* CouchSearchRequest.m */,
-				6C93662513A2826800FA8960 /* CouchSearchFilter.h */,
-				6C93662613A2826800FA8960 /* CouchSearchFilter.m */,
 			);
 			name = CouchSearch;
 			sourceTree = "<group>";
@@ -392,18 +392,18 @@
 		6C9EAD1013A0FD3A00C1B19D /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				6CDE85D413A547610065A991 /* LogoutRequest.h */,
+				6CDE85D513A547610065A991 /* LogoutRequest.m */,
+				6CDE85D613A547610065A991 /* ProfileRequest.h */,
+				6CDE85D713A547610065A991 /* ProfileRequest.m */,
+				6CDE85D813A547610065A991 /* ProfileRequestFactory.h */,
+				6CDE85D913A547610065A991 /* ProfileRequestFactory.m */,
 				6C9EAD0313A0FCF900C1B19D /* IdentityManager.h */,
 				6C9EAD0413A0FCF900C1B19D /* IdentityManager.m */,
 				6C9EAD0513A0FCF900C1B19D /* LoginAnnouncer.h */,
 				6C9EAD0613A0FCF900C1B19D /* LoginInformation.h */,
 				6C9EAD0713A0FCF900C1B19D /* LoginRequest.h */,
 				6C9EAD0813A0FCF900C1B19D /* LoginRequest.m */,
-				6CDE85C513A50DB70065A991 /* LogoutRequest.h */,
-				6CDE85C613A50DB70065A991 /* LogoutRequest.m */,
-				6CDE85CB13A52D2B0065A991 /* ProfileRequest.h */,
-				6CDE85CC13A52D2B0065A991 /* ProfileRequest.m */,
-				6CDE85CE13A537880065A991 /* ProfileRequestFactory.h */,
-				6CDE85CF13A537880065A991 /* ProfileRequestFactory.m */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -574,11 +574,11 @@
 				6C93662213A22EA700FA8960 /* CXMLNode_PrivateExtensions.m in Sources */,
 				6C93662313A22EA700FA8960 /* CXMLNode_XPathExtensions.m in Sources */,
 				6C93662413A22EA700FA8960 /* CTidy.m in Sources */,
-				6C93662713A2826800FA8960 /* CouchSearchFilter.m in Sources */,
-				6CDE85C713A50DB80065A991 /* LogoutRequest.m in Sources */,
 				6CDE85CA13A51AE70065A991 /* AuthControllersFactory.m in Sources */,
-				6CDE85CD13A52D2B0065A991 /* ProfileRequest.m in Sources */,
-				6CDE85D013A537880065A991 /* ProfileRequestFactory.m in Sources */,
+				6CDE85D313A547510065A991 /* CouchSearchFilter.m in Sources */,
+				6CDE85DA13A547610065A991 /* LogoutRequest.m in Sources */,
+				6CDE85DB13A547610065A991 /* ProfileRequest.m in Sources */,
+				6CDE85DC13A547610065A991 /* ProfileRequestFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

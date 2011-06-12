@@ -9,8 +9,6 @@
 #import <UIKit/UIKit.h>
 #import "MVIOC/MVIOC.h"
 
-#import "ProfileRequestFactory.h"
-
 @interface AppDelegate_iPhone : NSObject <UIApplicationDelegate> {
     UIWindow *_window;
     MVIOCContainer *_container;

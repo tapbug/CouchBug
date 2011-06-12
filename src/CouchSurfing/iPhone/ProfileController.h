@@ -10,8 +10,6 @@
 
 #import "LogoutRequest.h"
 #import "ProfileRequest.h"
-//nejde dat do .m????
-#import "ProfileRequestFactory.h"
 
 @class ActivityOverlap;
 @class AuthControllersFactory;

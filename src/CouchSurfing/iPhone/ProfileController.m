@@ -9,6 +9,7 @@
 #import "ProfileController.h"
 #import "AuthControllersFactory.h"
 #import "ActivityOverlap.h"
+#import "ProfileRequestFactory.h"
 
 @interface ProfileController ()
 

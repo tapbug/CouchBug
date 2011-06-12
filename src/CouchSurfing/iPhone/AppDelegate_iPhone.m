@@ -8,10 +8,11 @@
 
 #import "AppDelegate_iPhone.h"
 
+//Auth module
 #import "AuthControllersFactory.h"
 #import "LoginAnnouncer.h"
 #import "IdentityManager.h"
-
+#import "ProfileRequestFactory.h"
 
 //Couchsearch UI modules
 #import "CouchSearchFormControllerFactory.h"
@@ -19,7 +20,6 @@
 #import "CouchSearchResultControllerFactory.h"
 //Couchsearch core modules
 #import "CouchSearchFilter.h"
-
 
 #import "MoreController.h"
 
