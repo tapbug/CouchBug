@@ -7,7 +7,6 @@
 //
 
 #import "CouchSearchFormControllerFactory.h"
-#import "CouchSearchRequestFactory.h"
 #import "CouchSearchFormController.h"
 
 @implementation CouchSearchFormControllerFactory
@@ -17,7 +16,6 @@
 
 - (id)createController {
     CouchSearchFormController *controller = [[[CouchSearchFormController alloc] init] autorelease];
-    controller.requestFactory = (id)self.requestFactory;
     controller.resultControllerFactory = self.resultControllerFactory;
     return controller;
 }

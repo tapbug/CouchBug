@@ -28,6 +28,7 @@
 		6C93662213A22EA700FA8960 /* CXMLNode_PrivateExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661113A22EA700FA8960 /* CXMLNode_PrivateExtensions.m */; };
 		6C93662313A22EA700FA8960 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661313A22EA700FA8960 /* CXMLNode_XPathExtensions.m */; };
 		6C93662413A22EA700FA8960 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661613A22EA700FA8960 /* CTidy.m */; };
+		6C93662713A2826800FA8960 /* CouchSearchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93662613A2826800FA8960 /* CouchSearchFilter.m */; };
 		6C9EACDD13A09ECA00C1B19D /* profileCard.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACD913A09ECA00C1B19D /* profileCard.png */; };
 		6C9EACDE13A09ECA00C1B19D /* profileCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */; };
 		6C9EACDF13A09ECA00C1B19D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDB13A09ECA00C1B19D /* search.png */; };
@@ -42,7 +43,6 @@
 		6C9EACF813A0FC4200C1B19D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACF213A0FC4200C1B19D /* Icon.png */; };
 		6C9EACF913A0FC4200C1B19D /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACF313A0FC4200C1B19D /* Icon@2x.png */; };
 		6C9EAD0913A0FCF900C1B19D /* CouchSearchRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EACFC13A0FCF900C1B19D /* CouchSearchRequest.m */; };
-		6C9EAD0A13A0FCF900C1B19D /* CouchSearchRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EACFE13A0FCF900C1B19D /* CouchSearchRequestFactory.m */; };
 		6C9EAD0B13A0FCF900C1B19D /* CouchSourfer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD0013A0FCF900C1B19D /* CouchSourfer.m */; };
 		6C9EAD0C13A0FCF900C1B19D /* CSImageDownloader.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD0213A0FCF900C1B19D /* CSImageDownloader.m */; };
 		6C9EAD0D13A0FCF900C1B19D /* IdentityManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD0413A0FCF900C1B19D /* IdentityManager.m */; };
@@ -124,6 +124,8 @@
 		6C93661513A22EA700FA8960 /* CTidy.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CTidy.h; sourceTree = "<group>"; };
 		6C93661613A22EA700FA8960 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
 		6C93661713A22EA700FA8960 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
+		6C93662513A2826800FA8960 /* CouchSearchFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFilter.h; sourceTree = "<group>"; };
+		6C93662613A2826800FA8960 /* CouchSearchFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFilter.m; sourceTree = "<group>"; };
 		6C9EACD913A09ECA00C1B19D /* profileCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileCard.png; sourceTree = "<group>"; };
 		6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCard@2x.png"; sourceTree = "<group>"; };
 		6C9EACDB13A09ECA00C1B19D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -142,8 +144,6 @@
 		6C9EACF313A0FC4200C1B19D /* Icon@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon@2x.png"; sourceTree = "<group>"; };
 		6C9EACFB13A0FCF900C1B19D /* CouchSearchRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouchSearchRequest.h; path = Shared/Classes/CouchSearchRequest.h; sourceTree = "<group>"; };
 		6C9EACFC13A0FCF900C1B19D /* CouchSearchRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CouchSearchRequest.m; path = Shared/Classes/CouchSearchRequest.m; sourceTree = "<group>"; };
-		6C9EACFD13A0FCF900C1B19D /* CouchSearchRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouchSearchRequestFactory.h; path = Shared/Classes/CouchSearchRequestFactory.h; sourceTree = "<group>"; };
-		6C9EACFE13A0FCF900C1B19D /* CouchSearchRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CouchSearchRequestFactory.m; path = Shared/Classes/CouchSearchRequestFactory.m; sourceTree = "<group>"; };
 		6C9EACFF13A0FCF900C1B19D /* CouchSourfer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouchSourfer.h; path = Shared/Classes/CouchSourfer.h; sourceTree = "<group>"; };
 		6C9EAD0013A0FCF900C1B19D /* CouchSourfer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CouchSourfer.m; path = Shared/Classes/CouchSourfer.m; sourceTree = "<group>"; };
 		6C9EAD0113A0FCF900C1B19D /* CSImageDownloader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSImageDownloader.h; path = Shared/Classes/CSImageDownloader.h; sourceTree = "<group>"; };
@@ -387,8 +387,8 @@
 			children = (
 				6C9EACFB13A0FCF900C1B19D /* CouchSearchRequest.h */,
 				6C9EACFC13A0FCF900C1B19D /* CouchSearchRequest.m */,
-				6C9EACFD13A0FCF900C1B19D /* CouchSearchRequestFactory.h */,
-				6C9EACFE13A0FCF900C1B19D /* CouchSearchRequestFactory.m */,
+				6C93662513A2826800FA8960 /* CouchSearchFilter.h */,
+				6C93662613A2826800FA8960 /* CouchSearchFilter.m */,
 			);
 			name = CouchSearch;
 			sourceTree = "<group>";
@@ -555,7 +555,6 @@
 				6C9EACE813A0D1AC00C1B19D /* MoreController.m in Sources */,
 				6C9EACEB13A0EBDD00C1B19D /* ProfileControllerFactory.m in Sources */,
 				6C9EAD0913A0FCF900C1B19D /* CouchSearchRequest.m in Sources */,
-				6C9EAD0A13A0FCF900C1B19D /* CouchSearchRequestFactory.m in Sources */,
 				6C9EAD0B13A0FCF900C1B19D /* CouchSourfer.m in Sources */,
 				6C9EAD0C13A0FCF900C1B19D /* CSImageDownloader.m in Sources */,
 				6C9EAD0D13A0FCF900C1B19D /* IdentityManager.m in Sources */,
@@ -575,6 +574,7 @@
 				6C93662213A22EA700FA8960 /* CXMLNode_PrivateExtensions.m in Sources */,
 				6C93662313A22EA700FA8960 /* CXMLNode_XPathExtensions.m in Sources */,
 				6C93662413A22EA700FA8960 /* CTidy.m in Sources */,
+				6C93662713A2826800FA8960 /* CouchSearchFilter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

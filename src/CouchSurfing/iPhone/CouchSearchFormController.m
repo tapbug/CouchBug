@@ -10,7 +10,6 @@
 
 #import "CouchSearchResultControllerFactory.h"
 #import "CouchSearchResultController.h"
-#import "CouchSearchRequestFactory.h"
 #import "CouchSearchRequest.h"
 
 @interface CouchSearchFormController ()
@@ -24,7 +23,6 @@
 
 @synthesize formTableView = _formTableView;
 
-@synthesize requestFactory = _requestFactory;
 @synthesize resultControllerFactory = _resultControllerFactory;
 
 - (void)viewDidLoad {
@@ -48,12 +46,11 @@
 
 - (void)dealloc {
     self.resultControllerFactory = nil;
-    self.requestFactory = nil;
     [super dealloc];
 }
 
 - (void)searchAction {
-    CouchSearchRequest *request = [self.requestFactory createRequest];
+
 }
 
 @end

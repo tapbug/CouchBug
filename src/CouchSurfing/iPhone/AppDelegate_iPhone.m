@@ -8,10 +8,12 @@
 
 #import "AppDelegate_iPhone.h"
 
+//Couchsearch UI modules
 #import "CouchSearchFormControllerFactory.h"
 #import "CouchSearchResultController.h"
 #import "CouchSearchResultControllerFactory.h"
-#import "CouchSearchRequestFactory.h"
+//Couchsearch core modules
+#import "CouchSearchFilter.h"
 
 #import "ProfileControllerFactory.h"
 
@@ -26,7 +28,6 @@
 - (void)injectLogin;
 - (void)injectProfile;
 - (void)injectCouchSearch;
-- (void)injectCouchSearchRequest;
 
 @end
 
@@ -43,7 +44,6 @@
     [self injectLogin];
     [self injectProfile];
     [self injectCouchSearch];
-    [self injectCouchSearchRequest];
     
     //Tvorba Profile Tabu
     LoginControllerFactory *loginControllerFactory = [self.container getComponent:[LoginControllerFactory class]];
@@ -95,10 +95,9 @@
 - (void)injectCouchSearch {
     [self.container addComponent:[CouchSearchResultControllerFactory class]];
     [self.container addComponent:[CouchSearchFormControllerFactory class]];
-}
-
-- (void)injectCouchSearchRequest {
-    [self.container addComponent:[CouchSearchRequestFactory class]];
+    
+    //Core modules
+    [[self.container withCache] addComponent:[CouchSearchFilter class]];
 }
 
 - (void)injectLogin {

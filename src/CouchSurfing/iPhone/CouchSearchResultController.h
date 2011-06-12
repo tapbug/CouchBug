@@ -11,18 +11,36 @@
 #import "CouchSearchRequest.h"
 #import "CSImageDownloader.h"
 
-@class CoachSearchRequestFactory;
+//  Konstanty stavu, ktere rikaji co se zrovna deje
+typedef enum {
+    CouchSearchResultControllerFirst,   //prvni loading
+    CouchSearchResultControllerMore     //loadovani dalsich vysledku
+} CouchSearchResultControllerLoadingActions;
+
 @class CouchSearchRequest;
+@class CouchSearchFilter;
+
+@class ActivityOverlap;
 
 @interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
-    CouchSearchRequest *_request;
+    CouchSearchFilter *_filter;
     
     UITableView *_tableView;
+    ActivityOverlap *_loadingActivity;
+
+    CouchSearchRequest *_request;    
     NSMutableArray *_imageDownloaders;
     
+    //oznacuje, jaky druh loadingu se zrovna deje
+    CouchSearchResultControllerLoadingActions _loadingAction;
+    //cislo aktualni stranky
+    NSUInteger _currentPage;
+    //zobrazit, nezobrazit show more posledni cell
+    BOOL _tryLoadMore;
+    //seznam surferu ktery zobrazujeme
     NSArray *_sourfers;
 }
 
-@property (nonatomic, retain) CouchSearchRequest *request;
+@property (nonatomic, retain) CouchSearchFilter *filter;
 
 @end

@@ -8,15 +8,24 @@
 
 #import "CouchSearchResultController.h"
 
+#import "ActivityOverlap.h"
+
+#import "CouchSearchFilter.h"
 #import "CouchSearchRequest.h"
 #import "CouchSourfer.h"
 
 @interface CouchSearchResultController ()
 
+@property (nonatomic, retain) ActivityOverlap *loadingActivity;
 
 @property (nonatomic, retain) NSArray *sourfers;
 @property (nonatomic, retain) NSMutableArray *imageDownloaders;
+@property (nonatomic, retain) CouchSearchRequest *request;
 
+//  Spusti hledani podle filteru
+- (void)performSearch;
+//  Spusti vyhledavani dalsich vysledku (strankovani)
+- (void)performSearchMore;
 - (void)loadImages;
 
 @end
@@ -24,11 +33,16 @@
 
 @implementation CouchSearchResultController
 
+@synthesize filter = _filter;
+
+@synthesize loadingActivity = _loadingActivity;
+
 @synthesize sourfers = _sourfers;
 @synthesize imageDownloaders = _imageDownloaders;
 @synthesize request = _request;
 
 - (void)viewDidLoad {
+    _currentPage = 1;
     self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
                                                       target:self
@@ -39,40 +53,41 @@
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
     
+    self.loadingActivity =
+        [[ActivityOverlap alloc] initWithView:self.view 
+                                        title:NSLocalizedString(@"Searching couch ...", @"Searching couch activity label")];
+    
     self.imageDownloaders = [NSMutableArray array];
-    
-    CouchSearchRequest *request = [[[CouchSearchRequest alloc] init] autorelease];
-    request.page = @"2";
-    request.location = @"%7B%22city_id%22%3A%226064086%22%2C%22city%22%3A%22Prague%22%2C%22latitude%22%3A%2250.085785%22%2C%22longitude%22%3A%2214.443588%22%2C%22type%22%3A%22city%22%2C%22state_id%22%3A%224384%22%2C%22state%22%3A%22Praha%22%2C%22country_id%22%3A%2275%22%2C%22country%22%3A%22Czech%2BRepublic%22%2C%22region_id%22%3A%226%22%2C%22region%22%3A%22Europe%22%7D";
-    request.mapEdges = @"%7B%22northEast%22%3A%7B%22lat%22%3A43.48552433447044%2C%22lng%22%3A-74.10790995312499%7D%2C%22southWest%22%3A%7B%22lat%22%3A41.54221236978597%2C%22lng%22%3A-76.72265604687499%7D%7D";
-    request.couchStatuses = [NSArray arrayWithObject:CouchSearchRequestHasCouchYes];
-    self.request = request;
-    
     [super viewDidLoad];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self.request send];
+    [self performSearch];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
 }
 
-#pragma mark Public methods
-
-- (void)setRequest:(CouchSearchRequest *)request {
-    [_request autorelease];
-    _request = [request retain];
-    request.delegate = self;
-}
-
 #pragma mark CoachSearchRequest methods
 
 - (void)couchSearchRequest:(CouchSearchRequest *)request didRecieveResult:(NSArray *)sourfers {
-    self.sourfers = sourfers;
+    if (_loadingAction == CouchSearchResultControllerFirst) {
+        self.sourfers = sourfers;
+        [self.loadingActivity removeOverlap];        
+    } else if (_loadingAction == CouchSearchResultControllerMore) {
+        self.sourfers = [self.sourfers arrayByAddingObjectsFromArray:sourfers];
+    }
+    
+    if ([_sourfers count] <10) {
+        _tryLoadMore = NO;
+    } else {
+        _tryLoadMore = YES;
+    }
+    
     [_tableView reloadData];
     self.request = nil;
+    
 }
 
 #pragma mark UITableViewDataSource methods
@@ -82,31 +97,71 @@
 }
 
 - (NSInteger)tableView:(UITableView *)table numberOfRowsInSection:(NSInteger)section {
-    return [self.sourfers count];
+    NSUInteger count = [self.sourfers count];
+    if (_tryLoadMore == YES) {
+        count += 1;
+    }
+    return count;
 }
 
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"sourferCell"];
-    CouchSourfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {    
+    UITableViewCell *cell;
     
-    if (cell == nil) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sourferCell"];
-    }
-    
-    cell.textLabel.text = sourfer.name;
-    cell.imageView.image = nil;
-    if (sourfer.image == nil) {
-        if (tableView.dragging == NO && tableView.decelerating == NO) {
-            CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
-            imageDownloader.delegate = self;
-            [imageDownloader downloadWithSrc:sourfer.imageSrc position:indexPath.row];
-            [imageDownloader release];
-        }            
-    } else {
-        cell.imageView.image = sourfer.image;
+    if ([self.sourfers count] == indexPath.row && _tryLoadMore) {// vytvoreni bunky load more
+        cell = [tableView dequeueReusableCellWithIdentifier:@"loadingMoreCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"loadingMoreCell"];
+            //Setup indicator view
+            UIActivityIndicatorView *activityView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+            activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+            [activityView startAnimating];
+            
+            //setup label
+            UILabel *loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(activityView.frame.size.width + 5, 0, 0, 0)] autorelease];
+            loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+            loadingLabel.text = NSLocalizedString(@"Loading more ...", @"Loading more results cell label in couch search");
+            [loadingLabel sizeToFit];
+            
+            //setup containing view
+            CGFloat loadingViewWidth = loadingLabel.frame.origin.x + loadingLabel.frame.size.width;
+            CGFloat loadingViewHeight = loadingLabel.frame.size.height;
+            UIView *loadingView = [[UIView alloc] initWithFrame:CGRectMake((int)(cell.contentView.frame.size.width - loadingViewWidth) / 2, (int)(cell.contentView.frame.size.height - loadingViewHeight) / 2, loadingViewWidth, loadingViewHeight)];
+            loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+            [loadingView addSubview:activityView];
+            [loadingView addSubview:loadingLabel];
+            
+            [cell.contentView addSubview:loadingView];            
+        }
+        
+    } else { // Vytvoreni bunky s couchsurferem
+        cell = [tableView dequeueReusableCellWithIdentifier:@"sourferCell"];
+        if (cell == nil) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sourferCell"];
+        }
+        
+        CouchSourfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
+        
+        cell.textLabel.text = sourfer.name;
+        cell.imageView.image = nil;
+        if (sourfer.image == nil) {
+            if (tableView.dragging == NO && tableView.decelerating == NO) {
+                CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
+                imageDownloader.delegate = self;
+                [imageDownloader downloadWithSrc:sourfer.imageSrc position:indexPath.row];
+                [imageDownloader release];
+            }            
+        } else {
+            cell.imageView.image = sourfer.image;
+        }
     }
     
     return cell;
+}
+
+- (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.sourfers count]) {//indexpath loading cellu
+        [self performSearchMore];
+    }
 }
 
 #pragma mark CSImageDownloaderDelegate methods
@@ -159,8 +214,31 @@
 
 #pragma mark Private methods
 
+- (void)performSearch {
+    _loadingAction = CouchSearchResultControllerFirst;
+    [self.loadingActivity overlapView];
+    CouchSearchRequest *request = [self.filter createRequest];
+    request.delegate = self;
+    self.request = request;
+    
+    [self.request send];
+}
+
+- (void)performSearchMore {
+    _loadingAction = CouchSearchResultControllerMore;
+    CouchSearchRequest *request = [self.filter createRequest];
+    request.delegate = self;
+    self.request = request;
+    request.page = [NSString stringWithFormat:@"%d", ++_currentPage];
+    [self.request send];
+    
+}
+
 - (void)loadImages {
-    NSArray *indexPaths = [_tableView indexPathsForVisibleRows];
+    NSMutableArray *indexPaths = [[_tableView indexPathsForVisibleRows] mutableCopy];
+    if (_tryLoadMore) {
+        [indexPaths removeLastObject];
+    }
     for (NSIndexPath *indexPath in indexPaths) {
         CouchSourfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
         if (sourfer.image == nil) {

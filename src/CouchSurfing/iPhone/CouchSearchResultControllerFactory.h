@@ -9,9 +9,13 @@
 #import <Foundation/Foundation.h>
 
 @class CouchSearchRequest;
+@class CouchSearchFilter;
 
 @interface CouchSearchResultControllerFactory : NSObject {
+    CouchSearchFilter *injFilter;
 }
+
+@property (nonatomic, assign) CouchSearchFilter *filter;
 
 - (id)createController;
 

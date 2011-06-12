@@ -69,6 +69,7 @@ extern CouchSearchRequestHasCouch * const CouchSearchRequestHasCouchTraveling;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *keyword;
 
+//  Vytvori a zasle http request, ktery se u CouchSurfu posila
 - (void)send;
 
 @end

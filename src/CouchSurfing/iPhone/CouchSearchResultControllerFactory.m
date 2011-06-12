@@ -12,13 +12,17 @@
 
 @implementation CouchSearchResultControllerFactory
 
+@synthesize filter = injFilter;
+
 - (id)createController {
     CouchSearchResultController *controller = [[[CouchSearchResultController alloc] init] autorelease];
+    controller.filter = self.filter;
     return controller;
 }
 
 
 - (void)dealloc {
+    self.filter = nil;
     [super dealloc];
 }
 

@@ -10,6 +10,7 @@
 #import "CouchSourfer.h"
 
 #import "TouchXML.h"
+#import "JSONKit.h"
 
 NSString * const CouchSearchRequestHasCouchYes = @"Y";
 NSString * const CouchSearchRequestHasCouchMaybe = @"M";
@@ -23,6 +24,7 @@ NSString * const CouchSearchRequestHasCouchTraveling = @"T";
 
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value;
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value key:(NSString *)key;
+- (NSString *)lastParameter:(NSString *)parameter value:(NSString *)value;
 
 @end
 
@@ -51,20 +53,33 @@ NSString * const CouchSearchRequestHasCouchTraveling = @"T";
 @synthesize keyword = _keyword;
 
 - (void)send {
-    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.couchsurfing.org/search/get_more_results"]];
+    NSMutableURLRequest *urlRequest = [NSMutableURLRequest requestWithURL:[NSURL URLWithString:@"http://www.couchsurfing.org/search/get_results"]];
     [urlRequest setHTTPMethod:@"POST"];
     
     NSMutableString *bodyString = [NSMutableString string];
     
     [bodyString appendString:[self parameter:@"page" value:self.page]];
-    [bodyString appendString:[self parameter:@"location" value:[self.location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];
-    [bodyString appendString:[self parameter:@"location" value:[self.location stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding]]];    
-    [bodyString appendString:[self parameter:@"order_by" value:@"Search!"]];
+    [bodyString appendString:[self parameter:@"order_by" value:@"default"]];
+    [bodyString appendString:[self parameter:@"encoded_data" value:@""]];
     
-    for (int i = 0; i < [self.couchStatuses count]; i++) {
-        [bodyString appendString:[self parameter:@"couchstatuses"
-                                           value:[self.couchStatuses objectAtIndex:i] 
-                                             key:[NSString stringWithFormat:@"%d", i]]];
+    NSString *locationEncoded = (NSString *)CFURLCreateStringByAddingPercentEscapes(
+                                                                                NULL,
+                                                                                (CFStringRef)self.location,
+                                                                                NULL,
+                                                                                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
+                                                                                kCFStringEncodingUTF8 );
+    
+    [bodyString appendString:[self parameter:@"location" value:locationEncoded]];
+    [bodyString appendString:[self parameter:@"search" value:@"Search!"]];
+    
+    if ([self.couchStatuses count] ==0) {
+        [bodyString appendString:[self parameter:@"couchstatus_all" value:@"1"]];
+    } else {
+        for (int i = 0; i < [self.couchStatuses count]; i++) {
+            [bodyString appendString:[self parameter:@"couchstatuses"
+                                               value:[self.couchStatuses objectAtIndex:i] 
+                                                 key:[NSString stringWithFormat:@"%d", i]]];
+        }
     }
     
     [bodyString appendString:[self parameter:@"age_low" value:self.ageLow]];
@@ -83,17 +98,25 @@ NSString * const CouchSearchRequestHasCouchTraveling = @"T";
     [bodyString appendString:[self parameter:@"submit_button" value:@"submit"]];
     [bodyString appendString:[self parameter:@"search_type" value:@"user"]];
     [bodyString appendString:[self parameter:@"data_only" value:@"false"]];
-    [bodyString appendString:[self parameter:@"cssstandart_request" value:@"true"]];
-    [bodyString appendString:[self parameter:@"type" value:@"json"]];
+    [bodyString appendString:[self parameter:@"csstandart_request" value:@"true"]];
+    [bodyString appendString:[self lastParameter:@"type" value:@"html"]];
     
     //podivat se na zbytek parametru
-    
-    [urlRequest setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
-    [urlRequest setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+
+    [urlRequest setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1 FirePHP/0.5" forHTTPHeaderField:@"User-Agent"];
     [urlRequest setValue:@"text/javascript, text/html, application/xml, text/xml, */*" forHTTPHeaderField:@"Accept"];
-    [urlRequest setValue:@"1.7" forHTTPHeaderField:@"X-Prototype-Version"];
+    [urlRequest setValue:@"cs,en-us;q=0.7,en;q=0.3" forHTTPHeaderField:@"Accept-Language"];
     
-     
+    [urlRequest setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
+    [urlRequest setValue:@"ISO-8859-2,utf-8;q=0.7,*;q=0.7" forHTTPHeaderField:@"Accept-Charset"];    
+    [urlRequest setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
+    [urlRequest setValue:@"1.7" forHTTPHeaderField:@"X-Prototype-Version"];
+    [urlRequest setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+    [urlRequest setValue:@"http://www.couchsurfing.org/search" forHTTPHeaderField:@"Referer"];
+    [urlRequest setValue:@"no-cache" forHTTPHeaderField:@"Pragma"];
+    [urlRequest setValue:@"no-cache" forHTTPHeaderField:@"Cache-Control"];
+    
+    
     NSData *bodyData = [bodyString dataUsingEncoding:NSUTF8StringEncoding];
     [urlRequest setHTTPBody:bodyData];
     self.connection = [NSURLConnection connectionWithRequest:urlRequest delegate:self];
@@ -172,6 +195,8 @@ NSString * const CouchSearchRequestHasCouchTraveling = @"T";
 #pragma mark Private methods
 
 //  Vytvori parametr pro pridani do POST body
+
+
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value {
     value = value == nil ? @"" : value;
     return [NSString stringWithFormat:@"%@=%@&", parameter, value];
@@ -180,6 +205,11 @@ NSString * const CouchSearchRequestHasCouchTraveling = @"T";
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value key:(NSString *)key {
     value = value == nil ? @"" : value;
     return [NSString stringWithFormat:@"%@%@%@%@=%@&", parameter, @"%5B", key, @"%5D", value];
+}
+
+- (NSString *)lastParameter:(NSString *)parameter value:(NSString *)value {
+    value = value == nil ? @"" : value;
+    return [NSString stringWithFormat:@"%@=%@", parameter, value];
 }
 
 @end
