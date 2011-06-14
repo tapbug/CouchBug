@@ -14,6 +14,7 @@
 @class ActivityOverlap;
 @class AuthControllersFactory;
 @class ProfileRequestFactory;
+@protocol LoginAnnouncer;
 
 @interface ProfileController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate>{
     AuthControllersFactory *_authControllersFactory;
@@ -24,9 +25,11 @@
     
     ActivityOverlap *_logoutOverlap;
     LogoutRequest *_logoutRequest;
+    id<LoginAnnouncer> _loginAnnouncer;
 }
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory 
-               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory;
+               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory
+                      loginAnnouncer:(id<LoginAnnouncer>) loginAnnouncer;
 
 @end

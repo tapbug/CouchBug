@@ -13,5 +13,6 @@
 @protocol LoginAnnouncer
 
 - (void)user:(NSString*)username hasLoggedWithPassword:(NSString *)password;
+- (void)userHasLoggedOut;
 
 @end

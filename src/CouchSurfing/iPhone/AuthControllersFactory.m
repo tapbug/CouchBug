@@ -33,7 +33,8 @@
 
 - (ProfileController *)createProfileController {
     return [[[ProfileController alloc] initWithAuthControllersFactory:self
-                                                profileRequestFactory:self.profileRequestFactory] autorelease];
+                                                profileRequestFactory:self.profileRequestFactory
+                                                       loginAnnouncer:self.loginAnnouncer] autorelease];
 }
 
 @end

@@ -10,6 +10,7 @@
 #import "AuthControllersFactory.h"
 #import "ActivityOverlap.h"
 #import "ProfileRequestFactory.h"
+#import "LoginAnnouncer.h"
 
 @interface ProfileController ()
 
@@ -21,6 +22,7 @@
 
 @property (nonatomic, retain) ActivityOverlap *logoutOverlap;
 @property (nonatomic, retain) LogoutRequest *logoutRequest;
+@property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 
 -(void)logoutAction;
 
@@ -36,14 +38,17 @@
 
 @synthesize logoutOverlap = _logoutOverlap;
 @synthesize logoutRequest = _logoutRequest;
+@synthesize loginAnnouncer = _loginAnnouncer;
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory
-               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory {
+               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory 
+                      loginAnnouncer:(id<LoginAnnouncer>) loginAnnouncer {
     
     self = [super init];
     if (self) {
         self.authControllersFactory = authControllersFactory;
         self.profileRequestFactory = profileRequestFactory;
+        self.loginAnnouncer = loginAnnouncer;
     }
     return self;
 }
@@ -127,6 +132,7 @@
 #pragma Mark LogoutRequestDelegate methods
 
 - (void)logoutDidFinnish:(LogoutRequest *)logoutReqeust {
+    [self.loginAnnouncer userHasLoggedOut];
     [self.logoutOverlap removeOverlap];
     id loginController = [self.authControllersFactory createLoginController];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:loginController] animated:YES];

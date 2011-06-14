@@ -281,9 +281,9 @@
 		6C87AEE1130BB61D0015B471 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				6C9EACE213A0CD7700C1B19D /* ProfileController.h */,
 				6CDE85C813A51AE70065A991 /* AuthControllersFactory.h */,
 				6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */,
+				6C9EACE213A0CD7700C1B19D /* ProfileController.h */,
 				6C9EACE313A0CD7700C1B19D /* ProfileController.m */,
 				6C87AEF0130BB8420015B471 /* LoginController.h */,
 				6C87AEF1130BB8420015B471 /* LoginController.m */,
