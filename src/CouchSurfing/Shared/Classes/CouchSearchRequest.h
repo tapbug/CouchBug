@@ -8,13 +8,6 @@
 
 #import <Foundation/Foundation.h>
 
-typedef NSString CouchSearchRequestHasCouch;
-
-extern CouchSearchRequestHasCouch * const CouchSearchRequestHasCouchYes;
-extern CouchSearchRequestHasCouch * const CouchSearchRequestHasCouchMaybe;
-extern CouchSearchRequestHasCouch * const CouchSearchRequestHasCouchCoffeDrink;
-extern CouchSearchRequestHasCouch * const CouchSearchRequestHasCouchTraveling;
-
 @protocol CouchSearchRequestDelegate;
 
 @interface CouchSearchRequest : NSObject {

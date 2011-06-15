@@ -42,7 +42,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    UIImage *image = [self scaleToSize:CGSizeMake(75, 75) image:[UIImage imageWithData:self.data]];
+    UIImage *image = [self scaleToSize:CGSizeMake(61, 61) image:[UIImage imageWithData:self.data]];
     
     if ([self.delegate respondsToSelector:@selector(imageDownloader:didDownloadImage:forPosition:)]) {
         [self.delegate imageDownloader:self didDownloadImage:image forPosition:_position];

@@ -32,7 +32,7 @@
     if (self) {
         //self.location = @"{state_id\":\"4441\",\"state\":\"Usti nad Labem\",\"latitude\":\"50.661034\",\"longitude\":\"14.032994\",\"type\":\"state\",\"country_id\":\"75\",\"country\":\"Czech Republic\",\"region_id\":\"6\",\"region\":\"Europe\"}";
         self.location = @"{\"state_id\":\"4384\",\"state\":\"Praha\",\"latitude\":\"50.087814\",\"longitude\":\"14.420453\",\"type\":\"state\",\"country_id\":\"75\",\"country\":\"Czech Republic\",\"region_id\":\"6\",\"region\":\"Europe\"}";
-        self.couchStatuses = [NSArray arrayWithObject:CouchSearchRequestHasCouchMaybe];
+        self.couchStatuses = [NSArray array];
         self.ageLow = @"";
         self.ageHigh = @"";
         self.maxSurfers = @"0";
@@ -42,7 +42,7 @@
         self.female = @"1";
         self.severalPeople = @"";
         self.hasPhoto = @"";
-        self.wheelchairAccessible = @"1";
+        self.wheelchairAccessible = @"";
         self.username = @"";
         self.keyword = @"";
     }
