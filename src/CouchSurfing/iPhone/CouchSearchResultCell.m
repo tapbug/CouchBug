@@ -18,6 +18,8 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
+        CGRect contentFrame = self.contentView.frame;
+        
         _photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(8.5, 9, 62.5, 62.5)] autorelease];
         [self.contentView addSubview:_photoView];
         
@@ -29,9 +31,15 @@
         photoFrameView.frame = photoFrameViewFrame;
         [self.contentView addSubview:photoFrameView];
         
-        _nameLabel = [[[UILabel alloc] init] autorelease];
-        _nameLabel.font = [UIFont systemFontOfSize:30];
+        CGFloat rightColumnX = photoFrameViewFrame.size.width + photoFrameViewFrame.origin.x + 4;
+        
+        _nameLabel = [[[UILabel alloc] initWithFrame:CGRectMake(rightColumnX, 10, contentFrame.size.width - rightColumnX, 18)] autorelease];
+        _nameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+        _nameLabel.backgroundColor = [UIColor clearColor];
+        _nameLabel.font = [UIFont boldSystemFontOfSize:15];
+        _nameLabel.shadowOffset = CGSizeMake(0, 1);
         _nameLabel.textColor = UIColorFromRGB(0x333637);
+        _nameLabel.shadowColor = [UIColor whiteColor];
         [self.contentView addSubview:_nameLabel];
     }
     return self;
