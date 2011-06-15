@@ -49,6 +49,7 @@
                                                       target:self
                                                       action:@selector(showSearchForm)];
     _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.autoresizingMask = self.view.autoresizingMask;
     _tableView.delegate = self;
     _tableView.dataSource = self;

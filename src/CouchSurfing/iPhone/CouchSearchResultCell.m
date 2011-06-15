@@ -7,6 +7,7 @@
 //
 
 #import "CouchSearchResultCell.h"
+#import "CSTools.h"
 
 @implementation CouchSearchResultCell
 
@@ -17,7 +18,7 @@
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
-        _photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(9, 9.5, 61.5, 61.5)] autorelease];
+        _photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(8.5, 9, 62.5, 62.5)] autorelease];
         [self.contentView addSubview:_photoView];
         
         UIImageView *photoFrameView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photoFrame.png"]] autorelease];
@@ -30,7 +31,7 @@
         
         _nameLabel = [[[UILabel alloc] init] autorelease];
         _nameLabel.font = [UIFont systemFontOfSize:30];
-        //_nameLabel.textColor = [UIColor colorWithRed:<#(CGFloat)#> green:<#(CGFloat)#> blue:<#(CGFloat)#> alpha:<#(CGFloat)#>
+        _nameLabel.textColor = UIColorFromRGB(0x333637);
         [self.contentView addSubview:_nameLabel];
     }
     return self;
