@@ -12,9 +12,23 @@
 @interface CouchSearchResultCell : UITableViewCell {
     UIImageView *_photoView;
     UILabel *_nameLabel;
+    UILabel *_basicsLabel;
+    UILabel *_aboutLabel;
+    UILabel *_referencesCountLabel;
+    UILabel *_photosCountLabel;
+    
+    UIImageView *_photoFrameView;
+    UILabel *_referencesLabel;
+    UILabel *_photosLabel;
 }
 
 @property (nonatomic, readonly) UIImageView *photoView;
 @property (nonatomic, readonly) UILabel *nameLabel;
+@property (nonatomic, readonly) UILabel *basicsLabel;
+@property (nonatomic, readonly) UILabel *aboutLabel;
+@property (nonatomic, readonly) UILabel *referencesCountLabel;
+@property (nonatomic, readonly) UILabel *photosCountLabel;
+
+- (void)makeLayout;
 
 @end

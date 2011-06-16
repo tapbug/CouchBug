@@ -148,6 +148,12 @@
         
         CouchSurfer *surfer = [self.sourfers objectAtIndex:indexPath.row];
         surferCell.nameLabel.text = surfer.name;
+        surferCell.basicsLabel.text = surfer.basics;
+        surferCell.aboutLabel.text = surfer.about;
+        surferCell.referencesCountLabel.text = surfer.referencesCount;
+        surferCell.photosCountLabel.text = surfer.photosCount;
+        
+        [surferCell makeLayout];
         
         if (surfer.image == nil) {
             if (tableView.dragging == NO && tableView.decelerating == NO) {

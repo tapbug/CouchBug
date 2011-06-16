@@ -15,6 +15,7 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6C34AD2413A89D1D00E43729 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C34AD2213A89A2100E43729 /* RegexKitLite.m */; };
 		6C71C70713A91A06005FE511 /* CouchSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */; };
+		6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */; };
 		6C87AEF2130BB8420015B471 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87AEF1130BB8420015B471 /* LoginController.m */; };
 		6C93661813A22EA700FA8960 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9365FD13A22EA700FA8960 /* CXMLDocument_CreationExtensions.m */; };
 		6C93661913A22EA700FA8960 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9365FF13A22EA700FA8960 /* CXMLNode_CreationExtensions.m */; };
@@ -108,6 +109,7 @@
 		6C71C70513A91A06005FE511 /* CouchSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchResultCell.h; sourceTree = "<group>"; };
 		6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchResultCell.m; sourceTree = "<group>"; };
 		6C71C70913A93FD8005FE511 /* CSTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSTools.h; path = Shared/Classes/CSTools.h; sourceTree = "<group>"; };
+		6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
 		6C87AEF0130BB8420015B471 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		6C87AEF1130BB8420015B471 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginController.m; sourceTree = "<group>"; };
 		6C9365FC13A22EA700FA8960 /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
@@ -203,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
@@ -291,10 +294,11 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				6CAA922E12852D6E00CB1737 /* libxml2.dylib */,
+				6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				6CAA922E12852D6E00CB1737 /* libxml2.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
