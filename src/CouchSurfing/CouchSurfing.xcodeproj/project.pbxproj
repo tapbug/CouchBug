@@ -67,6 +67,10 @@
 		6CF39A4A13A7F01D008148ED /* searchRowBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4413A7F01D008148ED /* searchRowBg@2x.png */; };
 		6CF39A4B13A7F01D008148ED /* verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4513A7F01D008148ED /* verified.png */; };
 		6CF39A4C13A7F01D008148ED /* verified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4613A7F01D008148ED /* verified@2x.png */; };
+		D073DF3C13AAAC9E002D00F9 /* photoNone.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3813AAAC9E002D00F9 /* photoNone.png */; };
+		D073DF3D13AAAC9E002D00F9 /* photoNone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */; };
+		D073DF3E13AAAC9E002D00F9 /* worldBg.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3A13AAAC9E002D00F9 /* worldBg.png */; };
+		D073DF3F13AAAC9E002D00F9 /* worldBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3B13AAAC9E002D00F9 /* worldBg@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -82,13 +86,6 @@
 			containerPortal = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 6C07A88211FEDDCA00358364;
-			remoteInfo = IOC;
-		};
-		6CAA91EC1284A18800CB1737 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 6C07A88111FEDDCA00358364;
 			remoteInfo = IOC;
 		};
 /* End PBXContainerItemProxy section */
@@ -198,6 +195,10 @@
 		6CF39A4513A7F01D008148ED /* verified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verified.png; sourceTree = "<group>"; };
 		6CF39A4613A7F01D008148ED /* verified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verified@2x.png"; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSurfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSurfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
+		D073DF3813AAAC9E002D00F9 /* photoNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoNone.png; sourceTree = "<group>"; };
+		D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoNone@2x.png"; sourceTree = "<group>"; };
+		D073DF3A13AAAC9E002D00F9 /* worldBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldBg.png; sourceTree = "<group>"; };
+		D073DF3B13AAAC9E002D00F9 /* worldBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "worldBg@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -380,6 +381,10 @@
 		6C9EACD813A09ECA00C1B19D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D073DF3813AAAC9E002D00F9 /* photoNone.png */,
+				D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */,
+				D073DF3A13AAAC9E002D00F9 /* worldBg.png */,
+				D073DF3B13AAAC9E002D00F9 /* worldBg@2x.png */,
 				6CF39A4113A7F01D008148ED /* photoFrame.png */,
 				6CF39A4213A7F01D008148ED /* photoFrame@2x.png */,
 				6CF39A4313A7F01D008148ED /* searchRowBg.png */,
@@ -507,7 +512,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				6CAA91ED1284A18800CB1737 /* PBXTargetDependency */,
 			);
 			name = CouchSurfing;
 			productName = CouchSourfing;
@@ -582,6 +586,10 @@
 				6CF39A4A13A7F01D008148ED /* searchRowBg@2x.png in Resources */,
 				6CF39A4B13A7F01D008148ED /* verified.png in Resources */,
 				6CF39A4C13A7F01D008148ED /* verified@2x.png in Resources */,
+				D073DF3C13AAAC9E002D00F9 /* photoNone.png in Resources */,
+				D073DF3D13AAAC9E002D00F9 /* photoNone@2x.png in Resources */,
+				D073DF3E13AAAC9E002D00F9 /* worldBg.png in Resources */,
+				D073DF3F13AAAC9E002D00F9 /* worldBg@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -635,14 +643,6 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
-/* Begin PBXTargetDependency section */
-		6CAA91ED1284A18800CB1737 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = IOC;
-			targetProxy = 6CAA91EC1284A18800CB1737 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
-
 /* Begin XCBuildConfiguration section */
 		1D6058940D05DD3E006BFB54 /* Debug */ = {
 			isa = XCBuildConfiguration;
@@ -662,6 +662,10 @@
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-licucore",
@@ -688,6 +692,10 @@
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
+				);
 				OTHER_LDFLAGS = (
 					"-all_load",
 					"-licucore",
