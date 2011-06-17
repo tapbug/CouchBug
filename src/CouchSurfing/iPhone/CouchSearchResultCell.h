@@ -32,6 +32,7 @@
 @property (nonatomic, readonly) UILabel *referencesCountLabel;
 @property (nonatomic, readonly) UILabel *photosCountLabel;
 @property (nonatomic, readonly) UILabel *replyRateCountLabel;
+@property (nonatomic, readonly) UIImageView *verifiedImageView;
 
 - (void)makeLayout;
 

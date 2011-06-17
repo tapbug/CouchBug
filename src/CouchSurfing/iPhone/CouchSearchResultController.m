@@ -158,9 +158,11 @@
         surferCell.photosCountLabel.text = surfer.photosCount;
         surferCell.replyRateCountLabel.text = [NSString stringWithFormat:@"%@%", surfer.replyRate];
         
-        //if (surfer.verified) {
-        //}
-        //surferCell.photoView
+        if (surfer.verified) {
+            surferCell.verifiedImageView.hidden = NO;
+        } else {
+            surferCell.verifiedImageView.hidden = YES;
+        }
         
         [surferCell makeLayout];
         

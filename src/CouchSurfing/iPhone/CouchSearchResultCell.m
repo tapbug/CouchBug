@@ -27,6 +27,7 @@
 @synthesize referencesCountLabel = _referencesCountLabel;
 @synthesize photosCountLabel = _photosCountLabel;
 @synthesize replyRateCountLabel = _replyRateCountLabel;
+@synthesize verifiedImageView = _verifiedImageView;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
