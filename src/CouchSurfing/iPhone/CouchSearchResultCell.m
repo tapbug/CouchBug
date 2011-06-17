@@ -45,7 +45,7 @@
         _nameLabel.backgroundColor = [UIColor clearColor];
         _nameLabel.font = [UIFont boldSystemFontOfSize:15];
         _nameLabel.shadowOffset = CGSizeMake(0, 1);
-        _nameLabel.textColor = UIColorFromRGB(0x333637);
+        _nameLabel.textColor = [UIColor blackColor];
         _nameLabel.shadowColor = [UIColor whiteColor];
         [self.contentView addSubview:_nameLabel];
         
@@ -55,7 +55,7 @@
         _basicsLabel.backgroundColor = [UIColor clearColor];
         _basicsLabel.font = [UIFont boldSystemFontOfSize:11.5];
         _basicsLabel.shadowOffset = CGSizeMake(0, 1);
-        _basicsLabel.textColor = UIColorFromRGB(0x333637);
+        _basicsLabel.textColor = UIColorFromRGB(0x4d4d4d);
         _basicsLabel.shadowColor = [UIColor whiteColor];
         [self.contentView addSubview:_basicsLabel];
         
@@ -65,7 +65,7 @@
         _aboutLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         _aboutLabel.backgroundColor = [UIColor clearColor];
         _aboutLabel.font = [UIFont systemFontOfSize:11.5];
-        _aboutLabel.textColor = UIColorFromRGB(0x6b6b6b);
+        _aboutLabel.textColor = UIColorFromRGB(0x4d4d4d);
         [self.contentView addSubview:_aboutLabel];
         
         _referencesCountLabel = [self createCountLabel];
