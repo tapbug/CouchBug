@@ -17,8 +17,6 @@
 		<string>Icon-Small@2x.png</string>
 		<string>Icon-Small-50.png</string>
 	</array>
-	<key>UIPrerenderedIcon</key>
-	<true/>
 	<key>CFBundleIdentifier</key>
 	<string>com.tapbug.${PRODUCT_NAME:rfc1034identifier}</string>
 	<key>CFBundleInfoDictionaryVersion</key>
@@ -33,9 +31,13 @@
 	<string>1.0</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>UIPrerenderedIcon</key>
+	<true/>
 	<key>UISupportedInterfaceOrientations</key>
 	<array>
 		<string>UIInterfaceOrientationPortrait</string>
+		<string>UIInterfaceOrientationLandscapeLeft</string>
+		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
 	<key>UISupportedInterfaceOrientations~ipad</key>
 	<array>

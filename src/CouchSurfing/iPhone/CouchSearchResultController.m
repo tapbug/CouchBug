@@ -45,13 +45,14 @@
 
 - (void)viewDidLoad {
     _currentPage = 1;
-
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
+
     self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
                                                       target:self
                                                       action:@selector(showSearchForm)];
     _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
+    _tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"worldBg"]] autorelease];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.autoresizingMask = self.view.autoresizingMask;
     _tableView.delegate = self;
