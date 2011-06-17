@@ -11,6 +11,7 @@
 
 @interface CouchSearchResultCell : UITableViewCell {
     UIImageView *_photoView;
+    UIImageView *_verifiedImageView;
     UILabel *_nameLabel;
     UILabel *_basicsLabel;
     UILabel *_aboutLabel;

@@ -35,6 +35,9 @@
         _photoView = [[[UIImageView alloc] init] autorelease];
         [self.contentView addSubview:_photoView];
         
+        _verifiedImageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"verified.png"]] autorelease];
+        [_photoView addSubview:_verifiedImageView];
+        
         _photoFrameView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"photoFrame.png"]] autorelease];
         _photoFrameView.backgroundColor = [UIColor clearColor];
         [self.contentView addSubview:_photoFrameView];
