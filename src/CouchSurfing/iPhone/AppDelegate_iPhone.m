@@ -24,6 +24,7 @@
 #import "MoreController.h"
 
 #import "RegexKitLite.h"
+#import "CSTools.h"
 
 @interface AppDelegate_iPhone ()
 
@@ -87,6 +88,15 @@
                                              searchNavigationController,//s navigationem prejmenovat promenou na nazev tabu na profile
                                              moreController,
                                              nil];
+        
+    // zmena vzhledu TabBaru
+    /*
+    CGSize tabBarSize = [self.tabBarController.tabBar frame].size;
+    UIView *tabBarFakeView = [[UIView alloc] initWithFrame:
+                      CGRectMake(0,0,tabBarSize.width, tabBarSize.height)];
+    [self.tabBarController.tabBar insertSubview:tabBarFakeView atIndex:0];
+    [tabBarFakeView setBackgroundColor:UIColorFromRGB(0x353839)];
+     */
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     self.window.backgroundColor = [UIColor whiteColor];

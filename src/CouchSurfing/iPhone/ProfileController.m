@@ -11,6 +11,7 @@
 #import "ActivityOverlap.h"
 #import "ProfileRequestFactory.h"
 #import "LoginAnnouncer.h"
+#import "CSTools.h"
 
 @interface ProfileController ()
 
@@ -95,6 +96,7 @@
                                         action:@selector(logoutAction)];
     
     self.navigationItem.leftBarButtonItem.enabled = NO;
+    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
     
     self.profileRequest = [self.profileRequestFactory createProfileRequest];
     self.profileRequest.delegate = self;

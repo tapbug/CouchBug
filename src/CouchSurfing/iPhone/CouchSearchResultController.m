@@ -44,6 +44,8 @@
 
 - (void)viewDidLoad {
     _currentPage = 1;
+
+    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
     self.navigationItem.rightBarButtonItem =
         [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
                                                       target:self

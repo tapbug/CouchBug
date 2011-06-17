@@ -14,6 +14,8 @@
 #import "LoginInformation.h"
 #import "AuthControllersFactory.h"
 
+#import "CSTools.h"
+
 @interface LoginController ()
 
 @property (nonatomic, retain) LoginRequest *loginRequest;
@@ -71,6 +73,7 @@
     
     //Setup navigation baru
     
+    self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
     self.navigationItem.title = NSLocalizedString(@"Login form", @"Login form navigation title");
     self.navigationItem.rightBarButtonItem = 
         [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"login", @"login button in navigation bar")
