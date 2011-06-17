@@ -9,10 +9,11 @@
 #import "CouchSearchResultController.h"
 
 #import "ActivityOverlap.h"
+#import "CouchSearchResultCell.h"
 
 #import "CouchSearchFilter.h"
 #import "CouchSearchRequest.h"
-#import "CouchSourfer.h"
+#import "CouchSurfer.h"
 
 @interface CouchSearchResultController ()
 
@@ -48,6 +49,7 @@
                                                       target:self
                                                       action:@selector(showSearchForm)];
     _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
+    _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.autoresizingMask = self.view.autoresizingMask;
     _tableView.delegate = self;
     _tableView.dataSource = self;
@@ -134,25 +136,37 @@
         }
         
     } else { // Vytvoreni bunky s couchsurferem
-        cell = [tableView dequeueReusableCellWithIdentifier:@"sourferCell"];
-        if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"sourferCell"];
+        CouchSearchResultCell *surferCell = (CouchSearchResultCell *)[tableView dequeueReusableCellWithIdentifier:@"surferCell"];
+        if (surferCell == nil) {
+            surferCell = [[CouchSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"surferCell"];
+            surferCell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"searchRowBg.png"]] autorelease];
+
+            
+        } else { //reset reused obrazku
+            surferCell.photoView.image = nil;
         }
         
-        CouchSourfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
+        CouchSurfer *surfer = [self.sourfers objectAtIndex:indexPath.row];
+        surferCell.nameLabel.text = surfer.name;
+        surferCell.basicsLabel.text = surfer.basics;
+        surferCell.aboutLabel.text = surfer.about;
+        surferCell.referencesCountLabel.text = surfer.referencesCount;
+        surferCell.photosCountLabel.text = surfer.photosCount;
+        surferCell.replyRateCountLabel.text = [NSString stringWithFormat:@"%@%", surfer.replyRate];
         
-        cell.textLabel.text = sourfer.name;
-        cell.imageView.image = nil;
-        if (sourfer.image == nil) {
+        [surferCell makeLayout];
+        
+        if (surfer.image == nil) {
             if (tableView.dragging == NO && tableView.decelerating == NO) {
                 CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
                 imageDownloader.delegate = self;
-                [imageDownloader downloadWithSrc:sourfer.imageSrc position:indexPath.row];
+                [imageDownloader downloadWithSrc:surfer.imageSrc position:indexPath.row];
                 [imageDownloader release];
-            }            
+            }
         } else {
-            cell.imageView.image = sourfer.image;
+            surferCell.photoView.image = surfer.image;
         }
+        cell = surferCell;
     }
     
     return cell;
@@ -164,13 +178,21 @@
     }
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self.sourfers count] == indexPath.row && _tryLoadMore) {
+        return 44;
+    } else {
+        return 98;
+    }
+}
+
 #pragma mark CSImageDownloaderDelegate methods
 
 - (void)imageDownloader:(CSImageDownloader *)imageDownloader didDownloadImage :(UIImage *)image forPosition:(NSInteger)position {
-    CouchSourfer *sourfer = [self.sourfers objectAtIndex:position];
+    CouchSurfer *sourfer = [self.sourfers objectAtIndex:position];
     sourfer.image = image;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
-    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];
+    [_tableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:UITableViewRowAnimationNone];        
 }
 
 #pragma mark UIScrollViewDelegate methods
@@ -240,7 +262,7 @@
         [indexPaths removeLastObject];
     }
     for (NSIndexPath *indexPath in indexPaths) {
-        CouchSourfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
+        CouchSurfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
         if (sourfer.image == nil) {
             CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
             imageDownloader.delegate = self;

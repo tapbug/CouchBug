@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
+NSString * const CouchSurferHasCouchYes = @"Y";
+NSString * const CouchSurferHasCouchMaybe = @"M";
+NSString * const CouchSurferHasCouchCoffeDrink = @"C";
+NSString * const CouchSurferHasCouchTraveling = @"T";
+
+NSString * const CouchSurferHasCouchNo = @"N";
+
 BOOL isDeviceAniPad() {
 #ifdef UI_USER_INTERFACE_IDIOM()
     return UI_USER_INTERFACE_IDIOM();

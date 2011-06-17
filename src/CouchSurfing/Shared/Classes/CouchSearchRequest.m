@@ -7,15 +7,13 @@
 //
 
 #import "CouchSearchRequest.h"
-#import "CouchSourfer.h"
+#import "CouchSurfer.h"
 
 #import "TouchXML.h"
 #import "JSONKit.h"
+#import "RegexKitLite.h"
 
-NSString * const CouchSearchRequestHasCouchYes = @"Y";
-NSString * const CouchSearchRequestHasCouchMaybe = @"M";
-NSString * const CouchSearchRequestHasCouchCoffeDrink = @"C";
-NSString * const CouchSearchRequestHasCouchTraveling = @"T";
+
 
 @interface CouchSearchRequest ()
 
@@ -151,13 +149,16 @@ NSString * const CouchSearchRequestHasCouchTraveling = @"T";
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSError *error;
-    CXMLDocument *doc = [[CXMLDocument alloc] initWithData:self.data options:0 error:&error];
+    NSString *responseString = [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease];
+    NSString *responseRepairedString = [responseString stringByReplacingOccurrencesOfRegex:@"<(br|img)(.*?)/?>" withString:@"<$1$2 />"];
+    NSData *responseData = [responseRepairedString dataUsingEncoding:NSUTF8StringEncoding];
+    CXMLDocument *doc = [[CXMLDocument alloc] initWithData:responseData options:0 error:&error];
     NSArray *nodes = [doc nodesForXPath:@"//div[@class='mod simple profile_result_item']" error:&error];
     
     NSMutableArray *surfers = [NSMutableArray array];
     
     for (CXMLNode *node in nodes) {
-        CouchSourfer *surfer = [[[CouchSourfer alloc] init] autorelease];
+        CouchSurfer *surfer = [[[CouchSurfer alloc] init] autorelease];
         NSArray *nameNodes = [node nodesForXPath:@".//span[@class='result_username']/a/text()" error:&error];
         if ([nameNodes count] > 0) {
             surfer.name = [[nameNodes objectAtIndex:0] stringValue];
@@ -166,6 +167,54 @@ NSString * const CouchSearchRequestHasCouchTraveling = @"T";
         NSArray *imageSrcNodes = [node nodesForXPath:@".//img[@class='profile_result_link_img']/@src" error:&error];
         if ([imageSrcNodes count] > 0) {
             surfer.imageSrc = [[imageSrcNodes objectAtIndex:0] stringValue];
+        }
+        
+        NSArray *iconsInfoNodes = [node nodesForXPath:@".//div[@class='hd']/div[2]//img/@src" error:&error];
+        if ([iconsInfoNodes count] > 0) {
+            for (CXMLNode *srcNode in iconsInfoNodes) {
+                if ([[srcNode stringValue] isEqual:@"/images/icon_couch_travel.gif"]) {
+                    surfer.couchStatus = CouchSurferHasCouchTraveling;
+                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_day.gif"]) {
+                    surfer.couchStatus = CouchSurferHasCouchCoffeDrink;
+                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_maybe.gif"]) {
+                    surfer.couchStatus = CouchSurferHasCouchMaybe;
+                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_yes.gif"]) {
+                    surfer.couchStatus = CouchSurferHasCouchYes;
+                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_no.gif"]) {
+                    surfer.couchStatus = CouchSurferHasCouchNo;
+                } else if ([[srcNode stringValue] isEqual:@"/images/ambassador-hands.gif"]) {
+                    surfer.vouched = YES;
+                } else if ([[srcNode stringValue] isEqual:@"/images/flag.png"]) {
+                    surfer.ambassador = YES;
+                } else if ([[srcNode stringValue] isEqual:@"/images/verification/verified-search-icon.gif"]) {
+                    surfer.verified = YES;
+                }
+            }
+        }
+        
+        NSArray *aboutNodes = [node nodesForXPath:@".//li/div[text()='About']/following-sibling::div[1]/text()" error:&error];
+        if ([aboutNodes count] > 0) {
+            surfer.about = [[[aboutNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        }
+        
+        NSArray *basicNodes = [node nodesForXPath:@".//li/div[text()='Basics']/following-sibling::div[1]/text()" error:&error];
+        if ([basicNodes count] > 0) {
+            surfer.basics = [[[basicNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        }
+        
+        NSArray *profileCountNodes = [node nodesForXPath:@".//ul[@class='profile_count']/li" error:&error];
+        if ([profileCountNodes count] > 0) {
+            for (CXMLNode *countNode in profileCountNodes) {
+                NSString *label = [[[countNode nodeForXPath:@"./text()" error:&error] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                NSString *count = [[countNode nodeForXPath:@"./span/text()" error:&error] stringValue];
+                if ([label isEqualToString:@"References"]) {
+                    surfer.referencesCount = count;
+                } else if ([label isEqualToString:@"Photos"]) {
+                    surfer.photosCount = count;
+                } else if ([label isEqualToString:@"Reply Rate"]) {
+                    surfer.replyRate = count;
+                }
+            }
         }
         
         [surfers addObject:surfer];
