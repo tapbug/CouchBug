@@ -16,10 +16,12 @@
     UILabel *_aboutLabel;
     UILabel *_referencesCountLabel;
     UILabel *_photosCountLabel;
+    UILabel *_replyRateCountLabel;
     
     UIImageView *_photoFrameView;
     UILabel *_referencesLabel;
     UILabel *_photosLabel;
+    UILabel *_replyRateLabel;
 }
 
 @property (nonatomic, readonly) UIImageView *photoView;
@@ -28,6 +30,7 @@
 @property (nonatomic, readonly) UILabel *aboutLabel;
 @property (nonatomic, readonly) UILabel *referencesCountLabel;
 @property (nonatomic, readonly) UILabel *photosCountLabel;
+@property (nonatomic, readonly) UILabel *replyRateCountLabel;
 
 - (void)makeLayout;
 

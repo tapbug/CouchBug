@@ -14,6 +14,7 @@
 @interface CouchSearchResultCell ()
 
 - (UILabel *)createCountLabel;
+- (UILabel *)createLabelForCount:(NSString *)str;
 
 @end
 
@@ -25,6 +26,7 @@
 @synthesize aboutLabel = _aboutLabel;
 @synthesize referencesCountLabel = _referencesCountLabel;
 @synthesize photosCountLabel = _photosCountLabel;
+@synthesize replyRateCountLabel = _replyRateCountLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -69,17 +71,20 @@
         _referencesCountLabel = [self createCountLabel];
         [self.contentView addSubview:_referencesCountLabel];
         
-        _referencesLabel = [[[UILabel alloc] init] autorelease];
-        _referencesLabel.backgroundColor = [UIColor clearColor];
-        _referencesLabel.text = NSLocalizedString(@"references", @"references label in couch search result table cell");
-        _referencesLabel.textColor = UIColorFromRGB(0x6b6b6b);
-        _referencesLabel.font = [UIFont systemFontOfSize:11.5];
-        [_referencesLabel sizeToFit];
+        _referencesLabel = [self createLabelForCount:NSLocalizedString(@"REFERENCES", @"")];
         [self.contentView addSubview:_referencesLabel];
         
         _photosCountLabel = [self createCountLabel];
         [self.contentView addSubview:_photosCountLabel];
         
+        _photosLabel = [self createLabelForCount:NSLocalizedString(@"PHOTOS", @"")];
+        [self.contentView addSubview:_photosLabel];
+        
+        _replyRateCountLabel = [self createCountLabel];
+        [self.contentView addSubview:_replyRateCountLabel];
+        
+        _replyRateLabel = [self createLabelForCount:NSLocalizedString(@"REPLY RATES", @"")];
+        [self.contentView addSubview:_replyRateLabel];
     }
     return self;
 }
@@ -131,7 +136,10 @@
 
     CGSize referencesCountSize = [_referencesCountLabel.text sizeWithFont:_referencesCountLabel.font
                                                         constrainedToSize:CGSizeMake(30, CGFLOAT_MAX)];
-    _referencesCountLabel.frame = CGRectMake(rightColumnX, countsTop, referencesCountSize.width + 6, 14);
+    _referencesCountLabel.frame = CGRectMake(rightColumnX,
+                                             countsTop,
+                                             referencesCountSize.width + 8,
+                                             14);
     
     CGRect referencesLabelFrame = _referencesLabel.frame;
     referencesLabelFrame.origin.x = rightColumnX + _referencesCountLabel.frame.size.width + 2;
@@ -140,24 +148,53 @@
     
     CGSize photosCountSize = [_photosCountLabel.text sizeWithFont:_photosCountLabel.font
                                                         constrainedToSize:CGSizeMake(30, CGFLOAT_MAX)];
-    _photosCountLabel.frame = CGRectMake(_referencesLabel.frame.origin.x + _referencesLabel.frame.size.width + 7, countsTop, photosCountSize.width + 6, 14);
+    _photosCountLabel.frame = CGRectMake(_referencesLabel.frame.origin.x + _referencesLabel.frame.size.width + 7,
+                                         countsTop,
+                                         photosCountSize.width + 8,
+                                         14);
+
+    CGRect photosLabelFrame = _photosLabel.frame;
+    photosLabelFrame.origin.x = _photosCountLabel.frame.origin.x + _photosCountLabel.frame.size.width + 2;
+    photosLabelFrame.origin.y = countsTop;
+    _photosLabel.frame = photosLabelFrame;
+    
+    CGSize replyRateCountSize = [_replyRateCountLabel.text sizeWithFont:_replyRateCountLabel.font
+                                                constrainedToSize:CGSizeMake(30, CGFLOAT_MAX)];
+    _replyRateCountLabel.frame = CGRectMake(_photosLabel.frame.origin.x + _photosLabel.frame.size.width + 7,
+                                         countsTop,
+                                         replyRateCountSize.width + 8,
+                                         14);
+    
+    CGRect _replyRateLabelFrame = _replyRateLabel.frame;
+    _replyRateLabelFrame.origin.x = _replyRateCountLabel.frame.origin.x + _replyRateCountLabel.frame.size.width + 2;
+    _replyRateLabelFrame.origin.y = countsTop;
+    _replyRateLabel.frame = _replyRateLabelFrame;
+    
     
 }
 
 #pragma Mark Private methods
-
+//  Vytvori UILabel pro zobrazeni cisla u count veci
 - (UILabel *)createCountLabel {
     UILabel *countLabel = [[[UILabel alloc] init] autorelease];
-    countLabel.backgroundColor = [UIColor clearColor];
-    countLabel.font = [UIFont boldSystemFontOfSize:11.5];
-    countLabel.shadowOffset = CGSizeMake(0, 1);
+    countLabel.font = [UIFont boldSystemFontOfSize:10];
     countLabel.textColor = [UIColor whiteColor];
     countLabel.backgroundColor = [UIColor grayColor];
     countLabel.textAlignment = UITextAlignmentCenter;
-    countLabel.layer.cornerRadius = 6;
-    
+    countLabel.layer.cornerRadius = 7;
     return countLabel;
     
+}
+
+//  Vytvori UILabel jako popisek ke count cislu
+- (UILabel *)createLabelForCount:(NSString *)str {
+    UILabel *label = [[[UILabel alloc] init] autorelease];
+    label.backgroundColor = [UIColor clearColor];
+    label.text = str;
+    label.textColor = UIColorFromRGB(0x6b6b6b);
+    label.font = [UIFont systemFontOfSize:10];
+    [label sizeToFit];
+    return label;
 }
 
 @end

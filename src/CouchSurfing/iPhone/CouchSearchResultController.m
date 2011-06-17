@@ -152,6 +152,7 @@
         surferCell.aboutLabel.text = surfer.about;
         surferCell.referencesCountLabel.text = surfer.referencesCount;
         surferCell.photosCountLabel.text = surfer.photosCount;
+        surferCell.replyRateCountLabel.text = [NSString stringWithFormat:@"%@%", surfer.replyRate];
         
         [surferCell makeLayout];
         
