@@ -23,6 +23,8 @@
 
 #import "MoreController.h"
 
+#import "RegexKitLite.h"
+
 @interface AppDelegate_iPhone ()
 
 - (void)injectAuth;
@@ -40,7 +42,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
-    
     [self injectAuth];
     [self injectCouchSearch];
     
