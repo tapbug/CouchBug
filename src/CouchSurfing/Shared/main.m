@@ -27,9 +27,12 @@ int main(int argc, char *argv[]) {
     
     NSAutoreleasePool * pool = [[NSAutoreleasePool alloc] init];
     NSString *delegateClassName = @"AppDelegate_iPhone";
+    
+    /*
     if (isDeviceAniPad()) {
         delegateClassName = @"AppDelegate_iPad";
     }
+    */
 
     int retVal = UIApplicationMain(argc, argv, nil, delegateClassName);
     [pool release];
