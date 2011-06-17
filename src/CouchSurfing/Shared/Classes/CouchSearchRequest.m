@@ -13,7 +13,7 @@
 #import "JSONKit.h"
 #import "RegexKitLite.h"
 
-
+#import "iconv.h"
 
 @interface CouchSearchRequest ()
 
@@ -23,6 +23,8 @@
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value;
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value key:(NSString *)key;
 - (NSString *)lastParameter:(NSString *)parameter value:(NSString *)value;
+
+- (NSData *)cleanUTF8:(NSData *)data;
 
 @end
 
@@ -149,10 +151,13 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSError *error;
-    NSString *responseString = [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding] autorelease];
+    NSString *responseString = [[[NSString alloc] initWithData:[self cleanUTF8:self.data] encoding:NSUTF8StringEncoding] autorelease];
     NSString *responseRepairedString = [responseString stringByReplacingOccurrencesOfRegex:@"<(br|img)(.*?)/?>" withString:@"<$1$2 />"];
     NSData *responseData = [responseRepairedString dataUsingEncoding:NSUTF8StringEncoding];
-    CXMLDocument *doc = [[CXMLDocument alloc] initWithData:responseData options:0 error:&error];
+    
+    CXMLDocument *doc = nil;
+    doc = [[CXMLDocument alloc] initWithData:responseData options:0 error:&error];
+    
     NSArray *nodes = [doc nodesForXPath:@"//div[@class='mod simple profile_result_item']" error:&error];
     
     NSMutableArray *surfers = [NSMutableArray array];
@@ -259,6 +264,27 @@
 - (NSString *)lastParameter:(NSString *)parameter value:(NSString *)value {
     value = value == nil ? @"" : value;
     return [NSString stringWithFormat:@"%@=%@", parameter, value];
+}
+
+- (NSData *)cleanUTF8:(NSData *)data {
+    iconv_t cd = iconv_open("UTF-8", "UTF-8");
+    int one = 1;
+    iconvctl(cd, ICONV_SET_DISCARD_ILSEQ, &one);
+    
+    size_t inbytesleft, outbytesleft;
+    inbytesleft = outbytesleft = data.length;
+    char *inbuf  = (char *)data.bytes;
+    char *outbuf = malloc(sizeof(char) * data.length);
+    char *outptr = outbuf;
+    if (iconv(cd, &inbuf, &inbytesleft, &outptr, &outbytesleft)
+        == (size_t)-1) {
+        NSLog(@"iconv error");
+        return nil;
+    }
+    NSData *result = [NSData dataWithBytes:outbuf length:data.length - outbytesleft];
+    iconv_close(cd);
+    free(outbuf);
+    return result;
 }
 
 @end
