@@ -14,6 +14,7 @@
 #import "CouchSearchFilter.h"
 #import "CouchSearchRequest.h"
 #import "CouchSurfer.h"
+#import "CSTools.h"
 
 @interface CouchSearchResultController ()
 
