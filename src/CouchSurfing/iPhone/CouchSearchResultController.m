@@ -61,7 +61,7 @@
     
     self.loadingActivity =
         [[ActivityOverlap alloc] initWithView:self.view 
-                                        title:NSLocalizedString(@"Searching couch ...", @"Searching couch activity label")];
+                                        title:NSLocalizedString(@"SEARCH COUCH", @"")];
     
     self.imageDownloaders = [NSMutableArray array];
     [super viewDidLoad];
@@ -127,7 +127,7 @@
             UILabel *loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(activityView.frame.size.width + 5, 0, 0, 0)] autorelease];
             loadingLabel.backgroundColor = [UIColor clearColor];
             loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-            loadingLabel.text = NSLocalizedString(@"Loading more ...", @"Loading more results cell label in couch search");
+            loadingLabel.text = NSLocalizedString(@"LOADING MORE", @"");
             [loadingLabel sizeToFit];
             
             //setup containing view

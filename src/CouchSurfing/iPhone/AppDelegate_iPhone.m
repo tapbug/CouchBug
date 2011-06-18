@@ -58,7 +58,7 @@
     UINavigationController *loginNavigationController = 
         [[[UINavigationController alloc] initWithRootViewController:(UIViewController *)authController] autorelease];
     UITabBarItem *loginTabBarItem =
-        [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Profile", @"Profile tabBar icon") 
+        [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"PROFILE", @"") 
                                        image:[UIImage imageNamed:@"profileCard.png"]
                                          tag:0] autorelease];
     [loginNavigationController setTabBarItem: loginTabBarItem];
@@ -70,7 +70,7 @@
     UINavigationController *searchNavigationController = 
     [[[UINavigationController alloc] initWithRootViewController:searchResultController] autorelease];
     UITabBarItem *searchTabBarItem =
-        [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"Search", @"Search tabBar icon")
+        [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"SEARCH", @"")
                                        image:[UIImage imageNamed:@"search.png"]
                                          tag:1] autorelease];
     [searchNavigationController setTabBarItem:searchTabBarItem];

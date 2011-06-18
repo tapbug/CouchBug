@@ -83,14 +83,14 @@
 {
     self.loadingOverlap = 
         [[[ActivityOverlap alloc] initWithView:self.view
-                                        title:NSLocalizedString(@"Loading profile ...", @"Loading profile message")] autorelease];
+                                        title:NSLocalizedString(@"LOADING PROFILE", @"")] autorelease];
     self.logoutOverlap = 
         [[[ActivityOverlap alloc] initWithView:self.view
-                                         title:NSLocalizedString(@"Logout ...", @"Logout from profile activity label")] autorelease];
+                                         title:NSLocalizedString(@"LOGOUTING", @"")] autorelease];
     
     [self.loadingOverlap overlapView];
     self.navigationItem.leftBarButtonItem = 
-        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"Logout", @"Logout button in profile")
+        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"LOGOUT", @"")
                                          style:UIBarButtonItemStyleBordered
                                         target:self
                                         action:@selector(logoutAction)];
