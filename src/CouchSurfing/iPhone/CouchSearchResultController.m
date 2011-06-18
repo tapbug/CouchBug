@@ -124,6 +124,7 @@
             
             //setup label
             UILabel *loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(activityView.frame.size.width + 5, 0, 0, 0)] autorelease];
+            loadingLabel.backgroundColor = [UIColor clearColor];
             loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
             loadingLabel.text = NSLocalizedString(@"Loading more ...", @"Loading more results cell label in couch search");
             [loadingLabel sizeToFit];
