@@ -40,7 +40,9 @@
 @synthesize container = _container;
 @synthesize tabBarController = _tabBarController;
 
-- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {    
+- (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    application.statusBarStyle = UIStatusBarStyleBlackOpaque;
+    
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
     [self injectAuth];
