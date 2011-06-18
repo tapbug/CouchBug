@@ -271,7 +271,10 @@
 - (void)loadImages {
     NSMutableArray *indexPaths = [[_tableView indexPathsForVisibleRows] mutableCopy];
     if (_tryLoadMore) {
-        [indexPaths removeLastObject];
+        NSIndexPath *lastIndexPath = [indexPaths lastObject];
+        if (lastIndexPath.row == [self.sourfers count]) {
+            [indexPaths removeLastObject];
+        }
     }
     for (NSIndexPath *indexPath in indexPaths) {
         CouchSurfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
