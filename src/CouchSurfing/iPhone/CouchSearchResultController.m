@@ -149,7 +149,7 @@
 
             
         } else { //reset reused obrazku
-            surferCell.photoView.image = nil;
+            [surferCell resetCell];
         }
         
         CouchSurfer *surfer = [self.sourfers objectAtIndex:indexPath.row];

@@ -13,6 +13,8 @@
 
 @interface CouchSearchResultCell ()
 
+@property (nonatomic, retain) UIImage *nonePhotoImage;
+
 - (UILabel *)createCountLabel;
 - (UILabel *)createLabelForCount:(NSString *)str;
 
@@ -29,11 +31,16 @@
 @synthesize replyRateCountLabel = _replyRateCountLabel;
 @synthesize verifiedImageView = _verifiedImageView;
 
+@synthesize nonePhotoImage = _nonePhotoImage;
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _photoView = [[[UIImageView alloc] init] autorelease];
+        self.nonePhotoImage = [UIImage imageNamed:@"photoNone"];
+        _photoView.image = self.nonePhotoImage;
+        
         [self.contentView addSubview:_photoView];
         
         _verifiedImageView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"verified.png"]] autorelease];
@@ -102,6 +109,7 @@
 
 - (void)dealloc
 {
+    self.nonePhotoImage = nil;
     [super dealloc];
 }
 
@@ -175,6 +183,10 @@
     _replyRateLabel.frame = _replyRateLabelFrame;
     
     
+}
+
+- (void)resetCell {
+    _photoView.image = self.nonePhotoImage;
 }
 
 #pragma Mark Private methods
