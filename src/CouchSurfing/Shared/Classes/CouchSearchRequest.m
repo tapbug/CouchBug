@@ -204,7 +204,20 @@
         
         NSArray *basicNodes = [node nodesForXPath:@".//li/div[text()='Basics']/following-sibling::div[1]/text()" error:&error];
         if ([basicNodes count] > 0) {
-            surfer.basics = [[[basicNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *regexp = @"([a-zA-Z ]+), ([0-9]+), ?(.*)$";
+            NSString *genderString = [basics stringByMatching:regexp capture:1];
+            if ([genderString isEqualToString:@"Male"]) {
+                surfer.gender = @"M";
+            } else if ([genderString isEqualToString:@"Female"]){
+                surfer.gender = @"F";
+            } else if ([genderString isEqualToString:@"Several people"]) {
+                surfer.gender = @"Group";
+            }
+            
+            
+            surfer.age = [basics stringByMatching:regexp capture:2];
+            surfer.job = [basics stringByMatching:regexp capture:3];
         }
         
         NSArray *profileCountNodes = [node nodesForXPath:@".//ul[@class='profile_count']/li" error:&error];

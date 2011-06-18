@@ -13,8 +13,10 @@
 @synthesize name;
 @synthesize imageSrc;
 @synthesize image;
+@synthesize gender;
+@synthesize age;
+@synthesize job;
 @synthesize about;
-@synthesize basics;
 @synthesize referencesCount;
 @synthesize photosCount;
 @synthesize replyRate;
@@ -28,25 +30,17 @@
     self.imageSrc = nil;
     self.image = nil;
     self.about = nil;
-    self.basics = nil;
+    self.gender = nil;
+    self.age = nil;
+    self.job = nil;
     self.referencesCount = nil;
     self.photosCount = nil;
     self.replyRate = nil;
     [super dealloc];
 }
 
-- (NSString *)description {
-    return [[[[NSArray alloc] initWithObjects:
-            self.about, @"about",
-            self.basics, @"basics",
-            self.referencesCount, @"referencesCount",
-            self.photosCount, @"photosCount",
-            self.replyRate, @"replyRate", 
-            self.couchStatus, @"couchStatus",
-            [NSNumber numberWithBool:self.verified], @"verified", 
-            [NSNumber numberWithBool:self.vouched], @"vouched",
-            [NSNumber numberWithBool:self.ambassador], @"ambassador",
-            nil] autorelease] description];
+- (NSString *)basics {
+    return [NSString stringWithFormat:@"%@ • %@ • %@", self.gender, self.age, self.job];
 }
 
 @end
