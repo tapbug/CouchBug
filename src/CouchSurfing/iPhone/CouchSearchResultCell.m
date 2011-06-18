@@ -144,7 +144,7 @@
                                         lineBreakMode:_aboutLabel.lineBreakMode];
     _aboutLabel.frame = CGRectMake(rightColumnX, aboutTop, rightColumnWidth, aboutSize.height);
     
-    CGFloat countsTop = aboutTop + aboutSize.height + 2;
+    CGFloat countsTop = self.contentView.frame.size.height - 20;
 
     CGSize referencesCountSize = [_referencesCountLabel.text sizeWithFont:_referencesCountLabel.font
                                                         constrainedToSize:CGSizeMake(30, CGFLOAT_MAX)];
@@ -193,6 +193,7 @@
 //  Vytvori UILabel pro zobrazeni cisla u count veci
 - (UILabel *)createCountLabel {
     UILabel *countLabel = [[[UILabel alloc] init] autorelease];
+    countLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     countLabel.font = [UIFont boldSystemFontOfSize:10];
     countLabel.textColor = [UIColor whiteColor];
     countLabel.backgroundColor = [UIColor grayColor];
@@ -205,6 +206,7 @@
 //  Vytvori UILabel jako popisek ke count cislu
 - (UILabel *)createLabelForCount:(NSString *)str {
     UILabel *label = [[[UILabel alloc] init] autorelease];
+    label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     label.backgroundColor = [UIColor clearColor];
     label.text = str;
     label.textColor = UIColorFromRGB(0x6b6b6b);
