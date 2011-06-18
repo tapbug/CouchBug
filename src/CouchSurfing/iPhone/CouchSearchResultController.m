@@ -92,6 +92,7 @@
     }
     
     [_tableView reloadData];
+    [_tableView flashScrollIndicators];
     self.request = nil;
     
 }
@@ -184,7 +185,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.sourfers count]) {//indexpath loading cellu
+    if (indexPath.row == [self.sourfers count] - 3 && _tryLoadMore) {//indexpath loading cellu
         [self performSearchMore];
     }
 }
