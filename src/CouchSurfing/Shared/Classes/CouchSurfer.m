@@ -40,7 +40,14 @@
 }
 
 - (NSString *)basics {
-    return [NSString stringWithFormat:@"%@ • %@ • %@", self.gender, self.age, self.job];
+    NSMutableString *basics = [[self.gender mutableCopy] autorelease];
+    if (![self.age isEqualToString:@""]) {
+        [basics appendFormat:@" • %@", self.age];
+    }
+    if (![self.job isEqualToString:@""]) {
+        [basics appendFormat:@" • %@", self.job];
+    }
+    return basics;
 }
 
 @end
