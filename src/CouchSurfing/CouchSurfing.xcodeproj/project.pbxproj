@@ -266,7 +266,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				6C94EC1C13ABDD1500DF96B1 /* libiconv.dylib */,
 				6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */,
 				2860E32A111B888700E27156 /* iPad */,
 				2860E324111B887F00E27156 /* iPhone */,
@@ -303,6 +302,7 @@
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
+				6C94EC1C13ABDD1500DF96B1 /* libiconv.dylib */,
 				6CAA922E12852D6E00CB1737 /* libxml2.dylib */,
 			);
 			name = Frameworks;
