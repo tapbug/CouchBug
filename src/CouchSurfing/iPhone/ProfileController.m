@@ -25,6 +25,10 @@
 @property (nonatomic, retain) LogoutRequest *logoutRequest;
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 
+@property (nonatomic, retain) CSImageDownloader *avatarDownloader;
+
+@property (nonatomic, retain) NSArray *items;
+
 -(void)logoutAction;
 
 @end
@@ -40,6 +44,10 @@
 @synthesize logoutOverlap = _logoutOverlap;
 @synthesize logoutRequest = _logoutRequest;
 @synthesize loginAnnouncer = _loginAnnouncer;
+
+@synthesize avatarDownloader = _avatarDownloader;
+
+@synthesize items = _items;
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory
                profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory 
@@ -66,6 +74,8 @@
     self.logoutRequest = nil;
     self.logoutOverlap = nil;
     
+    self.avatarDownloader = nil;
+    self.items = nil;
     [super dealloc];
 }
 
@@ -79,8 +89,40 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad
-{
+- (void)viewDidLoad {    
+    CGRect viewFrame = self.view.frame;
+    _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height)] autorelease];
+    _tableView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+    _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+    _tableView.delegate = self;
+    _tableView.dataSource = self;
+    
+    UIImage *headerBackgroundImage = [UIImage imageNamed:@"blackBg"];
+    UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0,
+                                                                   0,
+                                                                   headerBackgroundImage.size.width,
+                                                                   headerBackgroundImage.size.height)] autorelease];
+    headerView.backgroundColor = [UIColor colorWithPatternImage:headerBackgroundImage];
+    _tableView.tableHeaderView = headerView;
+    UIImage *photoNoneImage = [UIImage imageNamed:@"photoNone"];
+    _photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(18,
+                                                                18,
+                                                                130,
+                                                                130)] autorelease];
+    _photoView.image = photoNoneImage;
+    [headerView addSubview:_photoView];
+    
+    UIImage *photoFrameImage = [UIImage imageNamed:@"photoFrameProfile"];
+    UIImageView *photoFrameView = [[[UIImageView alloc] initWithFrame:CGRectMake(8.5,
+                                                                                 8.5,
+                                                                                 photoFrameImage.size.width,
+                                                                                 photoFrameImage.size.height)] autorelease];
+    photoFrameView.image = photoFrameImage;
+    [headerView addSubview:photoFrameView];
+    
+    
+    [self.view addSubview:_tableView];
+    
     self.loadingOverlap = 
         [[[ActivityOverlap alloc] initWithView:self.view
                                         title:NSLocalizedString(@"LOADING PROFILE", @"")] autorelease];
@@ -117,12 +159,154 @@
     return YES;
 }
 
+#pragma Mark UITableViewDataSource methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    if (self.items != nil) {
+        return [self.items count];
+    }
+    return 0;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    NSString *cellType;
+
+    id item = [self.items objectAtIndex:indexPath.row];
+    if ([item isKindOfClass:[NSString class]]) {
+        cellType = @"singleValueCell";
+    } else {
+        cellType = @"pairCell";
+    }
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellType];
+    if (cell == nil) {
+        if ([cellType isEqualToString:@"pairCell"]) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"pairCell"];
+            
+            UILabel *valueLabel = [[[UILabel alloc] init] autorelease];
+            valueLabel.tag = 1;
+            valueLabel.backgroundColor = [UIColor clearColor];
+            valueLabel.font = [UIFont boldSystemFontOfSize:12.5];
+            valueLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            [cell.contentView addSubview:valueLabel];
+            
+            UILabel *descriptionLabel = [[[UILabel alloc] init] autorelease];
+            descriptionLabel.tag = 2;
+            descriptionLabel.backgroundColor = [UIColor clearColor];
+            descriptionLabel.font = [UIFont systemFontOfSize:12.5];
+            descriptionLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            [cell.contentView addSubview:descriptionLabel];            
+        } else if([cellType isEqualToString:@"singleValueCell"]) {
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"singleValueCell"];
+            UILabel *valueLabel = [[[UILabel alloc] init] autorelease];
+            valueLabel.font = [UIFont systemFontOfSize:12.5];
+            valueLabel.backgroundColor = [UIColor clearColor];
+            valueLabel.tag = 1;
+            valueLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
+            [cell.contentView addSubview:valueLabel];
+        }
+        
+    }
+    
+    if ([cellType isEqualToString:@"pairCell"]) {
+        NSArray *pair = (NSArray *)item;
+        UILabel *valueLabel = (UILabel *)[cell.contentView viewWithTag:1];    
+        valueLabel.text = [pair objectAtIndex:1];
+        [valueLabel sizeToFit];
+        CGRect valueLabelFrame = valueLabel.frame;
+        valueLabelFrame.origin.x = 20;
+        valueLabelFrame.origin.y = (int)(cell.contentView.frame.size.height - valueLabelFrame.size.height) / 2;
+        valueLabel.frame = valueLabelFrame;
+        
+        UILabel *descriptionLabel = (UILabel *)[cell.contentView viewWithTag:2];
+        descriptionLabel.text = [pair objectAtIndex:0];
+        
+        [descriptionLabel sizeToFit];
+        CGRect descriptionLabelFrame = descriptionLabel.frame;
+        descriptionLabelFrame.origin.x = valueLabelFrame.origin.x + valueLabelFrame.size.width + 2;
+        descriptionLabelFrame.origin.y = (int)(cell.contentView.frame.size.height - descriptionLabelFrame.size.height) / 2;
+        descriptionLabel.frame = descriptionLabelFrame;        
+    } else if([cellType isEqualToString:@"singleValueCell"]) {
+        UILabel *valueLabel = (UILabel *)[cell.contentView viewWithTag:1];
+        valueLabel.text = (NSString *)item;
+        [valueLabel sizeToFit];
+        CGRect valueLabelFrame = valueLabel.frame;
+        valueLabelFrame.origin.x = 20;
+        valueLabelFrame.origin.y = (int)(cell.contentView.frame.size.height - valueLabelFrame.size.height) / 2;
+        valueLabel.frame = valueLabelFrame;
+    }
+    
+    return cell;
+}
+
 #pragma Mark ProfileRequestDelegate methods
 
 - (void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
-    self.navigationItem.title = [NSString stringWithFormat:@"%@ %@", [profile objectForKey:@"firstname"], [profile objectForKey:@"lastname"]];
+    self.navigationItem.title = [NSString stringWithFormat:@"%@", [profile objectForKey:@"name"]];
+    
     self.navigationItem.leftBarButtonItem.enabled = YES;
     [self.loadingOverlap removeOverlap];
+    
+    self.avatarDownloader = [[[CSImageDownloader alloc] initWithSize:CGSizeMake(130, 130)] autorelease];
+    self.avatarDownloader.delegate = self;
+    [self.avatarDownloader downloadWithSrc:[profile objectForKey:@"avatar"] position:0];
+    
+    NSMutableArray *tempItems = [NSMutableArray array];
+    if ([profile objectForKey:@"loggedVisitors"]) {
+        NSArray *loggedVisitorsPair = [NSArray arrayWithObjects:NSLocalizedString(@"COUCHSURFERS ONLINE",@""), [profile objectForKey:@"loggedVisitors"], nil];
+        [tempItems addObject:loggedVisitorsPair];
+    }
+    if ([profile objectForKey:@"profileViews"]) {
+        NSArray *profileViewsPair = [NSArray arrayWithObjects:NSLocalizedString(@"PROFILE VIEWS", @""), [profile objectForKey:@"profileViews"], nil];
+        [tempItems addObject:profileViewsPair];
+    }
+    
+    if ([profile objectForKey:@"messagesCount"]) {
+        NSString *messagesCount = [profile objectForKey:@"messagesCount"];
+        NSString *label;
+        if ([messagesCount integerValue] == 1) {
+            label = NSLocalizedString(@"UNREAD MESSAGE", @"");
+        } else {
+            label = NSLocalizedString(@"UNREAD MESSAGES", @"");
+        }
+        NSArray *messagesCountPair = [NSArray arrayWithObjects:label, messagesCount,nil];
+        [tempItems addObject:messagesCountPair];
+    }
+    
+    if ([profile objectForKey:@"pendingFriends"]) {
+        NSString *label;
+        NSString *pendingFriendsValue = [profile objectForKey:@"pendingFriends"];
+        if ([pendingFriendsValue integerValue] == 1) {
+            label = NSLocalizedString(@"PENDING FRIEND", @"");
+        } else {
+            label = NSLocalizedString(@"PENDING FRIENDS", @"");
+        }
+        NSArray *pendingFriendsPair = [NSArray arrayWithObjects:label, pendingFriendsValue, nil];
+        [tempItems addObject:pendingFriendsPair];
+    }
+    
+    if ([profile objectForKey:@"couchRequestCount"]) {
+        NSString *label;
+        NSString *couhRequests = [profile objectForKey:@"couchRequestCount"];
+        if ([couhRequests integerValue] == 1) {
+            label = NSLocalizedString(@"COUCH REQUEST", @"");
+        } else {
+            label = NSLocalizedString(@"COUCH REQUESTS", @"");
+        }
+        NSArray *couhRequestsPair = [NSArray arrayWithObjects:label, couhRequests, nil];
+        [tempItems addObject:couhRequestsPair];
+    }  
+    
+    if ([profile objectForKey:@"memberSince"]) {
+        [tempItems addObject:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"MEMBER SINCE", @""), [profile objectForKey:@"memberSince"]]];
+    }
+    
+    self.items = tempItems;
+    [_tableView reloadData];
 }
 
 - (void)profileRequestFailedToLogin:(ProfileRequest *)profileRequest {
@@ -136,6 +320,12 @@
     [self.logoutOverlap removeOverlap];
     id loginController = [self.authControllersFactory createLoginController];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:loginController] animated:YES];
+}
+
+#pragma Mark CSImageDownloaderDelegate methods
+
+- (void)imageDownloader:(CSImageDownloader *)imageDownloader didDownloadImage:(UIImage *)image forPosition:(NSInteger)position {
+    _photoView.image = image;
 }
 
 #pragma Mark Action methods

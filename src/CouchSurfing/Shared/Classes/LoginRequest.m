@@ -7,14 +7,8 @@
 //
 
 #import "LoginRequest.h"
-
-@implementation NSURLRequest (NSURLRequestWithIgnoreSSL)
-
-+ (BOOL)allowsAnyHTTPSCertificateForHost:(NSString*)host {
-    return YES;
-}
-
-@end
+#import "TouchXML.h"
+#import "RegexKitLite.h"
 
 @interface LoginRequest ()
 
@@ -83,7 +77,14 @@
     if (_isSuccessfull) {
         [self.delegate loginRequestDidFinnishLogin:self];
     } else {
-        [self.delegate loginRequestDidFail:self];
+        CXMLDocument *doc = [[[CXMLDocument alloc] initWithData:_data options:0 error:nil] autorelease];
+        NSString *titleValue = [[doc nodeForXPath:@"//title/text()" error:nil] stringValue];
+        if ([titleValue stringByMatching:@".*Login"]) {
+            [self.delegate loginRequestDidFail:self];
+        } else {
+            [self.delegate loginRequestDidFinnishLogin:self];
+        }
+        
     }
 
     [_data release];

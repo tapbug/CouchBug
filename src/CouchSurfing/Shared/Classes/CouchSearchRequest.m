@@ -149,6 +149,7 @@
 
 #pragma mark NSURLConnectionDelegate methods
 
+//  TODO misto URLConnection pouzit MVUrlConnection, protoze ma v sobe zabudovano i opravovani html
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSError *error;
     NSString *responseString = [[[NSString alloc] initWithData:[self cleanUTF8:self.data] encoding:NSUTF8StringEncoding] autorelease];

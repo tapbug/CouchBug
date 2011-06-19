@@ -9,13 +9,17 @@
 #import "ProfileRequest.h"
 #import "LoginInformation.h"
 #import "TouchXML.h"
+#import "RegexKitLite.h"
 
 @interface ProfileRequest ()
 
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 
-@property (nonatomic, retain) MVUrlConnection *loadingConnection;
+@property (nonatomic, retain) MVUrlConnection *profileConnection;
+@property (nonatomic, retain) MVUrlConnection *homeConnection;
 @property (nonatomic, retain) LoginRequest *loginRequest;
+
+@property (nonatomic, retain) NSMutableDictionary *profileDictionary;
 
 @end
 
@@ -23,8 +27,10 @@
 
 @synthesize delegate = _delegate;
 @synthesize loginInformation = _loginInformation;
-@synthesize loadingConnection = _loadingConnection;
+@synthesize profileConnection = _profileConnection;
+@synthesize homeConnection = _homeConnection;
 @synthesize loginRequest = _loginRequest;
+@synthesize profileDictionary = _profileDictionary;
 
 - (id)initWithLoginInformation:(id<LoginInformation>)loginInformation {
     self = [super init];
@@ -35,43 +41,114 @@
 }
 
 - (void)dealloc {
-    self.loadingConnection.delegate = nil;
-    self.loadingConnection = nil;
+    self.profileConnection.delegate = nil;
+    self.profileConnection = nil;
+    self.homeConnection.delegate = nil;
+    self.homeConnection = nil;
     self.loginRequest.delegate = nil;
     self.loginRequest = nil;
+    self.profileDictionary = nil;
     [super dealloc];
 }
 
 - (void)loadProfile {
-    NSString *profileUrl = @"https://www.couchsurfing.org/editprofile.html?edit=general";
-    self.loadingConnection = [[[MVUrlConnection alloc] initWithUrlString:profileUrl] autorelease];
-    self.loadingConnection.delegate = self;
-    [self.loadingConnection sendRequest];
+    self.homeConnection = [[[MVUrlConnection alloc] initWithUrlString:@"http://www.couchsurfing.org/home.html"] autorelease];
+    self.homeConnection.delegate = self;
+    [self.homeConnection sendRequest];
 }
 
 #pragma mark MVUrlConnectionDelegate methods
 
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
-    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:responseData options:0 error:nil];
-    NSString *firstname = [[doc nodeForXPath:@"//input[@id='profilefirst_name']/@value" error:nil] stringValue];
-    NSString *lastname = [[doc nodeForXPath:@"//input[@id='profilelast_name']/@value" error:nil] stringValue];
-
-    if (firstname == nil && lastname == nil) {
-        if (self.loginRequest == nil) {
-            self.loginRequest = [[[LoginRequest alloc] init] autorelease];
-            self.loginRequest.delegate = self;
-            self.loginRequest.username = self.loginInformation.username;
-            self.loginRequest.password = self.loginInformation.password;
-            [self.loginRequest login];
-        } else {
-            //todo request failed (zmena api, neni spojeni ...)
+    NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
+    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:responseData options:CXMLDocumentTidyHTML error:nil];
+    if (connection == self.homeConnection) {
+        self.profileDictionary = [NSMutableDictionary dictionary];
+        CXMLNode *isNotLoggedNode = [doc nodeForXPath:@"//*[@id='auth_loginaction']" error:nil];
+        if (isNotLoggedNode) {
+            if (self.loginRequest == nil) {
+                self.loginRequest = [[[LoginRequest alloc] init] autorelease];
+                self.loginRequest.delegate = self;
+                self.loginRequest.username = self.loginInformation.username;
+                self.loginRequest.password = self.loginInformation.password;
+                [self.loginRequest login];
+            } else {
+                //todo request failed (zmena api, neni spojeni ...)
+            }
+            return;
         }
-    } else {
-        NSDictionary *profile = [NSDictionary dictionaryWithObjectsAndKeys:firstname, @"firstname",
-                                 lastname, @"lastname",
-                                 nil];
+        
+        //  Zjisteni poctu CouchSurferu na webu
+        NSArray *visitorsCountNodes = [doc nodesForXPath:@"//*[text()='Online Visitors']/following-sibling::*//*[number(text())=text()]/text()" error:nil];
+        if ([visitorsCountNodes count] == 2) {
+            NSInteger sumVisitors = [[[visitorsCountNodes objectAtIndex:0] stringValue] integerValue];
+            NSInteger nonLoggedVisitors = [[[visitorsCountNodes objectAtIndex:1] stringValue] integerValue];
+            NSInteger loggedVisitors = sumVisitors - nonLoggedVisitors;
+            
+            [self.profileDictionary setObject:[NSString stringWithFormat:@"%d", loggedVisitors] forKey:@"loggedVisitors"];            
+        }        
+        
+        //  Zjisteni poctu visitu meho profilu a zjisteni od kdy jsem clenem
+        
+        NSArray *profilesViewNodes = [doc nodesForXPath:@"//*[text()='My Profile at a Glance']/../following-sibling::*//text()" namespaceMappings:ns error:nil];
+        for (CXMLNode *profileNode in profilesViewNodes) {
+            NSString *profileViewsRegex = @"^([0-9]+) profile views since(.+?)$";
+            NSString *profileString = [profileNode stringValue];
+            NSString *profileViews = [profileString stringByMatching:profileViewsRegex capture:1];
+            NSString *memberSince = [profileString stringByMatching:profileViewsRegex capture:2];
+            if (profileViews != nil) {
+                [self.profileDictionary setObject:profileViews forKey:@"profileViews"];
+            }
+            if (memberSince != nil) {
+                [self.profileDictionary setObject:memberSince forKey:@"memberSince"];
+            }
+            
+            //2 Pending Friend Request
+            NSString *pendingFriendsString = [profileNode stringValue];
+            NSString *pendingFriends = [pendingFriendsString stringByMatching:@"([0-9]+) Pending Friend" capture:1];
+            if (pendingFriends != nil) {
+                [self.profileDictionary setObject:pendingFriends forKey:@"pendingFriends"];
+            }
+        }
+        
+        NSArray *bubbleNodes = [doc nodesForXPath:@"//*[@class='item_bubble']" namespaceMappings:ns error:nil];
+        for (CXMLNode *bubbleNode in bubbleNodes) {
+            NSString *href = [[[bubbleNode nodesForXPath:@".//x:a/@href" namespaceMappings:ns error:nil] lastObject] stringValue];
+            NSString *value = [[[bubbleNode nodesForXPath:@".//x:a/text()" namespaceMappings:ns error:nil] lastObject] stringValue];
+            if ([href stringByMatching:@"messages"] != nil) {
+                [self.profileDictionary setObject:value forKey:@"messagesCount"];
+            } else if([href stringByMatching:@"couchmanager"] != nil) {
+                [self.profileDictionary setObject:value forKey:@"couchRequestCount"];
+            }
+        }
+
+        /*NSString *messagesCount = [[nodes lastObject] stringValue];
+        if (messagesCount != nil) {
+            [self.profileDictionary setObject:messagesCount forKey:@"messagesCount"];
+        }*/
+        
+        //dotazat se jeste stranky profilu, kvuli dalsim informacim (obrazek ...)
+        NSString *profileUrl = [NSString stringWithFormat:@"http://www.couchsurfing.org/people/%@/", self.loginInformation.username];
+        self.profileConnection = [[[MVUrlConnection alloc] initWithUrlString:profileUrl] autorelease];
+        self.profileConnection.delegate = self;
+        [self.profileConnection sendRequest];
+        
+    } else if (connection == self.profileConnection) {
+        NSString *name = [[[[doc nodesForXPath:@"//x:span[@id='online_now']//x:font/text()"
+                             namespaceMappings:ns
+                                         error:nil] lastObject] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+        
+        NSString *avatarUrl = [[[doc nodesForXPath:[NSString stringWithFormat:@"//x:img[@alt='%@']/@src", name] namespaceMappings:ns error:nil] lastObject] stringValue];
+        if (name != nil) {
+            [self.profileDictionary setObject:name forKey:@"name"];            
+        }
+        if (avatarUrl != nil) {
+            [self.profileDictionary setObject:avatarUrl forKey:@"avatar"];            
+        }
+        
         if ([self.delegate respondsToSelector:@selector(profileRequest:didLoadProfile:)]) {
-            [self.delegate profileRequest:self didLoadProfile:profile];
+            [self.delegate profileRequest:self didLoadProfile:self.profileDictionary];
+            self.profileDictionary = nil;
         }
     }
     

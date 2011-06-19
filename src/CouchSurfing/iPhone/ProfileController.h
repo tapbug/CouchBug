@@ -10,13 +10,14 @@
 
 #import "LogoutRequest.h"
 #import "ProfileRequest.h"
+#import "CSImageDownloader.h"
 
 @class ActivityOverlap;
 @class AuthControllersFactory;
 @class ProfileRequestFactory;
 @protocol LoginAnnouncer;
 
-@interface ProfileController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate>{
+@interface ProfileController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
     AuthControllersFactory *_authControllersFactory;
     ProfileRequestFactory *_profileRequestFactory;
     
@@ -26,6 +27,13 @@
     ActivityOverlap *_logoutOverlap;
     LogoutRequest *_logoutRequest;
     id<LoginAnnouncer> _loginAnnouncer;
+    
+    UITableView *_tableView;
+    UIImageView *_photoView;
+    
+    CSImageDownloader *_avatarDownloader;
+    
+    NSArray *_items;
 }
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory 

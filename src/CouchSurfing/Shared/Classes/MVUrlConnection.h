@@ -16,6 +16,8 @@
     NSURLRequest *_urlRequest;
     NSURLConnection *_actualConnection;
     NSMutableData *_actualData;
+    
+    BOOL _repairHtml;
 }
 
 @property(nonatomic, assign) id<MVUrlConnectionDelegate> delegate;
@@ -23,6 +25,8 @@
 - (id)initWithUrlString:(NSString *)urlString;
 - (id)initWithUrlRequest:(NSURLRequest *)urlRequest;
 - (void)sendRequest;
+//  Odesle regquest a vysledne html se pokusi trochu zvalidnit
+- (void)sendRequestWithHtmlRepair;
 
 @end
 

@@ -24,6 +24,21 @@
 @synthesize data = _data;
 @synthesize connection = _connection;
 
+- (id)init {
+    if ((self = [super init])) {
+        _sizeToScale = CGSizeMake(61, 61);
+    }
+    return self;
+}
+
+- (id)initWithSize:(CGSize)size {
+    if ((self = [super init])) {
+        _sizeToScale = size;
+    }
+    
+    return self;
+}
+
 - (void)downloadWithSrc:(NSString *)src position:(NSInteger)position {
     _position = position;
     NSURLRequest *urlRequest = [NSURLRequest requestWithURL:[NSURL URLWithString:src]];
@@ -42,7 +57,7 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     
-    UIImage *image = [self scaleToSize:CGSizeMake(61, 61) image:[UIImage imageWithData:self.data]];
+    UIImage *image = [self scaleToSize:_sizeToScale image:[UIImage imageWithData:self.data]];
     
     if ([self.delegate respondsToSelector:@selector(imageDownloader:didDownloadImage:forPosition:)]) {
         [self.delegate imageDownloader:self didDownloadImage:image forPosition:_position];

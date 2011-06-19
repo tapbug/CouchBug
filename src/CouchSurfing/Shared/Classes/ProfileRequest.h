@@ -18,9 +18,12 @@
 @interface ProfileRequest : NSObject <MVUrlConnectionDelegate, LoginRequestDelegate> {
     id<ProfileRequestDelegate> _delegate;
     id<LoginInformation> _loginInformation;
-    MVUrlConnection *_loadingConnection;
+    MVUrlConnection *_profileConnection;
+    MVUrlConnection *_homeConnection;
     
     LoginRequest *_loginRequest;
+    
+    NSMutableDictionary *_profileDictionary;
 }
 
 @property(nonatomic, assign) id<ProfileRequestDelegate> delegate;

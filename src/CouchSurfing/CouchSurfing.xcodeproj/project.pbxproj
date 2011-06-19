@@ -31,6 +31,12 @@
 		6C93662313A22EA700FA8960 /* CXMLNode_XPathExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661313A22EA700FA8960 /* CXMLNode_XPathExtensions.m */; };
 		6C93662413A22EA700FA8960 /* CTidy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93661613A22EA700FA8960 /* CTidy.m */; };
 		6C94EC1D13ABDD1500DF96B1 /* libiconv.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C94EC1C13ABDD1500DF96B1 /* libiconv.dylib */; };
+		6C94EC2513ACCC4C00DF96B1 /* blackBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC1F13ACCC4C00DF96B1 /* blackBg.png */; };
+		6C94EC2613ACCC4C00DF96B1 /* blackBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2013ACCC4C00DF96B1 /* blackBg@2x.png */; };
+		6C94EC2713ACCC4C00DF96B1 /* clothBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2113ACCC4C00DF96B1 /* clothBg.png */; };
+		6C94EC2813ACCC4C00DF96B1 /* clothBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2213ACCC4C00DF96B1 /* clothBg@2x.png */; };
+		6C94EC2913ACCC4C00DF96B1 /* photoFrameProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2313ACCC4C00DF96B1 /* photoFrameProfile.png */; };
+		6C94EC2A13ACCC4C00DF96B1 /* photoFrameProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */; };
 		6C9EACDD13A09ECA00C1B19D /* profileCard.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACD913A09ECA00C1B19D /* profileCard.png */; };
 		6C9EACDE13A09ECA00C1B19D /* profileCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */; };
 		6C9EACDF13A09ECA00C1B19D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDB13A09ECA00C1B19D /* search.png */; };
@@ -57,6 +63,7 @@
 		6CAA940C128591BD00CB1737 /* CouchSearchResultControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */; };
 		6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */; };
 		6CC1DA1313A09276008F659F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC1DA1213A09276008F659F /* JSONKit.m */; };
+		6CD0A6DF13AE395700700F01 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD0A6DE13AE395700700F01 /* libtidy.dylib */; };
 		6CDE85CA13A51AE70065A991 /* AuthControllersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */; };
 		6CDE85D313A547510065A991 /* CouchSearchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D213A547510065A991 /* CouchSearchFilter.m */; };
 		6CDE85DA13A547610065A991 /* LogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D513A547610065A991 /* LogoutRequest.m */; };
@@ -138,6 +145,12 @@
 		6C93661613A22EA700FA8960 /* CTidy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CTidy.m; sourceTree = "<group>"; };
 		6C93661713A22EA700FA8960 /* TouchXML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TouchXML.h; sourceTree = "<group>"; };
 		6C94EC1C13ABDD1500DF96B1 /* libiconv.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libiconv.dylib; path = usr/lib/libiconv.dylib; sourceTree = SDKROOT; };
+		6C94EC1F13ACCC4C00DF96B1 /* blackBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = blackBg.png; sourceTree = "<group>"; };
+		6C94EC2013ACCC4C00DF96B1 /* blackBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "blackBg@2x.png"; sourceTree = "<group>"; };
+		6C94EC2113ACCC4C00DF96B1 /* clothBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = clothBg.png; sourceTree = "<group>"; };
+		6C94EC2213ACCC4C00DF96B1 /* clothBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothBg@2x.png"; sourceTree = "<group>"; };
+		6C94EC2313ACCC4C00DF96B1 /* photoFrameProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoFrameProfile.png; sourceTree = "<group>"; };
+		6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoFrameProfile@2x.png"; sourceTree = "<group>"; };
 		6C9EACD913A09ECA00C1B19D /* profileCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileCard.png; sourceTree = "<group>"; };
 		6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCard@2x.png"; sourceTree = "<group>"; };
 		6C9EACDB13A09ECA00C1B19D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -180,6 +193,7 @@
 		6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormControllerFactory.m; sourceTree = "<group>"; };
 		6CC1DA1113A09276008F659F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		6CC1DA1213A09276008F659F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
+		6CD0A6DE13AE395700700F01 /* libtidy.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtidy.dylib; path = usr/lib/libtidy.dylib; sourceTree = SDKROOT; };
 		6CDE85C813A51AE70065A991 /* AuthControllersFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthControllersFactory.h; sourceTree = "<group>"; };
 		6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthControllersFactory.m; sourceTree = "<group>"; };
 		6CDE85D113A547510065A991 /* CouchSearchFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouchSearchFilter.h; path = Shared/Classes/CouchSearchFilter.h; sourceTree = "<group>"; };
@@ -208,6 +222,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6CD0A6DF13AE395700700F01 /* libtidy.dylib in Frameworks */,
 				6C94EC1D13ABDD1500DF96B1 /* libiconv.dylib in Frameworks */,
 				6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */,
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
@@ -304,6 +319,7 @@
 				288765FC0DF74451002DB57D /* CoreGraphics.framework */,
 				6C94EC1C13ABDD1500DF96B1 /* libiconv.dylib */,
 				6CAA922E12852D6E00CB1737 /* libxml2.dylib */,
+				6CD0A6DE13AE395700700F01 /* libtidy.dylib */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -382,9 +398,23 @@
 			path = Tidy;
 			sourceTree = "<group>";
 		};
+		6C94EC1E13ACCC4C00DF96B1 /* profile */ = {
+			isa = PBXGroup;
+			children = (
+				6C94EC1F13ACCC4C00DF96B1 /* blackBg.png */,
+				6C94EC2013ACCC4C00DF96B1 /* blackBg@2x.png */,
+				6C94EC2113ACCC4C00DF96B1 /* clothBg.png */,
+				6C94EC2213ACCC4C00DF96B1 /* clothBg@2x.png */,
+				6C94EC2313ACCC4C00DF96B1 /* photoFrameProfile.png */,
+				6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */,
+			);
+			path = profile;
+			sourceTree = "<group>";
+		};
 		6C9EACD813A09ECA00C1B19D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6C94EC1E13ACCC4C00DF96B1 /* profile */,
 				D073DF3813AAAC9E002D00F9 /* photoNone.png */,
 				D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */,
 				D073DF3A13AAAC9E002D00F9 /* worldBg.png */,
@@ -594,6 +624,12 @@
 				D073DF3D13AAAC9E002D00F9 /* photoNone@2x.png in Resources */,
 				D073DF3E13AAAC9E002D00F9 /* worldBg.png in Resources */,
 				D073DF3F13AAAC9E002D00F9 /* worldBg@2x.png in Resources */,
+				6C94EC2513ACCC4C00DF96B1 /* blackBg.png in Resources */,
+				6C94EC2613ACCC4C00DF96B1 /* blackBg@2x.png in Resources */,
+				6C94EC2713ACCC4C00DF96B1 /* clothBg.png in Resources */,
+				6C94EC2813ACCC4C00DF96B1 /* clothBg@2x.png in Resources */,
+				6C94EC2913ACCC4C00DF96B1 /* photoFrameProfile.png in Resources */,
+				6C94EC2A13ACCC4C00DF96B1 /* photoFrameProfile@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -658,11 +694,13 @@
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CouchSurfing_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TOUCHXMLUSETIDY=1";
 				HEADER_SEARCH_PATHS = (
 					../../libs/xpathfinder/Classes,
 					../../libs/objectiveioc/src/Classes,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
+					/usr/include/tidy,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
@@ -688,11 +726,13 @@
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CouchSurfing_Prefix.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = "TOUCHXMLUSETIDY=1";
 				HEADER_SEARCH_PATHS = (
 					../../libs/xpathfinder/Classes,
 					../../libs/objectiveioc/src/Classes,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
+					/usr/include/tidy,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.3;

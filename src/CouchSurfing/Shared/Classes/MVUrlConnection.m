@@ -7,12 +7,16 @@
 //
 
 #import "MVUrlConnection.h"
+#import "RegexKitLite.h"
 
 @interface MVUrlConnection ()
 
 @property(nonatomic, retain) NSURLRequest *urlRequest;
 @property(nonatomic, retain) NSURLConnection *actualConnection;
 @property(nonatomic, retain) NSMutableData *actualData;
+
+//  Opravi html tak aby bylo co nejvice validni
+- (NSString *)repairHtmlInString:(NSString *)html;
 
 @end
 
@@ -52,6 +56,12 @@
     self.actualConnection = [[NSURLConnection alloc] initWithRequest:self.urlRequest delegate:self];
 }
 
+- (void)sendRequestWithHtmlRepair {
+    self.actualConnection = [[NSURLConnection alloc] initWithRequest:self.urlRequest delegate:self];
+    _repairHtml = YES;
+}
+
+
 #pragma mark NSURLConnectionDelegate methods
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
@@ -64,11 +74,24 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if ([self.delegate respondsToSelector:@selector(connection:didFinnishLoadingWithResponseString:)]) {
+        
         NSString *responseString = [[[NSString alloc] initWithData:self.actualData encoding:NSUTF8StringEncoding] autorelease];        
+        if (_repairHtml) {
+            responseString = [self repairHtmlInString:responseString];
+        }
+        
         [self.delegate connection:self didFinnishLoadingWithResponseString:responseString];
     }
     if ([self.delegate respondsToSelector:@selector(connection:didFinnishLoadingWithResponseData:)]) {
-        [self.delegate connection:self didFinnishLoadingWithResponseData:self.actualData];
+        NSData *responseData = nil;
+        if (_repairHtml) {
+            NSString *responseString = [[[NSString alloc] initWithData:self.actualData encoding:NSUTF8StringEncoding] autorelease];
+            responseString = [self repairHtmlInString:responseString];
+            responseData = [responseString dataUsingEncoding:NSUTF8StringEncoding];
+        } else {
+            responseData = self.actualData;
+        }
+        [self.delegate connection:self didFinnishLoadingWithResponseData:responseData];
     }
 }
 
@@ -83,5 +106,10 @@
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 
+#pragma Mark private methods
+
+- (NSString *)repairHtmlInString:(NSString *)html {
+    return [html stringByReplacingOccurrencesOfRegex:@" (.*?)=[\\\"](.*?) " withString:@" $1=\"$2\" "];
+}
 
 @end

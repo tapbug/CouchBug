@@ -11,6 +11,8 @@
 @protocol CSImageDownloaderDelegate;
 
 @interface CSImageDownloader : NSObject {
+    CGSize _sizeToScale;
+    
     id<CSImageDownloaderDelegate> _delegate;
     NSMutableData *_data;
     NSURLConnection *_connection;
@@ -19,6 +21,7 @@
 
 @property (nonatomic, assign) id<CSImageDownloaderDelegate> delegate;
 
+- (id)initWithSize:(CGSize)size;
 - (void)downloadWithSrc:(NSString *)src position:(NSInteger)position;
 
 @end
