@@ -45,6 +45,7 @@
     
     [requestString appendFormat:@"auth_login[un]=%@", self.username];
     [requestString appendFormat:@"&auth_login[pw]=%@", self.password];
+    [requestString appendFormat:@"&auth_login[persistant]=%@", @"yes"];
     [requestString appendFormat:@"&auth_login[action]=%@", @"Secure login..."];
     //vyzjistit zda je to nutne
     //[requestString appendFormat:@"&auth_login[timezone_offset]=%@", @"-60"];
