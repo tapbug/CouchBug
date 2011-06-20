@@ -92,7 +92,7 @@
         
         NSArray *profilesViewNodes = [doc nodesForXPath:@"//*[text()='My Profile at a Glance']/../following-sibling::*//text()" namespaceMappings:ns error:nil];
         for (CXMLNode *profileNode in profilesViewNodes) {
-            NSString *profileViewsRegex = @"^([0-9]+) profile views since(.+?)$";
+            NSString *profileViewsRegex = @"^([0-9,]+) profile views since(.+?)$";
             NSString *profileString = [profileNode stringValue];
             NSString *profileViews = [profileString stringByMatching:profileViewsRegex capture:1];
             NSString *memberSince = [profileString stringByMatching:profileViewsRegex capture:2];
