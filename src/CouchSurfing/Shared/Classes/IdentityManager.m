@@ -24,10 +24,8 @@
 
 - (void)userHasLoggedOut {
     NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
-    [userDefaults removeObjectForKey:@"username"];
     [userDefaults removeObjectForKey:@"password"];
     [userDefaults synchronize];
-    [_username release]; _username = nil;
     [_password release]; _password = nil;
 }
 
