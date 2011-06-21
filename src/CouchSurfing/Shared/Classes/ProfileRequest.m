@@ -118,7 +118,7 @@
             }
         }
 
-        CXMLNode *personalImgNode = [[doc nodesForXPath:@"//x:a[contains(@class, 'profile-image')][contains(@class, 'online')]/x:img" namespaceMappings:ns error:nil] lastObject];
+        CXMLNode *personalImgNode = [[doc nodesForXPath:@"//*[text()='My Profile at a Glance']/../following-sibling::*//x:a[contains(@class, 'profile-image')][contains(@class, 'online')]/x:img" namespaceMappings:ns error:nil] lastObject];
         NSString *avatarUrl = [[[personalImgNode nodeForXPath:@"./@src" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"_t_" withString:@"_m_"];
         NSString *name = [[personalImgNode nodeForXPath:@"./@alt" error:nil] stringValue];
         

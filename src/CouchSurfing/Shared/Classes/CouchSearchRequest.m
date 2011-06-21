@@ -98,14 +98,14 @@
     [bodyString appendString:[self parameter:@"vouched" value:self.vouched]];
     [bodyString appendString:[self parameter:@"ambassador" value:self.ambassador]];
     [bodyString appendString:[self parameter:@"wheelchair_accessible" value:self.wheelchairAccessible]];
-    [bodyString appendString:[self parameter:@"username" value:self.username]];    
+    [bodyString appendString:[self parameter:@"username" value:self.username]];
     [bodyString appendString:[self parameter:@"keyword" value:self.keyword]];
     [bodyString appendString:[self parameter:@"submitted" value:@"manual"]];
     [bodyString appendString:[self parameter:@"submit_button" value:@"submit"]];
     [bodyString appendString:[self parameter:@"search_type" value:@"user"]];
     [bodyString appendString:[self parameter:@"data_only" value:@"false"]];
     [bodyString appendString:[self parameter:@"csstandart_request" value:@"true"]];
-    [bodyString appendString:[self lastParameter:@"type" value:@"html"]];
+	[bodyString appendString:[self lastParameter:@"type" value:@"html"]];
     
     //podivat se na zbytek parametru
 
