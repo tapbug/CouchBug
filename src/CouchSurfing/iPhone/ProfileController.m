@@ -240,6 +240,8 @@
         valueLabel.frame = valueLabelFrame;
     }
     
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
     return cell;
 }
 
