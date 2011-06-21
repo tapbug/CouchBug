@@ -84,6 +84,7 @@
         [self.loadingActivity removeOverlap];        
     } else if (_loadingAction == CouchSearchResultControllerMore) {
         self.sourfers = [self.sourfers arrayByAddingObjectsFromArray:sourfers];
+        [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
     }
     
     if ([sourfers count] <10) {
@@ -265,6 +266,7 @@
     request.delegate = self;
     self.request = request;
     request.page = [NSString stringWithFormat:@"%d", ++_currentPage];
+    [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
     [self.request send];
     
 }
