@@ -245,6 +245,10 @@
     return cell;
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return 33;
+}
+
 #pragma Mark ProfileRequestDelegate methods
 
 - (void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
