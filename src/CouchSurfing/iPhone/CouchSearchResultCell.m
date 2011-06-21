@@ -106,9 +106,11 @@
         [self.contentView addSubview:_hasCouchView];
         
         _vouchedView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iconVouched"]] autorelease];
+        _vouchedView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         [self.contentView addSubview:_vouchedView];
         
         _ambassadorView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iconAmbassador"]] autorelease];
+        _ambassadorView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
         [self.contentView addSubview:_ambassadorView];
     }
     return self;
