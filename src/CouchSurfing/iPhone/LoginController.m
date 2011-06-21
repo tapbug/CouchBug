@@ -258,6 +258,7 @@
 
 - (void)hideLoading {
     [self.activityOverlap removeOverlap];
+    self.navigationItem.rightBarButtonItem.enabled = YES;
 }
 
 
@@ -268,6 +269,7 @@
     [self hideKeyboard];
     
     [self.activityOverlap overlapView];
+    self.navigationItem.rightBarButtonItem.enabled = NO;
     
     self.loginRequest = [[[LoginRequest alloc] init] autorelease];
     self.loginRequest.delegate = self;
