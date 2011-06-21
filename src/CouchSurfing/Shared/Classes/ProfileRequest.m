@@ -15,7 +15,6 @@
 
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 
-@property (nonatomic, retain) MVUrlConnection *profileConnection;
 @property (nonatomic, retain) MVUrlConnection *homeConnection;
 @property (nonatomic, retain) LoginRequest *loginRequest;
 
@@ -27,7 +26,6 @@
 
 @synthesize delegate = _delegate;
 @synthesize loginInformation = _loginInformation;
-@synthesize profileConnection = _profileConnection;
 @synthesize homeConnection = _homeConnection;
 @synthesize loginRequest = _loginRequest;
 @synthesize profileDictionary = _profileDictionary;
@@ -41,8 +39,6 @@
 }
 
 - (void)dealloc {
-    self.profileConnection.delegate = nil;
-    self.profileConnection = nil;
     self.homeConnection.delegate = nil;
     self.homeConnection = nil;
     self.loginRequest.delegate = nil;
@@ -122,28 +118,16 @@
             }
         }
 
-        /*NSString *messagesCount = [[nodes lastObject] stringValue];
-        if (messagesCount != nil) {
-            [self.profileDictionary setObject:messagesCount forKey:@"messagesCount"];
-        }*/
+        CXMLNode *personalImgNode = [[doc nodesForXPath:@"//x:a[contains(@class, 'profile-image')][contains(@class, 'online')]/x:img" namespaceMappings:ns error:nil] lastObject];
+        NSString *avatarUrl = [[[personalImgNode nodeForXPath:@"./@src" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"_t_" withString:@"_m_"];
+        NSString *name = [[personalImgNode nodeForXPath:@"./@alt" error:nil] stringValue];
         
-        //dotazat se jeste stranky profilu, kvuli dalsim informacim (obrazek ...)
-        NSString *profileUrl = [NSString stringWithFormat:@"http://www.couchsurfing.org/people/%@/", self.loginInformation.username];
-        self.profileConnection = [[[MVUrlConnection alloc] initWithUrlString:profileUrl] autorelease];
-        self.profileConnection.delegate = self;
-        [self.profileConnection sendRequest];
-        
-    } else if (connection == self.profileConnection) {
-        NSString *name = [[[[doc nodesForXPath:@"//x:span[@id='online_now']//x:font/text()"
-                             namespaceMappings:ns
-                                         error:nil] lastObject] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-        
-        NSString *avatarUrl = [[[doc nodesForXPath:[NSString stringWithFormat:@"//x:img[@alt='%@']/@src", name] namespaceMappings:ns error:nil] lastObject] stringValue];
-        if (name != nil) {
-            [self.profileDictionary setObject:name forKey:@"name"];            
-        }
         if (avatarUrl != nil) {
             [self.profileDictionary setObject:avatarUrl forKey:@"avatar"];            
+        }
+        
+        if (name != nil) {
+            [self.profileDictionary setObject:name forKey:@"name"];            
         }
         
         if ([self.delegate respondsToSelector:@selector(profileRequest:didLoadProfile:)]) {
@@ -151,7 +135,6 @@
             self.profileDictionary = nil;
         }
     }
-    
 }
 
 #pragma Mark LoginRequestDelegate
