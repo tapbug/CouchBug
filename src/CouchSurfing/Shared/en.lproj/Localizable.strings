@@ -1,0 +1,38 @@
+// TabBar
+"PROFILE" = "Profile";
+"SEARCH" = "Search";
+"MORE" = "More";
+
+// Profile tab
+"MEMBERS ONLINE" = "CouchSurfers online";
+"PROFILE VIEWS" = "profile views";
+"UNREAD MESSAGE" = "unread message";
+"UNREAD MESSAGES" = "unread messages";
+"FRIEND REQUEST" = "friend request";
+"FRIEND REQUESTS" = "friend requests";
+"COUCH REQUEST" = "couch request";
+"COUCH REQUESTS" = "couch requests";
+"MEMBER SINCE" = "Member since";
+
+// Search results tab
+"LOADING COUCHES" = "Loading couches…";
+
+// Search result cell
+"REFERENCES" = "references";
+"PHOTOS" = "photos";
+"REPLY RATE" = "reply rate";
+
+// Login / logout
+"USERNAME" = "Username";
+"PASSWORD" = "Password";
+"CANCEL" = "Cancel";
+
+"SIGN IN" = "Sign in";
+"SIGN OUT" = "Sign out";
+"SIGNING IN" = "Signing in…";
+"SIGNING OUT" = "Signing out…";
+
+"SORRY" = "Sorry";
+"LOGIN ERROR" = "Username and password combination is not valid";
+
+"LOADING PROFILE" = "Loading profile…";

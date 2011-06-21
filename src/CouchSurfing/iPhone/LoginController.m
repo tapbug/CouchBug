@@ -74,9 +74,9 @@
     //Setup navigation baru
     
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
-    self.navigationItem.title = NSLocalizedString(@"LOGIN FORM", @"");
+    
     self.navigationItem.rightBarButtonItem = 
-        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"LOGIN", @"")
+        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SIGN IN", nil)
                                          style:UIBarButtonItemStyleBordered
                                         target:self
                                         action:@selector(loginAction)];
@@ -84,7 +84,7 @@
     self.view.backgroundColor = [UIColor whiteColor];
         
     self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view
-                                                           title:NSLocalizedString(@"TRY TO LOGIN TO COUCHSURF", @"")];
+                                                           title:NSLocalizedString(@"SIGNING IN", nil)];
     
     self.usernameField = [[[UITextField alloc] init] autorelease];
     self.usernameField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -135,7 +135,7 @@
             self.usernameField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
             [cell.contentView addSubview:self.usernameField];
         }
-        cell.textLabel.text = NSLocalizedString(@"USERNAME", @"");
+        cell.textLabel.text = NSLocalizedString(@"USERNAME", nil);
     } else if (indexPath.row == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"passwordCell"];
         if (cell == nil) {
@@ -143,7 +143,7 @@
             self.passwordField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
             [cell.contentView addSubview:self.passwordField];
         }
-        cell.textLabel.text = NSLocalizedString(@"PASSWORD", @"");
+        cell.textLabel.text = NSLocalizedString(@"PASSWORD", nil);
         
     }
     
@@ -191,9 +191,9 @@
 
 - (void)loginRequestDidFail:(LoginRequest *)request {
     [self hideLoading];
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"LOGIN FAILED", @"")
-                                                    message:NSLocalizedString(@"BAD USERNAME OR PASSWORD", @"")
-                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", @"")
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SORRY", nil)
+                                                    message:NSLocalizedString(@"LOGIN ERROR", nil)
+                                                   delegate:self cancelButtonTitle:NSLocalizedString(@"OK", nil)
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
@@ -231,7 +231,7 @@
     [UIView commitAnimations];
     
     self.navigationItem.leftBarButtonItem =
-        [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"HIDE", @"")
+        [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"CANCEL", nil)
                                           style:UIBarButtonItemStyleBordered
                                          target:self
                                          action:@selector(hideKeyboard)] autorelease];

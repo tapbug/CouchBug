@@ -82,19 +82,19 @@
         _referencesCountLabel = [self createCountLabel];
         [self.contentView addSubview:_referencesCountLabel];
         
-        _referencesLabel = [self createLabelForCount:NSLocalizedString(@"REFERENCES", @"")];
+        _referencesLabel = [self createLabelForCount:NSLocalizedString(@"REFERENCES", nil)];
         [self.contentView addSubview:_referencesLabel];
         
         _photosCountLabel = [self createCountLabel];
         [self.contentView addSubview:_photosCountLabel];
         
-        _photosLabel = [self createLabelForCount:NSLocalizedString(@"PHOTOS", @"")];
+        _photosLabel = [self createLabelForCount:NSLocalizedString(@"PHOTOS", nil)];
         [self.contentView addSubview:_photosLabel];
         
         _replyRateCountLabel = [self createCountLabel];
         [self.contentView addSubview:_replyRateCountLabel];
         
-        _replyRateLabel = [self createLabelForCount:NSLocalizedString(@"REPLY RATES", @"")];
+        _replyRateLabel = [self createLabelForCount:NSLocalizedString(@"REPLY RATE", nil)];
         [self.contentView addSubview:_replyRateLabel];
     }
     return self;

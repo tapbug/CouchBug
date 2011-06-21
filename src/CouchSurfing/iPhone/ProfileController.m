@@ -125,14 +125,14 @@
     
     self.loadingOverlap = 
         [[[ActivityOverlap alloc] initWithView:self.view
-                                        title:NSLocalizedString(@"LOADING PROFILE", @"")] autorelease];
+                                        title:NSLocalizedString(@"LOADING PROFILE", nil)] autorelease];
     self.logoutOverlap = 
         [[[ActivityOverlap alloc] initWithView:self.view
-                                         title:NSLocalizedString(@"LOGOUTING", @"")] autorelease];
+                                         title:NSLocalizedString(@"SIGNING OUT", nil)] autorelease];
     
     [self.loadingOverlap overlapView];
     self.navigationItem.leftBarButtonItem = 
-        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"LOGOUT", @"")
+        [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SIGN OUT", nil)
                                          style:UIBarButtonItemStyleBordered
                                         target:self
                                         action:@selector(logoutAction)];
@@ -257,11 +257,11 @@
     
     NSMutableArray *tempItems = [NSMutableArray array];
     if ([profile objectForKey:@"loggedVisitors"]) {
-        NSArray *loggedVisitorsPair = [NSArray arrayWithObjects:NSLocalizedString(@"COUCHSURFERS ONLINE",@""), [profile objectForKey:@"loggedVisitors"], nil];
+        NSArray *loggedVisitorsPair = [NSArray arrayWithObjects:NSLocalizedString(@"MEMBERS ONLINE",@""), [profile objectForKey:@"loggedVisitors"], nil];
         [tempItems addObject:loggedVisitorsPair];
     }
     if ([profile objectForKey:@"profileViews"]) {
-        NSArray *profileViewsPair = [NSArray arrayWithObjects:NSLocalizedString(@"PROFILE VIEWS", @""), [profile objectForKey:@"profileViews"], nil];
+        NSArray *profileViewsPair = [NSArray arrayWithObjects:NSLocalizedString(@"PROFILE VIEWS", nil), [profile objectForKey:@"profileViews"], nil];
         [tempItems addObject:profileViewsPair];
     }
     
@@ -269,9 +269,9 @@
         NSString *messagesCount = [profile objectForKey:@"messagesCount"];
         NSString *label;
         if ([messagesCount integerValue] == 1) {
-            label = NSLocalizedString(@"UNREAD MESSAGE", @"");
+            label = NSLocalizedString(@"UNREAD MESSAGE", nil);
         } else {
-            label = NSLocalizedString(@"UNREAD MESSAGES", @"");
+            label = NSLocalizedString(@"UNREAD MESSAGES", nil);
         }
         NSArray *messagesCountPair = [NSArray arrayWithObjects:label, messagesCount,nil];
         [tempItems addObject:messagesCountPair];
@@ -281,9 +281,9 @@
         NSString *label;
         NSString *pendingFriendsValue = [profile objectForKey:@"pendingFriends"];
         if ([pendingFriendsValue integerValue] == 1) {
-            label = NSLocalizedString(@"PENDING FRIEND", @"");
+            label = NSLocalizedString(@"FRIEND REQUEST", nil);
         } else {
-            label = NSLocalizedString(@"PENDING FRIENDS", @"");
+            label = NSLocalizedString(@"FRIEND REQUESTS", nil);
         }
         NSArray *pendingFriendsPair = [NSArray arrayWithObjects:label, pendingFriendsValue, nil];
         [tempItems addObject:pendingFriendsPair];
@@ -293,16 +293,16 @@
         NSString *label;
         NSString *couhRequests = [profile objectForKey:@"couchRequestCount"];
         if ([couhRequests integerValue] == 1) {
-            label = NSLocalizedString(@"COUCH REQUEST", @"");
+            label = NSLocalizedString(@"COUCH REQUEST", nil);
         } else {
-            label = NSLocalizedString(@"COUCH REQUESTS", @"");
+            label = NSLocalizedString(@"COUCH REQUESTS", nil);
         }
         NSArray *couhRequestsPair = [NSArray arrayWithObjects:label, couhRequests, nil];
         [tempItems addObject:couhRequestsPair];
     }  
     
     if ([profile objectForKey:@"memberSince"]) {
-        [tempItems addObject:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"MEMBER SINCE", @""), [profile objectForKey:@"memberSince"]]];
+        [tempItems addObject:[NSString stringWithFormat:@"%@ %@", NSLocalizedString(@"MEMBER SINCE", nil), [profile objectForKey:@"memberSince"]]];
     }
     
     self.items = tempItems;
