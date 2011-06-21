@@ -55,6 +55,7 @@
     _tableView.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"worldBg"]] autorelease];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
     _tableView.autoresizingMask = self.view.autoresizingMask;
+    _tableView.showsVerticalScrollIndicator = NO;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
