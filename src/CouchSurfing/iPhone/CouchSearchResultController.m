@@ -276,7 +276,10 @@
             [indexPaths removeLastObject];
         }
     }
+    
+    NSUInteger lastRow;
     for (NSIndexPath *indexPath in indexPaths) {
+        lastRow = indexPath.row;
         CouchSurfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
         if (sourfer.image == nil) {
             CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
@@ -285,6 +288,20 @@
             [imageDownloader release];            
         }
     }
+    
+    for(NSUInteger i = 1; i <= 2; i++) {
+        if ([self.sourfers count] - 1 >= lastRow + i) {
+            CouchSurfer *sourfer = [self.sourfers objectAtIndex:lastRow + i];
+            if (sourfer.image == nil) {
+                CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
+                imageDownloader.delegate = self;
+                [imageDownloader downloadWithSrc:sourfer.imageSrc position:lastRow + i];
+            }
+        } else {
+            break;
+        }
+    } 
+    
 }
 
 @end
