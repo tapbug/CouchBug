@@ -39,6 +39,8 @@ typedef enum {
     BOOL _tryLoadMore;
     //seznam surferu ktery zobrazujeme
     NSArray *_sourfers;
+    //znaci, ze jiz probehlo prvni hledani po zapnuti appky
+    BOOL _initialLoadDone;
 }
 
 @property (nonatomic, retain) CouchSearchFilter *filter;

@@ -69,7 +69,13 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-    [self performSearch];
+    if (!_initialLoadDone) {
+        [self performSearch];        
+    }
+    if ([self.sourfers count] > 0) {
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];        
+    }
+    _initialLoadDone = YES;
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
