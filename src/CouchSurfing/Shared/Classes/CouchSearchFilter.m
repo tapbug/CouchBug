@@ -23,6 +23,9 @@
 @synthesize female;
 @synthesize severalPeople;
 @synthesize hasPhoto;
+@synthesize verified;
+@synthesize vouched;
+@synthesize ambassador;
 @synthesize wheelchairAccessible;
 @synthesize username;
 @synthesize keyword;
@@ -42,6 +45,9 @@
         self.female = @"1";
         self.severalPeople = @"";
         self.hasPhoto = @"";
+        self.verified = @"";
+        self.vouched = @"";
+        self.ambassador = @"1";
         self.wheelchairAccessible = @"";
         self.username = @"";
         self.keyword = @"";
@@ -62,6 +68,9 @@
     self.severalPeople = nil;
     self.hasPhoto = nil;
     self.wheelchairAccessible = nil;
+    self.verified = nil;
+    self.vouched = nil;
+    self.ambassador = nil;
     self.username = nil;
     self.keyword = nil;
     [super dealloc];
@@ -80,6 +89,9 @@
     request.female = self.female;
     request.severalPeople = self.severalPeople;
     request.hasPhoto = self.hasPhoto;
+    request.verified = self.verified;
+    request.vouched = self.vouched;
+    request.ambassador = self.ambassador;
     request.wheelchairAccessible = self.wheelchairAccessible;
     request.username = self.username;
     request.keyword = self.keyword;

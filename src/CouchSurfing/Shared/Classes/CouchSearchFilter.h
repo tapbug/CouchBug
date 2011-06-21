@@ -25,6 +25,10 @@
     NSString *female;
     NSString *severalPeople;
     NSString *hasPhoto;
+    NSString *verified;
+    NSString *vouched;
+    NSString *ambassador;
+
     NSString *wheelchairAccessible;
     NSString *username;
     NSString *keyword;
@@ -42,6 +46,9 @@
 @property (nonatomic, retain) NSString *female;
 @property (nonatomic, retain) NSString *severalPeople;
 @property (nonatomic, retain) NSString *hasPhoto;
+@property (nonatomic, retain) NSString *verified;
+@property (nonatomic, retain) NSString *vouched;
+@property (nonatomic, retain) NSString *ambassador;
 @property (nonatomic, retain) NSString *wheelchairAccessible;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *keyword;

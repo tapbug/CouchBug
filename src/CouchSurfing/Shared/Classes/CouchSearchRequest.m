@@ -48,6 +48,9 @@
 @synthesize female = _female;
 @synthesize severalPeople = _severalPeople;
 @synthesize hasPhoto = _hasPhoto;
+@synthesize verified = _verified;
+@synthesize vouched = _vouched;
+@synthesize ambassador = _ambassador;
 @synthesize wheelchairAccessible = _wheelchairAccessible;
 @synthesize username = _username;
 @synthesize keyword = _keyword;
@@ -91,6 +94,9 @@
     [bodyString appendString:[self parameter:@"female" value:self.female]];
     [bodyString appendString:[self parameter:@"several_people" value:self.severalPeople]];
     [bodyString appendString:[self parameter:@"has_photo" value:self.hasPhoto]];
+    [bodyString appendString:[self parameter:@"verified" value:self.verified]];
+    [bodyString appendString:[self parameter:@"vouched" value:self.vouched]];
+    [bodyString appendString:[self parameter:@"ambassador" value:self.ambassador]];
     [bodyString appendString:[self parameter:@"wheelchair_accessible" value:self.wheelchairAccessible]];
     [bodyString appendString:[self parameter:@"username" value:self.username]];    
     [bodyString appendString:[self parameter:@"keyword" value:self.keyword]];
@@ -126,7 +132,6 @@
     self.connection = nil;
     self.data = nil;
 
-    
     self.page = nil;
     self.location = nil;
     self.mapEdges = nil;
@@ -139,6 +144,9 @@
     self.male = nil;
     self.female = nil;
     self.severalPeople = nil;
+    self.verified = nil;
+    self.vouched = nil;
+    self.ambassador = nil;
     self.hasPhoto = nil;
     self.wheelchairAccessible = nil;
     self.username = nil;
