@@ -16,6 +16,8 @@
 #import "CouchSurfer.h"
 #import "CSTools.h"
 
+static NSDictionary *hasCouchIcons;
+
 @interface CouchSearchResultController ()
 
 @property (nonatomic, retain) ActivityOverlap *loadingActivity;
@@ -42,6 +44,15 @@
 @synthesize sourfers = _sourfers;
 @synthesize imageDownloaders = _imageDownloaders;
 @synthesize request = _request;
+
++ (void)initialize {
+    hasCouchIcons = [[NSDictionary alloc] initWithObjectsAndKeys:[UIImage imageNamed:@"couchYes"], CouchSurferHasCouchYes,
+                     [UIImage imageNamed:@"couchNo"], CouchSurferHasCouchNo,
+                     [UIImage imageNamed:@"couchTravel"], CouchSurferHasCouchTraveling,
+                     [UIImage imageNamed: @"couchMaybe"], CouchSurferHasCouchMaybe,
+                     [UIImage imageNamed:@"couchCoffee"], CouchSurferHasCouchCoffeDrink,
+                     nil];
+}
 
 - (void)viewDidLoad {
     _currentPage = 1;
@@ -173,6 +184,13 @@
         } else {
             surferCell.verifiedImageView.hidden = YES;
         }
+        
+        if (surfer.couchStatus != nil && [hasCouchIcons objectForKey:surfer.couchStatus]) {
+            surferCell.hasCouchView.image = [hasCouchIcons objectForKey:surfer.couchStatus];
+        }
+        
+        surferCell.vouchedView.hidden = !surfer.vouched;
+        surferCell.ambassadorView.hidden = !surfer.ambassador;
         
         [surferCell makeLayout];
         

@@ -18,6 +18,9 @@
     UILabel *_referencesCountLabel;
     UILabel *_photosCountLabel;
     UILabel *_replyRateCountLabel;
+    UIImageView *_hasCouchView;
+    UIImageView *_vouchedView;
+    UIImageView *_ambassadorView;
     
     UIImageView *_photoFrameView;
     UILabel *_referencesLabel;
@@ -35,6 +38,9 @@
 @property (nonatomic, readonly) UILabel *photosCountLabel;
 @property (nonatomic, readonly) UILabel *replyRateCountLabel;
 @property (nonatomic, readonly) UIImageView *verifiedImageView;
+@property (nonatomic, readonly) UIImageView *hasCouchView;
+@property (nonatomic, readonly) UIImageView *vouchedView;
+@property (nonatomic, readonly) UIImageView *ambassadorView;
 
 - (void)makeLayout;
 - (void)resetCell;

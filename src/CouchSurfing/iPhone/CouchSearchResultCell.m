@@ -30,8 +30,12 @@
 @synthesize photosCountLabel = _photosCountLabel;
 @synthesize replyRateCountLabel = _replyRateCountLabel;
 @synthesize verifiedImageView = _verifiedImageView;
+@synthesize hasCouchView = _hasCouchView;
+@synthesize vouchedView = _vouchedView;
+@synthesize ambassadorView = _ambassadorView;
 
 @synthesize nonePhotoImage = _nonePhotoImage;
+
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -96,6 +100,16 @@
         
         _replyRateLabel = [self createLabelForCount:NSLocalizedString(@"REPLY RATE", nil)];
         [self.contentView addSubview:_replyRateLabel];
+        
+        _hasCouchView = [[[UIImageView alloc] init] autorelease];
+        _hasCouchView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+        [self.contentView addSubview:_hasCouchView];
+        
+        _vouchedView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iconVouched"]] autorelease];
+        [self.contentView addSubview:_vouchedView];
+        
+        _ambassadorView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"iconAmbassador"]] autorelease];
+        [self.contentView addSubview:_ambassadorView];
     }
     return self;
 }
@@ -182,6 +196,21 @@
     _replyRateLabelFrame.origin.y = countsTop;
     _replyRateLabel.frame = _replyRateLabelFrame;
     
+    CGFloat infoIconsTop = contentFrame.size.height - 20;
+    CGRect hasCouchFrame = CGRectMake(4, infoIconsTop, 18, 18);
+    _hasCouchView.frame = hasCouchFrame;
+    
+    CGRect vouchedFrame = CGRectMake(hasCouchFrame.origin.x + hasCouchFrame.size.width + 2,
+                                     infoIconsTop,
+                                     18,
+                                     18);
+    
+    _vouchedView.frame = vouchedFrame;
+    
+    _ambassadorView.frame = CGRectMake(vouchedFrame.origin.x + vouchedFrame.size.width + 2,
+                                    infoIconsTop,
+                                    18,
+                                    18);
     
 }
 
