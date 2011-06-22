@@ -9,15 +9,15 @@
 #import <Foundation/Foundation.h>
 
 @class CouchSearchRequestFactory;
-@class CouchSearchResultControllerFactory;
-@class CouchSearchBasicFormVariant;
-@class CouchSearchAdvancedFormVariant;
+@class CouchSearchFilter;
 
 @interface CouchSearchFormControllerFactory : NSObject {
     CouchSearchRequestFactory *injRequestFactory;
+	CouchSearchFilter *injFilter;
 }
 
 @property (nonatomic, retain) CouchSearchRequestFactory *requestFactory;
+@property (nonatomic, assign) CouchSearchFilter *filter;
 
 - (id)createController;
 

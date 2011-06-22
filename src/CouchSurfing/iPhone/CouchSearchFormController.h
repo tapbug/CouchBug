@@ -9,12 +9,19 @@
 #import <UIKit/UIKit.h>
 
 @class CouchSearchResultController;
+@class CouchSearchFilter;
 
-@interface CouchSearchFormController : UIViewController {
+@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	CouchSearchResultController *_searchResultController;
-    UITableView *_formTableView;
+    CouchSearchFilter *_filter;
+	
+	UITableView *_formTableView;
+	
+	NSArray *_sections;
+	NSArray *_items;
 }
 
 @property (nonatomic, assign) CouchSearchResultController *searchResultController;
+@property (nonatomic, assign) CouchSearchFilter *filter;
 
 @end

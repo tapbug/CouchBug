@@ -9,14 +9,22 @@
 #import "CouchSearchFormController.h"
 
 #import "CouchSearchResultController.h"
+#import "CouchSearchFilter.h"
+
+#import "CSCheckboxCell.h"
+
 #import "CSTools.h"
 
 @interface CouchSearchFormController ()
 
 @property (nonatomic, assign) UITableView *formTableView;
+@property (nonatomic, retain) NSArray *sections;
+@property (nonatomic, retain) NSArray *items;
 
 - (void)cancelForm;
 - (void)searchAction;
+
+- (CSCheckboxCell *)createCheckboxCell:(NSString *)title;
 
 @end
 
@@ -24,10 +32,36 @@
 @implementation CouchSearchFormController
 
 @synthesize searchResultController = _searchResultController;
+@synthesize filter = _filter;
+
 @synthesize formTableView = _formTableView;
+@synthesize sections = _sections;
+@synthesize items = _items;
 
 - (void)viewDidLoad {
-    self.view.backgroundColor = [UIColor whiteColor];
+	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMUNITY", @"PROFILE", nil];
+					 
+	NSArray *locationSection = [NSArray arrayWithObject:@"LOCATION"];
+	NSArray *couchStatusSection = [NSArray arrayWithObjects:@"YES",
+								   @"MAYBE", 
+								   @"COFFEE AND DRINK",
+								   @"TRAVELING",
+								   nil];
+	NSArray *host1Section = [NSArray arrayWithObjects:
+							@"AGE", @"HAS SPACE FOR", @"LANGUAGE", @"LAST LOGIN", nil];
+	NSArray *host2Section = [NSArray arrayWithObjects:
+							 @"MALE", @"FEMALE", @"SEVERAL PEOPLE", @"HAS PHOTO", @"WHEELCHAIR ACCESSIBLE", nil];
+	NSArray *comunitySection = [NSArray arrayWithObjects:@"VERIFIED", @"VOUCHED", @"AMBASSADOR", nil];
+	NSArray *profileSection = [NSArray arrayWithObjects:@"NAME / USERNAME", @"KEYWORD", nil];
+	
+	self.items = [NSArray arrayWithObjects:locationSection,
+				  couchStatusSection,
+				  host1Section,
+				  host2Section,
+				  comunitySection, 
+				  profileSection, nil];
+	
+    self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 
 	UIBarButtonItem *cancelItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"CANCEL", nil)
 																   style:UIBarButtonItemStyleBordered
@@ -42,9 +76,21 @@
 																			   action:nil];
 	
 	UIToolbar *toolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
+	toolBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
 	toolBar.tintColor = UIColorFromRGB(0x3d4041);
 	toolBar.items = [NSArray arrayWithObjects:cancelItem, spaceItem, searchItem, nil];
 	[self.view addSubview:toolBar];
+	
+	_formTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 
+																   toolBar.frame.size.height,
+																   self.view.frame.size.width,
+																   self.view.frame.size.height) 
+												   style:UITableViewStyleGrouped] autorelease];
+	_formTableView.backgroundColor = [UIColor clearColor];
+	_formTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_formTableView.delegate = self;
+	_formTableView.dataSource = self;
+	[self.view addSubview:_formTableView];
 	
     [super viewDidLoad];
 }
@@ -64,8 +110,65 @@
 
 
 - (void)dealloc {
+	self.sections = nil;
+	self.items = nil;
     [super dealloc];
 }
+
+#pragma Mark UITableViewDataSource methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return 2;
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	return [[self.items objectAtIndex:section] count];
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if (![[self.sections objectAtIndex:section] isEqualToString:@""]) {
+		return NSLocalizedString([self.sections objectAtIndex:section], @"");
+	}
+	
+	return nil;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell;
+	NSString *item = [[self.items objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	
+	if ([item isEqualToString:@"LOCATION"]) {
+		cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"] autorelease];
+			UILabel *textLabel = [[[UILabel alloc] initWithFrame:CGRectMake(0,
+																			0,
+																			cell.contentView.frame.size.width,
+																			cell.contentView.frame.size.height)] autorelease];
+			textLabel.tag = 1;
+			textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+			textLabel.backgroundColor = [UIColor clearColor];
+			textLabel.textAlignment = UITextAlignmentCenter;
+			textLabel.adjustsFontSizeToFitWidth = YES;
+			[cell.contentView addSubview:textLabel];
+		}
+		UILabel *textLabel = (UILabel *)[cell.contentView viewWithTag:1];
+		textLabel.text = self.filter.locationName; //otestovat veeelkou delku
+		
+	} else if ([item isEqualToString:@"YES"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+	} else if ([item isEqualToString:@"MAYBE"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+	} else if ([item isEqualToString:@"COFFEE AND DRINK"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+	} else if ([item isEqualToString:@"TRAVELING"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+	}
+	
+	return cell;
+}
+
+#pragma Mark Action methods
 
 - (void)cancelForm {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
@@ -74,6 +177,18 @@
 - (void)searchAction {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 	[self.searchResultController performSearch];
+}
+
+#pragma Mark Private methods
+
+- (CSCheckboxCell *)createCheckboxCell:(NSString *)title{
+	CSCheckboxCell * cell = (CSCheckboxCell *)[_formTableView dequeueReusableCellWithIdentifier:@"checkboxCell"];
+	if (cell == nil) {
+		cell = [[CSCheckboxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"checkboxCell"];
+	}
+	cell.keyLabel.text = title;
+	[cell makeLayout];
+	return cell;
 }
 
 @end

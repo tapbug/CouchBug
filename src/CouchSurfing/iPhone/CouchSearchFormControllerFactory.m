@@ -8,13 +8,16 @@
 
 #import "CouchSearchFormControllerFactory.h"
 #import "CouchSearchFormController.h"
+#import "CouchSearchFilter.h"
 
 @implementation CouchSearchFormControllerFactory
 
 @synthesize requestFactory = injRequestFactory;
+@synthesize filter = injFilter;
 
 - (id)createController {
     CouchSearchFormController *controller = [[[CouchSearchFormController alloc] init] autorelease];
+	controller.filter = self.filter;
     return controller;
 }
 

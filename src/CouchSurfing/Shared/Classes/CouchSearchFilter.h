@@ -35,7 +35,10 @@
 
 }
 
-@property (nonatomic, retain) NSString *location;
+@property (nonatomic , retain) NSDictionary *locationJSON;
+@property (nonatomic, readonly) NSString *location;
+@property (nonatomic, readonly) NSString *locationName;
+
 @property (nonatomic, retain) NSArray *couchStatuses;
 @property (nonatomic, retain) NSString *ageLow;
 @property (nonatomic, retain) NSString *ageHigh;

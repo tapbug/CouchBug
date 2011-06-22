@@ -9,10 +9,11 @@
 #import "CouchSearchFilter.h"
 
 #import "CouchSearchRequest.h"
+#import "JSONKit.h"
 
 @implementation CouchSearchFilter
 
-@synthesize location;
+@synthesize locationJSON;
 @synthesize couchStatuses;
 @synthesize ageLow;
 @synthesize ageHigh;
@@ -33,8 +34,7 @@
 - (id)init {
     self = [super init];
     if (self) {
-        //self.location = @"{state_id\":\"4441\",\"state\":\"Usti nad Labem\",\"latitude\":\"50.661034\",\"longitude\":\"14.032994\",\"type\":\"state\",\"country_id\":\"75\",\"country\":\"Czech Republic\",\"region_id\":\"6\",\"region\":\"Europe\"}";
-        self.location = @"{\"state_id\":\"4384\",\"state\":\"Praha\",\"latitude\":\"50.087814\",\"longitude\":\"14.420453\",\"type\":\"state\",\"country_id\":\"75\",\"country\":\"Czech Republic\",\"region_id\":\"6\",\"region\":\"Europe\"}";
+        self.locationJSON = [@"{\"state_id\":\"4384\",\"state\":\"Praha\",\"latitude\":\"50.087814\",\"longitude\":\"14.420453\",\"type\":\"state\",\"country_id\":\"75\",\"country\":\"Czech Republic\",\"region_id\":\"6\",\"region\":\"Europe\"}" objectFromJSONString];
         self.couchStatuses = [NSArray array];
         self.ageLow = @"";
         self.ageHigh = @"";
@@ -56,7 +56,7 @@
 }
 
 - (void)dealloc {
-    self.location = nil;
+    self.locationJSON = nil;
     self.couchStatuses = nil;
     self.ageLow = nil;
     self.ageHigh = nil;
@@ -97,6 +97,32 @@
     request.keyword = self.keyword;
     
     return request;
+}
+
+#pragma Public methods
+
+- (NSString *)location {
+	return [self.locationJSON JSONString];
+}
+
+- (NSString *)locationName {
+	if ([self.locationJSON objectForKey:@"city"]) {
+		return [NSString stringWithFormat:@"%@, %@, %@", 
+				[self.locationJSON objectForKey:@"city"],
+				[self.locationJSON objectForKey:@"state"],
+				[self.locationJSON objectForKey:@"country"]];
+	} else if ([self.locationJSON objectForKey:@"state"]) {
+		return [NSString stringWithFormat:@"%@, %@",
+				[self.locationJSON objectForKey:@"state"],
+				[self.locationJSON objectForKey:@"country"]];
+	} else if ([self.locationJSON objectForKey:@"country"]) {
+		return [NSString stringWithFormat:@"%@",
+				[self.locationJSON objectForKey:@"country"]];
+	} else if ([self.locationJSON objectForKey:@"region"]) {
+		return [NSString stringWithFormat:@"%@",
+				[self.locationJSON objectForKey:@"region"]];
+	}
+	return nil;
 }
 
 @end
