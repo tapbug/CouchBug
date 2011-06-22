@@ -14,7 +14,7 @@
 @protocol LoginAnnouncer;
 @protocol LoginInformation;
 
-@class ProfileController;
+@class HomeController;
 @class ProfileRequestFactory;
 
 @interface AuthControllersFactory : NSObject {
@@ -30,6 +30,6 @@
 @property (nonatomic, retain) ProfileRequestFactory *profileRequestFactory;
 
 - (LoginController *)createLoginController;
-- (ProfileController *)createProfileController;
+- (HomeController *)createProfileController;
 
 @end

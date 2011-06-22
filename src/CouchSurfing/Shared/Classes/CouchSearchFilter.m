@@ -43,11 +43,11 @@
         self.lastLoginDays = @"";
         self.male = @"1";
         self.female = @"1";
-        self.severalPeople = @"";
+        self.severalPeople = @"1";
         self.hasPhoto = @"";
         self.verified = @"";
         self.vouched = @"";
-        self.ambassador = @"1";
+        self.ambassador = @"";
         self.wheelchairAccessible = @"";
         self.username = @"";
         self.keyword = @"";

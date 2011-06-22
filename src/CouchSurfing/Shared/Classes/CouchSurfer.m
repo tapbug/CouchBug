@@ -8,6 +8,10 @@
 
 #import "CouchSurfer.h"
 
+@interface CouchSurfer ()
+
+@end
+
 @implementation CouchSurfer
 
 @synthesize name;

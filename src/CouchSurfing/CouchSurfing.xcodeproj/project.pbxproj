@@ -28,6 +28,8 @@
 		6C4D8ABD13B09D69008FD263 /* iconAmbassador@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AAF13B09D69008FD263 /* iconAmbassador@2x.png */; };
 		6C4D8ABE13B09D69008FD263 /* iconVouched.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AB013B09D69008FD263 /* iconVouched.png */; };
 		6C4D8ABF13B09D69008FD263 /* iconVouched@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AB113B09D69008FD263 /* iconVouched@2x.png */; };
+		6C4D8AC613B1D6C6008FD263 /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D8AC513B1D6C6008FD263 /* ProfileController.m */; };
+		6C59C0A113B1E6F200D68F3E /* CSImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */; };
 		6C71C70713A91A06005FE511 /* CouchSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */; };
 		6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */; };
 		6C87AEF2130BB8420015B471 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87AEF1130BB8420015B471 /* LoginController.m */; };
@@ -55,7 +57,7 @@
 		6C9EACDE13A09ECA00C1B19D /* profileCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */; };
 		6C9EACDF13A09ECA00C1B19D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDB13A09ECA00C1B19D /* search.png */; };
 		6C9EACE013A09ECA00C1B19D /* search@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDC13A09ECA00C1B19D /* search@2x.png */; };
-		6C9EACE413A0CD7700C1B19D /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EACE313A0CD7700C1B19D /* ProfileController.m */; };
+		6C9EACE413A0CD7700C1B19D /* HomeController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EACE313A0CD7700C1B19D /* HomeController.m */; };
 		6C9EACE813A0D1AC00C1B19D /* MoreController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EACE713A0D1AC00C1B19D /* MoreController.m */; };
 		6C9EACF413A0FC4200C1B19D /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACEE13A0FC4200C1B19D /* Icon-72.png */; };
 		6C9EACF513A0FC4200C1B19D /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACEF13A0FC4200C1B19D /* Icon-Small-50.png */; };
@@ -140,6 +142,10 @@
 		6C4D8AAF13B09D69008FD263 /* iconAmbassador@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconAmbassador@2x.png"; sourceTree = "<group>"; };
 		6C4D8AB013B09D69008FD263 /* iconVouched.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = iconVouched.png; sourceTree = "<group>"; };
 		6C4D8AB113B09D69008FD263 /* iconVouched@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconVouched@2x.png"; sourceTree = "<group>"; };
+		6C4D8AC413B1D6C6008FD263 /* ProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileController.h; sourceTree = "<group>"; };
+		6C4D8AC513B1D6C6008FD263 /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileController.m; sourceTree = "<group>"; };
+		6C59C09F13B1E6F200D68F3E /* CSImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSImageCropper.h; path = Shared/Classes/CSImageCropper.h; sourceTree = "<group>"; };
+		6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSImageCropper.m; path = Shared/Classes/CSImageCropper.m; sourceTree = "<group>"; };
 		6C71C70513A91A06005FE511 /* CouchSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchResultCell.h; sourceTree = "<group>"; };
 		6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CouchSearchResultCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6C71C70913A93FD8005FE511 /* CSTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSTools.h; path = Shared/Classes/CSTools.h; sourceTree = "<group>"; };
@@ -184,8 +190,8 @@
 		6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCard@2x.png"; sourceTree = "<group>"; };
 		6C9EACDB13A09ECA00C1B19D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
 		6C9EACDC13A09ECA00C1B19D /* search@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "search@2x.png"; sourceTree = "<group>"; };
-		6C9EACE213A0CD7700C1B19D /* ProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileController.h; sourceTree = "<group>"; };
-		6C9EACE313A0CD7700C1B19D /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = ProfileController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6C9EACE213A0CD7700C1B19D /* HomeController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = HomeController.h; sourceTree = "<group>"; };
+		6C9EACE313A0CD7700C1B19D /* HomeController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = HomeController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6C9EACE613A0D1AB00C1B19D /* MoreController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MoreController.h; sourceTree = "<group>"; };
 		6C9EACE713A0D1AC00C1B19D /* MoreController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MoreController.m; sourceTree = "<group>"; };
 		6C9EACEE13A0FC4200C1B19D /* Icon-72.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Icon-72.png"; sourceTree = "<group>"; };
@@ -333,6 +339,8 @@
 				6C9EAD0113A0FCF900C1B19D /* CSImageDownloader.h */,
 				6C71C70913A93FD8005FE511 /* CSTools.h */,
 				6C9EAD0213A0FCF900C1B19D /* CSImageDownloader.m */,
+				6C59C09F13B1E6F200D68F3E /* CSImageCropper.h */,
+				6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */,
 				6C9EAD1113A1009700C1B19D /* MVUrlConnection.h */,
 				6C9EAD1213A1009700C1B19D /* MVUrlConnection.m */,
 				32CA4F630368D1EE00C91783 /* CouchSurfing_Prefix.pch */,
@@ -365,13 +373,22 @@
 			path = ../../libs/RegexKitLite;
 			sourceTree = "<group>";
 		};
+		6C4D8AC013B1D5AE008FD263 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				6C4D8AC413B1D6C6008FD263 /* ProfileController.h */,
+				6C4D8AC513B1D6C6008FD263 /* ProfileController.m */,
+			);
+			name = Profile;
+			sourceTree = "<group>";
+		};
 		6C87AEE1130BB61D0015B471 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
 				6CDE85C813A51AE70065A991 /* AuthControllersFactory.h */,
 				6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */,
-				6C9EACE213A0CD7700C1B19D /* ProfileController.h */,
-				6C9EACE313A0CD7700C1B19D /* ProfileController.m */,
+				6C9EACE213A0CD7700C1B19D /* HomeController.h */,
+				6C9EACE313A0CD7700C1B19D /* HomeController.m */,
 				6C87AEF0130BB8420015B471 /* LoginController.h */,
 				6C87AEF1130BB8420015B471 /* LoginController.m */,
 			);
@@ -545,6 +562,7 @@
 		6CAA9303128546B900CB1737 /* CouchSearch */ = {
 			isa = PBXGroup;
 			children = (
+				6C4D8AC013B1D5AE008FD263 /* Profile */,
 				6CAA94D51285A06200CB1737 /* Form */,
 				6CAA94051285914E00CB1737 /* CouchSearchResultController.h */,
 				6CAA94061285914E00CB1737 /* CouchSearchResultController.m */,
@@ -712,7 +730,7 @@
 				6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */,
 				6C87AEF2130BB8420015B471 /* LoginController.m in Sources */,
 				6CC1DA1313A09276008F659F /* JSONKit.m in Sources */,
-				6C9EACE413A0CD7700C1B19D /* ProfileController.m in Sources */,
+				6C9EACE413A0CD7700C1B19D /* HomeController.m in Sources */,
 				6C9EACE813A0D1AC00C1B19D /* MoreController.m in Sources */,
 				6C9EAD0913A0FCF900C1B19D /* CouchSearchRequest.m in Sources */,
 				6C9EAD0B13A0FCF900C1B19D /* CouchSurfer.m in Sources */,
@@ -740,6 +758,8 @@
 				6CDE85DB13A547610065A991 /* ProfileRequest.m in Sources */,
 				6CDE85DC13A547610065A991 /* ProfileRequestFactory.m in Sources */,
 				6C71C70713A91A06005FE511 /* CouchSearchResultCell.m in Sources */,
+				6C4D8AC613B1D6C6008FD263 /* ProfileController.m in Sources */,
+				6C59C0A113B1E6F200D68F3E /* CSImageCropper.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

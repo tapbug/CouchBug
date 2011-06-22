@@ -8,6 +8,8 @@
 
 #import "CouchSearchResultController.h"
 
+#import "CSImageCropper.h"
+
 #import "ActivityOverlap.h"
 #import "CouchSearchResultCell.h"
 
@@ -15,6 +17,8 @@
 #import "CouchSearchRequest.h"
 #import "CouchSurfer.h"
 #import "CSTools.h"
+
+#import "ProfileController.h"
 
 static NSDictionary *hasCouchIcons;
 
@@ -84,9 +88,6 @@ static NSDictionary *hasCouchIcons;
 	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
     if (!_initialLoadDone) {
         [self performSearch];        
-    }
-    if ([self.sourfers count] > 0) {
-        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];        
     }
     _initialLoadDone = YES;
 }
@@ -204,7 +205,7 @@ static NSDictionary *hasCouchIcons;
                 [imageDownloader release];
             }
         } else {
-            surferCell.photoView.image = surfer.image;
+            surferCell.photoView.image = [CSImageCropper scaleToSize:CGSizeMake(61, 61) image:surfer.image];
         }
         cell = surferCell;
     }
@@ -226,9 +227,20 @@ static NSDictionary *hasCouchIcons;
     }
 }
 
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if ([self.sourfers count] > indexPath.row) {
+		CouchSurfer *surfer = [self.sourfers objectAtIndex:indexPath.row];
+		ProfileController *profileController = [[ProfileController alloc] initWithSurfer:surfer];
+		[self.navigationController pushViewController:profileController animated:YES];
+	}
+}
+
 #pragma mark CSImageDownloaderDelegate methods
 
-- (void)imageDownloader:(CSImageDownloader *)imageDownloader didDownloadImage :(UIImage *)image forPosition:(NSInteger)position {
+- (void)imageDownloader:(CSImageDownloader *)imageDownloader
+	  didDownloadImage :(UIImage *)image 
+			forPosition:(NSInteger)position {
+	
     CouchSurfer *sourfer = [self.sourfers objectAtIndex:position];
     sourfer.image = image;
     NSIndexPath *indexPath = [NSIndexPath indexPathForRow:position inSection:0];
@@ -331,6 +343,14 @@ static NSDictionary *hasCouchIcons;
         }
     } 
     
+}
+
+#pragma Public methods
+
+- (void)scrollToTop {
+    if ([self.sourfers count] > 0) {
+        [_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0] atScrollPosition:UITableViewScrollPositionTop animated:NO];        
+    }	
 }
 
 @end

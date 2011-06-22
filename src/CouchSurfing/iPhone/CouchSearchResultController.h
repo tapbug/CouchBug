@@ -45,4 +45,6 @@ typedef enum {
 
 @property (nonatomic, retain) CouchSearchFilter *filter;
 
+- (void)scrollToTop;
+
 @end

@@ -68,14 +68,15 @@
     //Tvorba CouchSearchTabu
     CouchSearchResultControllerFactory *resultControllerFactory =
         [self.container getComponent:[CouchSearchResultControllerFactory class]];
-    CouchSearchResultController *searchResultController = [resultControllerFactory createController];
-    UINavigationController *searchNavigationController = 
-    [[[UINavigationController alloc] initWithRootViewController:searchResultController] autorelease];
+    
+	_searchResultController = [resultControllerFactory createController];
+    _searchNavigationController = 
+    [[[UINavigationController alloc] initWithRootViewController:_searchResultController] autorelease];
     UITabBarItem *searchTabBarItem =
         [[[UITabBarItem alloc] initWithTitle:NSLocalizedString(@"SEARCH", nil)
                                        image:[UIImage imageNamed:@"search.png"]
                                          tag:1] autorelease];
-    [searchNavigationController setTabBarItem:searchTabBarItem];
+    [_searchNavigationController setTabBarItem:searchTabBarItem];
     
     //Tvorba MoreTabu
     UIViewController *moreController = [[[MoreController alloc] init] autorelease];
@@ -87,9 +88,10 @@
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
                                              loginNavigationController,
-                                             searchNavigationController,//s navigationem prejmenovat promenou na nazev tabu na profile
+                                             _searchNavigationController,
                                              moreController,
                                              nil];
+	self.tabBarController.delegate = self;
         
     // zmena vzhledu TabBaru
     /*
@@ -183,5 +185,16 @@
     [super dealloc];
 }
 
+#pragma Mark UITabBarDelegate methods
+
+- (void)tabBarController:(UITabBarController *)tabBarController
+ didSelectViewController:(UIViewController *)viewController {
+	
+	if (_searchNavigationController	== viewController) {
+		if (_searchResultController == _searchNavigationController.topViewController) {
+			[_searchResultController scrollToTop];
+		}
+	}
+}
 
 @end

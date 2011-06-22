@@ -9,10 +9,15 @@
 #import <UIKit/UIKit.h>
 #import "MVIOC/MVIOC.h"
 
-@interface AppDelegate_iPhone : NSObject <UIApplicationDelegate> {
+@class CouchSearchResultController;
+
+@interface AppDelegate_iPhone : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
     UIWindow *_window;
     MVIOCContainer *_container;
     UITabBarController *_tabBarController;
+	
+	UINavigationController *_searchNavigationController;
+	CouchSearchResultController *_searchResultController;
 }
 
 @property (nonatomic, retain) UIWindow *window;

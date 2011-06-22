@@ -11,7 +11,7 @@
 #import "LoginController.h"
 #import "LoginAnnouncer.h"
 
-#import "ProfileController.h"
+#import "HomeController.h"
 #import "ProfileRequestFactory.h"
 
 @implementation AuthControllersFactory
@@ -31,8 +31,8 @@
                                   authControllerFactory:self] autorelease];
 }
 
-- (ProfileController *)createProfileController {
-    return [[[ProfileController alloc] initWithAuthControllersFactory:self
+- (HomeController *)createProfileController {
+    return [[[HomeController alloc] initWithAuthControllersFactory:self
                                                 profileRequestFactory:self.profileRequestFactory
                                                        loginAnnouncer:self.loginAnnouncer] autorelease];
 }

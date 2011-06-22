@@ -21,13 +21,14 @@
 
 @property (nonatomic, assign) id<CSImageDownloaderDelegate> delegate;
 
-- (id)initWithSize:(CGSize)size;
 - (void)downloadWithSrc:(NSString *)src position:(NSInteger)position;
 
 @end
 
 @protocol CSImageDownloaderDelegate <NSObject>
 
-- (void)imageDownloader:(CSImageDownloader *)imageDownloader didDownloadImage:(UIImage *)image forPosition:(NSInteger)position;
+- (void)imageDownloader:(CSImageDownloader *)imageDownloader
+	   didDownloadImage:(UIImage *)image
+			forPosition:(NSInteger)position;
 
 @end

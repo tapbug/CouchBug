@@ -39,6 +39,7 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *imageSrc;
 @property (nonatomic, retain) UIImage *image;
+
 @property (nonatomic, retain) NSString *gender;
 @property (nonatomic, retain) NSString *age;
 @property (nonatomic, retain) NSString *job;
