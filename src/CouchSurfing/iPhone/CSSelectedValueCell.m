@@ -1,18 +1,18 @@
 //
-//  CSCheckboxCell.m
+//  CSSelectedValueCell.m
 //  CouchSurfing
 //
 //  Created by Michal Vašíček on 6/22/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CSCheckboxCell.h"
+#import "CSSelectedValueCell.h"
+#import "CSTools.h"
 
-
-@implementation CSCheckboxCell
+@implementation CSSelectedValueCell
 
 @synthesize keyLabel = _keyLabel;
-@synthesize checkbox = _checkbox;
+@synthesize selectedValueLabel = _selectedValueLabel;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -21,11 +21,14 @@
 		_keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		[self.contentView addSubview:_keyLabel];
-		_checkbox = [[[UISwitch alloc] init] autorelease];
-		_checkbox.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-		[self.contentView addSubview:_checkbox];
+		
+		_selectedValueLabel = [[[UILabel alloc] init] autorelease];
+		_selectedValueLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+		_selectedValueLabel.textColor = UIColorFromRGB(0x385487);
+		[self.contentView addSubview:_selectedValueLabel];
     }
     return self;
+
 }
 
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
@@ -49,10 +52,11 @@
 	keyLabelFrame.origin.y = (int)((self.contentView.frame.size.height - keyLabelFrame.size.height) / 2);
 	_keyLabel.frame = keyLabelFrame;
 	
-	CGRect checkboxFrame = _checkbox.frame;
-	checkboxFrame.origin.x = self.contentView.frame.size.width - checkboxFrame.size.width - 5;
-	checkboxFrame.origin.y = (int)((self.contentView.frame.size.height - checkboxFrame.size.height) / 2);
-	_checkbox.frame = checkboxFrame;
+	[_selectedValueLabel sizeToFit];
+	CGRect selectedValueFrame = _selectedValueLabel.frame;
+	selectedValueFrame.origin.x = self.contentView.frame.size.width - selectedValueFrame.size.width - 15;
+	selectedValueFrame.origin.y = (int)((self.contentView.frame.size.height - selectedValueFrame.size.height) / 2);
+	_selectedValueLabel.frame = selectedValueFrame;
 }
 
 @end

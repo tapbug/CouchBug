@@ -15,44 +15,51 @@
 
 @interface CouchSearchFilter : NSObject {
     NSString *location;
-    NSArray *couchStatuses;
+	
+	BOOL hasCouchYes;
+	BOOL hasCouchMaybe;
+	BOOL hasCouchCoffeeOrDrink;
+	BOOL hasCouchTraveling;
+	
     NSString *ageLow;
-    NSString *ageHigh;    
+    NSString *ageHigh;
     NSString *maxSurfers;
     NSString *laguageId;
     NSString *lastLoginDays;
-    NSString *male;
-    NSString *female;
-    NSString *severalPeople;
-    NSString *hasPhoto;
-    NSString *verified;
-    NSString *vouched;
-    NSString *ambassador;
-
-    NSString *wheelchairAccessible;
+    BOOL male;
+    BOOL female;
+    BOOL severalPeople;
+    BOOL hasPhoto;
+    BOOL verified;
+    BOOL vouched;
+    BOOL ambassador;
+	BOOL wheelchairAccessible;
     NSString *username;
     NSString *keyword;
 
 }
 
 @property (nonatomic , retain) NSDictionary *locationJSON;
-@property (nonatomic, readonly) NSString *location;
 @property (nonatomic, readonly) NSString *locationName;
 
-@property (nonatomic, retain) NSArray *couchStatuses;
+@property (nonatomic, assign) BOOL hasCouchYes;
+@property (nonatomic, assign) BOOL hasCouchMaybe;
+@property (nonatomic, assign) BOOL hasCouchCoffeeOrDrink;
+@property (nonatomic, assign) BOOL hasCouchTraveling;
+
 @property (nonatomic, retain) NSString *ageLow;
 @property (nonatomic, retain) NSString *ageHigh;
 @property (nonatomic, retain) NSString *maxSurfers;
 @property (nonatomic, retain) NSString *languageId;
 @property (nonatomic, retain) NSString *lastLoginDays;
-@property (nonatomic, retain) NSString *male;
-@property (nonatomic, retain) NSString *female;
-@property (nonatomic, retain) NSString *severalPeople;
-@property (nonatomic, retain) NSString *hasPhoto;
-@property (nonatomic, retain) NSString *verified;
-@property (nonatomic, retain) NSString *vouched;
-@property (nonatomic, retain) NSString *ambassador;
-@property (nonatomic, retain) NSString *wheelchairAccessible;
+@property (nonatomic, assign) BOOL male;
+@property (nonatomic, assign) BOOL female;
+@property (nonatomic, assign) BOOL severalPeople;
+@property (nonatomic, assign) BOOL hasPhoto;
+@property (nonatomic, assign) BOOL verified;
+@property (nonatomic, assign) BOOL vouched;
+@property (nonatomic, assign) BOOL ambassador;
+@property (nonatomic, assign) BOOL wheelchairAccessible;
 @property (nonatomic, retain) NSString *username;
 @property (nonatomic, retain) NSString *keyword;
 

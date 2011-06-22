@@ -12,7 +12,6 @@
 
 @implementation CouchSearchFormControllerFactory
 
-@synthesize requestFactory = injRequestFactory;
 @synthesize filter = injFilter;
 
 - (id)createController {
@@ -22,7 +21,6 @@
 }
 
 - (void)dealloc {
-    self.requestFactory = nil;
     [super dealloc];
 }
 

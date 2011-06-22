@@ -12,6 +12,7 @@
 #import "CouchSearchFilter.h"
 
 #import "CSCheckboxCell.h"
+#import "CSSelectedValueCell.h"
 
 #import "CSTools.h"
 
@@ -24,7 +25,8 @@
 - (void)cancelForm;
 - (void)searchAction;
 
-- (CSCheckboxCell *)createCheckboxCell:(NSString *)title;
+- (CSCheckboxCell *)createCheckboxCell:(NSString *)title checked:(BOOL)checked;
+- (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected;
 
 @end
 
@@ -84,7 +86,7 @@
 	_formTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 
 																   toolBar.frame.size.height,
 																   self.view.frame.size.width,
-																   self.view.frame.size.height) 
+																   self.view.frame.size.height - toolBar.frame.size.height) 
 												   style:UITableViewStyleGrouped] autorelease];
 	_formTableView.backgroundColor = [UIColor clearColor];
 	_formTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -108,6 +110,9 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
+	return YES;
+}
 
 - (void)dealloc {
 	self.sections = nil;
@@ -118,7 +123,7 @@
 #pragma Mark UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 2;
+	return 4;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -156,15 +161,38 @@
 		textLabel.text = self.filter.locationName; //otestovat veeelkou delku
 		
 	} else if ([item isEqualToString:@"YES"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchYes];
 	} else if ([item isEqualToString:@"MAYBE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchMaybe];
 	} else if ([item isEqualToString:@"COFFEE AND DRINK"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchCoffeeOrDrink];
 	} else if ([item isEqualToString:@"TRAVELING"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil)];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchTraveling];
+	} else if ([item isEqualToString:@"AGE"]) {
+		NSString *value = nil;
+		if (self.filter.ageLow || self.filter.ageHigh) {
+			value = [NSString stringWithFormat:@"%@ to %@",
+					 self.filter.ageLow == nil ? NSLocalizedString(@"ANY", nil) : self.filter.ageLow,
+					 self.filter.ageHigh == nil ? NSLocalizedString(@"ANY", nil) : self.filter.ageHigh];
+		}
+		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:value];
+	} else if ([item isEqualToString:@"HAS SPACE FOR"]) {
+		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:self.filter.maxSurfers];
+	} else if ([item isEqualToString:@"LANGUAGE"]) {
+		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:@"English"];
+	} else if ([item isEqualToString:@"LAST LOGIN"]) {
+		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:self.filter.lastLoginDays];
+	} else if ([item isEqualToString:@"MALE"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.male];
+	} else if ([item isEqualToString:@"FEMALE"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.female];
+	} else if ([item isEqualToString:@"SEVERAL PEOPLE"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.severalPeople];
+	} else if ([item isEqualToString:@"HAS PHOTO"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasPhoto];
+	} else if ([item isEqualToString:@"WHEELCHAIR ACCESSIBLE"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.wheelchairAccessible];
 	}
-	
 	return cell;
 }
 
@@ -181,12 +209,25 @@
 
 #pragma Mark Private methods
 
-- (CSCheckboxCell *)createCheckboxCell:(NSString *)title{
+- (CSCheckboxCell *)createCheckboxCell:(NSString *)title checked:(BOOL)checked {
 	CSCheckboxCell * cell = (CSCheckboxCell *)[_formTableView dequeueReusableCellWithIdentifier:@"checkboxCell"];
 	if (cell == nil) {
 		cell = [[CSCheckboxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"checkboxCell"];
 	}
 	cell.keyLabel.text = title;
+	[cell.checkbox setOn:checked];
+	[cell makeLayout];
+	return cell;
+}
+
+- (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected {
+	CSSelectedValueCell * cell = (CSSelectedValueCell *)[_formTableView dequeueReusableCellWithIdentifier:@"selectedValueCell"];
+	if (cell == nil) {
+		cell = [[CSSelectedValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"selectedValueCell"];
+	}
+	cell.keyLabel.text = title;
+	cell.selectedValueLabel.text = (selected == nil || [selected isEqualToString:@""]) ? NSLocalizedString(@"ANY", nil) : selected;
+	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 	[cell makeLayout];
 	return cell;
 }
