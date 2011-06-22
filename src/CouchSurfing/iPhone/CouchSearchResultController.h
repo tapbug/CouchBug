@@ -19,12 +19,13 @@ typedef enum {
 
 @class CouchSearchRequest;
 @class CouchSearchFilter;
-
+@class CouchSearchFormControllerFactory;
 @class ActivityOverlap;
 
 @interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
     CouchSearchFilter *_filter;
-    
+    CouchSearchFormControllerFactory *_formControllerFactory;
+	
     UITableView *_tableView;
     ActivityOverlap *_loadingActivity;
 
@@ -43,8 +44,12 @@ typedef enum {
     BOOL _initialLoadDone;
 }
 
-@property (nonatomic, retain) CouchSearchFilter *filter;
+@property (nonatomic, assign) CouchSearchFilter *filter;
+@property (nonatomic, retain) CouchSearchFormControllerFactory *formControllerFactory;
 
+//  Spusti hledani podle filteru
+- (void)performSearch;
+//	Zaskroluje nalezeny vysledek nahoru
 - (void)scrollToTop;
 
 @end

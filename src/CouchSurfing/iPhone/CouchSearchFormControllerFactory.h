@@ -15,11 +15,9 @@
 
 @interface CouchSearchFormControllerFactory : NSObject {
     CouchSearchRequestFactory *injRequestFactory;
-    CouchSearchResultControllerFactory *injResultControllerFactory;
 }
 
 @property (nonatomic, retain) CouchSearchRequestFactory *requestFactory;
-@property (nonatomic, retain) CouchSearchResultControllerFactory *resultControllerFactory;
 
 - (id)createController;
 

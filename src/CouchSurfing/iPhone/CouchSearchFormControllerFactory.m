@@ -12,17 +12,14 @@
 @implementation CouchSearchFormControllerFactory
 
 @synthesize requestFactory = injRequestFactory;
-@synthesize resultControllerFactory = injResultControllerFactory;
 
 - (id)createController {
     CouchSearchFormController *controller = [[[CouchSearchFormController alloc] init] autorelease];
-    controller.resultControllerFactory = self.resultControllerFactory;
     return controller;
 }
 
 - (void)dealloc {
     self.requestFactory = nil;
-    self.resultControllerFactory = nil;
     [super dealloc];
 }
 

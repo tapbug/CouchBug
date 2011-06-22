@@ -10,12 +10,15 @@
 
 @class CouchSearchRequest;
 @class CouchSearchFilter;
+@class CouchSearchFormControllerFactory;
 
 @interface CouchSearchResultControllerFactory : NSObject {
     CouchSearchFilter *injFilter;
+	CouchSearchFormControllerFactory *injFormControllerFactory;
 }
 
 @property (nonatomic, assign) CouchSearchFilter *filter;
+@property (nonatomic, retain) CouchSearchFormControllerFactory *formControllerFactory;
 
 - (id)createController;
 

@@ -13,10 +13,12 @@
 @implementation CouchSearchResultControllerFactory
 
 @synthesize filter = injFilter;
+@synthesize formControllerFactory = injFormControllerFactory;
 
 - (id)createController {
     CouchSearchResultController *controller = [[[CouchSearchResultController alloc] init] autorelease];
     controller.filter = self.filter;
+	controller.formControllerFactory = self.formControllerFactory;
     return controller;
 }
 

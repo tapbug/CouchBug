@@ -14,6 +14,8 @@
 #import "CouchSearchResultCell.h"
 
 #import "CouchSearchFilter.h"
+#import "CouchSearchFormControllerFactory.h"
+#import "CouchSearchFormController.h"
 #import "CouchSearchRequest.h"
 #import "CouchSurfer.h"
 #import "CSTools.h"
@@ -30,8 +32,8 @@ static NSDictionary *hasCouchIcons;
 @property (nonatomic, retain) NSMutableArray *imageDownloaders;
 @property (nonatomic, retain) CouchSearchRequest *request;
 
-//  Spusti hledani podle filteru
-- (void)performSearch;
+- (void)showSearchForm;
+
 //  Spusti vyhledavani dalsich vysledku (strankovani)
 - (void)performSearchMore;
 - (void)loadImages;
@@ -42,7 +44,7 @@ static NSDictionary *hasCouchIcons;
 @implementation CouchSearchResultController
 
 @synthesize filter = _filter;
-
+@synthesize formControllerFactory = _formControllerFactory;
 @synthesize loadingActivity = _loadingActivity;
 
 @synthesize sourfers = _sourfers;
@@ -87,7 +89,7 @@ static NSDictionary *hasCouchIcons;
 - (void)viewDidAppear:(BOOL)animated {
 	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
     if (!_initialLoadDone) {
-        [self performSearch];        
+        //[self performSearch];        
     }
     _initialLoadDone = YES;
 }
@@ -283,12 +285,22 @@ static NSDictionary *hasCouchIcons;
     }
     self.imageDownloaders = nil;
     self.sourfers = nil;
+	self.formControllerFactory = nil;
     [super dealloc];
+}
+
+#pragma Mark Action methods
+
+- (void)showSearchForm {
+	CouchSearchFormController *formController = [self.formControllerFactory createController];
+	formController.searchResultController = self;
+	[self presentModalViewController:formController animated:YES];
 }
 
 #pragma mark Private methods
 
 - (void)performSearch {
+	[self scrollToTop];
     _loadingAction = CouchSearchResultControllerFirst;
     [self.loadingActivity overlapView];
     CouchSearchRequest *request = [self.filter createRequest];

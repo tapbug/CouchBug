@@ -8,14 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@class CouchSearchResultControllerFactory;
+@class CouchSearchResultController;
 
 @interface CouchSearchFormController : UIViewController {
-    CouchSearchResultControllerFactory *_resultControllerFactory;
-        
+	CouchSearchResultController *_searchResultController;
     UITableView *_formTableView;
 }
 
-@property (nonatomic, retain) CouchSearchResultControllerFactory *resultControllerFactory;
+@property (nonatomic, assign) CouchSearchResultController *searchResultController;
 
 @end
