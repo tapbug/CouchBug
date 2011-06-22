@@ -81,7 +81,7 @@
                                         target:self
                                         action:@selector(loginAction)];
     
-    self.view.backgroundColor = [UIColor whiteColor];
+    self.view.backgroundColor = [UIColor clearColor];
         
     self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view
                                                            title:NSLocalizedString(@"SIGNING IN", nil)];
@@ -117,6 +117,10 @@
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
     [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];    
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
