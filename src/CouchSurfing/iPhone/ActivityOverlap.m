@@ -35,15 +35,16 @@
 - (void)overlapView {
     _activityView = [[[UIView alloc] init] autorelease];
     _activityView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    _activityView.backgroundColor = [UIColor whiteColor];
-    
+    //_activityView.backgroundColor = [UIColor whiteColor];
+    _activityView.backgroundColor = [UIColor clearColor];
+	
     _activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
     _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [_activityView addSubview:_activityIndicator];
     
     _activityLabel = [[[UILabel alloc] init] autorelease];
     _activityLabel.text = self.title;
-    _activityLabel.backgroundColor = [UIColor whiteColor];
+    _activityLabel.backgroundColor = [UIColor clearColor];
     _activityLabel.textColor = [UIColor grayColor];
     [_activityLabel sizeToFit];
     _activityLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
