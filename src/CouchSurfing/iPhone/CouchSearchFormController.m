@@ -46,7 +46,7 @@
 	NSArray *locationSection = [NSArray arrayWithObject:@"LOCATION"];
 	NSArray *couchStatusSection = [NSArray arrayWithObjects:@"YES",
 								   @"MAYBE", 
-								   @"COFFEE AND DRINK",
+								   @"COFFEE",
 								   @"TRAVELING",
 								   nil];
 	NSArray *host1Section = [NSArray arrayWithObjects:
@@ -54,7 +54,7 @@
 	NSArray *host2Section = [NSArray arrayWithObjects:
 							 @"MALE", @"FEMALE", @"SEVERAL PEOPLE", @"HAS PHOTO", @"WHEELCHAIR ACCESSIBLE", nil];
 	NSArray *comunitySection = [NSArray arrayWithObjects:@"VERIFIED", @"VOUCHED", @"AMBASSADOR", nil];
-	NSArray *profileSection = [NSArray arrayWithObjects:@"NAME / USERNAME", @"KEYWORD", nil];
+	NSArray *profileSection = [NSArray arrayWithObjects:@"NAME USERNAME", @"KEYWORD", nil];
 	
 	self.items = [NSArray arrayWithObjects:locationSection,
 				  couchStatusSection,
@@ -164,7 +164,7 @@
 		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchYes];
 	} else if ([item isEqualToString:@"MAYBE"]) {
 		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchMaybe];
-	} else if ([item isEqualToString:@"COFFEE AND DRINK"]) {
+	} else if ([item isEqualToString:@"COFFEE"]) {
 		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchCoffeeOrDrink];
 	} else if ([item isEqualToString:@"TRAVELING"]) {
 		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchTraveling];

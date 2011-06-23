@@ -22,6 +22,34 @@
 "PHOTOS" = "photos";
 "REPLY RATE" = "reply rate";
 
+// Search filter
+"LOCATION" = "Location";
+
+"COUCH STATUS" = "Couch status";
+"YES" = "Yes";
+"MAYBE" = "Maybe";
+"COFFEE" = "Coffee or a Drink";
+"TRAVELING" = "Traveling";
+
+"HOST" = "Host";
+"AGE" = "Age";
+"HAS SPACE FOR" = "Has space for";
+"LANGUAGE" = "Language";
+"LAST LOGIN" = "Last login";
+"MALE" = "Male";
+"FEMALE" = "Female";
+"SEVERAL PEOPLE" = "Several people";
+"HAS PHOTO" = "Has photo";
+"WHEELCHAIR ACCESSIBLE" = "Wheelchair accessible";
+
+"VERIFIED" = "Verified";
+"VOUCHED" = "Vouched";
+"AMBASSADOR" = "Ambassador";
+
+"NAME USERNAME" = "Name / Username";
+"KEYWORD" = "Keyword";
+
+
 // Login / logout
 "USERNAME" = "Username";
 "PASSWORD" = "Password";
