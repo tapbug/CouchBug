@@ -114,6 +114,7 @@
     
     [self.view addSubview:_loginTabel];
     
+	// TODO odhlaseni od prijimani udalosti
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
     [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];    
@@ -252,11 +253,15 @@
         keyboardHeigh = addFrame.size.width;
     }
     
+	[UIView beginAnimations:@"hideKeyboard" context:nil];
+    [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
+    [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     
     CGRect viewFrame = self.view.frame;
     viewFrame.size.height += keyboardHeigh - self.tabBarController.tabBar.frame.size.height;
     self.view.frame = viewFrame;
-    
+    [UIView commitAnimations];
+	
     self.navigationItem.leftBarButtonItem = nil;
 }
 

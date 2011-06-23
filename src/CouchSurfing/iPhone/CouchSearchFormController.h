@@ -19,6 +19,8 @@
 	
 	NSArray *_sections;
 	NSArray *_items;
+	
+	NSMutableDictionary *_switches;
 }
 
 @property (nonatomic, assign) CouchSearchResultController *searchResultController;

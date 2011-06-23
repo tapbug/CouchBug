@@ -1,18 +1,18 @@
 //
-//  CSCheckboxCell.m
+//  CSEditableCell.m
 //  CouchSurfing
 //
-//  Created by Michal Vašíček on 6/22/11.
+//  Created by Michal Vašíček on 6/23/11.
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CSCheckboxCell.h"
+#import "CSEditableCell.h"
 
 
-@implementation CSCheckboxCell
+@implementation CSEditableCell
 
 @synthesize keyLabel = _keyLabel;
-@synthesize checkbox = _checkbox;
+@synthesize valueField = _valueField;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -21,6 +21,11 @@
 		_keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		[self.contentView addSubview:_keyLabel];
+		
+		_valueField = [[[UITextField alloc] init] autorelease];
+		_valueField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+		_valueField.textAlignment = UITextAlignmentRight;
+		[self.contentView addSubview:_valueField];
     }
     return self;
 }
@@ -37,8 +42,6 @@
     [super dealloc];
 }
 
-#pragma Mark public methods
-
 - (void)makeLayout {
 	[_keyLabel sizeToFit];
 	CGRect keyLabelFrame = _keyLabel.frame;
@@ -46,13 +49,11 @@
 	keyLabelFrame.origin.y = (int)((self.contentView.frame.size.height - keyLabelFrame.size.height) / 2);
 	_keyLabel.frame = keyLabelFrame;
 	
-	_checkbox.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
-	CGRect checkboxFrame = _checkbox.frame;
-	checkboxFrame.origin.x = self.contentView.frame.size.width - checkboxFrame.size.width - 5;
-	checkboxFrame.origin.y = (int)((self.contentView.frame.size.height - checkboxFrame.size.height) / 2);
-	_checkbox.frame = checkboxFrame;
-	
-	[self.contentView addSubview:_checkbox];
+	CGFloat valueX = keyLabelFrame.origin.x + keyLabelFrame.size.width + 4;
+	_valueField.frame = CGRectMake(valueX,
+								   (int)((self.contentView.frame.size.height - 18) / 2),
+								   self.contentView.frame.size.width - valueX - 4,
+								   18);
 }
 
 @end

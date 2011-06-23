@@ -93,6 +93,7 @@
 		6CF39A4A13A7F01D008148ED /* searchRowBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4413A7F01D008148ED /* searchRowBg@2x.png */; };
 		6CF39A4B13A7F01D008148ED /* verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4513A7F01D008148ED /* verified.png */; };
 		6CF39A4C13A7F01D008148ED /* verified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4613A7F01D008148ED /* verified@2x.png */; };
+		6CF8341713B32D9900C2A446 /* CSEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8341613B32D9900C2A446 /* CSEditableCell.m */; };
 		D073DF3C13AAAC9E002D00F9 /* photoNone.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3813AAAC9E002D00F9 /* photoNone.png */; };
 		D073DF3D13AAAC9E002D00F9 /* photoNone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */; };
 		D073DF3E13AAAC9E002D00F9 /* worldBg.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3A13AAAC9E002D00F9 /* worldBg.png */; };
@@ -251,6 +252,8 @@
 		6CF39A4413A7F01D008148ED /* searchRowBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "searchRowBg@2x.png"; sourceTree = "<group>"; };
 		6CF39A4513A7F01D008148ED /* verified.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = verified.png; sourceTree = "<group>"; };
 		6CF39A4613A7F01D008148ED /* verified@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "verified@2x.png"; sourceTree = "<group>"; };
+		6CF8341513B32D9900C2A446 /* CSEditableCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSEditableCell.h; sourceTree = "<group>"; };
+		6CF8341613B32D9900C2A446 /* CSEditableCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSEditableCell.m; sourceTree = "<group>"; };
 		8D1107310486CEB800E47090 /* CouchSurfing-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "CouchSurfing-Info.plist"; plistStructureDefinitionIdentifier = "com.apple.xcode.plist.structure-definition.iphone.info-plist"; sourceTree = "<group>"; };
 		D073DF3813AAAC9E002D00F9 /* photoNone.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoNone.png; sourceTree = "<group>"; };
 		D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoNone@2x.png"; sourceTree = "<group>"; };
@@ -591,6 +594,8 @@
 				6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */,
 				6C7E868113B244F4000ED485 /* CSCheckboxCell.h */,
 				6C7E868213B244F4000ED485 /* CSCheckboxCell.m */,
+				6CF8341513B32D9900C2A446 /* CSEditableCell.h */,
+				6CF8341613B32D9900C2A446 /* CSEditableCell.m */,
 			);
 			name = Form;
 			sourceTree = "<group>";
@@ -772,6 +777,7 @@
 				6C59C0A113B1E6F200D68F3E /* CSImageCropper.m in Sources */,
 				6C7E868313B244F4000ED485 /* CSCheckboxCell.m in Sources */,
 				6C7E868613B262C0000ED485 /* CSSelectedValueCell.m in Sources */,
+				6CF8341713B32D9900C2A446 /* CSEditableCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

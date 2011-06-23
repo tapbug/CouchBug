@@ -13,6 +13,7 @@
 
 #import "CSCheckboxCell.h"
 #import "CSSelectedValueCell.h"
+#import "CSEditableCell.h"
 
 #import "CSTools.h"
 
@@ -22,11 +23,17 @@
 @property (nonatomic, retain) NSArray *sections;
 @property (nonatomic, retain) NSArray *items;
 
+@property (nonatomic, retain) NSMutableDictionary *switches;
+
 - (void)cancelForm;
 - (void)searchAction;
 
-- (CSCheckboxCell *)createCheckboxCell:(NSString *)title checked:(BOOL)checked;
+- (void)keyboardDidShow:(NSNotification *)notification;
+- (void)keyboardDidHide:(NSNotification *)notification;
+
+- (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey;
 - (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected;
+- (CSEditableCell *)createEditableCell:(NSString *)title value:(NSString *)value;
 
 @end
 
@@ -39,6 +46,8 @@
 @synthesize formTableView = _formTableView;
 @synthesize sections = _sections;
 @synthesize items = _items;
+
+@synthesize switches = _switches;
 
 - (void)viewDidLoad {
 	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMUNITY", @"PROFILE", nil];
@@ -64,7 +73,8 @@
 				  profileSection, nil];
 	
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
-
+	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	
 	UIBarButtonItem *cancelItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"CANCEL", nil)
 																   style:UIBarButtonItemStyleBordered
 																  target:self
@@ -94,6 +104,12 @@
 	_formTableView.dataSource = self;
 	[self.view addSubview:_formTableView];
 	
+	self.switches = [NSMutableDictionary dictionary];
+	
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+	
     [super viewDidLoad];
 }
 
@@ -110,20 +126,17 @@
     // e.g. self.myOutlet = nil;
 }
 
-- (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
-	return YES;
-}
-
 - (void)dealloc {
 	self.sections = nil;
 	self.items = nil;
+	self.switches = nil;
     [super dealloc];
 }
 
 #pragma Mark UITableViewDataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 4;
+	return 6;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -161,13 +174,13 @@
 		textLabel.text = self.filter.locationName; //otestovat veeelkou delku
 		
 	} else if ([item isEqualToString:@"YES"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchYes];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchYes"];
 	} else if ([item isEqualToString:@"MAYBE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchMaybe];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchMaybe"];
 	} else if ([item isEqualToString:@"COFFEE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchCoffeeOrDrink];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchCoffeeOrDrink"];
 	} else if ([item isEqualToString:@"TRAVELING"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasCouchTraveling];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchTraveling"];
 	} else if ([item isEqualToString:@"AGE"]) {
 		NSString *value = nil;
 		if (self.filter.ageLow || self.filter.ageHigh) {
@@ -183,16 +196,27 @@
 	} else if ([item isEqualToString:@"LAST LOGIN"]) {
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:self.filter.lastLoginDays];
 	} else if ([item isEqualToString:@"MALE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.male];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"male"];
 	} else if ([item isEqualToString:@"FEMALE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.female];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"female"];
 	} else if ([item isEqualToString:@"SEVERAL PEOPLE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.severalPeople];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"severalPeople"];
 	} else if ([item isEqualToString:@"HAS PHOTO"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.hasPhoto];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasPhoto"];
 	} else if ([item isEqualToString:@"WHEELCHAIR ACCESSIBLE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) checked:self.filter.wheelchairAccessible];
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"wheelchairAccessible"];
+	} else if ([item isEqualToString:@"VERIFIED"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"verified"];
+	} else if ([item isEqualToString:@"VOUCHED"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"vouched"];
+	} else if ([item isEqualToString:@"AMBASSADOR"]) {
+		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"ambassador"];
+	} else if ([item isEqualToString:@"NAME / USERNAME"]) {
+		cell = [self createEditableCell:NSLocalizedString(item, nil) value:self.filter.username];
+	} else if ([item isEqualToString:@"KEYWORD"]) {
+		cell = [self createEditableCell:NSLocalizedString(item, nil) value:self.filter.keyword];
 	}
+	
 	return cell;
 }
 
@@ -204,18 +228,90 @@
 
 - (void)searchAction {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
+	for (NSString *key in self.switches) {
+		
+		UISwitch *checkbox = [self.switches objectForKey:key];
+		
+		SEL setterSel = NSSelectorFromString([NSString stringWithFormat:@"set%@:", [NSString stringWithFormat:@"%@%@",[[key substringToIndex:1] capitalizedString],[key substringFromIndex:1]]]);
+		NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:setterSel]];
+		[flagInvocation setSelector:setterSel];
+		BOOL result = checkbox.on;
+		[flagInvocation setArgument:&result atIndex:2];
+		[flagInvocation invokeWithTarget:self.filter];		
+	}
 	[self.searchResultController performSearch];
+}
+
+#pragma Mark Keyboard events methods
+
+- (void)keyboardDidShow:(NSNotification *)notification {
+	NSIndexPath *lastVisibleIndexPath = [[_formTableView indexPathsForVisibleRows] lastObject];
+
+    CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];    
+    
+    CGFloat keyboardHeigh = 0;
+    if (UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
+        keyboardHeigh = addFrame.size.height;
+    } else {
+        keyboardHeigh = addFrame.size.width;
+    }
+    
+    CGRect viewFrame = self.view.frame;
+    
+    [UIView beginAnimations:@"showKeyboard" context:nil];
+    [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
+    [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    
+    viewFrame.size.height -= keyboardHeigh;
+    self.view.frame = viewFrame;
+    
+    [UIView commitAnimations];
+	[_formTableView scrollToRowAtIndexPath:lastVisibleIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+}
+
+- (void)keyboardDidHide:(NSNotification *)notification {
+	CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
+    
+    CGFloat keyboardHeigh = 0;
+    if (UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
+        keyboardHeigh = addFrame.size.height;
+    } else {
+        keyboardHeigh = addFrame.size.width;
+    }
+
+    [UIView beginAnimations:@"showKeyboard" context:nil];
+    [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
+    [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
+    
+    CGRect viewFrame = self.view.frame;
+    viewFrame.size.height += keyboardHeigh;
+    self.view.frame = viewFrame;
+	
+	[UIView commitAnimations];
 }
 
 #pragma Mark Private methods
 
-- (CSCheckboxCell *)createCheckboxCell:(NSString *)title checked:(BOOL)checked {
+- (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey {
 	CSCheckboxCell * cell = (CSCheckboxCell *)[_formTableView dequeueReusableCellWithIdentifier:@"checkboxCell"];
 	if (cell == nil) {
 		cell = [[CSCheckboxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"checkboxCell"];
 	}
+	
+	UISwitch *checkbox = [[[UISwitch alloc] init] autorelease];
+	[self.switches setObject:checkbox forKey:filterKey];
+	cell.checkbox = checkbox;
+	
 	cell.keyLabel.text = title;
-	[cell.checkbox setOn:checked];
+	NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:NSSelectorFromString(filterKey)]];
+	[flagInvocation setSelector:NSSelectorFromString(filterKey)];
+	[flagInvocation invokeWithTarget:self.filter];
+
+	BOOL result;
+	[flagInvocation getReturnValue:&result];
+
+	[cell.checkbox setOn:result];
+	cell.selectionStyle = UITableViewCellEditingStyleNone;
 	[cell makeLayout];
 	return cell;
 }
@@ -226,10 +322,23 @@
 		cell = [[CSSelectedValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"selectedValueCell"];
 	}
 	cell.keyLabel.text = title;
-	cell.selectedValueLabel.text = (selected == nil || [selected isEqualToString:@""]) ? NSLocalizedString(@"ANY", nil) : selected;
+	cell.selectedValueLabel.text = (selected == nil) ? NSLocalizedString(@"ANY", nil) : selected;
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	cell.selectionStyle = UITableViewCellEditingStyleNone;
 	[cell makeLayout];
 	return cell;
+}
+
+- (CSEditableCell *)createEditableCell:(NSString *)title value:(NSString *)value {
+	CSEditableCell * cell = (CSEditableCell *)[_formTableView dequeueReusableCellWithIdentifier:@"editableValueCell"];
+	if (cell == nil) {
+		cell = [[CSEditableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"editableValueCell"];
+	}
+	cell.keyLabel.text = title;
+	cell.valueField.text = value;
+	cell.selectionStyle = UITableViewCellEditingStyleNone;
+	[cell makeLayout];
+	return cell;	
 }
 
 @end

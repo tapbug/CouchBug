@@ -15,7 +15,7 @@
 }
 
 @property (readonly) UILabel *keyLabel;
-@property (readonly) UISwitch *checkbox;
+@property (nonatomic, assign) UISwitch *checkbox;
 
 - (void)makeLayout;
 
