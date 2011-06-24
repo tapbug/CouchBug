@@ -24,6 +24,7 @@
 @property (nonatomic, retain) NSArray *items;
 
 @property (nonatomic, retain) NSMutableDictionary *switches;
+@property (nonatomic, retain) NSMutableDictionary *fields;
 
 - (void)cancelForm;
 - (void)searchAction;
@@ -31,9 +32,17 @@
 - (void)keyboardDidShow:(NSNotification *)notification;
 - (void)keyboardDidHide:(NSNotification *)notification;
 
+- (void)showDialogViewWithContentView:(UIView *)contentView donedToSelector:(SEL)doneSelector;
+- (void)cancelDialogView;
+
+- (void)hasSpaceForFilled;
+
 - (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey;
 - (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected;
-- (CSEditableCell *)createEditableCell:(NSString *)title value:(NSString *)value;
+- (CSEditableCell *)createEditableCell:(NSString *)title filterKey:(NSString *)filterKey;
+
+- (void)reduceViewSizeByHeight:(CGFloat)byHeight;
+- (void)extendViewSizeByHeight:(CGFloat)byHeight;
 
 @end
 
@@ -48,8 +57,11 @@
 @synthesize items = _items;
 
 @synthesize switches = _switches;
+@synthesize fields = _fields;
 
 - (void)viewDidLoad {
+	_hasSpaceFor = self.filter.maxSurfers;
+	
 	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMUNITY", @"PROFILE", nil];
 					 
 	NSArray *locationSection = [NSArray arrayWithObject:@"LOCATION"];
@@ -105,6 +117,7 @@
 	[self.view addSubview:_formTableView];
 	
 	self.switches = [NSMutableDictionary dictionary];
+	self.fields = [NSMutableDictionary dictionary];
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -130,6 +143,7 @@
 	self.sections = nil;
 	self.items = nil;
 	self.switches = nil;
+	self.fields = nil;
     [super dealloc];
 }
 
@@ -190,7 +204,13 @@
 		}
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:value];
 	} else if ([item isEqualToString:@"HAS SPACE FOR"]) {
-		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:self.filter.maxSurfers];
+		NSString *value;
+		if (_hasSpaceFor == 0) {
+			value = NSLocalizedString(@"ANY", nil);
+		} else {
+			value = [NSString stringWithFormat:@"%d", _hasSpaceFor];
+		}
+		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:value];
 	} else if ([item isEqualToString:@"LANGUAGE"]) {
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:@"English"];
 	} else if ([item isEqualToString:@"LAST LOGIN"]) {
@@ -211,13 +231,25 @@
 		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"vouched"];
 	} else if ([item isEqualToString:@"AMBASSADOR"]) {
 		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"ambassador"];
-	} else if ([item isEqualToString:@"NAME / USERNAME"]) {
-		cell = [self createEditableCell:NSLocalizedString(item, nil) value:self.filter.username];
+	} else if ([item isEqualToString:@"NAME USERNAME"]) {
+		cell = [self createEditableCell:NSLocalizedString(item, nil) filterKey:@"username"];
 	} else if ([item isEqualToString:@"KEYWORD"]) {
-		cell = [self createEditableCell:NSLocalizedString(item, nil) value:self.filter.keyword];
+		cell = [self createEditableCell:NSLocalizedString(item, nil) filterKey:@"keyword"];
 	}
 	
 	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSString *item = [[self.items objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
+	if ([item isEqualToString:@"HAS SPACE FOR"]) {
+		_hasSpaceForPickerView = [[[UIPickerView alloc] init] autorelease];
+		_hasSpaceForPickerView.dataSource = self;
+		_hasSpaceForPickerView.delegate = self;
+		_hasSpaceForPickerView.showsSelectionIndicator = YES;
+		[_hasSpaceForPickerView selectRow:_hasSpaceFor inComponent:0 animated:NO];
+		[self showDialogViewWithContentView:_hasSpaceForPickerView donedToSelector:@selector(hasSpaceForFilled)];
+	}
 }
 
 #pragma Mark Action methods
@@ -237,8 +269,20 @@
 		[flagInvocation setSelector:setterSel];
 		BOOL result = checkbox.on;
 		[flagInvocation setArgument:&result atIndex:2];
-		[flagInvocation invokeWithTarget:self.filter];		
+		[flagInvocation invokeWithTarget:self.filter];
 	}
+	
+	for (NSString *key in self.fields) {
+		UITextField *field = [self.fields objectForKey:key];
+		SEL setterSel = NSSelectorFromString([NSString stringWithFormat:@"set%@:", [NSString stringWithFormat:@"%@%@",[[key substringToIndex:1] capitalizedString],[key substringFromIndex:1]]]);
+		NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:setterSel]];
+		[flagInvocation setSelector:setterSel];
+		
+		NSString *result = field.text;
+		[flagInvocation setArgument:&result atIndex:2];
+		[flagInvocation invokeWithTarget:self.filter];
+	}
+	
 	[self.searchResultController performSearch];
 }
 
@@ -255,15 +299,12 @@
     } else {
         keyboardHeigh = addFrame.size.width;
     }
-    
-    CGRect viewFrame = self.view.frame;
-    
+    	
     [UIView beginAnimations:@"showKeyboard" context:nil];
     [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
     [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
-    
-    viewFrame.size.height -= keyboardHeigh;
-    self.view.frame = viewFrame;
+	
+	[self reduceViewSizeByHeight:keyboardHeigh];
     
     [UIView commitAnimations];
 	[_formTableView scrollToRowAtIndexPath:lastVisibleIndexPath atScrollPosition:UITableViewScrollPositionMiddle animated:NO];
@@ -279,18 +320,114 @@
         keyboardHeigh = addFrame.size.width;
     }
 
-    [UIView beginAnimations:@"showKeyboard" context:nil];
+    [UIView beginAnimations:@"hideKeyboard" context:nil];
     [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
     [UIView setAnimationDuration:[[[notification userInfo] objectForKey:UIKeyboardAnimationDurationUserInfoKey] doubleValue]];
     
-    CGRect viewFrame = self.view.frame;
-    viewFrame.size.height += keyboardHeigh;
-    self.view.frame = viewFrame;
+	[self extendViewSizeByHeight:keyboardHeigh];
 	
 	[UIView commitAnimations];
 }
 
-#pragma Mark Private methods
+#pragma Mark DialogView methods
+
+- (void)showDialogViewWithContentView:(UIView *)contentView donedToSelector:(SEL)doneSelector {
+	CGFloat toolBarHeight = 30;
+	if (_dialogView == nil) {
+		
+		UIWindow *window = [UIApplication sharedApplication].keyWindow;
+		_dialogView = [[UIView alloc] initWithFrame:CGRectMake(0,
+															   window.frame.size.height,
+															   window.frame.size.width,
+															   0)];
+		_dialogView.backgroundColor = [UIColor whiteColor];
+		[window addSubview:_dialogView];		
+		
+		UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, _dialogView.frame.size.width, toolBarHeight)];
+		toolBar.tintColor = UIColorFromRGB(0x3d4041);
+		[_dialogView addSubview:toolBar];
+				
+		UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
+																					 target:self
+																					 action:doneSelector] autorelease];
+		UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+																					   target:self
+																					   action:@selector(cancelDialogView)] autorelease];
+		UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+																					   target:nil
+																					   action:nil];
+		[toolBar setItems:[NSArray arrayWithObjects:cancelButton, flexibleSpace, doneButton, nil]];		
+	}
+
+	CGRect dialogViewFrame = _dialogView.frame;
+	dialogViewFrame.size.height = toolBarHeight + contentView.frame.size.height;
+	_dialogView.frame = dialogViewFrame;
+
+	[[_dialogView viewWithTag:1] removeFromSuperview];
+	
+	CGRect contentViewFrame = contentView.frame;
+	contentViewFrame.origin.y = toolBarHeight;
+	contentView.frame = contentViewFrame;
+	contentView.tag = 1;
+	[_dialogView addSubview:contentView];
+	
+	[UIView beginAnimations:@"showDialog" context:nil];
+	[self reduceViewSizeByHeight:dialogViewFrame.size.height];
+	dialogViewFrame.origin.y -= dialogViewFrame.size.height;
+	_dialogView.frame = dialogViewFrame;
+	[UIView commitAnimations];
+	[_formTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle animated:NO];
+}
+
+- (void)cancelDialogView {
+	[UIView beginAnimations:@"hideDialog" context:nil];
+	CGRect dialogViewFrame = _dialogView.frame;
+	[self extendViewSizeByHeight:dialogViewFrame.size.height];
+	dialogViewFrame.origin.y += dialogViewFrame.size.height;
+	_dialogView.frame = dialogViewFrame;
+	[UIView commitAnimations];
+	
+	_hasSpaceForPickerView = nil;
+}
+
+#pragma Mark Setting from dialogs to form
+
+- (void)hasSpaceForFilled {
+	NSUInteger newHasSpaceFor = [_hasSpaceForPickerView selectedRowInComponent:0];
+	if (_hasSpaceFor != newHasSpaceFor) {
+		_hasSpaceFor = newHasSpaceFor;
+		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]]
+							  withRowAnimation:UITableViewRowAnimationMiddle];		
+	}
+	[self cancelDialogView];
+}
+
+#pragma Mark UIPickerViewDataSource / Delegate methods
+
+- (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
+	if (_hasSpaceForPickerView == pickerView) {
+		return 1;
+	}
+	return 0;
+}
+
+- (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
+	if (_hasSpaceForPickerView) {
+		return 7;
+	}
+	return 0;
+}
+
+- (NSString *)pickerView:(UIPickerView *)pickerView titleForRow:(NSInteger)row forComponent:(NSInteger)component {
+	if (_hasSpaceForPickerView == pickerView) {
+		if (row == 0) {
+			return NSLocalizedString(@"ANY", nil);
+		}
+	}
+	return [NSString stringWithFormat:@"%d", row];
+}
+
+#pragma Mark Cell creation methods
 
 - (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey {
 	CSCheckboxCell * cell = (CSCheckboxCell *)[_formTableView dequeueReusableCellWithIdentifier:@"checkboxCell"];
@@ -329,16 +466,43 @@
 	return cell;
 }
 
-- (CSEditableCell *)createEditableCell:(NSString *)title value:(NSString *)value {
+- (CSEditableCell *)createEditableCell:(NSString *)title filterKey:(NSString *)filterKey {
 	CSEditableCell * cell = (CSEditableCell *)[_formTableView dequeueReusableCellWithIdentifier:@"editableValueCell"];
 	if (cell == nil) {
 		cell = [[CSEditableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"editableValueCell"];
 	}
 	cell.keyLabel.text = title;
-	cell.valueField.text = value;
+	
+	NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:NSSelectorFromString(filterKey)]];
+	[flagInvocation setSelector:NSSelectorFromString(filterKey)];
+	[flagInvocation invokeWithTarget:self.filter];
+	
+	NSString *result;
+	[flagInvocation getReturnValue:&result];
+
+	
+	UITextField *valueField = [[[UITextField alloc] init] autorelease];
+	valueField.text = result;
+	valueField.clearButtonMode = UITextFieldViewModeAlways;
+	[self.fields setObject:valueField forKey:filterKey];
+	cell.valueField = valueField;
 	cell.selectionStyle = UITableViewCellEditingStyleNone;
 	[cell makeLayout];
 	return cell;	
+}
+
+#pragma Mark View manipulation methods
+
+- (void)reduceViewSizeByHeight:(CGFloat)byHeight {
+	CGRect viewFrame = self.view.frame;
+	viewFrame.size.height -= byHeight;
+    self.view.frame = viewFrame;
+}
+
+- (void)extendViewSizeByHeight:(CGFloat)byHeight {
+    CGRect viewFrame = self.view.frame;
+    viewFrame.size.height += byHeight;
+    self.view.frame = viewFrame;
 }
 
 @end

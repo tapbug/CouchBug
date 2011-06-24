@@ -21,11 +21,6 @@
 		_keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		[self.contentView addSubview:_keyLabel];
-		
-		_valueField = [[[UITextField alloc] init] autorelease];
-		_valueField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-		_valueField.textAlignment = UITextAlignmentRight;
-		[self.contentView addSubview:_valueField];
     }
     return self;
 }
@@ -49,11 +44,15 @@
 	keyLabelFrame.origin.y = (int)((self.contentView.frame.size.height - keyLabelFrame.size.height) / 2);
 	_keyLabel.frame = keyLabelFrame;
 	
+	_valueField.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_valueField.textAlignment = UITextAlignmentRight;
+	[self.contentView addSubview:_valueField];
+
 	CGFloat valueX = keyLabelFrame.origin.x + keyLabelFrame.size.width + 4;
 	_valueField.frame = CGRectMake(valueX,
-								   (int)((self.contentView.frame.size.height - 18) / 2),
+								   (int)((self.contentView.frame.size.height - 20) / 2),
 								   self.contentView.frame.size.width - valueX - 4,
-								   18);
+								   20);
 }
 
 @end

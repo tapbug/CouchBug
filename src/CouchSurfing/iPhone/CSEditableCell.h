@@ -15,7 +15,7 @@
 }
 
 @property (readonly) UILabel *keyLabel;
-@property (readonly) UITextField *valueField;
+@property (nonatomic, assign) UITextField *valueField;
 
 - (void)makeLayout;
 

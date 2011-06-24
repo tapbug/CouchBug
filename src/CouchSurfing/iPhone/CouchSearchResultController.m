@@ -330,7 +330,7 @@ static NSDictionary *hasCouchIcons;
         }
     }
     
-    NSUInteger lastRow;
+    NSUInteger lastRow = 0;
     for (NSIndexPath *indexPath in indexPaths) {
         lastRow = indexPath.row;
         CouchSurfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
@@ -341,20 +341,23 @@ static NSDictionary *hasCouchIcons;
             [imageDownloader release];            
         }
     }
-    
-    for(NSUInteger i = 1; i <= 2; i++) {
-        if ([self.sourfers count] - 1 >= lastRow + i) {
-            CouchSurfer *sourfer = [self.sourfers objectAtIndex:lastRow + i];
-            if (sourfer.image == nil) {
-                CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
-                imageDownloader.delegate = self;
-                [imageDownloader downloadWithSrc:sourfer.imageSrc position:lastRow + i];
-            }
-        } else {
-            break;
-        }
-    } 
-    
+    if ([self.sourfers count] > 0) {
+		for(NSUInteger i = 1; i <= 2; i++) {
+			NSUInteger rowToLoad = lastRow + i;
+			int lastRowPosition = [self.sourfers count] - 1;
+			if (lastRowPosition >= rowToLoad) {
+				CouchSurfer *sourfer = [self.sourfers objectAtIndex:lastRow + i];
+				if (sourfer.image == nil) {
+					CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
+					imageDownloader.delegate = self;
+					[imageDownloader downloadWithSrc:sourfer.imageSrc position:lastRow + i];
+				}
+			} else {
+				break;
+			}
+		} 
+
+	}    
 }
 
 #pragma Public methods

@@ -23,7 +23,7 @@
 	
     NSString *ageLow;
     NSString *ageHigh;
-    NSString *maxSurfers;
+    NSUInteger maxSurfers;
     NSString *laguageId;
     NSString *lastLoginDays;
     BOOL male;
@@ -49,7 +49,7 @@
 
 @property (nonatomic, retain) NSString *ageLow;
 @property (nonatomic, retain) NSString *ageHigh;
-@property (nonatomic, retain) NSString *maxSurfers;
+@property (nonatomic, assign) NSUInteger maxSurfers;
 @property (nonatomic, retain) NSString *languageId;
 @property (nonatomic, retain) NSString *lastLoginDays;
 @property (nonatomic, assign) BOOL male;

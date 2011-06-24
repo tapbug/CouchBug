@@ -11,16 +11,22 @@
 @class CouchSearchResultController;
 @class CouchSearchFilter;
 
-@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
+@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate> {
 	CouchSearchResultController *_searchResultController;
     CouchSearchFilter *_filter;
 	
 	UITableView *_formTableView;
 	
+	UIView *_dialogView;
+	
 	NSArray *_sections;
 	NSArray *_items;
 	
 	NSMutableDictionary *_switches;
+	NSMutableDictionary *_fields;
+	
+	UIPickerView *_hasSpaceForPickerView;
+	NSUInteger _hasSpaceFor;
 }
 
 @property (nonatomic, assign) CouchSearchResultController *searchResultController;

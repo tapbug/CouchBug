@@ -45,7 +45,7 @@
 		self.hasCouchTraveling = YES;
 		self.ageLow = @"3";
 		self.ageHigh = @"30";
-        self.maxSurfers = @"1";
+        self.maxSurfers = 1;
         self.languageId = @"";
         self.lastLoginDays = @"";
         self.male = YES;
@@ -66,7 +66,6 @@
     self.locationJSON = nil;
     self.ageLow = nil;
     self.ageHigh = nil;
-    self.maxSurfers = nil;
     self.languageId = nil;
     self.lastLoginDays = nil;
     self.username = nil;
@@ -95,7 +94,7 @@
 	
     request.ageLow = self.ageLow;
     request.ageHigh = self.ageHigh;
-    request.maxSurfers = self.maxSurfers;
+    request.maxSurfers = [NSString stringWithFormat:@"%d", self.maxSurfers];
     request.languageId = self.languageId;
     request.lastLoginDays = self.lastLoginDays;
     request.male = self.male ? @"1" : @"";
