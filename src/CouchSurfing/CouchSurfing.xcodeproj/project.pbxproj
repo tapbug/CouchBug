@@ -30,6 +30,7 @@
 		6C4D8ABF13B09D69008FD263 /* iconVouched@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AB113B09D69008FD263 /* iconVouched@2x.png */; };
 		6C4D8AC613B1D6C6008FD263 /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D8AC513B1D6C6008FD263 /* ProfileController.m */; };
 		6C59C0A113B1E6F200D68F3E /* CSImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */; };
+		6C5C77FA13B5217E00115B5D /* TapableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5C77F913B5217E00115B5D /* TapableTableView.m */; };
 		6C71C70713A91A06005FE511 /* CouchSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */; };
 		6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */; };
 		6C7E868313B244F4000ED485 /* CSCheckboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E868213B244F4000ED485 /* CSCheckboxCell.m */; };
@@ -149,6 +150,8 @@
 		6C4D8AC513B1D6C6008FD263 /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileController.m; sourceTree = "<group>"; };
 		6C59C09F13B1E6F200D68F3E /* CSImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSImageCropper.h; path = Shared/Classes/CSImageCropper.h; sourceTree = "<group>"; };
 		6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSImageCropper.m; path = Shared/Classes/CSImageCropper.m; sourceTree = "<group>"; };
+		6C5C77F813B5217E00115B5D /* TapableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapableTableView.h; sourceTree = "<group>"; };
+		6C5C77F913B5217E00115B5D /* TapableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapableTableView.m; sourceTree = "<group>"; };
 		6C71C70513A91A06005FE511 /* CouchSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchResultCell.h; sourceTree = "<group>"; };
 		6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CouchSearchResultCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6C71C70913A93FD8005FE511 /* CSTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSTools.h; path = Shared/Classes/CSTools.h; sourceTree = "<group>"; };
@@ -596,6 +599,8 @@
 				6C7E868213B244F4000ED485 /* CSCheckboxCell.m */,
 				6CF8341513B32D9900C2A446 /* CSEditableCell.h */,
 				6CF8341613B32D9900C2A446 /* CSEditableCell.m */,
+				6C5C77F813B5217E00115B5D /* TapableTableView.h */,
+				6C5C77F913B5217E00115B5D /* TapableTableView.m */,
 			);
 			name = Form;
 			sourceTree = "<group>";
@@ -778,6 +783,7 @@
 				6C7E868313B244F4000ED485 /* CSCheckboxCell.m in Sources */,
 				6C7E868613B262C0000ED485 /* CSSelectedValueCell.m in Sources */,
 				6CF8341713B32D9900C2A446 /* CSEditableCell.m in Sources */,
+				6C5C77FA13B5217E00115B5D /* TapableTableView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

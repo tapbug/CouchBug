@@ -7,15 +7,16 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TapableTableView.h"
 
 @class CouchSearchResultController;
 @class CouchSearchFilter;
 
-@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, TabableTableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
 	CouchSearchResultController *_searchResultController;
     CouchSearchFilter *_filter;
 	
-	UITableView *_formTableView;
+	TapableTableView *_formTableView;
 	
 	UIView *_dialogView;
 	
@@ -25,6 +26,7 @@
 	NSMutableDictionary *_switches;
 	NSMutableDictionary *_fields;
 	
+	BOOL dialogViewOn;
 	UIPickerView *_hasSpaceForPickerView;
 	NSUInteger _hasSpaceFor;
 }

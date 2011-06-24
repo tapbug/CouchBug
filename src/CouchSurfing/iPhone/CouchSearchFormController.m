@@ -19,7 +19,7 @@
 
 @interface CouchSearchFormController ()
 
-@property (nonatomic, assign) UITableView *formTableView;
+@property (nonatomic, assign) TapableTableView *formTableView;
 @property (nonatomic, retain) NSArray *sections;
 @property (nonatomic, retain) NSArray *items;
 
@@ -32,10 +32,8 @@
 - (void)keyboardDidShow:(NSNotification *)notification;
 - (void)keyboardDidHide:(NSNotification *)notification;
 
-- (void)showDialogViewWithContentView:(UIView *)contentView donedToSelector:(SEL)doneSelector;
-- (void)cancelDialogView;
-
-- (void)hasSpaceForFilled;
+- (void)showDialogViewWithContentView:(UIView *)contentView;
+- (void)hideDialogView;
 
 - (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey;
 - (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected;
@@ -61,7 +59,6 @@
 
 - (void)viewDidLoad {
 	_hasSpaceFor = self.filter.maxSurfers;
-	
 	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMUNITY", @"PROFILE", nil];
 					 
 	NSArray *locationSection = [NSArray arrayWithObject:@"LOCATION"];
@@ -105,11 +102,12 @@
 	toolBar.items = [NSArray arrayWithObjects:cancelItem, spaceItem, searchItem, nil];
 	[self.view addSubview:toolBar];
 	
-	_formTableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 
+	_formTableView = [[[TapableTableView alloc] initWithFrame:CGRectMake(0, 
 																   toolBar.frame.size.height,
 																   self.view.frame.size.width,
 																   self.view.frame.size.height - toolBar.frame.size.height) 
 												   style:UITableViewStyleGrouped] autorelease];
+	_formTableView.tapDelegate = self;
 	_formTableView.backgroundColor = [UIColor clearColor];
 	_formTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_formTableView.delegate = self;
@@ -248,7 +246,7 @@
 		_hasSpaceForPickerView.delegate = self;
 		_hasSpaceForPickerView.showsSelectionIndicator = YES;
 		[_hasSpaceForPickerView selectRow:_hasSpaceFor inComponent:0 animated:NO];
-		[self showDialogViewWithContentView:_hasSpaceForPickerView donedToSelector:@selector(hasSpaceForFilled)];
+		[self showDialogViewWithContentView:_hasSpaceForPickerView];
 	}
 }
 
@@ -256,10 +254,13 @@
 
 - (void)cancelForm {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
+	[self hideDialogView];
 }
 
 - (void)searchAction {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
+	[self hideDialogView];
+	
 	for (NSString *key in self.switches) {
 		
 		UISwitch *checkbox = [self.switches objectForKey:key];
@@ -282,6 +283,8 @@
 		[flagInvocation setArgument:&result atIndex:2];
 		[flagInvocation invokeWithTarget:self.filter];
 	}
+	
+	self.filter.maxSurfers = _hasSpaceFor;
 	
 	[self.searchResultController performSearch];
 }
@@ -331,7 +334,9 @@
 
 #pragma Mark DialogView methods
 
-- (void)showDialogViewWithContentView:(UIView *)contentView donedToSelector:(SEL)doneSelector {
+- (void)showDialogViewWithContentView:(UIView *)contentView {
+	_formTableView.justTableTouch = YES;
+	dialogViewOn = YES;
 	CGFloat toolBarHeight = 30;
 	if (_dialogView == nil) {
 		
@@ -349,14 +354,11 @@
 				
 		UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
 																					 target:self
-																					 action:doneSelector] autorelease];
-		UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
-																					   target:self
-																					   action:@selector(cancelDialogView)] autorelease];
+																					 action:@selector(hideDialogView)] autorelease];
 		UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
 																					   target:nil
 																					   action:nil];
-		[toolBar setItems:[NSArray arrayWithObjects:cancelButton, flexibleSpace, doneButton, nil]];		
+		[toolBar setItems:[NSArray arrayWithObjects:flexibleSpace, doneButton, nil]];		
 	}
 
 	CGRect dialogViewFrame = _dialogView.frame;
@@ -379,7 +381,9 @@
 	[_formTableView scrollToNearestSelectedRowAtScrollPosition:UITableViewScrollPositionMiddle animated:NO];
 }
 
-- (void)cancelDialogView {
+- (void)hideDialogView {
+	_formTableView.justTableTouch = NO;
+	dialogViewOn = NO;
 	[UIView beginAnimations:@"hideDialog" context:nil];
 	CGRect dialogViewFrame = _dialogView.frame;
 	[self extendViewSizeByHeight:dialogViewFrame.size.height];
@@ -388,18 +392,6 @@
 	[UIView commitAnimations];
 	
 	_hasSpaceForPickerView = nil;
-}
-
-#pragma Mark Setting from dialogs to form
-
-- (void)hasSpaceForFilled {
-	NSUInteger newHasSpaceFor = [_hasSpaceForPickerView selectedRowInComponent:0];
-	if (_hasSpaceFor != newHasSpaceFor) {
-		_hasSpaceFor = newHasSpaceFor;
-		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]]
-							  withRowAnimation:UITableViewRowAnimationMiddle];		
-	}
-	[self cancelDialogView];
 }
 
 #pragma Mark UIPickerViewDataSource / Delegate methods
@@ -427,6 +419,17 @@
 	return [NSString stringWithFormat:@"%d", row];
 }
 
+- (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+	if (_hasSpaceForPickerView == pickerView) {
+		NSUInteger newHasSpaceFor = [_hasSpaceForPickerView selectedRowInComponent:0];
+		if (_hasSpaceFor != newHasSpaceFor) {
+			_hasSpaceFor = newHasSpaceFor;
+			[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]]
+								  withRowAnimation:UITableViewRowAnimationMiddle];		
+		}
+	}
+}
+
 #pragma Mark Cell creation methods
 
 - (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey {
@@ -448,7 +451,7 @@
 	[flagInvocation getReturnValue:&result];
 
 	[cell.checkbox setOn:result];
-	cell.selectionStyle = UITableViewCellEditingStyleNone;
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	[cell makeLayout];
 	return cell;
 }
@@ -461,7 +464,6 @@
 	cell.keyLabel.text = title;
 	cell.selectedValueLabel.text = (selected == nil) ? NSLocalizedString(@"ANY", nil) : selected;
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-	cell.selectionStyle = UITableViewCellEditingStyleNone;
 	[cell makeLayout];
 	return cell;
 }
@@ -486,7 +488,7 @@
 	valueField.clearButtonMode = UITextFieldViewModeAlways;
 	[self.fields setObject:valueField forKey:filterKey];
 	cell.valueField = valueField;
-	cell.selectionStyle = UITableViewCellEditingStyleNone;
+	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	[cell makeLayout];
 	return cell;	
 }
@@ -503,6 +505,14 @@
     CGRect viewFrame = self.view.frame;
     viewFrame.size.height += byHeight;
     self.view.frame = viewFrame;
+}
+
+#pragma Mark TapableTableViewDelegate methods
+
+- (void)tableViewWasTouched:(TapableTableView *)tableView {
+	if (dialogViewOn) {
+		[self hideDialogView];
+	}
 }
 
 @end
