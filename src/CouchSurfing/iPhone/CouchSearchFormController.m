@@ -455,6 +455,25 @@
 		NSUInteger selectedIndex = [self selectedLastLoginDays];
 		[_lastLoginPickerView selectRow:selectedIndex inComponent:0 animated:NO];
 		[self showDialogViewWithContentView:_lastLoginPickerView];
+	} else if ([item isEqualToString:@"AGE"]) {
+		_agePickerView = [[[UIPickerView alloc] init] autorelease];
+		_agePickerView.dataSource = self;
+		_agePickerView.delegate = self;
+		_agePickerView.showsSelectionIndicator = YES;
+		
+		NSUInteger selectedIndexAgeLow = 0;
+		NSUInteger selectedIndexAgeHigh = 0;
+		if (self.filter.ageLow != 0) {
+			selectedIndexAgeLow = self.filter.ageLow - 17;
+		}
+		
+		if (self.filter.ageHigh != 0) {
+			selectedIndexAgeHigh = self.filter.ageHigh - 17;
+		}
+		
+		[_agePickerView selectRow:selectedIndexAgeLow inComponent:0 animated:NO];
+		[_agePickerView selectRow:selectedIndexAgeHigh inComponent:1 animated:NO];
+		[self showDialogViewWithContentView:_agePickerView];
 	}
 }
 
@@ -573,6 +592,7 @@
 	
 	_hasSpaceForPickerView = nil;
 	_lastLoginPickerView = nil;
+	_agePickerView = nil;
 }
 
 #pragma Mark UIPickerViewDataSource / Delegate methods
@@ -580,8 +600,10 @@
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
 	if (_hasSpaceForPickerView == pickerView) {
 		return 1;
-	} else if(_lastLoginPickerView == pickerView) {
+	} else if (_lastLoginPickerView == pickerView) {
 		return 1;
+	} else if (_agePickerView == pickerView) {
+		return 2;
 	}
 	return 0;
 }
@@ -591,6 +613,8 @@
 		return 7;
 	} else if(_lastLoginPickerView == pickerView) {
 		return 8;
+	} else if (_agePickerView == pickerView) {
+		return 83;
 	}
 	return 0;
 }
@@ -602,6 +626,11 @@
 		}
 	} else if (_lastLoginPickerView == pickerView) {
 		return [[self.lastLoginsData objectAtIndex:row] objectAtIndex:0];
+	} else if (_agePickerView) {
+		if (row == 0) {
+			return NSLocalizedString(@"ANY", nil);
+		}
+		return [NSString stringWithFormat:@"%d", row + 17];
 	}
 	return [NSString stringWithFormat:@"%d", row];
 }
@@ -619,14 +648,30 @@
 		if (oldRow != row) {
 			NSUInteger selectedValue = [[[self.lastLoginsData objectAtIndex:row] objectAtIndex:1] intValue];
 			self.filter.lastLoginDays = selectedValue;
-			[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:3 inSection:2]]
-								  withRowAnimation:UITableViewRowAnimationMiddle];
 			actualIndexPath = [NSIndexPath indexPathForRow:3 inSection:2];
+		}
+	} else if (_agePickerView == pickerView) {
+		NSUInteger actualAgeLow = 0;
+		
+		if ([pickerView selectedRowInComponent:0] != 0) {
+			actualAgeLow = [pickerView selectedRowInComponent:0] + 17;
+		}
+		
+		NSUInteger actualAgeHigh = 0;
+		
+		if ([pickerView selectedRowInComponent:1] != 0) {
+			actualAgeHigh = [pickerView selectedRowInComponent:1] + 17;
+		}
+
+		if (self.filter.ageLow != actualAgeLow || self.filter.ageHigh != actualAgeHigh) {
+			actualIndexPath = [NSIndexPath indexPathForRow:0 inSection:2];
+			self.filter.ageLow = actualAgeLow;
+			self.filter.ageHigh = actualAgeHigh;
 		}
 	}
 	if (actualIndexPath != nil) {
 		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
-							  withRowAnimation:UITableViewRowAnimationMiddle];
+							  withRowAnimation:UITableViewRowAnimationFade];
 		[_formTableView selectRowAtIndexPath:actualIndexPath
 									animated:NO
 							  scrollPosition:UITableViewScrollPositionMiddle];

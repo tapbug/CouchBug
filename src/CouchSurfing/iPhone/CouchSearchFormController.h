@@ -44,6 +44,7 @@
 	UIPickerView *_hasSpaceForPickerView;
 	UIPickerView *_lastLoginPickerView;
 	NSArray *_lastLoginsData;
+	UIPickerView *_agePickerView;
 	
 	NSIndexPath *_currentlyHiddenIndexPath;
 }
