@@ -585,10 +585,11 @@
 	dialogViewOn = NO;
 	[UIView beginAnimations:@"hideDialog" context:nil];
 	CGRect dialogViewFrame = _dialogView.frame;
-	[self extendViewSizeByHeight:dialogViewFrame.size.height];
 	dialogViewFrame.origin.y += dialogViewFrame.size.height;
 	_dialogView.frame = dialogViewFrame;
 	[UIView commitAnimations];
+
+	[self extendViewSizeByHeight:dialogViewFrame.size.height];
 	
 	_hasSpaceForPickerView = nil;
 	_lastLoginPickerView = nil;
