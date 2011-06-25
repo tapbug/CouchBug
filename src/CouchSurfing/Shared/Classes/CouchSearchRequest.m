@@ -75,9 +75,11 @@
     [bodyString appendString:[self parameter:@"location" value:locationEncoded]];
     [bodyString appendString:[self parameter:@"search" value:@"Search!"]];
     
-    if ([self.couchStatuses count] ==0) {
+    if ([self.couchStatuses count] == 0) {
         [bodyString appendString:[self parameter:@"couchstatus_all" value:@"1"]];
-    } else {
+    } else if ([self.couchStatuses count] == 1) {
+		[bodyString appendString:[self parameter:@"couchstatuses" value:[self.couchStatuses lastObject]]];
+	} else {
         for (int i = 0; i < [self.couchStatuses count]; i++) {
             [bodyString appendString:[self parameter:@"couchstatuses"
                                                value:[self.couchStatuses objectAtIndex:i] 

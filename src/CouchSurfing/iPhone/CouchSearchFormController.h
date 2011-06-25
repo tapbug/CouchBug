@@ -12,7 +12,7 @@
 @class CouchSearchResultController;
 @class CouchSearchFilter;
 
-@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, TabableTableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate> {
+@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, TabableTableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate> {
 	CouchSearchResultController *_searchResultController;
     CouchSearchFilter *_filter;
 	
@@ -23,8 +23,22 @@
 	NSArray *_sections;
 	NSArray *_items;
 	
-	NSMutableDictionary *_switches;
-	NSMutableDictionary *_fields;
+	UISwitch *_hasCouchYesCB;
+	UISwitch *_hasCouchMaybeCB;
+	UISwitch *_hasCouchCoffeOrDrinkCB;
+	UISwitch *_hasCouchTravelingCB;
+	
+	UISwitch *_maleCB;
+	UISwitch *_femaleCB;
+	UISwitch *_groupCB;
+	UISwitch *_hasPhotoCB;
+	UISwitch *_wheelchairAccessibleCB;
+	UISwitch *_verifiedCB;
+	UISwitch *_vouchedCB;
+	UISwitch *_ambassadorCB;
+	
+	UITextField *_usernameTF;
+	UITextField *_keywordTF;
 	
 	BOOL dialogViewOn;
 	UIPickerView *_hasSpaceForPickerView;

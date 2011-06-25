@@ -23,8 +23,20 @@
 @property (nonatomic, retain) NSArray *sections;
 @property (nonatomic, retain) NSArray *items;
 
-@property (nonatomic, retain) NSMutableDictionary *switches;
-@property (nonatomic, retain) NSMutableDictionary *fields;
+@property (nonatomic, retain) UISwitch *hasCouchYesCB;
+@property (nonatomic, retain) UISwitch *hasCouchMaybeCB;
+@property (nonatomic, retain) UISwitch *hasCouchCoffeeOrDrinkCB;
+@property (nonatomic, retain) UISwitch *hasCouchTravelingCB;
+@property (nonatomic, retain) UISwitch *maleCB;
+@property (nonatomic, retain) UISwitch *femaleCB;
+@property (nonatomic, retain) UISwitch *groupCB;
+@property (nonatomic, retain) UISwitch *hasPhotoCB;
+@property (nonatomic, retain) UISwitch *wheelchairAccessibleCB;
+@property (nonatomic, retain) UISwitch *verifiedCB;
+@property (nonatomic, retain) UISwitch *vouchedCB;
+@property (nonatomic, retain) UISwitch *ambassadorCB;
+@property (nonatomic, retain) UITextField *usernameTF;
+@property (nonatomic, retain) UITextField *keywordTF;
 
 - (void)cancelForm;
 - (void)searchAction;
@@ -35,9 +47,9 @@
 - (void)showDialogViewWithContentView:(UIView *)contentView;
 - (void)hideDialogView;
 
-- (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey;
+- (CSCheckboxCell *)getCheckboxCell;
 - (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected;
-- (CSEditableCell *)createEditableCell:(NSString *)title filterKey:(NSString *)filterKey;
+- (CSEditableCell *)getEditableCell;
 
 - (void)reduceViewSizeByHeight:(CGFloat)byHeight;
 - (void)extendViewSizeByHeight:(CGFloat)byHeight;
@@ -54,8 +66,20 @@
 @synthesize sections = _sections;
 @synthesize items = _items;
 
-@synthesize switches = _switches;
-@synthesize fields = _fields;
+@synthesize hasCouchYesCB = _hasCouchYesCB;
+@synthesize hasCouchMaybeCB = _hasCouchMaybeCB;
+@synthesize hasCouchCoffeeOrDrinkCB = _hasCouchCoffeOrDrinkCB;
+@synthesize hasCouchTravelingCB = _hasCouchTravelingCB;
+@synthesize maleCB = _maleCB;
+@synthesize femaleCB = _femaleCB;
+@synthesize groupCB = _groupCB;
+@synthesize hasPhotoCB = _hasPhotoCB;
+@synthesize wheelchairAccessibleCB = _wheelchairAccessibleCB;
+@synthesize verifiedCB = _verifiedCB;
+@synthesize vouchedCB = _vouchedCB;
+@synthesize ambassadorCB = _ambassadorCB;
+@synthesize usernameTF = _usernameTF;
+@synthesize keywordTF = _keywordTF;
 
 - (void)viewDidLoad {
 	_hasSpaceFor = self.filter.maxSurfers;
@@ -114,9 +138,6 @@
 	_formTableView.dataSource = self;
 	[self.view addSubview:_formTableView];
 	
-	self.switches = [NSMutableDictionary dictionary];
-	self.fields = [NSMutableDictionary dictionary];
-	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
     [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -140,8 +161,20 @@
 - (void)dealloc {
 	self.sections = nil;
 	self.items = nil;
-	self.switches = nil;
-	self.fields = nil;
+	self.hasCouchYesCB = nil;
+	self.hasCouchMaybeCB = nil;
+	self.hasCouchCoffeeOrDrinkCB = nil;
+	self.hasCouchTravelingCB = nil;
+	self.maleCB = nil;
+	self.femaleCB = nil;
+	self.groupCB = nil;
+	self.hasPhotoCB = nil;
+	self.wheelchairAccessibleCB = nil;
+	self.verifiedCB = nil;
+	self.vouchedCB = nil;
+	self.ambassadorCB = nil;
+	self.usernameTF = nil;
+	self.keywordTF = nil;
     [super dealloc];
 }
 
@@ -186,13 +219,54 @@
 		textLabel.text = self.filter.locationName; //otestovat veeelkou delku
 		
 	} else if ([item isEqualToString:@"YES"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchYes"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.hasCouchYesCB == nil) {
+			self.hasCouchYesCB = [[[UISwitch alloc] init] autorelease];
+			[self.hasCouchYesCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.hasCouchYesCB;		
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		[csCell.checkbox setOn:self.filter.hasCouchYes];
+		[csCell makeLayout];
+		cell = csCell;
+
 	} else if ([item isEqualToString:@"MAYBE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchMaybe"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.hasCouchMaybeCB == nil) {
+			self.hasCouchMaybeCB = [[[UISwitch alloc] init] autorelease];
+			[self.hasCouchMaybeCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.hasCouchMaybeCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.hasCouchMaybe];
+		[csCell makeLayout];
+		cell = csCell;
+		
 	} else if ([item isEqualToString:@"COFFEE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchCoffeeOrDrink"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.hasCouchCoffeeOrDrinkCB == nil) {
+			self.hasCouchCoffeeOrDrinkCB = [[[UISwitch alloc] init] autorelease];
+			[self.hasCouchCoffeeOrDrinkCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.hasCouchCoffeeOrDrinkCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.hasCouchCoffeeOrDrink];
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"TRAVELING"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasCouchTraveling"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.hasCouchTravelingCB == nil) {
+			self.hasCouchTravelingCB = [[[UISwitch alloc] init] autorelease];
+			[self.hasCouchTravelingCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.hasCouchTravelingCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.hasCouchTraveling];
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"AGE"]) {
 		NSString *value = nil;
 		if (self.filter.ageLow || self.filter.ageHigh) {
@@ -214,25 +288,125 @@
 	} else if ([item isEqualToString:@"LAST LOGIN"]) {
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:self.filter.lastLoginDays];
 	} else if ([item isEqualToString:@"MALE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"male"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.maleCB == nil) {
+			self.maleCB = [[[UISwitch alloc] init] autorelease];
+			[self.maleCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.maleCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.male];
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"FEMALE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"female"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.femaleCB == nil) {
+			self.femaleCB = [[[UISwitch alloc] init] autorelease];
+			[self.femaleCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.femaleCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.female];
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"SEVERAL PEOPLE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"severalPeople"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.groupCB == nil) {
+			self.groupCB = [[[UISwitch alloc] init] autorelease];
+			[self.groupCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.groupCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.severalPeople];
+		[csCell makeLayout];
+		cell = csCell;		
 	} else if ([item isEqualToString:@"HAS PHOTO"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"hasPhoto"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.hasPhotoCB == nil) {
+			self.hasPhotoCB = [[[UISwitch alloc] init] autorelease];
+			[self.hasPhotoCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.hasPhotoCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.hasPhoto];
+		[csCell makeLayout];
+		cell = csCell;	
 	} else if ([item isEqualToString:@"WHEELCHAIR ACCESSIBLE"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"wheelchairAccessible"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.wheelchairAccessibleCB == nil) {
+			self.wheelchairAccessibleCB = [[[UISwitch alloc] init] autorelease];
+			[self.wheelchairAccessibleCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.wheelchairAccessibleCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.wheelchairAccessible];
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"VERIFIED"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"verified"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.verifiedCB == nil) {
+			self.verifiedCB = [[[UISwitch alloc] init] autorelease];
+			[self.verifiedCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.verifiedCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.verified];
+		[csCell makeLayout];
+		cell = csCell;		
 	} else if ([item isEqualToString:@"VOUCHED"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"vouched"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.vouchedCB == nil) {
+			self.vouchedCB = [[[UISwitch alloc] init] autorelease];
+			[self.vouchedCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.vouchedCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.vouched];
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"AMBASSADOR"]) {
-		cell = [self createCheckboxCell:NSLocalizedString(item, nil) filterKey:@"ambassador"];
+		CSCheckboxCell *csCell = [self getCheckboxCell];
+		if (self.ambassadorCB == nil) {
+			self.ambassadorCB = [[[UISwitch alloc] init] autorelease];
+			[self.ambassadorCB addTarget:self action:@selector(switchHasChanged:) forControlEvents:UIControlEventValueChanged];
+		}
+		csCell.checkbox = self.ambassadorCB;
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		
+		[csCell.checkbox setOn:self.filter.ambassador];
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"NAME USERNAME"]) {
-		cell = [self createEditableCell:NSLocalizedString(item, nil) filterKey:@"username"];
+		CSEditableCell *csCell = [self getEditableCell];
+		if (self.usernameTF	== nil) {
+			self.usernameTF = [[[UITextField alloc] init] autorelease];
+			self.usernameTF.clearButtonMode = UITextFieldViewModeAlways;
+			self.usernameTF.delegate = self;
+		}
+		
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		csCell.valueField = self.usernameTF;
+		[csCell makeLayout];
+		cell = csCell;
 	} else if ([item isEqualToString:@"KEYWORD"]) {
-		cell = [self createEditableCell:NSLocalizedString(item, nil) filterKey:@"keyword"];
+		CSEditableCell *csCell = [self getEditableCell];
+		if (self.keywordTF	== nil) {
+			self.keywordTF = [[[UITextField alloc] init] autorelease];
+			self.keywordTF.clearButtonMode = UITextFieldViewModeAlways;
+			self.keywordTF.delegate = self;
+		}
+		
+		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		csCell.valueField = self.keywordTF;
+		[csCell makeLayout];
+		cell = csCell;
 	}
 	
 	return cell;
@@ -260,32 +434,6 @@
 - (void)searchAction {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 	[self hideDialogView];
-	
-	for (NSString *key in self.switches) {
-		
-		UISwitch *checkbox = [self.switches objectForKey:key];
-		
-		SEL setterSel = NSSelectorFromString([NSString stringWithFormat:@"set%@:", [NSString stringWithFormat:@"%@%@",[[key substringToIndex:1] capitalizedString],[key substringFromIndex:1]]]);
-		NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:setterSel]];
-		[flagInvocation setSelector:setterSel];
-		BOOL result = checkbox.on;
-		[flagInvocation setArgument:&result atIndex:2];
-		[flagInvocation invokeWithTarget:self.filter];
-	}
-	
-	for (NSString *key in self.fields) {
-		UITextField *field = [self.fields objectForKey:key];
-		SEL setterSel = NSSelectorFromString([NSString stringWithFormat:@"set%@:", [NSString stringWithFormat:@"%@%@",[[key substringToIndex:1] capitalizedString],[key substringFromIndex:1]]]);
-		NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:setterSel]];
-		[flagInvocation setSelector:setterSel];
-		
-		NSString *result = field.text;
-		[flagInvocation setArgument:&result atIndex:2];
-		[flagInvocation invokeWithTarget:self.filter];
-	}
-	
-	self.filter.maxSurfers = _hasSpaceFor;
-	
 	[self.searchResultController performSearch];
 }
 
@@ -432,27 +580,11 @@
 
 #pragma Mark Cell creation methods
 
-- (CSCheckboxCell *)createCheckboxCell:(NSString *)title filterKey:(NSString *)filterKey {
+- (CSCheckboxCell *)getCheckboxCell {
 	CSCheckboxCell * cell = (CSCheckboxCell *)[_formTableView dequeueReusableCellWithIdentifier:@"checkboxCell"];
 	if (cell == nil) {
 		cell = [[CSCheckboxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"checkboxCell"];
-	}
-	
-	UISwitch *checkbox = [[[UISwitch alloc] init] autorelease];
-	[self.switches setObject:checkbox forKey:filterKey];
-	cell.checkbox = checkbox;
-	
-	cell.keyLabel.text = title;
-	NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:NSSelectorFromString(filterKey)]];
-	[flagInvocation setSelector:NSSelectorFromString(filterKey)];
-	[flagInvocation invokeWithTarget:self.filter];
-
-	BOOL result;
-	[flagInvocation getReturnValue:&result];
-
-	[cell.checkbox setOn:result];
-	cell.selectionStyle = UITableViewCellSelectionStyleNone;
-	[cell makeLayout];
+	}	
 	return cell;
 }
 
@@ -468,26 +600,12 @@
 	return cell;
 }
 
-- (CSEditableCell *)createEditableCell:(NSString *)title filterKey:(NSString *)filterKey {
+- (CSEditableCell *)getEditableCell {
 	CSEditableCell * cell = (CSEditableCell *)[_formTableView dequeueReusableCellWithIdentifier:@"editableValueCell"];
 	if (cell == nil) {
 		cell = [[CSEditableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"editableValueCell"];
 	}
-	cell.keyLabel.text = title;
-	
-	NSInvocation *flagInvocation = [NSInvocation invocationWithMethodSignature:[self.filter methodSignatureForSelector:NSSelectorFromString(filterKey)]];
-	[flagInvocation setSelector:NSSelectorFromString(filterKey)];
-	[flagInvocation invokeWithTarget:self.filter];
-	
-	NSString *result;
-	[flagInvocation getReturnValue:&result];
 
-	
-	UITextField *valueField = [[[UITextField alloc] init] autorelease];
-	valueField.text = result;
-	valueField.clearButtonMode = UITextFieldViewModeAlways;
-	[self.fields setObject:valueField forKey:filterKey];
-	cell.valueField = valueField;
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;
 	[cell makeLayout];
 	return cell;	
@@ -512,6 +630,44 @@
 - (void)tableViewWasTouched:(TapableTableView *)tableView {
 	if (dialogViewOn) {
 		[self hideDialogView];
+	}
+}
+
+#pragma Mark ChangeForm actions
+
+- (void)switchHasChanged:(id)sender {
+	if (self.hasCouchYesCB == sender) {
+		self.filter.hasCouchYes = self.hasCouchYesCB.on;
+	} else if (self.hasCouchMaybeCB == sender) {
+		self.filter.hasCouchMaybe = self.hasCouchMaybeCB.on;
+	} else if (self.hasCouchCoffeeOrDrinkCB == sender) {
+		self.filter.hasCouchCoffeeOrDrink = self.hasCouchCoffeeOrDrinkCB.on;
+	} else if (self.hasCouchTravelingCB == sender) {
+		self.filter.hasCouchTraveling = self.hasCouchTravelingCB.on;
+	} else if (self.maleCB == sender) {
+		self.filter.male = self.maleCB.on;
+	} else if (self.femaleCB == sender) {
+		self.filter.female = self.femaleCB.on;
+	} else if (self.groupCB == sender) {
+		self.filter.severalPeople = self.groupCB.on;
+	} else if (self.hasPhotoCB == sender) {
+		self.filter.hasPhoto = self.hasPhotoCB.on;
+	} else if (self.wheelchairAccessibleCB == sender) {
+		self.filter.wheelchairAccessible = self.wheelchairAccessibleCB.on;
+	} else if (self.verifiedCB == sender) {
+		self.filter.verified = self.verifiedCB.on;
+	} else if (self.vouchedCB == sender) {
+		self.filter.vouched = self.vouchedCB.on;
+	} else if (self.ambassadorCB == sender) {
+		self.filter.ambassador = self.ambassadorCB.on;
+	}
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+	if (self.usernameTF == textField) {
+		self.filter.username = textField.text;
+	} else if (self.keywordTF == textField) {
+		self.filter.keyword = textField.text;
 	}
 }
 

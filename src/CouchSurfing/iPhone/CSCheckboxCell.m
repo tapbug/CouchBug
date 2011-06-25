@@ -21,6 +21,7 @@
 		_keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		[self.contentView addSubview:_keyLabel];
+		self.selectionStyle = UITableViewCellSelectionStyleNone;
     }
     return self;
 }
