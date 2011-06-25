@@ -150,9 +150,9 @@
     
     CGFloat basicsTop = _nameLabel.frame.origin.y + _nameLabel.frame.size.height + 1;
     CGSize basicsSize = [_basicsLabel.text sizeWithFont:_basicsLabel.font
-                                      constrainedToSize:CGSizeMake(rightColumnWidth, 12) 
+                                      constrainedToSize:CGSizeMake(rightColumnWidth - 10, 12) 
                                           lineBreakMode:_basicsLabel.lineBreakMode];
-    _basicsLabel.frame = CGRectMake(rightColumnX, basicsTop, rightColumnWidth - 10, basicsSize.height);
+    _basicsLabel.frame = CGRectMake(rightColumnX, basicsTop, basicsSize.width, basicsSize.height);
     
     CGFloat aboutTop = basicsTop + basicsSize.height + 4;
     CGSize aboutSize = [_aboutLabel.text sizeWithFont:_aboutLabel.font
