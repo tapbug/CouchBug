@@ -59,7 +59,7 @@
 
 - (void)viewDidLoad {
 	_hasSpaceFor = self.filter.maxSurfers;
-	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMUNITY", @"PROFILE", nil];
+	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMMUNITY", @"PROFILE", nil];
 					 
 	NSArray *locationSection = [NSArray arrayWithObject:@"LOCATION"];
 	NSArray *couchStatusSection = [NSArray arrayWithObjects:@"YES",
@@ -71,14 +71,14 @@
 							@"AGE", @"HAS SPACE FOR", @"LANGUAGE", @"LAST LOGIN", nil];
 	NSArray *host2Section = [NSArray arrayWithObjects:
 							 @"MALE", @"FEMALE", @"SEVERAL PEOPLE", @"HAS PHOTO", @"WHEELCHAIR ACCESSIBLE", nil];
-	NSArray *comunitySection = [NSArray arrayWithObjects:@"VERIFIED", @"VOUCHED", @"AMBASSADOR", nil];
+	NSArray *communitySection = [NSArray arrayWithObjects:@"VERIFIED", @"VOUCHED", @"AMBASSADOR", nil];
 	NSArray *profileSection = [NSArray arrayWithObjects:@"NAME USERNAME", @"KEYWORD", nil];
 	
 	self.items = [NSArray arrayWithObjects:locationSection,
 				  couchStatusSection,
 				  host1Section,
 				  host2Section,
-				  comunitySection, 
+				  communitySection, 
 				  profileSection, nil];
 	
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
