@@ -65,7 +65,7 @@
         [self.contentView addSubview:_nameLabel];
         
         _basicsLabel = [[[UILabel alloc] init] autorelease];
-        _basicsLabel.lineBreakMode = UILineBreakModeTailTruncation;
+        _basicsLabel.lineBreakMode = UILineBreakModeWordWrap;
         _basicsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
         _basicsLabel.backgroundColor = [UIColor clearColor];
         _basicsLabel.font = [UIFont boldSystemFontOfSize:11.5];
@@ -140,34 +140,34 @@
     photoFrameViewFrame.origin.y = 3;
     _photoFrameView.frame = photoFrameViewFrame;
     
-    CGFloat rightColumnX = photoFrameViewFrame.size.width + photoFrameViewFrame.origin.x + 2;
-    CGFloat rightColumnWidth = contentFrame.size.width - rightColumnX - 5;
+    CGFloat rightColumnX = photoFrameViewFrame.size.width + photoFrameViewFrame.origin.x + 4;
+    CGFloat rightColumnWidth = contentFrame.size.width - rightColumnX - 7;
     
     CGSize nameSize = [_nameLabel.text sizeWithFont:_nameLabel.font
                                               forWidth:rightColumnWidth
                                          lineBreakMode:UILineBreakModeTailTruncation];
-    _nameLabel.frame = CGRectMake(rightColumnX, 7, rightColumnWidth, nameSize.height);
+    _nameLabel.frame = CGRectMake(rightColumnX, 5, rightColumnWidth, nameSize.height);
     
-    CGFloat basicsTop = _nameLabel.frame.origin.y + _nameLabel.frame.size.height + 2;
+    CGFloat basicsTop = _nameLabel.frame.origin.y + _nameLabel.frame.size.height + 1;
     CGSize basicsSize = [_basicsLabel.text sizeWithFont:_basicsLabel.font
                                       constrainedToSize:CGSizeMake(rightColumnWidth, 12) 
                                           lineBreakMode:_basicsLabel.lineBreakMode];
-    _basicsLabel.frame = CGRectMake(rightColumnX, basicsTop, rightColumnWidth, basicsSize.height);
+    _basicsLabel.frame = CGRectMake(rightColumnX, basicsTop, rightColumnWidth - 10, basicsSize.height);
     
-    CGFloat aboutTop = basicsTop + basicsSize.height + 2;
+    CGFloat aboutTop = basicsTop + basicsSize.height + 4;
     CGSize aboutSize = [_aboutLabel.text sizeWithFont:_aboutLabel.font
                                     constrainedToSize:CGSizeMake(rightColumnWidth, 25)
                                         lineBreakMode:_aboutLabel.lineBreakMode];
     _aboutLabel.frame = CGRectMake(rightColumnX, aboutTop, rightColumnWidth, aboutSize.height);
     
-    CGFloat countsTop = self.contentView.frame.size.height - 20;
+    CGFloat countsTop = self.contentView.frame.size.height - 18;
 
     CGSize referencesCountSize = [_referencesCountLabel.text sizeWithFont:_referencesCountLabel.font
                                                         constrainedToSize:CGSizeMake(30, CGFLOAT_MAX)];
     _referencesCountLabel.frame = CGRectMake(rightColumnX,
                                              countsTop,
-                                             referencesCountSize.width + 8,
-                                             14);
+                                             referencesCountSize.width + 7,
+                                             13);
     
     CGRect referencesLabelFrame = _referencesLabel.frame;
     referencesLabelFrame.origin.x = rightColumnX + _referencesCountLabel.frame.size.width + 2;
@@ -178,8 +178,8 @@
                                                         constrainedToSize:CGSizeMake(30, CGFLOAT_MAX)];
     _photosCountLabel.frame = CGRectMake(_referencesLabel.frame.origin.x + _referencesLabel.frame.size.width + 7,
                                          countsTop,
-                                         photosCountSize.width + 8,
-                                         14);
+                                         photosCountSize.width + 7,
+                                         13);
 
     CGRect photosLabelFrame = _photosLabel.frame;
     photosLabelFrame.origin.x = _photosCountLabel.frame.origin.x + _photosCountLabel.frame.size.width + 2;
@@ -190,8 +190,8 @@
                                                 constrainedToSize:CGSizeMake(30, CGFLOAT_MAX)];
     _replyRateCountLabel.frame = CGRectMake(_photosLabel.frame.origin.x + _photosLabel.frame.size.width + 7,
                                          countsTop,
-                                         replyRateCountSize.width + 8,
-                                         14);
+                                         replyRateCountSize.width + 7,
+                                         13);
     
     CGRect _replyRateLabelFrame = _replyRateLabel.frame;
     _replyRateLabelFrame.origin.x = _replyRateCountLabel.frame.origin.x + _replyRateCountLabel.frame.size.width + 2;
@@ -199,17 +199,17 @@
     _replyRateLabel.frame = _replyRateLabelFrame;
     
     CGFloat infoIconsTop = contentFrame.size.height - 20;
-    CGRect hasCouchFrame = CGRectMake(4, infoIconsTop, 18, 18);
+    CGRect hasCouchFrame = CGRectMake(10, infoIconsTop, 18, 18);
     _hasCouchView.frame = hasCouchFrame;
     
-    CGRect vouchedFrame = CGRectMake(hasCouchFrame.origin.x + hasCouchFrame.size.width + 2,
+    CGRect vouchedFrame = CGRectMake(hasCouchFrame.origin.x + hasCouchFrame.size.width + 5,
                                      infoIconsTop,
                                      18,
                                      18);
     
     _vouchedView.frame = vouchedFrame;
     
-    _ambassadorView.frame = CGRectMake(vouchedFrame.origin.x + vouchedFrame.size.width + 2,
+    _ambassadorView.frame = CGRectMake(vouchedFrame.origin.x + vouchedFrame.size.width + 5,
                                     infoIconsTop,
                                     18,
                                     18);
@@ -229,7 +229,8 @@
     countLabel.textColor = [UIColor whiteColor];
     countLabel.backgroundColor = [UIColor grayColor];
     countLabel.textAlignment = UITextAlignmentCenter;
-    countLabel.layer.cornerRadius = 7;
+    countLabel.layer.cornerRadius = 6;
+	[countLabel sizeToFit];
     return countLabel;
     
 }
@@ -240,8 +241,8 @@
     label.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
     label.backgroundColor = [UIColor clearColor];
     label.text = str;
-    label.textColor = UIColorFromRGB(0x6b6b6b);
-    label.font = [UIFont systemFontOfSize:10];
+    label.textColor = UIColorFromRGB(0x4d4d4d);
+    label.font = [UIFont systemFontOfSize:11];
     [label sizeToFit];
     return label;
 }
