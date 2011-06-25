@@ -12,15 +12,12 @@
 @implementation TapableTableView
 
 @synthesize tapDelegate = _tabDelegate;
-@synthesize justTableTouch = _justTableTouch;
 
-- (void)touchesBegan:(NSSet *)touches withEvent:(UIEvent *)event {
-	if (!self.justTableTouch) {
-		[super touchesBegan:touches withEvent:event];		
-	} else {
-		if ([self.tapDelegate respondsToSelector:@selector(tableViewWasTouched:)]) {
-			[self.tapDelegate tableViewWasTouched:self];
-		}	
+- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event {
+	[super touchesEnded:touches withEvent:event];
+	
+	if ([self.tapDelegate respondsToSelector:@selector(tableViewWasTouched:)]) {
+		[self.tapDelegate tableViewWasTouched:self];
 	}
 }
 

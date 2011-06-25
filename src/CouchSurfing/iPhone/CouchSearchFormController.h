@@ -42,7 +42,8 @@
 	
 	BOOL dialogViewOn;
 	UIPickerView *_hasSpaceForPickerView;
-	NSUInteger _hasSpaceFor;
+	
+	NSIndexPath *_currentlyHiddenIndexPath;
 }
 
 @property (nonatomic, assign) CouchSearchResultController *searchResultController;

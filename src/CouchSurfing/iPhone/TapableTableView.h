@@ -12,11 +12,9 @@
 
 @interface TapableTableView : UITableView {
     id<TabableTableViewDelegate> _tapDelegate;
-	BOOL _justTableTouch;
 }
 
 @property(nonatomic, assign) id<TabableTableViewDelegate> tapDelegate;
-@property(nonatomic, assign) BOOL justTableTouch;
 
 @end
 

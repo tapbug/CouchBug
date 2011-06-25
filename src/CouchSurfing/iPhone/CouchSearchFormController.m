@@ -38,6 +38,8 @@
 @property (nonatomic, retain) UITextField *usernameTF;
 @property (nonatomic, retain) UITextField *keywordTF;
 
+@property (nonatomic, retain) NSIndexPath *currentlyHiddenIndexPath;
+
 - (void)cancelForm;
 - (void)searchAction;
 
@@ -81,8 +83,9 @@
 @synthesize usernameTF = _usernameTF;
 @synthesize keywordTF = _keywordTF;
 
+@synthesize currentlyHiddenIndexPath = _currentlyHiddenIndexPath;
+
 - (void)viewDidLoad {
-	_hasSpaceFor = self.filter.maxSurfers;
 	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMMUNITY", @"PROFILE", nil];
 					 
 	NSArray *locationSection = [NSArray arrayWithObject:@"LOCATION"];
@@ -175,6 +178,8 @@
 	self.ambassadorCB = nil;
 	self.usernameTF = nil;
 	self.keywordTF = nil;
+	
+	self.currentlyHiddenIndexPath = nil;
     [super dealloc];
 }
 
@@ -277,10 +282,10 @@
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:value];
 	} else if ([item isEqualToString:@"HAS SPACE FOR"]) {
 		NSString *value;
-		if (_hasSpaceFor == 0) {
+		if (self.filter.maxSurfers == 0) {
 			value = NSLocalizedString(@"ANY", nil);
 		} else {
-			value = [NSString stringWithFormat:@"%d", _hasSpaceFor];
+			value = [NSString stringWithFormat:@"%d", self.filter.maxSurfers];
 		}
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:value];
 	} else if ([item isEqualToString:@"LANGUAGE"]) {
@@ -414,12 +419,15 @@
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *item = [[self.items objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
-	if ([item isEqualToString:@"HAS SPACE FOR"]) {
+	
+	if ([self.currentlyHiddenIndexPath isEqual:indexPath]) {
+		return;
+	} else if ([item isEqualToString:@"HAS SPACE FOR"]) {
 		_hasSpaceForPickerView = [[[UIPickerView alloc] init] autorelease];
 		_hasSpaceForPickerView.dataSource = self;
 		_hasSpaceForPickerView.delegate = self;
 		_hasSpaceForPickerView.showsSelectionIndicator = YES;
-		[_hasSpaceForPickerView selectRow:_hasSpaceFor inComponent:0 animated:NO];
+		[_hasSpaceForPickerView selectRow:self.filter.maxSurfers inComponent:0 animated:NO];
 		[self showDialogViewWithContentView:_hasSpaceForPickerView];
 	}
 }
@@ -483,7 +491,6 @@
 #pragma Mark DialogView methods
 
 - (void)showDialogViewWithContentView:(UIView *)contentView {
-	_formTableView.justTableTouch = YES;
 	dialogViewOn = YES;
 	CGFloat toolBarHeight = 30;
 	if (_dialogView == nil) {
@@ -530,7 +537,6 @@
 }
 
 - (void)hideDialogView {
-	_formTableView.justTableTouch = NO;
 	dialogViewOn = NO;
 	[UIView beginAnimations:@"hideDialog" context:nil];
 	CGRect dialogViewFrame = _dialogView.frame;
@@ -570,8 +576,8 @@
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
 	if (_hasSpaceForPickerView == pickerView) {
 		NSUInteger newHasSpaceFor = [_hasSpaceForPickerView selectedRowInComponent:0];
-		if (_hasSpaceFor != newHasSpaceFor) {
-			_hasSpaceFor = newHasSpaceFor;
+		if (self.filter.maxSurfers != newHasSpaceFor) {
+			self.filter.maxSurfers = newHasSpaceFor;
 			[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]]
 								  withRowAnimation:UITableViewRowAnimationMiddle];		
 		}
@@ -629,7 +635,10 @@
 
 - (void)tableViewWasTouched:(TapableTableView *)tableView {
 	if (dialogViewOn) {
+		self.currentlyHiddenIndexPath = [tableView indexPathForSelectedRow];
 		[self hideDialogView];
+	} else {
+		self.currentlyHiddenIndexPath = nil;
 	}
 }
 
