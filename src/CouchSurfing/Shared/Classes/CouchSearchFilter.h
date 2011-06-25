@@ -21,11 +21,11 @@
 	BOOL hasCouchCoffeeOrDrink;
 	BOOL hasCouchTraveling;
 	
-    NSString *ageLow;
-    NSString *ageHigh;
+    NSUInteger ageLow;
+    NSUInteger ageHigh;
     NSUInteger maxSurfers;
     NSString *laguageId;
-    NSString *lastLoginDays;
+    NSUInteger lastLoginDays;
     BOOL male;
     BOOL female;
     BOOL severalPeople;
@@ -47,11 +47,11 @@
 @property (nonatomic, assign) BOOL hasCouchCoffeeOrDrink;
 @property (nonatomic, assign) BOOL hasCouchTraveling;
 
-@property (nonatomic, retain) NSString *ageLow;
-@property (nonatomic, retain) NSString *ageHigh;
+@property (nonatomic, assign) NSUInteger ageLow;
+@property (nonatomic, assign) NSUInteger ageHigh;
 @property (nonatomic, assign) NSUInteger maxSurfers;
 @property (nonatomic, retain) NSString *languageId;
-@property (nonatomic, retain) NSString *lastLoginDays;
+@property (nonatomic, assign) NSUInteger lastLoginDays;
 @property (nonatomic, assign) BOOL male;
 @property (nonatomic, assign) BOOL female;
 @property (nonatomic, assign) BOOL severalPeople;

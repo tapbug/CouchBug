@@ -43,11 +43,11 @@
     if (self) {
         self.locationJSON = [@"{\"state_id\":\"4384\",\"state\":\"Praha\",\"latitude\":\"50.087814\",\"longitude\":\"14.420453\",\"type\":\"state\",\"country_id\":\"75\",\"country\":\"Czech Republic\",\"region_id\":\"6\",\"region\":\"Europe\"}" objectFromJSONString];
 		self.hasCouchTraveling = YES;
-		self.ageLow = @"3";
-		self.ageHigh = @"30";
+		self.ageLow = 18;
+		self.ageHigh = 30;
         self.maxSurfers = 1;
         self.languageId = @"";
-        self.lastLoginDays = @"";
+        self.lastLoginDays = 0;
         self.male = YES;
         self.female = YES;
         self.severalPeople = YES;
@@ -64,10 +64,7 @@
 
 - (void)dealloc {
     self.locationJSON = nil;
-    self.ageLow = nil;
-    self.ageHigh = nil;
     self.languageId = nil;
-    self.lastLoginDays = nil;
     self.username = nil;
     self.keyword = nil;
     [super dealloc];
@@ -92,11 +89,11 @@
 	}
 	request.couchStatuses = couchStatusesTemp;
 	
-    request.ageLow = self.ageLow;
-    request.ageHigh = self.ageHigh;
+    request.ageLow = [NSString stringWithFormat:@"%d", self.ageLow];
+    request.ageHigh = [NSString stringWithFormat:@"%d", self.ageHigh];
     request.maxSurfers = [NSString stringWithFormat:@"%d", self.maxSurfers];
     request.languageId = self.languageId;
-    request.lastLoginDays = self.lastLoginDays;
+    request.lastLoginDays = [NSString stringWithFormat:@"%d", self.lastLoginDays];
     request.male = self.male ? @"1" : @"";
     request.female = self.female ? @"1" : @"";;
     request.severalPeople = self.severalPeople ? @"1" : @"";;

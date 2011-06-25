@@ -40,6 +40,8 @@
 
 @property (nonatomic, retain) NSIndexPath *currentlyHiddenIndexPath;
 
+@property (nonatomic, retain) NSArray *lastLoginsData;
+
 - (void)cancelForm;
 - (void)searchAction;
 
@@ -55,6 +57,8 @@
 
 - (void)reduceViewSizeByHeight:(CGFloat)byHeight;
 - (void)extendViewSizeByHeight:(CGFloat)byHeight;
+
+- (NSUInteger)selectedLastLoginDays;
 
 @end
 
@@ -84,6 +88,8 @@
 @synthesize keywordTF = _keywordTF;
 
 @synthesize currentlyHiddenIndexPath = _currentlyHiddenIndexPath;
+
+@synthesize lastLoginsData = _lastLoginsData;
 
 - (void)viewDidLoad {
 	self.sections = [NSArray arrayWithObjects:@"LOCATION", @"COUCH STATUS", @"HOST", @"", @"COMMUNITY", @"PROFILE", nil];
@@ -141,6 +147,17 @@
 	_formTableView.dataSource = self;
 	[self.view addSubview:_formTableView];
 	
+	self.lastLoginsData = [NSArray arrayWithObjects:
+						   [NSArray arrayWithObjects:NSLocalizedString(@"ANY", nil), [NSNumber numberWithInt:0], nil],
+						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 90, NSLocalizedString(@"DAYS", nil)], [NSNumber numberWithInt:90], nil],
+						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 50, NSLocalizedString(@"DAYS", nil)], [NSNumber numberWithInt:50], nil],
+						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 30, NSLocalizedString(@"DAYS", nil)], [NSNumber numberWithInt:30], nil],
+						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 14, NSLocalizedString(@"DAYS", nil)], [NSNumber numberWithInt:14], nil],
+						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 7, NSLocalizedString(@"DAYS", nil)], [NSNumber numberWithInt:7], nil],
+						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 3, NSLocalizedString(@"DAYS", nil)], [NSNumber numberWithInt:3], nil],
+						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 24, NSLocalizedString(@"HOURS", nil)], [NSNumber numberWithInt:1], nil],
+						   nil];
+	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
     [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
@@ -178,8 +195,8 @@
 	self.ambassadorCB = nil;
 	self.usernameTF = nil;
 	self.keywordTF = nil;
-	
 	self.currentlyHiddenIndexPath = nil;
+	self.lastLoginsData = nil;
     [super dealloc];
 }
 
@@ -276,8 +293,8 @@
 		NSString *value = nil;
 		if (self.filter.ageLow || self.filter.ageHigh) {
 			value = [NSString stringWithFormat:@"%@ to %@",
-					 self.filter.ageLow == nil ? NSLocalizedString(@"ANY", nil) : self.filter.ageLow,
-					 self.filter.ageHigh == nil ? NSLocalizedString(@"ANY", nil) : self.filter.ageHigh];
+					 self.filter.ageLow == 0 ? NSLocalizedString(@"ANY", nil) : [NSString stringWithFormat:@"%d", self.filter.ageLow],
+					 self.filter.ageHigh == 0 ? NSLocalizedString(@"ANY", nil) : [NSString stringWithFormat:@"%d", self.filter.ageHigh]];
 		}
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:value];
 	} else if ([item isEqualToString:@"HAS SPACE FOR"]) {
@@ -291,7 +308,8 @@
 	} else if ([item isEqualToString:@"LANGUAGE"]) {
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:@"English"];
 	} else if ([item isEqualToString:@"LAST LOGIN"]) {
-		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:self.filter.lastLoginDays];
+		NSArray *selectedRow = [self.lastLoginsData objectAtIndex:[self selectedLastLoginDays]];
+		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:[selectedRow objectAtIndex:0]];
 	} else if ([item isEqualToString:@"MALE"]) {
 		CSCheckboxCell *csCell = [self getCheckboxCell];
 		if (self.maleCB == nil) {
@@ -429,6 +447,14 @@
 		_hasSpaceForPickerView.showsSelectionIndicator = YES;
 		[_hasSpaceForPickerView selectRow:self.filter.maxSurfers inComponent:0 animated:NO];
 		[self showDialogViewWithContentView:_hasSpaceForPickerView];
+	} else if ([item isEqualToString:@"LAST LOGIN"]) {
+		_lastLoginPickerView = [[[UIPickerView alloc] init] autorelease];
+		_lastLoginPickerView.dataSource = self;
+		_lastLoginPickerView.delegate = self;
+		_lastLoginPickerView.showsSelectionIndicator = YES;
+		NSUInteger selectedIndex = [self selectedLastLoginDays];
+		[_lastLoginPickerView selectRow:selectedIndex inComponent:0 animated:NO];
+		[self showDialogViewWithContentView:_lastLoginPickerView];
 	}
 }
 
@@ -546,6 +572,7 @@
 	[UIView commitAnimations];
 	
 	_hasSpaceForPickerView = nil;
+	_lastLoginPickerView = nil;
 }
 
 #pragma Mark UIPickerViewDataSource / Delegate methods
@@ -553,13 +580,17 @@
 - (NSInteger)numberOfComponentsInPickerView:(UIPickerView *)pickerView {
 	if (_hasSpaceForPickerView == pickerView) {
 		return 1;
+	} else if(_lastLoginPickerView == pickerView) {
+		return 1;
 	}
 	return 0;
 }
 
 - (NSInteger)pickerView:(UIPickerView *)pickerView numberOfRowsInComponent:(NSInteger)component {
-	if (_hasSpaceForPickerView) {
+	if (_hasSpaceForPickerView == pickerView) {
 		return 7;
+	} else if(_lastLoginPickerView == pickerView) {
+		return 8;
 	}
 	return 0;
 }
@@ -569,19 +600,49 @@
 		if (row == 0) {
 			return NSLocalizedString(@"ANY", nil);
 		}
+	} else if (_lastLoginPickerView == pickerView) {
+		return [[self.lastLoginsData objectAtIndex:row] objectAtIndex:0];
 	}
 	return [NSString stringWithFormat:@"%d", row];
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
+	NSIndexPath *actualIndexPath = nil;
 	if (_hasSpaceForPickerView == pickerView) {
 		NSUInteger newHasSpaceFor = [_hasSpaceForPickerView selectedRowInComponent:0];
 		if (self.filter.maxSurfers != newHasSpaceFor) {
 			self.filter.maxSurfers = newHasSpaceFor;
-			[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:2]]
-								  withRowAnimation:UITableViewRowAnimationMiddle];		
+			actualIndexPath = [NSIndexPath indexPathForRow:1 inSection:2];
+		}
+	} else if (_lastLoginPickerView == pickerView) {
+		NSUInteger oldRow = [self selectedLastLoginDays];
+		if (oldRow != row) {
+			NSUInteger selectedValue = [[[self.lastLoginsData objectAtIndex:row] objectAtIndex:1] intValue];
+			self.filter.lastLoginDays = selectedValue;
+			[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:3 inSection:2]]
+								  withRowAnimation:UITableViewRowAnimationMiddle];
+			actualIndexPath = [NSIndexPath indexPathForRow:3 inSection:2];
 		}
 	}
+	if (actualIndexPath != nil) {
+		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
+							  withRowAnimation:UITableViewRowAnimationMiddle];
+		[_formTableView selectRowAtIndexPath:actualIndexPath
+									animated:NO
+							  scrollPosition:UITableViewScrollPositionMiddle];
+	}
+	
+}
+
+- (NSUInteger)selectedLastLoginDays {
+	NSUInteger index = 0;
+	for (; index < [self.lastLoginsData count]; index++) {
+		NSArray *row = [self.lastLoginsData objectAtIndex:index];
+		if ([[row objectAtIndex:1] intValue] == self.filter.lastLoginDays) {
+			break;
+		}
+	}
+	return index;
 }
 
 #pragma Mark Cell creation methods
@@ -679,5 +740,6 @@
 		self.filter.keyword = textField.text;
 	}
 }
+
 
 @end

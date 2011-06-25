@@ -42,6 +42,8 @@
 	
 	BOOL dialogViewOn;
 	UIPickerView *_hasSpaceForPickerView;
+	UIPickerView *_lastLoginPickerView;
+	NSArray *_lastLoginsData;
 	
 	NSIndexPath *_currentlyHiddenIndexPath;
 }
