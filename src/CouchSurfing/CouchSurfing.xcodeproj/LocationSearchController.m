@@ -13,6 +13,8 @@
 #import "CSTools.h"
 #import "ActivityOverlap.h"
 
+#import "CouchSearchFilter.h"
+
 @interface LocationSearchController ()
 
 @property (nonatomic, retain) MVUrlConnection *searchConnection;
@@ -37,6 +39,7 @@
 
 @implementation LocationSearchController
 
+@synthesize delegate = _delegate;
 @synthesize searchConnection;
 @synthesize locations;
 
@@ -183,6 +186,23 @@
 		cell.textLabel.text = [location locationName];
 	}	
 	return cell;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if ([self nonSearchMode]) {
+		if (indexPath.row == 1) {
+			_filter.locationJSON = nil;
+			if ([self.delegate respondsToSelector:@selector(locationSearchDidSelectLocation:)]) {
+				[self.delegate locationSearchDidSelectLocation:self];
+			}			
+		}
+	} else {
+		NSDictionary *location = [self.locations objectAtIndex:indexPath.row];
+		_filter.locationJSON = location;
+		if ([self.delegate respondsToSelector:@selector(locationSearchDidSelectLocation:)]) {
+			[self.delegate locationSearchDidSelectLocation:self];
+		}
+	}
 }
 
 #pragma Mark Private methods

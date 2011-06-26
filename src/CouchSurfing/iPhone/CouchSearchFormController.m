@@ -17,6 +17,7 @@
 #import "CSEditableCell.h"
 
 #import "CSTools.h"
+#import "NSDictionary+Location.h"
 
 @interface CouchSearchFormController ()
 
@@ -46,6 +47,8 @@
 - (void)cancelForm;
 - (void)searchAction;
 
+- (void)registerForKeyboardEvents;
+- (void)unregisterKeyboardEvents;
 - (void)keyboardDidShow:(NSNotification *)notification;
 - (void)keyboardDidHide:(NSNotification *)notification;
 
@@ -149,9 +152,7 @@
 						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 24, NSLocalizedString(@"HOURS", nil)], [NSNumber numberWithInt:1], nil],
 						   nil];
 	
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+	[self registerForKeyboardEvents];
 	
     [super viewDidLoad];
 }
@@ -229,7 +230,11 @@
 			[cell.contentView addSubview:textLabel];
 		}
 		UILabel *textLabel = (UILabel *)[cell.contentView viewWithTag:1];
-		textLabel.text = self.filter.locationName; //otestovat veeelkou delku
+		NSString *locationName = NSLocalizedString(@"EVERYWHERE", nil);
+		if (self.filter.locationJSON != nil) {
+			locationName = [self.filter.locationJSON locationName];
+		}
+		textLabel.text = locationName;
 		
 	} else if ([item isEqualToString:@"YES"]) {
 		CSCheckboxCell *csCell = [self getCheckboxCell];
@@ -475,9 +480,13 @@
 		LanguagesListController *controller = [[[LanguagesListController alloc] initWithFilter:self.filter] autorelease];
 		controller.delegate = self;
 		[self.navigationController pushViewController:controller animated:YES];
+		[self unregisterKeyboardEvents];
+		
 	} else if ([item isEqualToString:@"LOCATION"]) {
 		LocationSearchController *controller = [[[LocationSearchController alloc] initWithFilter:self.filter] autorelease];
+		controller.delegate = self;
 		[self.navigationController pushViewController:controller animated:YES];
+		[self unregisterKeyboardEvents];
 	}
 }
 
@@ -495,6 +504,18 @@
 }
 
 #pragma Mark Keyboard events methods
+
+- (void)registerForKeyboardEvents {
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+}
+
+- (void)unregisterKeyboardEvents {
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [nc removeObserver:self name:UIKeyboardWillHideNotification object:nil];
+}
 
 - (void)keyboardDidShow:(NSNotification *)notification {
 	NSIndexPath *lastVisibleIndexPath = [[_formTableView indexPathsForVisibleRows] lastObject];
@@ -797,6 +818,16 @@
 	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[_formTableView indexPathForSelectedRow]]
 						  withRowAnimation:UITableViewRowAnimationNone];	
 	[self.navigationController popViewControllerAnimated:YES];
+	[self registerForKeyboardEvents];
+}
+
+#pragma  Mark LocationSearchControllerDelegate
+
+- (void)locationSearchDidSelectLocation:(LocationSearchController *)locationSearchController {
+	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[_formTableView indexPathForSelectedRow]]
+						  withRowAnimation:UITableViewRowAnimationNone];	
+	[self.navigationController popViewControllerAnimated:YES];
+	[self registerForKeyboardEvents];
 }
 
 @end
