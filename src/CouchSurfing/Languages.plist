@@ -3,1292 +3,1292 @@
 <plist version="1.0">
 <array>
 	<dict>
-	<key>1</key>
-	<string>Abkhazian</string>
+		<key>1</key>
+		<string>Abkhazian</string>
 	</dict>
 	<dict>
-	<key>2</key>
-	<string>Afar</string>
+		<key>2</key>
+		<string>Afar</string>
 	</dict>
 	<dict>
-	<key>3</key>
-	<string>Afrikaans</string>
+		<key>3</key>
+		<string>Afrikaans</string>
 	</dict>
 	<dict>
-	<key>219</key>
-	<string>Albanian</string>
+		<key>219</key>
+		<string>Albanian</string>
 	</dict>
 	<dict>
-	<key>4</key>
-	<string>Albanian</string>
+		<key>4</key>
+		<string>Albanian</string>
 	</dict>
 	<dict>
-	<key>310</key>
-	<string>Algonquin</string>
+		<key>310</key>
+		<string>Algonquin</string>
 	</dict>
 	<dict>
-	<key>291</key>
-	<string>Alsatian</string>
+		<key>291</key>
+		<string>Alsatian</string>
 	</dict>
 	<dict>
-	<key>5</key>
-	<string>Amharic</string>
+		<key>5</key>
+		<string>Amharic</string>
 	</dict>
 	<dict>
-	<key>224</key>
-	<string>Ancient Greek</string>
+		<key>224</key>
+		<string>Ancient Greek</string>
 	</dict>
 	<dict>
-	<key>6</key>
-	<string>Arabic</string>
+		<key>6</key>
+		<string>Arabic</string>
 	</dict>
 	<dict>
-	<key>237</key>
-	<string>Arabic (East Arabian / Bahrani)</string>
+		<key>237</key>
+		<string>Arabic (East Arabian / Bahrani)</string>
 	</dict>
 	<dict>
-	<key>234</key>
-	<string>Arabic (Egypt)</string>
+		<key>234</key>
+		<string>Arabic (Egypt)</string>
 	</dict>
 	<dict>
-	<key>238</key>
-	<string>Arabic (Gulf)</string>
+		<key>238</key>
+		<string>Arabic (Gulf)</string>
 	</dict>
 	<dict>
-	<key>235</key>
-	<string>Arabic (Levantine / Shami)</string>
+		<key>235</key>
+		<string>Arabic (Levantine / Shami)</string>
 	</dict>
 	<dict>
-	<key>236</key>
-	<string>Arabic (Morocco)</string>
+		<key>236</key>
+		<string>Arabic (Morocco)</string>
 	</dict>
 	<dict>
-	<key>312</key>
-	<string>Aragonese</string>
+		<key>312</key>
+		<string>Aragonese</string>
 	</dict>
 	<dict>
-	<key>263</key>
-	<string>Aramaic</string>
+		<key>263</key>
+		<string>Aramaic</string>
 	</dict>
 	<dict>
-	<key>7</key>
-	<string>Armenian</string>
+		<key>7</key>
+		<string>Armenian</string>
 	</dict>
 	<dict>
-	<key>289</key>
-	<string>Arpitan</string>
+		<key>289</key>
+		<string>Arpitan</string>
 	</dict>
 	<dict>
-	<key>8</key>
-	<string>Assamese</string>
+		<key>8</key>
+		<string>Assamese</string>
 	</dict>
 	<dict>
-	<key>9</key>
-	<string>Aymara</string>
+		<key>9</key>
+		<string>Aymara</string>
 	</dict>
 	<dict>
-	<key>10</key>
-	<string>Azerbaijani</string>
+		<key>10</key>
+		<string>Azerbaijani</string>
 	</dict>
 	<dict>
-	<key>142</key>
-	<string>Bambara</string>
+		<key>142</key>
+		<string>Bambara</string>
 	</dict>
 	<dict>
-	<key>11</key>
-	<string>Bashkir</string>
+		<key>11</key>
+		<string>Bashkir</string>
 	</dict>
 	<dict>
-	<key>12</key>
-	<string>Basque</string>
+		<key>12</key>
+		<string>Basque</string>
 	</dict>
 	<dict>
-	<key>20</key>
-	<string>Belarusian</string>
+		<key>20</key>
+		<string>Belarusian</string>
 	</dict>
 	<dict>
-	<key>13</key>
-	<string>Bengali</string>
+		<key>13</key>
+		<string>Bengali</string>
 	</dict>
 	<dict>
-	<key>146</key>
-	<string>Berber</string>
+		<key>146</key>
+		<string>Berber</string>
 	</dict>
 	<dict>
-	<key>15</key>
-	<string>Bihari</string>
+		<key>15</key>
+		<string>Bihari</string>
 	</dict>
 	<dict>
-	<key>16</key>
-	<string>Bislama</string>
+		<key>16</key>
+		<string>Bislama</string>
 	</dict>
 	<dict>
-	<key>225</key>
-	<string>Bosnian</string>
+		<key>225</key>
+		<string>Bosnian</string>
 	</dict>
 	<dict>
-	<key>17</key>
-	<string>Breton</string>
+		<key>17</key>
+		<string>Breton</string>
 	</dict>
 	<dict>
-	<key>18</key>
-	<string>Bulgarian</string>
+		<key>18</key>
+		<string>Bulgarian</string>
 	</dict>
 	<dict>
-	<key>19</key>
-	<string>Burmese</string>
+		<key>19</key>
+		<string>Burmese</string>
 	</dict>
 	<dict>
-	<key>21</key>
-	<string>Cambodian</string>
+		<key>21</key>
+		<string>Cambodian</string>
 	</dict>
 	<dict>
-	<key>22</key>
-	<string>Catalan</string>
+		<key>22</key>
+		<string>Catalan</string>
 	</dict>
 	<dict>
-	<key>314</key>
-	<string>Chichewa</string>
+		<key>314</key>
+		<string>Chichewa</string>
 	</dict>
 	<dict>
-	<key>139</key>
-	<string>Chinese (Cantonese)</string>
+		<key>139</key>
+		<string>Chinese (Cantonese)</string>
 	</dict>
 	<dict>
-	<key>23</key>
-	<string>Chinese (Mandarin)</string>
+		<key>23</key>
+		<string>Chinese (Mandarin)</string>
 	</dict>
 	<dict>
-	<key>149</key>
-	<string>Chinese (Simplified)</string>
+		<key>149</key>
+		<string>Chinese (Simplified)</string>
 	</dict>
 	<dict>
-	<key>150</key>
-	<string>Chinese (Traditional)</string>
+		<key>150</key>
+		<string>Chinese (Traditional)</string>
 	</dict>
 	<dict>
-	<key>317</key>
-	<string>Chuukese</string>
+		<key>317</key>
+		<string>Chuukese</string>
 	</dict>
 	<dict>
-	<key>258</key>
-	<string>Chuvash</string>
+		<key>258</key>
+		<string>Chuvash</string>
 	</dict>
 	<dict>
-	<key>257</key>
-	<string>Cornish</string>
+		<key>257</key>
+		<string>Cornish</string>
 	</dict>
 	<dict>
-	<key>24</key>
-	<string>Corsican</string>
+		<key>24</key>
+		<string>Corsican</string>
 	</dict>
 	<dict>
-	<key>213</key>
-	<string>Cree</string>
+		<key>213</key>
+		<string>Cree</string>
 	</dict>
 	<dict>
-	<key>148</key>
-	<string>Creole</string>
+		<key>148</key>
+		<string>Creole</string>
 	</dict>
 	<dict>
-	<key>222</key>
-	<string>Creole (Guyana)</string>
+		<key>222</key>
+		<string>Creole (Guyana)</string>
 	</dict>
 	<dict>
-	<key>220</key>
-	<string>Creole (Haiti)</string>
+		<key>220</key>
+		<string>Creole (Haiti)</string>
 	</dict>
 	<dict>
-	<key>221</key>
-	<string>Creole (Jamaica)</string>
+		<key>221</key>
+		<string>Creole (Jamaica)</string>
 	</dict>
 	<dict>
-	<key>239</key>
-	<string>Creole (Louisiana)</string>
+		<key>239</key>
+		<string>Creole (Louisiana)</string>
 	</dict>
 	<dict>
-	<key>25</key>
-	<string>Croatian</string>
+		<key>25</key>
+		<string>Croatian</string>
 	</dict>
 	<dict>
-	<key>211</key>
-	<string>Croatian</string>
+		<key>211</key>
+		<string>Croatian</string>
 	</dict>
 	<dict>
-	<key>26</key>
-	<string>Czech</string>
+		<key>26</key>
+		<string>Czech</string>
 	</dict>
 	<dict>
-	<key>27</key>
-	<string>Danish</string>
+		<key>27</key>
+		<string>Danish</string>
 	</dict>
 	<dict>
-	<key>300</key>
-	<string>Dhivehi</string>
+		<key>300</key>
+		<string>Dhivehi</string>
 	</dict>
 	<dict>
-	<key>28</key>
-	<string>Dutch</string>
+		<key>28</key>
+		<string>Dutch</string>
 	</dict>
 	<dict>
-	<key>151</key>
-	<string>Dutch (Belgium)</string>
+		<key>151</key>
+		<string>Dutch (Belgium)</string>
 	</dict>
 	<dict>
-	<key>152</key>
-	<string>Dutch (Netherlands)</string>
+		<key>152</key>
+		<string>Dutch (Netherlands)</string>
 	</dict>
 	<dict>
-	<key>14</key>
-	<string>Dzongkha</string>
+		<key>14</key>
+		<string>Dzongkha</string>
 	</dict>
 	<dict>
-	<key>29</key>
-	<string>English</string>
+		<key>29</key>
+		<string>English</string>
 	</dict>
 	<dict>
-	<key>153</key>
-	<string>English (Australia)</string>
+		<key>153</key>
+		<string>English (Australia)</string>
 	</dict>
 	<dict>
-	<key>154</key>
-	<string>English (Belize)</string>
+		<key>154</key>
+		<string>English (Belize)</string>
 	</dict>
 	<dict>
-	<key>155</key>
-	<string>English (Canada)</string>
+		<key>155</key>
+		<string>English (Canada)</string>
 	</dict>
 	<dict>
-	<key>223</key>
-	<string>English (Caribbean)</string>
+		<key>223</key>
+		<string>English (Caribbean)</string>
 	</dict>
 	<dict>
-	<key>298</key>
-	<string>English (Guyana)</string>
+		<key>298</key>
+		<string>English (Guyana)</string>
 	</dict>
 	<dict>
-	<key>156</key>
-	<string>English (Ireland)</string>
+		<key>156</key>
+		<string>English (Ireland)</string>
 	</dict>
 	<dict>
-	<key>157</key>
-	<string>English (Jamaica)</string>
+		<key>157</key>
+		<string>English (Jamaica)</string>
 	</dict>
 	<dict>
-	<key>158</key>
-	<string>English (New Zealand)</string>
+		<key>158</key>
+		<string>English (New Zealand)</string>
 	</dict>
 	<dict>
-	<key>159</key>
-	<string>English (Philippines)</string>
+		<key>159</key>
+		<string>English (Philippines)</string>
 	</dict>
 	<dict>
-	<key>160</key>
-	<string>English (South Africa)</string>
+		<key>160</key>
+		<string>English (South Africa)</string>
 	</dict>
 	<dict>
-	<key>161</key>
-	<string>English (Trinidad)</string>
+		<key>161</key>
+		<string>English (Trinidad)</string>
 	</dict>
 	<dict>
-	<key>162</key>
-	<string>English (United Kingdom)</string>
+		<key>162</key>
+		<string>English (United Kingdom)</string>
 	</dict>
 	<dict>
-	<key>163</key>
-	<string>English (United States)</string>
+		<key>163</key>
+		<string>English (United States)</string>
 	</dict>
 	<dict>
-	<key>164</key>
-	<string>English (Zimbabwe)</string>
+		<key>164</key>
+		<string>English (Zimbabwe)</string>
 	</dict>
 	<dict>
-	<key>261</key>
-	<string>Erzya</string>
+		<key>261</key>
+		<string>Erzya</string>
 	</dict>
 	<dict>
-	<key>30</key>
-	<string>Esperanto</string>
+		<key>30</key>
+		<string>Esperanto</string>
 	</dict>
 	<dict>
-	<key>31</key>
-	<string>Estonian</string>
+		<key>31</key>
+		<string>Estonian</string>
 	</dict>
 	<dict>
-	<key>278</key>
-	<string>Fang</string>
+		<key>278</key>
+		<string>Fang</string>
 	</dict>
 	<dict>
-	<key>32</key>
-	<string>Faroese</string>
+		<key>32</key>
+		<string>Faroese</string>
 	</dict>
 	<dict>
-	<key>33</key>
-	<string>Fijian</string>
+		<key>33</key>
+		<string>Fijian</string>
 	</dict>
 	<dict>
-	<key>34</key>
-	<string>Finnish</string>
+		<key>34</key>
+		<string>Finnish</string>
 	</dict>
 	<dict>
-	<key>35</key>
-	<string>French</string>
+		<key>35</key>
+		<string>French</string>
 	</dict>
 	<dict>
-	<key>245</key>
-	<string>French (Acadian)</string>
+		<key>245</key>
+		<string>French (Acadian)</string>
 	</dict>
 	<dict>
-	<key>165</key>
-	<string>French (Belgium)</string>
+		<key>165</key>
+		<string>French (Belgium)</string>
 	</dict>
 	<dict>
-	<key>241</key>
-	<string>French (Cajun)</string>
+		<key>241</key>
+		<string>French (Cajun)</string>
 	</dict>
 	<dict>
-	<key>166</key>
-	<string>French (Canada)</string>
+		<key>166</key>
+		<string>French (Canada)</string>
 	</dict>
 	<dict>
-	<key>167</key>
-	<string>French (France)</string>
+		<key>167</key>
+		<string>French (France)</string>
 	</dict>
 	<dict>
-	<key>168</key>
-	<string>French (Luxembourg)</string>
+		<key>168</key>
+		<string>French (Luxembourg)</string>
 	</dict>
 	<dict>
-	<key>169</key>
-	<string>French (Monaco)</string>
+		<key>169</key>
+		<string>French (Monaco)</string>
 	</dict>
 	<dict>
-	<key>281</key>
-	<string>French (Quebec)</string>
+		<key>281</key>
+		<string>French (Quebec)</string>
 	</dict>
 	<dict>
-	<key>170</key>
-	<string>French (Switzerland)</string>
+		<key>170</key>
+		<string>French (Switzerland)</string>
 	</dict>
 	<dict>
-	<key>36</key>
-	<string>Frisian</string>
+		<key>36</key>
+		<string>Frisian</string>
 	</dict>
 	<dict>
-	<key>251</key>
-	<string>Fulah</string>
+		<key>251</key>
+		<string>Fulah</string>
 	</dict>
 	<dict>
-	<key>37</key>
-	<string>Galician</string>
+		<key>37</key>
+		<string>Galician</string>
 	</dict>
 	<dict>
-	<key>38</key>
-	<string>Georgian</string>
+		<key>38</key>
+		<string>Georgian</string>
 	</dict>
 	<dict>
-	<key>39</key>
-	<string>German</string>
+		<key>39</key>
+		<string>German</string>
 	</dict>
 	<dict>
-	<key>171</key>
-	<string>German (Austria)</string>
+		<key>171</key>
+		<string>German (Austria)</string>
 	</dict>
 	<dict>
-	<key>172</key>
-	<string>German (Germany)</string>
+		<key>172</key>
+		<string>German (Germany)</string>
 	</dict>
 	<dict>
-	<key>173</key>
-	<string>German (Liechtenstein)</string>
+		<key>173</key>
+		<string>German (Liechtenstein)</string>
 	</dict>
 	<dict>
-	<key>174</key>
-	<string>German (Luxembourg)</string>
+		<key>174</key>
+		<string>German (Luxembourg)</string>
 	</dict>
 	<dict>
-	<key>175</key>
-	<string>German (Switzerland)</string>
+		<key>175</key>
+		<string>German (Switzerland)</string>
 	</dict>
 	<dict>
-	<key>40</key>
-	<string>Greek</string>
+		<key>40</key>
+		<string>Greek</string>
 	</dict>
 	<dict>
-	<key>41</key>
-	<string>Greenlandic</string>
+		<key>41</key>
+		<string>Greenlandic</string>
 	</dict>
 	<dict>
-	<key>229</key>
-	<string>Guahibo</string>
+		<key>229</key>
+		<string>Guahibo</string>
 	</dict>
 	<dict>
-	<key>42</key>
-	<string>Guarani</string>
+		<key>42</key>
+		<string>Guarani</string>
 	</dict>
 	<dict>
-	<key>43</key>
-	<string>Gujarati</string>
+		<key>43</key>
+		<string>Gujarati</string>
 	</dict>
 	<dict>
-	<key>218</key>
-	<string>Gwich"in</string>
+		<key>218</key>
+		<string>Gwich"in</string>
 	</dict>
 	<dict>
-	<key>44</key>
-	<string>Hausa</string>
+		<key>44</key>
+		<string>Hausa</string>
 	</dict>
 	<dict>
-	<key>144</key>
-	<string>Hawaiian</string>
+		<key>144</key>
+		<string>Hawaiian</string>
 	</dict>
 	<dict>
-	<key>45</key>
-	<string>Hebrew</string>
+		<key>45</key>
+		<string>Hebrew</string>
 	</dict>
 	<dict>
-	<key>46</key>
-	<string>Hindi</string>
+		<key>46</key>
+		<string>Hindi</string>
 	</dict>
 	<dict>
-	<key>287</key>
-	<string>Hindko</string>
+		<key>287</key>
+		<string>Hindko</string>
 	</dict>
 	<dict>
-	<key>285</key>
-	<string>Hmong</string>
+		<key>285</key>
+		<string>Hmong</string>
 	</dict>
 	<dict>
-	<key>47</key>
-	<string>Hungarian</string>
+		<key>47</key>
+		<string>Hungarian</string>
 	</dict>
 	<dict>
-	<key>48</key>
-	<string>Icelandic</string>
+		<key>48</key>
+		<string>Icelandic</string>
 	</dict>
 	<dict>
-	<key>246</key>
-	<string>Igbo</string>
+		<key>246</key>
+		<string>Igbo</string>
 	</dict>
 	<dict>
-	<key>49</key>
-	<string>Indonesian</string>
+		<key>49</key>
+		<string>Indonesian</string>
 	</dict>
 	<dict>
-	<key>50</key>
-	<string>Interlingua</string>
+		<key>50</key>
+		<string>Interlingua</string>
 	</dict>
 	<dict>
-	<key>51</key>
-	<string>Interlingue</string>
+		<key>51</key>
+		<string>Interlingue</string>
 	</dict>
 	<dict>
-	<key>216</key>
-	<string>Inuktitut</string>
+		<key>216</key>
+		<string>Inuktitut</string>
 	</dict>
 	<dict>
-	<key>52</key>
-	<string>Inupiak</string>
+		<key>52</key>
+		<string>Inupiak</string>
 	</dict>
 	<dict>
-	<key>53</key>
-	<string>Irish</string>
+		<key>53</key>
+		<string>Irish</string>
 	</dict>
 	<dict>
-	<key>54</key>
-	<string>Italian</string>
+		<key>54</key>
+		<string>Italian</string>
 	</dict>
 	<dict>
-	<key>176</key>
-	<string>Italian (Italy)</string>
+		<key>176</key>
+		<string>Italian (Italy)</string>
 	</dict>
 	<dict>
-	<key>177</key>
-	<string>Italian (Switzerland)</string>
+		<key>177</key>
+		<string>Italian (Switzerland)</string>
 	</dict>
 	<dict>
-	<key>55</key>
-	<string>Japanese</string>
+		<key>55</key>
+		<string>Japanese</string>
 	</dict>
 	<dict>
-	<key>56</key>
-	<string>Javanese</string>
+		<key>56</key>
+		<string>Javanese</string>
 	</dict>
 	<dict>
-	<key>305</key>
-	<string>K"iche"</string>
+		<key>305</key>
+		<string>K"iche"</string>
 	</dict>
 	<dict>
-	<key>57</key>
-	<string>Kannada</string>
+		<key>57</key>
+		<string>Kannada</string>
 	</dict>
 	<dict>
-	<key>277</key>
-	<string>Karelian</string>
+		<key>277</key>
+		<string>Karelian</string>
 	</dict>
 	<dict>
-	<key>58</key>
-	<string>Kashmiri</string>
+		<key>58</key>
+		<string>Kashmiri</string>
 	</dict>
 	<dict>
-	<key>240</key>
-	<string>Kashubian</string>
+		<key>240</key>
+		<string>Kashubian</string>
 	</dict>
 	<dict>
-	<key>59</key>
-	<string>Kazakh</string>
+		<key>59</key>
+		<string>Kazakh</string>
 	</dict>
 	<dict>
-	<key>269</key>
-	<string>Kichwa</string>
+		<key>269</key>
+		<string>Kichwa</string>
 	</dict>
 	<dict>
-	<key>60</key>
-	<string>Kinyarwanda</string>
+		<key>60</key>
+		<string>Kinyarwanda</string>
 	</dict>
 	<dict>
-	<key>62</key>
-	<string>Kirundi</string>
+		<key>62</key>
+		<string>Kirundi</string>
 	</dict>
 	<dict>
-	<key>266</key>
-	<string>Klingon</string>
+		<key>266</key>
+		<string>Klingon</string>
 	</dict>
 	<dict>
-	<key>260</key>
-	<string>Komi</string>
+		<key>260</key>
+		<string>Komi</string>
 	</dict>
 	<dict>
-	<key>262</key>
-	<string>Konkani</string>
+		<key>262</key>
+		<string>Konkani</string>
 	</dict>
 	<dict>
-	<key>63</key>
-	<string>Korean</string>
+		<key>63</key>
+		<string>Korean</string>
 	</dict>
 	<dict>
-	<key>319</key>
-	<string>Kosraean</string>
+		<key>319</key>
+		<string>Kosraean</string>
 	</dict>
 	<dict>
-	<key>64</key>
-	<string>Kurdish</string>
+		<key>64</key>
+		<string>Kurdish</string>
 	</dict>
 	<dict>
-	<key>282</key>
-	<string>Kurmanji</string>
+		<key>282</key>
+		<string>Kurmanji</string>
 	</dict>
 	<dict>
-	<key>61</key>
-	<string>Kyrgyz</string>
+		<key>61</key>
+		<string>Kyrgyz</string>
 	</dict>
 	<dict>
-	<key>273</key>
-	<string>Láadan</string>
+		<key>273</key>
+		<string>Láadan</string>
 	</dict>
 	<dict>
-	<key>141</key>
-	<string>Ladakhi</string>
+		<key>141</key>
+		<string>Ladakhi</string>
 	</dict>
 	<dict>
-	<key>65</key>
-	<string>Lao</string>
+		<key>65</key>
+		<string>Lao</string>
 	</dict>
 	<dict>
-	<key>66</key>
-	<string>Latin</string>
+		<key>66</key>
+		<string>Latin</string>
 	</dict>
 	<dict>
-	<key>67</key>
-	<string>Latvian (Lettish)</string>
+		<key>67</key>
+		<string>Latvian (Lettish)</string>
 	</dict>
 	<dict>
-	<key>244</key>
-	<string>Ligurian</string>
+		<key>244</key>
+		<string>Ligurian</string>
 	</dict>
 	<dict>
-	<key>204</key>
-	<string>Limburgish</string>
+		<key>204</key>
+		<string>Limburgish</string>
 	</dict>
 	<dict>
-	<key>68</key>
-	<string>Lingala</string>
+		<key>68</key>
+		<string>Lingala</string>
 	</dict>
 	<dict>
-	<key>69</key>
-	<string>Lithuanian</string>
+		<key>69</key>
+		<string>Lithuanian</string>
 	</dict>
 	<dict>
-	<key>253</key>
-	<string>Lojban</string>
+		<key>253</key>
+		<string>Lojban</string>
 	</dict>
 	<dict>
-	<key>270</key>
-	<string>Low German</string>
+		<key>270</key>
+		<string>Low German</string>
 	</dict>
 	<dict>
-	<key>276</key>
-	<string>Lower Sorbian</string>
+		<key>276</key>
+		<string>Lower Sorbian</string>
 	</dict>
 	<dict>
-	<key>205</key>
-	<string>Luxembourgish</string>
+		<key>205</key>
+		<string>Luxembourgish</string>
 	</dict>
 	<dict>
-	<key>70</key>
-	<string>Macedonian</string>
+		<key>70</key>
+		<string>Macedonian</string>
 	</dict>
 	<dict>
-	<key>71</key>
-	<string>Malagasy</string>
+		<key>71</key>
+		<string>Malagasy</string>
 	</dict>
 	<dict>
-	<key>72</key>
-	<string>Malay</string>
+		<key>72</key>
+		<string>Malay</string>
 	</dict>
 	<dict>
-	<key>73</key>
-	<string>Malayalam</string>
+		<key>73</key>
+		<string>Malayalam</string>
 	</dict>
 	<dict>
-	<key>74</key>
-	<string>Maltese</string>
+		<key>74</key>
+		<string>Maltese</string>
 	</dict>
 	<dict>
-	<key>206</key>
-	<string>Manchu</string>
+		<key>206</key>
+		<string>Manchu</string>
 	</dict>
 	<dict>
-	<key>259</key>
-	<string>Manx</string>
+		<key>259</key>
+		<string>Manx</string>
 	</dict>
 	<dict>
-	<key>75</key>
-	<string>Maori</string>
+		<key>75</key>
+		<string>Maori</string>
 	</dict>
 	<dict>
-	<key>249</key>
-	<string>Mapudungun</string>
+		<key>249</key>
+		<string>Mapudungun</string>
 	</dict>
 	<dict>
-	<key>76</key>
-	<string>Marathi</string>
+		<key>76</key>
+		<string>Marathi</string>
 	</dict>
 	<dict>
-	<key>265</key>
-	<string>Mari</string>
+		<key>265</key>
+		<string>Mari</string>
 	</dict>
 	<dict>
-	<key>242</key>
-	<string>Marshallese</string>
+		<key>242</key>
+		<string>Marshallese</string>
 	</dict>
 	<dict>
-	<key>247</key>
-	<string>Min Nan</string>
+		<key>247</key>
+		<string>Min Nan</string>
 	</dict>
 	<dict>
-	<key>264</key>
-	<string>Moksha</string>
+		<key>264</key>
+		<string>Moksha</string>
 	</dict>
 	<dict>
-	<key>77</key>
-	<string>Moldovan</string>
+		<key>77</key>
+		<string>Moldovan</string>
 	</dict>
 	<dict>
-	<key>78</key>
-	<string>Mongolian</string>
+		<key>78</key>
+		<string>Mongolian</string>
 	</dict>
 	<dict>
-	<key>274</key>
-	<string>Montenegrin</string>
+		<key>274</key>
+		<string>Montenegrin</string>
 	</dict>
 	<dict>
-	<key>207</key>
-	<string>More</string>
+		<key>207</key>
+		<string>More</string>
 	</dict>
 	<dict>
-	<key>320</key>
-	<string>Mortlockese</string>
+		<key>320</key>
+		<string>Mortlockese</string>
 	</dict>
 	<dict>
-	<key>267</key>
-	<string>Nahuatl</string>
+		<key>267</key>
+		<string>Nahuatl</string>
 	</dict>
 	<dict>
-	<key>79</key>
-	<string>Nauruan</string>
+		<key>79</key>
+		<string>Nauruan</string>
 	</dict>
 	<dict>
-	<key>288</key>
-	<string>Navajo</string>
+		<key>288</key>
+		<string>Navajo</string>
 	</dict>
 	<dict>
-	<key>279</key>
-	<string>Neapolitan</string>
+		<key>279</key>
+		<string>Neapolitan</string>
 	</dict>
 	<dict>
-	<key>301</key>
-	<string>Nepal Bhasa</string>
+		<key>301</key>
+		<string>Nepal Bhasa</string>
 	</dict>
 	<dict>
-	<key>80</key>
-	<string>Nepali</string>
+		<key>80</key>
+		<string>Nepali</string>
 	</dict>
 	<dict>
-	<key>81</key>
-	<string>Norwegian</string>
+		<key>81</key>
+		<string>Norwegian</string>
 	</dict>
 	<dict>
-	<key>227</key>
-	<string>Norwegian (Bokmål)</string>
+		<key>227</key>
+		<string>Norwegian (Bokmål)</string>
 	</dict>
 	<dict>
-	<key>228</key>
-	<string>Norwegian (Nynorsk)</string>
+		<key>228</key>
+		<string>Norwegian (Nynorsk)</string>
 	</dict>
 	<dict>
-	<key>82</key>
-	<string>Occitan</string>
+		<key>82</key>
+		<string>Occitan</string>
 	</dict>
 	<dict>
-	<key>143</key>
-	<string>Okinawan</string>
+		<key>143</key>
+		<string>Okinawan</string>
 	</dict>
 	<dict>
-	<key>83</key>
-	<string>Oriya</string>
+		<key>83</key>
+		<string>Oriya</string>
 	</dict>
 	<dict>
-	<key>84</key>
-	<string>Oromo</string>
+		<key>84</key>
+		<string>Oromo</string>
 	</dict>
 	<dict>
-	<key>321</key>
-	<string>Palauan</string>
+		<key>321</key>
+		<string>Palauan</string>
 	</dict>
 	<dict>
-	<key>145</key>
-	<string>Papiamento</string>
+		<key>145</key>
+		<string>Papiamento</string>
 	</dict>
 	<dict>
-	<key>85</key>
-	<string>Pashto (Pushto)</string>
+		<key>85</key>
+		<string>Pashto (Pushto)</string>
 	</dict>
 	<dict>
-	<key>299</key>
-	<string>Pemon</string>
+		<key>299</key>
+		<string>Pemon</string>
 	</dict>
 	<dict>
-	<key>140</key>
-	<string>Persian</string>
+		<key>140</key>
+		<string>Persian</string>
 	</dict>
 	<dict>
-	<key>86</key>
-	<string>Persian</string>
+		<key>86</key>
+		<string>Persian</string>
 	</dict>
 	<dict>
-	<key>137</key>
-	<string>Pidgin</string>
+		<key>137</key>
+		<string>Pidgin</string>
 	</dict>
 	<dict>
-	<key>316</key>
-	<string>Pohnpeian</string>
+		<key>316</key>
+		<string>Pohnpeian</string>
 	</dict>
 	<dict>
-	<key>87</key>
-	<string>Polish</string>
+		<key>87</key>
+		<string>Polish</string>
 	</dict>
 	<dict>
-	<key>88</key>
-	<string>Portuguese</string>
+		<key>88</key>
+		<string>Portuguese</string>
 	</dict>
 	<dict>
-	<key>178</key>
-	<string>Portuguese (Brazil)</string>
+		<key>178</key>
+		<string>Portuguese (Brazil)</string>
 	</dict>
 	<dict>
-	<key>179</key>
-	<string>Portuguese (Portugal)</string>
+		<key>179</key>
+		<string>Portuguese (Portugal)</string>
 	</dict>
 	<dict>
-	<key>89</key>
-	<string>Punjabi</string>
+		<key>89</key>
+		<string>Punjabi</string>
 	</dict>
 	<dict>
-	<key>90</key>
-	<string>Quechua</string>
+		<key>90</key>
+		<string>Quechua</string>
 	</dict>
 	<dict>
-	<key>268</key>
-	<string>Quenya</string>
+		<key>268</key>
+		<string>Quenya</string>
 	</dict>
 	<dict>
-	<key>284</key>
-	<string>Rapa Nui</string>
+		<key>284</key>
+		<string>Rapa Nui</string>
 	</dict>
 	<dict>
-	<key>91</key>
-	<string>Rhaeto-Romance</string>
+		<key>91</key>
+		<string>Rhaeto-Romance</string>
 	</dict>
 	<dict>
-	<key>248</key>
-	<string>Romani</string>
+		<key>248</key>
+		<string>Romani</string>
 	</dict>
 	<dict>
-	<key>92</key>
-	<string>Romanian</string>
+		<key>92</key>
+		<string>Romanian</string>
 	</dict>
 	<dict>
-	<key>180</key>
-	<string>Romanian (Moldova)</string>
+		<key>180</key>
+		<string>Romanian (Moldova)</string>
 	</dict>
 	<dict>
-	<key>181</key>
-	<string>Romanian (Romania)</string>
+		<key>181</key>
+		<string>Romanian (Romania)</string>
 	</dict>
 	<dict>
-	<key>93</key>
-	<string>Russian</string>
+		<key>93</key>
+		<string>Russian</string>
 	</dict>
 	<dict>
-	<key>182</key>
-	<string>Russian (Moldova)</string>
+		<key>182</key>
+		<string>Russian (Moldova)</string>
 	</dict>
 	<dict>
-	<key>183</key>
-	<string>Russian (Russia)</string>
+		<key>183</key>
+		<string>Russian (Russia)</string>
 	</dict>
 	<dict>
-	<key>283</key>
-	<string>Sami</string>
+		<key>283</key>
+		<string>Sami</string>
 	</dict>
 	<dict>
-	<key>94</key>
-	<string>Samoan</string>
+		<key>94</key>
+		<string>Samoan</string>
 	</dict>
 	<dict>
-	<key>95</key>
-	<string>Sango</string>
+		<key>95</key>
+		<string>Sango</string>
 	</dict>
 	<dict>
-	<key>96</key>
-	<string>Sanskrit</string>
+		<key>96</key>
+		<string>Sanskrit</string>
 	</dict>
 	<dict>
-	<key>214</key>
-	<string>Sardinian</string>
+		<key>214</key>
+		<string>Sardinian</string>
 	</dict>
 	<dict>
-	<key>215</key>
-	<string>Scots</string>
+		<key>215</key>
+		<string>Scots</string>
 	</dict>
 	<dict>
-	<key>97</key>
-	<string>Scottish Gaelic (Gàidhlig)</string>
+		<key>97</key>
+		<string>Scottish Gaelic (Gàidhlig)</string>
 	</dict>
 	<dict>
-	<key>212</key>
-	<string>Serbian (Cyrillic)</string>
+		<key>212</key>
+		<string>Serbian (Cyrillic)</string>
 	</dict>
 	<dict>
-	<key>98</key>
-	<string>Serbian (Latin)</string>
+		<key>98</key>
+		<string>Serbian (Latin)</string>
 	</dict>
 	<dict>
-	<key>99</key>
-	<string>Serbo-Croatian</string>
+		<key>99</key>
+		<string>Serbo-Croatian</string>
 	</dict>
 	<dict>
-	<key>100</key>
-	<string>Sesotho</string>
+		<key>100</key>
+		<string>Sesotho</string>
 	</dict>
 	<dict>
-	<key>101</key>
-	<string>Setswana</string>
+		<key>101</key>
+		<string>Setswana</string>
 	</dict>
 	<dict>
-	<key>102</key>
-	<string>Shona</string>
+		<key>102</key>
+		<string>Shona</string>
 	</dict>
 	<dict>
-	<key>208</key>
-	<string>Sibe</string>
+		<key>208</key>
+		<string>Sibe</string>
 	</dict>
 	<dict>
-	<key>250</key>
-	<string>Sicilian</string>
+		<key>250</key>
+		<string>Sicilian</string>
 	</dict>
 	<dict>
-	<key>147</key>
-	<string>Sign Language - American</string>
+		<key>147</key>
+		<string>Sign Language - American</string>
 	</dict>
 	<dict>
-	<key>296</key>
-	<string>Sign Language - Austrian</string>
+		<key>296</key>
+		<string>Sign Language - Austrian</string>
 	</dict>
 	<dict>
-	<key>297</key>
-	<string>Sign Language - British</string>
+		<key>297</key>
+		<string>Sign Language - British</string>
 	</dict>
 	<dict>
-	<key>243</key>
-	<string>Sign Language - BSL, AUSLAN, NZS</string>
+		<key>243</key>
+		<string>Sign Language - BSL, AUSLAN, NZS</string>
 	</dict>
 	<dict>
-	<key>294</key>
-	<string>Sign Language - Chinese</string>
+		<key>294</key>
+		<string>Sign Language - Chinese</string>
 	</dict>
 	<dict>
-	<key>233</key>
-	<string>Sign Language - Dutch (NGT)</string>
+		<key>233</key>
+		<string>Sign Language - Dutch (NGT)</string>
 	</dict>
 	<dict>
-	<key>280</key>
-	<string>Sign Language - Finnish</string>
+		<key>280</key>
+		<string>Sign Language - Finnish</string>
 	</dict>
 	<dict>
-	<key>315</key>
-	<string>Sign Language - Flemish</string>
+		<key>315</key>
+		<string>Sign Language - Flemish</string>
 	</dict>
 	<dict>
-	<key>232</key>
-	<string>Sign Language - French</string>
+		<key>232</key>
+		<string>Sign Language - French</string>
 	</dict>
 	<dict>
-	<key>302</key>
-	<string>Sign Language - German</string>
+		<key>302</key>
+		<string>Sign Language - German</string>
 	</dict>
 	<dict>
-	<key>323</key>
-	<string>Sign Language - Greek</string>
+		<key>323</key>
+		<string>Sign Language - Greek</string>
 	</dict>
 	<dict>
-	<key>271</key>
-	<string>Sign Language - Hungarian</string>
+		<key>271</key>
+		<string>Sign Language - Hungarian</string>
 	</dict>
 	<dict>
-	<key>309</key>
-	<string>Sign Language - Indian</string>
+		<key>309</key>
+		<string>Sign Language - Indian</string>
 	</dict>
 	<dict>
-	<key>138</key>
-	<string>Sign Language - Intl</string>
+		<key>138</key>
+		<string>Sign Language - Intl</string>
 	</dict>
 	<dict>
-	<key>306</key>
-	<string>Sign Language - Japanese</string>
+		<key>306</key>
+		<string>Sign Language - Japanese</string>
 	</dict>
 	<dict>
-	<key>290</key>
-	<string>Sign Language - Kenyan</string>
+		<key>290</key>
+		<string>Sign Language - Kenyan</string>
 	</dict>
 	<dict>
-	<key>308</key>
-	<string>Sign Language - Korean</string>
+		<key>308</key>
+		<string>Sign Language - Korean</string>
 	</dict>
 	<dict>
-	<key>292</key>
-	<string>Sign Language - Mexican</string>
+		<key>292</key>
+		<string>Sign Language - Mexican</string>
 	</dict>
 	<dict>
-	<key>313</key>
-	<string>Sign Language - Norwegian</string>
+		<key>313</key>
+		<string>Sign Language - Norwegian</string>
 	</dict>
 	<dict>
-	<key>293</key>
-	<string>Sign Language - Quebec</string>
+		<key>293</key>
+		<string>Sign Language - Quebec</string>
 	</dict>
 	<dict>
-	<key>303</key>
-	<string>Sign Language - Spanish</string>
+		<key>303</key>
+		<string>Sign Language - Spanish</string>
 	</dict>
 	<dict>
-	<key>295</key>
-	<string>Sign Language - Taiwanese</string>
+		<key>295</key>
+		<string>Sign Language - Taiwanese</string>
 	</dict>
 	<dict>
-	<key>307</key>
-	<string>Sign Language - Trinidad and Tob</string>
+		<key>307</key>
+		<string>Sign Language - Trinidad and Tob</string>
 	</dict>
 	<dict>
-	<key>311</key>
-	<string>Sign Language - Yugoslavian</string>
+		<key>311</key>
+		<string>Sign Language - Yugoslavian</string>
 	</dict>
 	<dict>
-	<key>252</key>
-	<string>Silesian</string>
+		<key>252</key>
+		<string>Silesian</string>
 	</dict>
 	<dict>
-	<key>103</key>
-	<string>Sindhi</string>
+		<key>103</key>
+		<string>Sindhi</string>
 	</dict>
 	<dict>
-	<key>104</key>
-	<string>Sinhala</string>
+		<key>104</key>
+		<string>Sinhala</string>
 	</dict>
 	<dict>
-	<key>105</key>
-	<string>Siswati</string>
+		<key>105</key>
+		<string>Siswati</string>
 	</dict>
 	<dict>
-	<key>106</key>
-	<string>Slovak</string>
+		<key>106</key>
+		<string>Slovak</string>
 	</dict>
 	<dict>
-	<key>107</key>
-	<string>Slovenian</string>
+		<key>107</key>
+		<string>Slovenian</string>
 	</dict>
 	<dict>
-	<key>108</key>
-	<string>Somali</string>
+		<key>108</key>
+		<string>Somali</string>
 	</dict>
 	<dict>
-	<key>272</key>
-	<string>Soranî</string>
+		<key>272</key>
+		<string>Soranî</string>
 	</dict>
 	<dict>
-	<key>109</key>
-	<string>Spanish</string>
+		<key>109</key>
+		<string>Spanish</string>
 	</dict>
 	<dict>
-	<key>184</key>
-	<string>Spanish (Argentina)</string>
+		<key>184</key>
+		<string>Spanish (Argentina)</string>
 	</dict>
 	<dict>
-	<key>185</key>
-	<string>Spanish (Bolivia)</string>
+		<key>185</key>
+		<string>Spanish (Bolivia)</string>
 	</dict>
 	<dict>
-	<key>186</key>
-	<string>Spanish (Chile)</string>
+		<key>186</key>
+		<string>Spanish (Chile)</string>
 	</dict>
 	<dict>
-	<key>187</key>
-	<string>Spanish (Colombia)</string>
+		<key>187</key>
+		<string>Spanish (Colombia)</string>
 	</dict>
 	<dict>
-	<key>188</key>
-	<string>Spanish (Costa Rica)</string>
+		<key>188</key>
+		<string>Spanish (Costa Rica)</string>
 	</dict>
 	<dict>
-	<key>189</key>
-	<string>Spanish (Dominican Republic)</string>
+		<key>189</key>
+		<string>Spanish (Dominican Republic)</string>
 	</dict>
 	<dict>
-	<key>190</key>
-	<string>Spanish (Ecuador)</string>
+		<key>190</key>
+		<string>Spanish (Ecuador)</string>
 	</dict>
 	<dict>
-	<key>191</key>
-	<string>Spanish (El Salvador)</string>
+		<key>191</key>
+		<string>Spanish (El Salvador)</string>
 	</dict>
 	<dict>
-	<key>192</key>
-	<string>Spanish (Guatemala)</string>
+		<key>192</key>
+		<string>Spanish (Guatemala)</string>
 	</dict>
 	<dict>
-	<key>193</key>
-	<string>Spanish (Honduras)</string>
+		<key>193</key>
+		<string>Spanish (Honduras)</string>
 	</dict>
 	<dict>
-	<key>194</key>
-	<string>Spanish (Mexico)</string>
+		<key>194</key>
+		<string>Spanish (Mexico)</string>
 	</dict>
 	<dict>
-	<key>195</key>
-	<string>Spanish (Nicaragua)</string>
+		<key>195</key>
+		<string>Spanish (Nicaragua)</string>
 	</dict>
 	<dict>
-	<key>196</key>
-	<string>Spanish (Panama)</string>
+		<key>196</key>
+		<string>Spanish (Panama)</string>
 	</dict>
 	<dict>
-	<key>197</key>
-	<string>Spanish (Paraguay)</string>
+		<key>197</key>
+		<string>Spanish (Paraguay)</string>
 	</dict>
 	<dict>
-	<key>198</key>
-	<string>Spanish (Peru)</string>
+		<key>198</key>
+		<string>Spanish (Peru)</string>
 	</dict>
 	<dict>
-	<key>199</key>
-	<string>Spanish (Puerto Rico)</string>
+		<key>199</key>
+		<string>Spanish (Puerto Rico)</string>
 	</dict>
 	<dict>
-	<key>200</key>
-	<string>Spanish (Spain)</string>
+		<key>200</key>
+		<string>Spanish (Spain)</string>
 	</dict>
 	<dict>
-	<key>201</key>
-	<string>Spanish (Uruguay)</string>
+		<key>201</key>
+		<string>Spanish (Uruguay)</string>
 	</dict>
 	<dict>
-	<key>231</key>
-	<string>Spanish (Venezuela)</string>
+		<key>231</key>
+		<string>Spanish (Venezuela)</string>
 	</dict>
 	<dict>
-	<key>226</key>
-	<string>Sranan Tongo</string>
+		<key>226</key>
+		<string>Sranan Tongo</string>
 	</dict>
 	<dict>
-	<key>110</key>
-	<string>Sundanese</string>
+		<key>110</key>
+		<string>Sundanese</string>
 	</dict>
 	<dict>
-	<key>111</key>
-	<string>Swahili</string>
+		<key>111</key>
+		<string>Swahili</string>
 	</dict>
 	<dict>
-	<key>112</key>
-	<string>Swedish</string>
+		<key>112</key>
+		<string>Swedish</string>
 	</dict>
 	<dict>
-	<key>202</key>
-	<string>Swedish (Finland)</string>
+		<key>202</key>
+		<string>Swedish (Finland)</string>
 	</dict>
 	<dict>
-	<key>203</key>
-	<string>Swedish (Sweden)</string>
+		<key>203</key>
+		<string>Swedish (Sweden)</string>
 	</dict>
 	<dict>
-	<key>113</key>
-	<string>Tagalog</string>
+		<key>113</key>
+		<string>Tagalog</string>
 	</dict>
 	<dict>
-	<key>254</key>
-	<string>Tahitian</string>
+		<key>254</key>
+		<string>Tahitian</string>
 	</dict>
 	<dict>
-	<key>114</key>
-	<string>Tajik</string>
+		<key>114</key>
+		<string>Tajik</string>
 	</dict>
 	<dict>
-	<key>115</key>
-	<string>Tamil</string>
+		<key>115</key>
+		<string>Tamil</string>
 	</dict>
 	<dict>
-	<key>116</key>
-	<string>Tatar</string>
+		<key>116</key>
+		<string>Tatar</string>
 	</dict>
 	<dict>
-	<key>117</key>
-	<string>Telugu</string>
+		<key>117</key>
+		<string>Telugu</string>
 	</dict>
 	<dict>
-	<key>209</key>
-	<string>Tetum</string>
+		<key>209</key>
+		<string>Tetum</string>
 	</dict>
 	<dict>
-	<key>118</key>
-	<string>Thai</string>
+		<key>118</key>
+		<string>Thai</string>
 	</dict>
 	<dict>
-	<key>119</key>
-	<string>Tibetan</string>
+		<key>119</key>
+		<string>Tibetan</string>
 	</dict>
 	<dict>
-	<key>120</key>
-	<string>Tigrinya</string>
+		<key>120</key>
+		<string>Tigrinya</string>
 	</dict>
 	<dict>
-	<key>121</key>
-	<string>Tongan</string>
+		<key>121</key>
+		<string>Tongan</string>
 	</dict>
 	<dict>
-	<key>122</key>
-	<string>Tsonga</string>
+		<key>122</key>
+		<string>Tsonga</string>
 	</dict>
 	<dict>
-	<key>123</key>
-	<string>Turkish</string>
+		<key>123</key>
+		<string>Turkish</string>
 	</dict>
 	<dict>
-	<key>124</key>
-	<string>Turkmen</string>
+		<key>124</key>
+		<string>Turkmen</string>
 	</dict>
 	<dict>
-	<key>125</key>
-	<string>Twi</string>
+		<key>125</key>
+		<string>Twi</string>
 	</dict>
 	<dict>
-	<key>275</key>
-	<string>Udmurt</string>
+		<key>275</key>
+		<string>Udmurt</string>
 	</dict>
 	<dict>
-	<key>126</key>
-	<string>Ukrainian</string>
+		<key>126</key>
+		<string>Ukrainian</string>
 	</dict>
 	<dict>
-	<key>286</key>
-	<string>Upper Sorbian</string>
+		<key>286</key>
+		<string>Upper Sorbian</string>
 	</dict>
 	<dict>
-	<key>127</key>
-	<string>Urdu</string>
+		<key>127</key>
+		<string>Urdu</string>
 	</dict>
 	<dict>
-	<key>210</key>
-	<string>Uyghur</string>
+		<key>210</key>
+		<string>Uyghur</string>
 	</dict>
 	<dict>
-	<key>128</key>
-	<string>Uzbek</string>
+		<key>128</key>
+		<string>Uzbek</string>
 	</dict>
 	<dict>
-	<key>256</key>
-	<string>Venetian</string>
+		<key>256</key>
+		<string>Venetian</string>
 	</dict>
 	<dict>
-	<key>129</key>
-	<string>Vietnamese</string>
+		<key>129</key>
+		<string>Vietnamese</string>
 	</dict>
 	<dict>
-	<key>130</key>
-	<string>Volapuk</string>
+		<key>130</key>
+		<string>Volapuk</string>
 	</dict>
 	<dict>
-	<key>230</key>
-	<string>Wayuu</string>
+		<key>230</key>
+		<string>Wayuu</string>
 	</dict>
 	<dict>
-	<key>131</key>
-	<string>Welsh</string>
+		<key>131</key>
+		<string>Welsh</string>
 	</dict>
 	<dict>
-	<key>132</key>
-	<string>Wolof</string>
+		<key>132</key>
+		<string>Wolof</string>
 	</dict>
 	<dict>
-	<key>322</key>
-	<string>Wu</string>
+		<key>322</key>
+		<string>Wu</string>
 	</dict>
 	<dict>
-	<key>133</key>
-	<string>Xhosa</string>
+		<key>133</key>
+		<string>Xhosa</string>
 	</dict>
 	<dict>
-	<key>318</key>
-	<string>Yapese</string>
+		<key>318</key>
+		<string>Yapese</string>
 	</dict>
 	<dict>
-	<key>134</key>
-	<string>Yiddish</string>
+		<key>134</key>
+		<string>Yiddish</string>
 	</dict>
 	<dict>
-	<key>135</key>
-	<string>Yoruba</string>
+		<key>135</key>
+		<string>Yoruba</string>
 	</dict>
 	<dict>
-	<key>304</key>
-	<string>Yucatec Maya</string>
+		<key>304</key>
+		<string>Yucatec Maya</string>
 	</dict>
 	<dict>
-	<key>217</key>
-	<string>Yupik</string>
+		<key>217</key>
+		<string>Yupik</string>
 	</dict>
 	<dict>
-	<key>136</key>
-	<string>Zulu</string>
+		<key>136</key>
+		<string>Zulu</string>
 	</dict>
 </array>
 </plist>
