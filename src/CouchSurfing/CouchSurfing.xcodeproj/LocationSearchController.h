@@ -12,8 +12,10 @@
 
 @class CouchSearchFilter;
 @class ActivityOverlap;
+@protocol LocationSearchControllerDelegate;
 
 @interface LocationSearchController : UIViewController <UISearchBarDelegate, MVUrlConnectionDelegate, UITableViewDelegate, UITableViewDataSource> {
+	id<LocationSearchControllerDelegate> _delegate;
 	UISearchBar *_searchBar;
 	UITableView *_tableView;
 
@@ -24,6 +26,14 @@
 	ActivityOverlap *_searchActivityOverlap;
 }
 
+@property (nonatomic, assign) id<LocationSearchControllerDelegate> delegate;
+
 - (id)initWithFilter:(CouchSearchFilter *)filter;
+
+@end
+
+@protocol LocationSearchControllerDelegate <NSObject>
+
+- (void)locationSearchDidSelectLocation:(LocationSearchController *)locationSearchController;
 
 @end

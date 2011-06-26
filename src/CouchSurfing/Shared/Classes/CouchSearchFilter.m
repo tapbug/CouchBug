@@ -72,7 +72,11 @@
 
 - (CouchSearchRequest *)createRequest {
     CouchSearchRequest *request = [[[CouchSearchRequest alloc] init] autorelease];
-    request.location = [self.locationJSON JSONString];
+	if (self.locationJSON == nil) {
+		request.location = @"{\"label\":\"Everywhere\",\"latitude\":0,\"longitude\":0,\"type\":\"everywhere\",\"cssClass\":\"item-everywhere\"}";
+	} else {
+		request.location = [self.locationJSON JSONString];
+	}
     
 	NSMutableArray *couchStatusesTemp = [NSMutableArray array];
 	if (self.hasCouchYes) {
