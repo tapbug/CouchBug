@@ -7,6 +7,7 @@
 //
 
 #import "ActivityOverlap.h"
+#import "CSTools.h"
 
 @interface ActivityOverlap ()
 
@@ -35,17 +36,18 @@
 - (void)overlapView {
     _activityView = [[[UIView alloc] init] autorelease];
     _activityView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-    //_activityView.backgroundColor = [UIColor whiteColor];
-    _activityView.backgroundColor = [UIColor clearColor];
+    _activityView.backgroundColor = [UIColor colorWithWhite:0.0 alpha:0.8];
+    //_activityView.backgroundColor = [UIColor clearColor];
 	
-    _activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+    _activityIndicator = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhite] autorelease];
     _activityIndicator.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [_activityView addSubview:_activityIndicator];
     
     _activityLabel = [[[UILabel alloc] init] autorelease];
     _activityLabel.text = self.title;
     _activityLabel.backgroundColor = [UIColor clearColor];
-    _activityLabel.textColor = [UIColor grayColor];
+    //_activityLabel.textColor = UIColorFromRGB(0x8e8e8e);
+	_activityLabel.textColor = [UIColor whiteColor];
     [_activityLabel sizeToFit];
     _activityLabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
     [_activityView addSubview:_activityLabel];
@@ -53,10 +55,10 @@
     _activityView.frame = CGRectMake(0, 0, _view.frame.size.width, _view.frame.size.height);
     CGRect activityIndicatorFrame = _activityIndicator.frame;
     CGRect activityLabelFrame = _activityLabel.frame;
-    activityIndicatorFrame.origin.x = (int)((_activityView.frame.size.width - activityIndicatorFrame.size.width) / 2);
-    activityIndicatorFrame.origin.y = (int)((_activityView.frame.size.height - activityIndicatorFrame.size.height - 3 - activityLabelFrame.size.height) / 2);
-    activityLabelFrame.origin.x = (int)((_activityView.frame.size.width - activityLabelFrame.size.width) / 2);
-    activityLabelFrame.origin.y = (int)((_activityView.frame.size.height - activityLabelFrame.size.height) / 2 + activityIndicatorFrame.size.height - 3);
+    activityIndicatorFrame.origin.x = (int)((_activityView.frame.size.width - activityIndicatorFrame.size.width) / 2 - (activityLabelFrame.size.width / 2) - 2.5);
+    activityIndicatorFrame.origin.y = (int)((_activityView.frame.size.height - activityIndicatorFrame.size.height) / 2);
+    activityLabelFrame.origin.x = (int)((_activityView.frame.size.width - activityLabelFrame.size.width ) / 2 + activityIndicatorFrame.size.width / 2 + 2.5);
+    activityLabelFrame.origin.y = (int)((_activityView.frame.size.height - activityLabelFrame.size.height) / 2 );
     _activityIndicator.frame = activityIndicatorFrame;
     _activityLabel.frame = activityLabelFrame;
     
