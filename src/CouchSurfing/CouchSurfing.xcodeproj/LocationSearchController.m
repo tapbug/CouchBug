@@ -81,7 +81,7 @@
 	[self.view addSubview:_tableView];
 	
 	self.searchActivityOverlap = [[[ActivityOverlap alloc] initWithView:_tableView 
-																 title:NSLocalizedString(@"SEARCHING LOCATIONS", nil)] autorelease];
+																 title:NSLocalizedString(@"LOADING LOCATIONS", nil)] autorelease];
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
@@ -109,7 +109,7 @@
 	if ([searchText isEqualToString:@""]) {
 		[_tableView reloadData];
 	} else {
-		[self performSelector:@selector(searchAction) withObject:nil afterDelay:2];
+		[self performSelector:@selector(searchAction) withObject:nil afterDelay:0.5];
 	}
 }
 

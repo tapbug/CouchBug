@@ -53,6 +53,11 @@
 "NAME USERNAME" = "Name / Username";
 "KEYWORD" = "Keyword";
 
+// Search location
+"LOADING LOCATIONS" = "Loading locations…";
+"CURRENT LOCATION" = "Current location";
+"EVERYWHERE" = "Everywhere";
+
 
 // Login / logout
 "USERNAME" = "Username";
