@@ -56,6 +56,8 @@
 		6C94EC2813ACCC4C00DF96B1 /* clothBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2213ACCC4C00DF96B1 /* clothBg@2x.png */; };
 		6C94EC2913ACCC4C00DF96B1 /* photoFrameProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2313ACCC4C00DF96B1 /* photoFrameProfile.png */; };
 		6C94EC2A13ACCC4C00DF96B1 /* photoFrameProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */; };
+		6C99163413B7819F00E35900 /* LocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163313B7819F00E35900 /* LocationSearchController.m */; };
+		6C99163A13B7B9C300E35900 /* NSDictionary+Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163913B7B9C300E35900 /* NSDictionary+Location.m */; };
 		6C9EACDD13A09ECA00C1B19D /* profileCard.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACD913A09ECA00C1B19D /* profileCard.png */; };
 		6C9EACDE13A09ECA00C1B19D /* profileCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */; };
 		6C9EACDF13A09ECA00C1B19D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDB13A09ECA00C1B19D /* search.png */; };
@@ -198,6 +200,10 @@
 		6C94EC2213ACCC4C00DF96B1 /* clothBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "clothBg@2x.png"; sourceTree = "<group>"; };
 		6C94EC2313ACCC4C00DF96B1 /* photoFrameProfile.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoFrameProfile.png; sourceTree = "<group>"; };
 		6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoFrameProfile@2x.png"; sourceTree = "<group>"; };
+		6C99163213B7819F00E35900 /* LocationSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LocationSearchController.h; path = CouchSurfing.xcodeproj/LocationSearchController.h; sourceTree = "<group>"; };
+		6C99163313B7819F00E35900 /* LocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationSearchController.m; path = CouchSurfing.xcodeproj/LocationSearchController.m; sourceTree = "<group>"; };
+		6C99163813B7B9C300E35900 /* NSDictionary+Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Location.h"; path = "Shared/Classes/NSDictionary+Location.h"; sourceTree = "<group>"; };
+		6C99163913B7B9C300E35900 /* NSDictionary+Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Location.m"; path = "Shared/Classes/NSDictionary+Location.m"; sourceTree = "<group>"; };
 		6C9EACD913A09ECA00C1B19D /* profileCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileCard.png; sourceTree = "<group>"; };
 		6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCard@2x.png"; sourceTree = "<group>"; };
 		6C9EACDB13A09ECA00C1B19D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -336,6 +342,8 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
+				6C99163213B7819F00E35900 /* LocationSearchController.h */,
+				6C99163313B7819F00E35900 /* LocationSearchController.m */,
 				6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */,
 				2860E32A111B888700E27156 /* iPad */,
 				2860E324111B887F00E27156 /* iPhone */,
@@ -530,6 +538,8 @@
 		6C9EACFA13A0FCD200C1B19D /* CouchSurf */ = {
 			isa = PBXGroup;
 			children = (
+				6C99163813B7B9C300E35900 /* NSDictionary+Location.h */,
+				6C99163913B7B9C300E35900 /* NSDictionary+Location.m */,
 				6C9EAD1013A0FD3A00C1B19D /* Auth */,
 				6C9EAD0F13A0FD0200C1B19D /* CouchSearch */,
 				6C9EACFF13A0FCF900C1B19D /* CouchSurfer.h */,
@@ -794,6 +804,8 @@
 				6CF8341713B32D9900C2A446 /* CSEditableCell.m in Sources */,
 				6C5C77FA13B5217E00115B5D /* TapableTableView.m in Sources */,
 				6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */,
+				6C99163413B7819F00E35900 /* LocationSearchController.m in Sources */,
+				6C99163A13B7B9C300E35900 /* NSDictionary+Location.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

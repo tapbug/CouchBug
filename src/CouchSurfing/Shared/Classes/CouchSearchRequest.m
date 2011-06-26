@@ -105,8 +105,8 @@
     [bodyString appendString:[self parameter:@"submitted" value:@"manual"]];
     [bodyString appendString:[self parameter:@"submit_button" value:@"submit"]];
     [bodyString appendString:[self parameter:@"search_type" value:@"user"]];
-    [bodyString appendString:[self parameter:@"data_only" value:@"false"]];
-    [bodyString appendString:[self parameter:@"csstandart_request" value:@"true"]];
+    [bodyString appendString:[self parameter:@"dataonly" value:@"true"]];
+    [bodyString appendString:[self parameter:@"csstandard_request" value:@"true"]];
 	[bodyString appendString:[self lastParameter:@"type" value:@"html"]];
     
     //podivat se na zbytek parametru
