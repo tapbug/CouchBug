@@ -10,6 +10,7 @@
 
 #import "CouchSearchResultController.h"
 #import "CouchSearchFilter.h"
+#import "LocationSearchController.h"
 
 #import "CSCheckboxCell.h"
 #import "CSSelectedValueCell.h"
@@ -473,6 +474,9 @@
 	} else if ([item isEqualToString:@"LANGUAGE"]) {
 		LanguagesListController *controller = [[[LanguagesListController alloc] initWithFilter:self.filter] autorelease];
 		controller.delegate = self;
+		[self.navigationController pushViewController:controller animated:YES];
+	} else if ([item isEqualToString:@"LOCATION"]) {
+		LocationSearchController *controller = [[[LocationSearchController alloc] initWithFilter:self.filter] autorelease];
 		[self.navigationController pushViewController:controller animated:YES];
 	}
 }
