@@ -117,28 +117,18 @@
     self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
-	UIBarButtonItem *cancelItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"CANCEL", nil)
-																   style:UIBarButtonItemStyleBordered
-																  target:self
-																  action:@selector(cancelForm)] autorelease];
 	UIBarButtonItem *searchItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SEARCH", nil) 
 																   style:UIBarButtonItemStyleBordered
 																  target:self
 																  action:@selector(searchAction)] autorelease];
-	UIBarButtonItem *spaceItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
-																			   target:nil
-																			   action:nil];
 	
-	UIToolbar *toolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 44)] autorelease];
-	toolBar.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
-	toolBar.tintColor = UIColorFromRGB(0x3d4041);
-	toolBar.items = [NSArray arrayWithObjects:cancelItem, spaceItem, searchItem, nil];
-	[self.view addSubview:toolBar];
+	self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
+	self.navigationItem.rightBarButtonItem = searchItem;
 	
 	_formTableView = [[[TapableTableView alloc] initWithFrame:CGRectMake(0, 
-																   toolBar.frame.size.height,
+																   0,
 																   self.view.frame.size.width,
-																   self.view.frame.size.height - toolBar.frame.size.height) 
+																   self.view.frame.size.height) 
 												   style:UITableViewStyleGrouped] autorelease];
 	_formTableView.tapDelegate = self;
 	_formTableView.backgroundColor = [UIColor clearColor];
@@ -306,7 +296,13 @@
 		}
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:value];
 	} else if ([item isEqualToString:@"LANGUAGE"]) {
-		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:@"English"];
+		NSString *languageName = nil;
+		if (self.filter.languageId != nil) {
+			languageName = self.filter.languageName;
+		} else {
+			languageName = NSLocalizedString(@"ANY", nil);
+		}
+		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:languageName];
 	} else if ([item isEqualToString:@"LAST LOGIN"]) {
 		NSArray *selectedRow = [self.lastLoginsData objectAtIndex:[self selectedLastLoginDays]];
 		cell = [self createSelectedValueCell:NSLocalizedString(item, nil) selected:[selectedRow objectAtIndex:0]];
@@ -474,6 +470,10 @@
 		[_agePickerView selectRow:selectedIndexAgeLow inComponent:0 animated:NO];
 		[_agePickerView selectRow:selectedIndexAgeHigh inComponent:1 animated:NO];
 		[self showDialogViewWithContentView:_agePickerView];
+	} else if ([item isEqualToString:@"LANGUAGE"]) {
+		LanguagesListController *controller = [[[LanguagesListController alloc] initWithFilter:self.filter] autorelease];
+		controller.delegate = self;
+		[self.navigationController pushViewController:controller animated:YES];
 	}
 }
 
@@ -672,7 +672,7 @@
 	}
 	if (actualIndexPath != nil) {
 		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
-							  withRowAnimation:UITableViewRowAnimationFade];
+							  withRowAnimation:UITableViewRowAnimationNone];
 		[_formTableView selectRowAtIndexPath:actualIndexPath
 									animated:NO
 							  scrollPosition:UITableViewScrollPositionMiddle];
@@ -787,5 +787,12 @@
 	}
 }
 
+#pragma Mark LanguagesListControllerDelegate methods
+
+- (void)languagesListDidSelectLanguage:(LanguagesListController *)languagesList {
+	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[_formTableView indexPathForSelectedRow]]
+						  withRowAnimation:UITableViewRowAnimationNone];	
+	[self.navigationController popViewControllerAnimated:YES];
+}
 
 @end

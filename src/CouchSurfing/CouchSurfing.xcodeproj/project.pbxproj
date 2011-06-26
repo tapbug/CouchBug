@@ -89,6 +89,7 @@
 		6CDE85DB13A547610065A991 /* ProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D713A547610065A991 /* ProfileRequest.m */; };
 		6CDE85DC13A547610065A991 /* ProfileRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D913A547610065A991 /* ProfileRequestFactory.m */; };
 		6CF1E0B413B6830400704662 /* Languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B313B6830400704662 /* Languages.plist */; };
+		6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B613B72E2900704662 /* LanguagesListController.m */; };
 		6CF39A4713A7F01D008148ED /* photoFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4113A7F01D008148ED /* photoFrame.png */; };
 		6CF39A4813A7F01D008148ED /* photoFrame@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4213A7F01D008148ED /* photoFrame@2x.png */; };
 		6CF39A4913A7F01D008148ED /* searchRowBg.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4313A7F01D008148ED /* searchRowBg.png */; };
@@ -251,6 +252,8 @@
 		6CDE85D813A547610065A991 /* ProfileRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileRequestFactory.h; path = Shared/Classes/ProfileRequestFactory.h; sourceTree = "<group>"; };
 		6CDE85D913A547610065A991 /* ProfileRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileRequestFactory.m; path = Shared/Classes/ProfileRequestFactory.m; sourceTree = "<group>"; };
 		6CF1E0B313B6830400704662 /* Languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Languages.plist; sourceTree = "<group>"; };
+		6CF1E0B513B72E2900704662 /* LanguagesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagesListController.h; sourceTree = "<group>"; };
+		6CF1E0B613B72E2900704662 /* LanguagesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagesListController.m; sourceTree = "<group>"; };
 		6CF39A4113A7F01D008148ED /* photoFrame.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = photoFrame.png; sourceTree = "<group>"; };
 		6CF39A4213A7F01D008148ED /* photoFrame@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoFrame@2x.png"; sourceTree = "<group>"; };
 		6CF39A4313A7F01D008148ED /* searchRowBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = searchRowBg.png; sourceTree = "<group>"; };
@@ -604,6 +607,8 @@
 				6CF8341613B32D9900C2A446 /* CSEditableCell.m */,
 				6C5C77F813B5217E00115B5D /* TapableTableView.h */,
 				6C5C77F913B5217E00115B5D /* TapableTableView.m */,
+				6CF1E0B513B72E2900704662 /* LanguagesListController.h */,
+				6CF1E0B613B72E2900704662 /* LanguagesListController.m */,
 			);
 			name = Form;
 			sourceTree = "<group>";
@@ -788,6 +793,7 @@
 				6C7E868613B262C0000ED485 /* CSSelectedValueCell.m in Sources */,
 				6CF8341713B32D9900C2A446 /* CSEditableCell.m in Sources */,
 				6C5C77FA13B5217E00115B5D /* TapableTableView.m in Sources */,
+				6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

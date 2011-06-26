@@ -294,7 +294,9 @@ static NSDictionary *hasCouchIcons;
 - (void)showSearchForm {
 	CouchSearchFormController *formController = [self.formControllerFactory createController];
 	formController.searchResultController = self;
-	[self presentModalViewController:formController animated:YES];
+	UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:formController] autorelease];
+	navController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+	[self presentModalViewController:navController animated:YES];
 }
 
 #pragma mark Private methods

@@ -24,7 +24,8 @@
     NSUInteger ageLow;
     NSUInteger ageHigh;
     NSUInteger maxSurfers;
-    NSString *laguageId;
+    NSString *languageId;
+	NSString *languageName;
     NSUInteger lastLoginDays;
     BOOL male;
     BOOL female;
@@ -51,6 +52,7 @@
 @property (nonatomic, assign) NSUInteger ageHigh;
 @property (nonatomic, assign) NSUInteger maxSurfers;
 @property (nonatomic, retain) NSString *languageId;
+@property (nonatomic, retain) NSString *languageName;
 @property (nonatomic, assign) NSUInteger lastLoginDays;
 @property (nonatomic, assign) BOOL male;
 @property (nonatomic, assign) BOOL female;

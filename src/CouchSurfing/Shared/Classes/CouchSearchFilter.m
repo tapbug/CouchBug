@@ -26,6 +26,7 @@
 @synthesize ageHigh;
 @synthesize maxSurfers;
 @synthesize languageId;
+@synthesize languageName;
 @synthesize lastLoginDays;
 @synthesize male;
 @synthesize female;
@@ -46,7 +47,6 @@
 		self.ageLow = 18;
 		self.ageHigh = 30;
         self.maxSurfers = 1;
-        self.languageId = @"";
         self.lastLoginDays = 0;
         self.male = YES;
         self.female = YES;
