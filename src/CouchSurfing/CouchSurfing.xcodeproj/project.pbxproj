@@ -58,6 +58,7 @@
 		6C94EC2A13ACCC4C00DF96B1 /* photoFrameProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */; };
 		6C99163413B7819F00E35900 /* LocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163313B7819F00E35900 /* LocationSearchController.m */; };
 		6C99163A13B7B9C300E35900 /* NSDictionary+Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163913B7B9C300E35900 /* NSDictionary+Location.m */; };
+		6C99164013B7CFAC00E35900 /* CurrentLocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163F13B7CFAC00E35900 /* CurrentLocationRequest.m */; };
 		6C9EACDD13A09ECA00C1B19D /* profileCard.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACD913A09ECA00C1B19D /* profileCard.png */; };
 		6C9EACDE13A09ECA00C1B19D /* profileCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */; };
 		6C9EACDF13A09ECA00C1B19D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDB13A09ECA00C1B19D /* search.png */; };
@@ -204,6 +205,8 @@
 		6C99163313B7819F00E35900 /* LocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LocationSearchController.m; path = CouchSurfing.xcodeproj/LocationSearchController.m; sourceTree = "<group>"; };
 		6C99163813B7B9C300E35900 /* NSDictionary+Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Location.h"; path = "Shared/Classes/NSDictionary+Location.h"; sourceTree = "<group>"; };
 		6C99163913B7B9C300E35900 /* NSDictionary+Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Location.m"; path = "Shared/Classes/NSDictionary+Location.m"; sourceTree = "<group>"; };
+		6C99163E13B7CFAC00E35900 /* CurrentLocationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentLocationRequest.h; path = Shared/Classes/CurrentLocationRequest.h; sourceTree = "<group>"; };
+		6C99163F13B7CFAC00E35900 /* CurrentLocationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentLocationRequest.m; path = Shared/Classes/CurrentLocationRequest.m; sourceTree = "<group>"; };
 		6C9EACD913A09ECA00C1B19D /* profileCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileCard.png; sourceTree = "<group>"; };
 		6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCard@2x.png"; sourceTree = "<group>"; };
 		6C9EACDB13A09ECA00C1B19D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -538,12 +541,12 @@
 		6C9EACFA13A0FCD200C1B19D /* CouchSurf */ = {
 			isa = PBXGroup;
 			children = (
-				6C99163813B7B9C300E35900 /* NSDictionary+Location.h */,
-				6C99163913B7B9C300E35900 /* NSDictionary+Location.m */,
 				6C9EAD1013A0FD3A00C1B19D /* Auth */,
 				6C9EAD0F13A0FD0200C1B19D /* CouchSearch */,
 				6C9EACFF13A0FCF900C1B19D /* CouchSurfer.h */,
 				6C9EAD0013A0FCF900C1B19D /* CouchSurfer.m */,
+				6C99163813B7B9C300E35900 /* NSDictionary+Location.h */,
+				6C99163913B7B9C300E35900 /* NSDictionary+Location.m */,
 			);
 			name = CouchSurf;
 			sourceTree = "<group>";
@@ -551,6 +554,8 @@
 		6C9EAD0F13A0FD0200C1B19D /* CouchSearch */ = {
 			isa = PBXGroup;
 			children = (
+				6C99163E13B7CFAC00E35900 /* CurrentLocationRequest.h */,
+				6C99163F13B7CFAC00E35900 /* CurrentLocationRequest.m */,
 				6CDE85D113A547510065A991 /* CouchSearchFilter.h */,
 				6CDE85D213A547510065A991 /* CouchSearchFilter.m */,
 				6C9EACFB13A0FCF900C1B19D /* CouchSearchRequest.h */,
@@ -806,6 +811,7 @@
 				6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */,
 				6C99163413B7819F00E35900 /* LocationSearchController.m in Sources */,
 				6C99163A13B7B9C300E35900 /* NSDictionary+Location.m in Sources */,
+				6C99164013B7CFAC00E35900 /* CurrentLocationRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

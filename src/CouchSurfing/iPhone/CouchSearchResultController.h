@@ -10,6 +10,7 @@
 
 #import "CouchSearchRequest.h"
 #import "CSImageDownloader.h"
+#import "CurrentLocationRequest.h"
 
 //  Konstanty stavu, ktere rikaji co se zrovna deje
 typedef enum {
@@ -22,14 +23,16 @@ typedef enum {
 @class CouchSearchFormControllerFactory;
 @class ActivityOverlap;
 
-@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
+@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationRequestDelegate> {
     CouchSearchFilter *_filter;
     CouchSearchFormControllerFactory *_formControllerFactory;
 	
     UITableView *_tableView;
-    ActivityOverlap *_loadingActivity;
+	ActivityOverlap *_locateActivity;
+    ActivityOverlap *_searchActivity;
 
-    CouchSearchRequest *_request;    
+	CurrentLocationRequest *_locationRequest;
+    CouchSearchRequest *_searchRequest;
     NSMutableArray *_imageDownloaders;
     
     //oznacuje, jaky druh loadingu se zrovna deje

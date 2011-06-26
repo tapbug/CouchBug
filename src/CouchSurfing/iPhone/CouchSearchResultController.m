@@ -26,12 +26,16 @@ static NSDictionary *hasCouchIcons;
 
 @interface CouchSearchResultController ()
 
-@property (nonatomic, retain) ActivityOverlap *loadingActivity;
+@property (nonatomic, retain) ActivityOverlap *locateActivity;
+@property (nonatomic, retain) ActivityOverlap *searchActivity;
 
 @property (nonatomic, retain) NSArray *sourfers;
 @property (nonatomic, retain) NSMutableArray *imageDownloaders;
-@property (nonatomic, retain) CouchSearchRequest *request;
 
+@property (nonatomic, retain) CurrentLocationRequest *locationRequest;
+@property (nonatomic, retain) CouchSearchRequest *searchRequest;
+
+- (void)gatherCurrentLocation;
 - (void)showSearchForm;
 
 //  Spusti vyhledavani dalsich vysledku (strankovani)
@@ -45,11 +49,13 @@ static NSDictionary *hasCouchIcons;
 
 @synthesize filter = _filter;
 @synthesize formControllerFactory = _formControllerFactory;
-@synthesize loadingActivity = _loadingActivity;
+@synthesize locateActivity = _locateActivity;
+@synthesize searchActivity = _searchActivity;
 
 @synthesize sourfers = _sourfers;
 @synthesize imageDownloaders = _imageDownloaders;
-@synthesize request = _request;
+@synthesize locationRequest = _locationRequest;
+@synthesize searchRequest = _searchRequest;
 
 + (void)initialize {
     hasCouchIcons = [[NSDictionary alloc] initWithObjectsAndKeys:[UIImage imageNamed:@"couchYes"], CouchSurferHasCouchYes,
@@ -77,8 +83,12 @@ static NSDictionary *hasCouchIcons;
     _tableView.delegate = self;
     _tableView.dataSource = self;
     [self.view addSubview:_tableView];
+
+	self.locateActivity =
+	[[ActivityOverlap alloc] initWithView:self.view 
+									title:NSLocalizedString(@"LOCATING YOUR POSITION", nil)];
     
-    self.loadingActivity =
+    self.searchActivity =
         [[ActivityOverlap alloc] initWithView:self.view 
                                         title:NSLocalizedString(@"LOADING COUCHES", nil)];
     
@@ -89,7 +99,11 @@ static NSDictionary *hasCouchIcons;
 - (void)viewDidAppear:(BOOL)animated {
 	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
     if (!_initialLoadDone) {
-        //[self performSearch];        
+		if (self.filter.locationJSON == nil) {
+			[self gatherCurrentLocation];
+		} else {
+			[self performSearch];
+		}
     }
     _initialLoadDone = YES;
 }
@@ -103,7 +117,7 @@ static NSDictionary *hasCouchIcons;
 - (void)couchSearchRequest:(CouchSearchRequest *)request didRecieveResult:(NSArray *)sourfers {
     if (_loadingAction == CouchSearchResultControllerFirst) {
         self.sourfers = sourfers;
-        [self.loadingActivity removeOverlap];        
+        [self.searchActivity removeOverlap];        
     } else if (_loadingAction == CouchSearchResultControllerMore) {
         self.sourfers = [self.sourfers arrayByAddingObjectsFromArray:sourfers];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
@@ -117,7 +131,7 @@ static NSDictionary *hasCouchIcons;
     
     [_tableView reloadData];
     [_tableView flashScrollIndicators];
-    self.request = nil;
+    self.searchRequest = nil;
     
 }
 
@@ -278,15 +292,27 @@ static NSDictionary *hasCouchIcons;
 
 
 - (void)dealloc {
-    self.request.delegate = nil;
-    self.request = nil;
+	self.locationRequest.delegate = nil;
+	self.locationRequest = nil;
+    self.searchRequest.delegate = nil;
+    self.searchRequest = nil;
     for (CSImageDownloader *downloader in self.imageDownloaders) {
         downloader.delegate = nil;
     }
+	self.locateActivity = nil;	
+	self.searchActivity = nil;
     self.imageDownloaders = nil;
     self.sourfers = nil;
 	self.formControllerFactory = nil;
     [super dealloc];
+}
+
+#pragma Mark CurrentLocationRequestDelegate methods
+
+- (void)currentLocationRequest:(CurrentLocationRequest *)request didGatherLocation:(NSDictionary *)location {
+	self.filter.locationJSON = location;
+	[self.locateActivity removeOverlap];
+	[self performSearch];
 }
 
 #pragma Mark Action methods
@@ -304,22 +330,22 @@ static NSDictionary *hasCouchIcons;
 - (void)performSearch {
 	[self scrollToTop];
     _loadingAction = CouchSearchResultControllerFirst;
-    [self.loadingActivity overlapView];
+    [self.searchActivity overlapView];
     CouchSearchRequest *request = [self.filter createRequest];
     request.delegate = self;
-    self.request = request;
+    self.searchRequest = request;
     
-    [self.request send];
+    [self.searchRequest send];
 }
 
 - (void)performSearchMore {
     _loadingAction = CouchSearchResultControllerMore;
     CouchSearchRequest *request = [self.filter createRequest];
     request.delegate = self;
-    self.request = request;
+    self.searchRequest = request;
     request.page = [NSString stringWithFormat:@"%d", ++_currentPage];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
-    [self.request send];
+    [self.searchRequest send];
     
 }
 
@@ -360,6 +386,13 @@ static NSDictionary *hasCouchIcons;
 		} 
 
 	}    
+}
+
+- (void)gatherCurrentLocation {
+	[self.locateActivity overlapView];
+	self.locationRequest = [[[CurrentLocationRequest alloc] init] autorelease];
+	self.locationRequest.delegate = self;
+	[self.locationRequest gatherCurrentLocation];
 }
 
 #pragma Public methods
