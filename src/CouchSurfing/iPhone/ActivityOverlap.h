@@ -16,6 +16,7 @@
     UIView *_activityView;
     UIActivityIndicatorView *_activityIndicator;
     UILabel *_activityLabel;
+	BOOL _active;
 }
 
 - (id)initWithView:(UIView *)view title:(NSString *)title;

@@ -109,6 +109,10 @@
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
 	[NSObject cancelPreviousPerformRequestsWithTarget:self];
+	
+	self.searchConnection.delegate = nil;
+	self.searchConnection = nil;
+	
 	if ([searchText isEqualToString:@""]) {
 		[_tableView reloadData];
 	} else {
