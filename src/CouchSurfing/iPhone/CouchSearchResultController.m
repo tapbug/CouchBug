@@ -86,7 +86,7 @@ static NSDictionary *hasCouchIcons;
 
 	self.locateActivity =
 	[[ActivityOverlap alloc] initWithView:self.view 
-									title:NSLocalizedString(@"LOCATING YOUR POSITION", nil)];
+									title:NSLocalizedString(@"LOCATING", nil)];
     
     self.searchActivity =
         [[ActivityOverlap alloc] initWithView:self.view 
