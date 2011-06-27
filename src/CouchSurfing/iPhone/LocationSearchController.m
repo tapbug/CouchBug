@@ -128,6 +128,12 @@
 #pragma Mark Actions
 
 - (void)searchAction {
+	if ([self.locations count] > 0) {
+		[_tableView scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:0]
+						  atScrollPosition:UITableViewScrollPositionTop
+								  animated:NO];		
+	}
+
 	[self.searchActivityOverlap overlapView];
 	
 	NSString *locationName = _searchBar.text;
@@ -153,7 +159,7 @@
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
 	NSArray *responseJSON = [responseData objectFromJSONData];
 	self.locations = [[[responseJSON lastObject] objectForKey:@"data"] objectForKey:@"results"];
-	[_tableView reloadData];
+	[_tableView reloadData];	
 	[self.searchActivityOverlap removeOverlap];
 }
 
