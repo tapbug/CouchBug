@@ -55,7 +55,6 @@
 								   20);
 	_valueField.returnKeyType = UIReturnKeyDone;
 	_valueField.autocorrectionType = UITextAutocorrectionTypeNo;
-	_valueField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 }
 
 @end

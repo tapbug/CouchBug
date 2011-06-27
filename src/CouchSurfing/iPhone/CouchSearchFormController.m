@@ -420,6 +420,7 @@
 			self.usernameTF = [[[UITextField alloc] init] autorelease];
 			self.usernameTF.clearButtonMode = UITextFieldViewModeAlways;
 			self.usernameTF.delegate = self;
+			self.usernameTF.autocapitalizationType = UITextAutocapitalizationTypeWords;
 		}
 		
 		csCell.keyLabel.text = NSLocalizedString(item, nil);
@@ -432,6 +433,7 @@
 			self.keywordTF = [[[UITextField alloc] init] autorelease];
 			self.keywordTF.clearButtonMode = UITextFieldViewModeAlways;
 			self.keywordTF.delegate = self;
+			self.keywordTF.autocapitalizationType = UITextAutocapitalizationTypeNone;
 		}
 		
 		csCell.keyLabel.text = NSLocalizedString(item, nil);
