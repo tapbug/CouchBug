@@ -82,7 +82,7 @@
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
 	[self.view addSubview:_tableView];
-	self.searchActivityOverlap = [[[ActivityOverlap alloc] initWithView:_tableView 
+	self.searchActivityOverlap = [[[ActivityOverlap alloc] initWithView:self.view 
 																 title:NSLocalizedString(@"LOADING LOCATIONS", nil)] autorelease];
 	
 	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
