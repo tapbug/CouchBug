@@ -233,6 +233,7 @@
 			textLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 			textLabel.backgroundColor = [UIColor clearColor];
 			textLabel.textAlignment = UITextAlignmentCenter;
+			textLabel.font = [UIFont boldSystemFontOfSize:17];
 			textLabel.adjustsFontSizeToFitWidth = YES;
 			[cell.contentView addSubview:textLabel];
 		}
