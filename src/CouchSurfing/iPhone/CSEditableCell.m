@@ -53,7 +53,7 @@
 	_valueField.frame = CGRectMake(valueX,
 								   (int)((self.contentView.frame.size.height - 20) / 2),
 								   self.contentView.frame.size.width - valueX - 4,
-								   20);
+								   22);
 	_valueField.returnKeyType = UIReturnKeyDone;
 	_valueField.autocorrectionType = UITextAutocorrectionTypeNo;
 }
