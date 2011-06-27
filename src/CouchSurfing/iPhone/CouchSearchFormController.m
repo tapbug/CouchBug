@@ -127,7 +127,7 @@
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	
 	UIBarButtonItem *searchItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SEARCH", nil) 
-																   style:UIBarButtonItemStyleBordered
+																   style:UIBarButtonItemStyleDone
 																  target:self
 																  action:@selector(searchAction)] autorelease];
 	
