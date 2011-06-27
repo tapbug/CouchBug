@@ -93,6 +93,7 @@ static NSDictionary *hasCouchIcons;
                                         title:NSLocalizedString(@"LOADING COUCHES", nil)];
     
     self.imageDownloaders = [NSMutableArray array];
+	self.navigationController.delegate = self;
     [super viewDidLoad];
 }
 
@@ -313,6 +314,15 @@ static NSDictionary *hasCouchIcons;
 	self.filter.locationJSON = location;
 	[self.locateActivity removeOverlap];
 	[self performSearch];
+}
+
+#pragma Mark UINavigationControllerDelegate methods
+
+- (void)navigationController:(UINavigationController *)navigationController 
+	   didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	if (viewController == self) {
+		[_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];		
+	}
 }
 
 #pragma Mark Action methods

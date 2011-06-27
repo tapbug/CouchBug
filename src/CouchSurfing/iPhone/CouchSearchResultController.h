@@ -23,7 +23,7 @@ typedef enum {
 @class CouchSearchFormControllerFactory;
 @class ActivityOverlap;
 
-@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationRequestDelegate> {
+@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationRequestDelegate, UINavigationControllerDelegate> {
     CouchSearchFilter *_filter;
     CouchSearchFormControllerFactory *_formControllerFactory;
 	
