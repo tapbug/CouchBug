@@ -82,7 +82,6 @@
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
 	[self.view addSubview:_tableView];
-	
 	self.searchActivityOverlap = [[[ActivityOverlap alloc] initWithView:_tableView 
 																 title:NSLocalizedString(@"LOADING LOCATIONS", nil)] autorelease];
 	
@@ -91,6 +90,11 @@
     [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
 
 	[super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[_searchBar becomeFirstResponder];
+	[super viewDidAppear:animated];
 }
 
 - (void)viewDidUnload
