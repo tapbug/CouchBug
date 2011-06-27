@@ -20,6 +20,7 @@
     if (self) {
 		_keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
+		_keyLabel.font = [UIFont boldSystemFontOfSize:17];
 		[self.contentView addSubview:_keyLabel];
     }
     return self;
