@@ -48,6 +48,7 @@
 
 - (void)registerForKeyboardEvents;
 - (void)unregisterKeyboardEvents;
+- (void)hideKeyboard;
 - (void)keyboardDidShow:(NSNotification *)notification;
 - (void)keyboardDidHide:(NSNotification *)notification;
 
@@ -499,6 +500,10 @@
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (keyboardOn) {
+		[self hideKeyboard];
+	}
+
 	if ([[tableView indexPathForSelectedRow] isEqual:indexPath]) {
 		if (dialogViewOn) {
 			[self hideDialogView];
@@ -517,6 +522,9 @@
 - (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
 	if (dialogViewOn) {
 		[self hideDialogView];
+	}
+	if (keyboardOn) {
+		[self hideKeyboard];
 	}
 }
 
@@ -542,7 +550,12 @@
     [nc removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
+- (void)hideKeyboard {
+	[_activeField resignFirstResponder];
+}
+
 - (void)keyboardDidShow:(NSNotification *)notification {
+	keyboardOn = YES;
 	NSIndexPath *lastVisibleIndexPath = [[_formTableView indexPathsForVisibleRows] lastObject];
 
     CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];    
@@ -565,6 +578,7 @@
 }
 
 - (void)keyboardDidHide:(NSNotification *)notification {
+	keyboardOn = NO;
 	CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameBeginUserInfoKey] CGRectValue];
     
     CGFloat keyboardHeigh = 0;
@@ -831,11 +845,16 @@
 	} else if (self.keywordTF == textField) {
 		self.filter.keyword = textField.text;
 	}
+	_activeField = nil;
 }
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
 	[textField resignFirstResponder];
 	return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+	_activeField = textField;
 }
 
 #pragma Mark LanguagesListControllerDelegate methods

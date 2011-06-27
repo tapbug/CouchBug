@@ -41,8 +41,11 @@
 	
 	UITextField *_usernameTF;
 	UITextField *_keywordTF;
+	UITextField *_activeField;
 	
 	BOOL dialogViewOn;
+	BOOL keyboardOn;
+	
 	UIPickerView *_hasSpaceForPickerView;
 	UIPickerView *_lastLoginPickerView;
 	NSArray *_lastLoginsData;
