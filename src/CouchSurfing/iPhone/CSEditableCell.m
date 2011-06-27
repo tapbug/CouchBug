@@ -53,6 +53,7 @@
 								   (int)((self.contentView.frame.size.height - 20) / 2),
 								   self.contentView.frame.size.width - valueX - 4,
 								   20);
+	_valueField.returnKeyType = UIReturnKeyDone;
 }
 
 @end

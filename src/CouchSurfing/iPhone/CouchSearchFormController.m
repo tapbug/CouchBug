@@ -835,6 +835,11 @@
 	}
 }
 
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+	[textField resignFirstResponder];
+	return YES;
+}
+
 #pragma Mark LanguagesListControllerDelegate methods
 
 - (void)languagesListDidSelectLanguage:(LanguagesListController *)languagesList {
