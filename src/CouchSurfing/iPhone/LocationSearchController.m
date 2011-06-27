@@ -112,16 +112,17 @@
 #pragma Mark UISearchBarDelegate methods
 
 - (void)searchBar:(UISearchBar *)searchBar textDidChange:(NSString *)searchText {
-	[NSObject cancelPreviousPerformRequestsWithTarget:self];
-	
+	[NSObject cancelPreviousPerformRequestsWithTarget:self];		
 	self.searchConnection.delegate = nil;
-	self.searchConnection = nil;
-	
-	if ([searchText isEqualToString:@""]) {
-		[_tableView reloadData];
-	} else {
+	self.searchConnection = nil;	
+
+	if (![self nonSearchMode]) {	
 		[self performSelector:@selector(searchAction) withObject:nil afterDelay:0.5];
+	} else if (_lastState != [self nonSearchMode]) {
+		[self.searchActivityOverlap removeOverlap];
+		[_tableView reloadData];
 	}
+	_lastState = [self nonSearchMode];
 }
 
 #pragma Mark Actions
@@ -226,7 +227,7 @@
 }
 
 - (BOOL)nonSearchMode {
-	return [_searchBar.text isEqualToString:@""] || _searchBar.text == nil;
+	return [_searchBar.text length] < 3;
 }
 
 #pragma Mark KeyboarShowing methods

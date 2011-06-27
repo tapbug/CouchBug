@@ -24,6 +24,7 @@
 	
 	NSArray *locations;
 	ActivityOverlap *_searchActivityOverlap;
+	BOOL _lastState;
 }
 
 @property (nonatomic, assign) id<LocationSearchControllerDelegate> delegate;
