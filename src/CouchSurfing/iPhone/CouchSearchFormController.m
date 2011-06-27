@@ -52,8 +52,14 @@
 - (void)keyboardDidShow:(NSNotification *)notification;
 - (void)keyboardDidHide:(NSNotification *)notification;
 
+//	DialogView je v tomto pripade vse co vyjizdy ze spodu
+//	zatim nejspise pouze pickery
 - (void)showDialogViewWithContentView:(UIView *)contentView;
 - (void)hideDialogView;
+
+//	refreshuje aktualni vybranou bunku pri prechodu z obrazovky, kde probihala zmena hodnoty
+//	teto bunky
+- (void)refreshFormFilterInformation;
 
 - (CSCheckboxCell *)getCheckboxCell;
 - (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected;
@@ -134,7 +140,8 @@
 																   self.view.frame.size.width,
 																   self.view.frame.size.height) 
 												   style:UITableViewStyleGrouped] autorelease];
-	_formTableView.tapDelegate = self;
+	//TODO nejspis jiz nebude potreba, uvidime
+	//_formTableView.tapDelegate = self;
 	_formTableView.backgroundColor = [UIColor clearColor];
 	_formTableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	_formTableView.delegate = self;
@@ -153,7 +160,7 @@
 						   nil];
 	
 	[self registerForKeyboardEvents];
-	
+	self.navigationController.delegate = self;
     [super viewDidLoad];
 }
 
@@ -440,9 +447,7 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	NSString *item = [[self.items objectAtIndex:indexPath.section] objectAtIndex:indexPath.row];
 	
-	if ([self.currentlyHiddenIndexPath isEqual:indexPath]) {
-		return;
-	} else if ([item isEqualToString:@"HAS SPACE FOR"]) {
+	if ([item isEqualToString:@"HAS SPACE FOR"]) {
 		_hasSpaceForPickerView = [[[UIPickerView alloc] init] autorelease];
 		_hasSpaceForPickerView.dataSource = self;
 		_hasSpaceForPickerView.delegate = self;
@@ -487,6 +492,28 @@
 		controller.delegate = self;
 		[self.navigationController pushViewController:controller animated:YES];
 		[self unregisterKeyboardEvents];
+	}
+}
+
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if ([[tableView indexPathForSelectedRow] isEqual:indexPath]) {
+		if (dialogViewOn) {
+			[self hideDialogView];
+		}
+		return nil;
+	}
+	return indexPath;
+}
+
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (dialogViewOn) {
+		[self hideDialogView];
+	}
+}
+
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView {
+	if (dialogViewOn) {
+		[self hideDialogView];
 	}
 }
 
@@ -615,7 +642,7 @@
 	[UIView commitAnimations];
 
 	[self extendViewSizeByHeight:dialogViewFrame.size.height];
-	
+	[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:YES];
 	_hasSpaceForPickerView = nil;
 	_lastLoginPickerView = nil;
 	_agePickerView = nil;
@@ -763,7 +790,7 @@
     self.view.frame = viewFrame;
 }
 
-#pragma Mark TapableTableViewDelegate methods
+#pragma Mark TapableTableViewDelegate methods TODO mozna uz nebude treba
 
 - (void)tableViewWasTouched:(TapableTableView *)tableView {
 	if (dialogViewOn) {
@@ -815,19 +842,31 @@
 #pragma Mark LanguagesListControllerDelegate methods
 
 - (void)languagesListDidSelectLanguage:(LanguagesListController *)languagesList {
-	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[_formTableView indexPathForSelectedRow]]
-						  withRowAnimation:UITableViewRowAnimationNone];	
-	[self.navigationController popViewControllerAnimated:YES];
-	[self registerForKeyboardEvents];
+	[self refreshFormFilterInformation];
 }
 
 #pragma  Mark LocationSearchControllerDelegate
 
 - (void)locationSearchDidSelectLocation:(LocationSearchController *)locationSearchController {
-	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[_formTableView indexPathForSelectedRow]]
-						  withRowAnimation:UITableViewRowAnimationNone];	
+	[self refreshFormFilterInformation];
+}
+
+- (void)refreshFormFilterInformation {
+	NSIndexPath *indexPath = [_formTableView indexPathForSelectedRow];
+	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+						  withRowAnimation:UITableViewRowAnimationNone];
+	[_formTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
 	[self.navigationController popViewControllerAnimated:YES];
 	[self registerForKeyboardEvents];
+}
+
+#pragma Mark UINavigationControllerDelegate methods
+
+- (void)navigationController:(UINavigationController *)navigationController 
+	   didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
+	if (viewController == self) {
+		[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:YES];		
+	}
 }
 
 @end

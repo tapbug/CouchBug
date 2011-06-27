@@ -14,7 +14,7 @@
 @class CouchSearchResultController;
 @class CouchSearchFilter;
 
-@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, TabableTableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, LanguagesListControllerDelegate, LocationSearchControllerDelegate> {
+@interface CouchSearchFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, TabableTableViewDelegate, UIPickerViewDataSource, UIPickerViewDelegate, UITextFieldDelegate, LanguagesListControllerDelegate, LocationSearchControllerDelegate, UINavigationControllerDelegate> {
 	CouchSearchResultController *_searchResultController;
     CouchSearchFilter *_filter;
 	
