@@ -85,7 +85,6 @@
         }        
         
         //  Zjisteni poctu visitu meho profilu a zjisteni od kdy jsem clenem
-        
         NSArray *profilesViewNodes = [doc nodesForXPath:@"//*[text()='My Profile at a Glance']/../following-sibling::*//text()" namespaceMappings:ns error:nil];
         for (CXMLNode *profileNode in profilesViewNodes) {
             NSString *profileViewsRegex = @"^([0-9,]+) profile views since(.+?)$";
@@ -117,8 +116,10 @@
                 [self.profileDictionary setObject:value forKey:@"couchRequestCount"];
             }
         }
-
-        CXMLNode *personalImgNode = [[doc nodesForXPath:@"//*[text()='My Profile at a Glance']/../following-sibling::*//x:a[contains(@class, 'profile-image')][contains(@class, 'online')]/x:img" namespaceMappings:ns error:nil] lastObject];
+		
+		//	Avatar obrazek a Jmeno a Prijmeni
+		NSString *personalImgNodeQuery = [NSString stringWithFormat:@"//x:a[contains(@href, '/people/%@')][contains(@class, 'profile-image')][contains(@class, 'online')]/x:img", self.loginInformation.username];
+        CXMLNode *personalImgNode = [[doc nodesForXPath:personalImgNodeQuery namespaceMappings:ns error:nil] lastObject];
         NSString *avatarUrl = [[[personalImgNode nodeForXPath:@"./@src" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"_t_" withString:@"_m_"];
         NSString *name = [[personalImgNode nodeForXPath:@"./@alt" error:nil] stringValue];
         
