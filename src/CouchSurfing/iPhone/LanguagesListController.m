@@ -15,6 +15,8 @@
 @property (nonatomic, retain) NSMutableArray *alphabet;
 @property (nonatomic, retain) NSMutableDictionary *languageToIdDictionary;
 
+- (void)chooseAnyLanguage;
+
 @end
 
 @implementation LanguagesListController
@@ -51,6 +53,10 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
+	UIBarButtonItem *anyLanguageItem = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"ANY LANGUAGE", nil)
+																		style:UIBarButtonItemStyleBordered
+																	   target:self action:@selector(chooseAnyLanguage)] autorelease];
+	self.navigationItem.rightBarButtonItem = anyLanguageItem;
 	
 	NSIndexPath *selectedIndexPath = nil;
 	
@@ -153,6 +159,15 @@
 	NSString *languageId = [self.languageToIdDictionary objectForKey:language];
 	_filter.languageId = languageId;
 	_filter.languageName = language;
+	if ([self.delegate respondsToSelector:@selector(languagesListDidSelectLanguage:)]) {
+		[self.delegate languagesListDidSelectLanguage:self];
+	}
+}
+
+#pragma Mark Action methods
+
+- (void)chooseAnyLanguage {
+	_filter.languageId = nil;
 	if ([self.delegate respondsToSelector:@selector(languagesListDidSelectLanguage:)]) {
 		[self.delegate languagesListDidSelectLanguage:self];
 	}
