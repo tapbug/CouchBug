@@ -44,7 +44,6 @@
 
 @property (nonatomic, retain) NSArray *lastLoginsData;
 
-- (void)cancelForm;
 - (void)searchAction;
 
 - (void)registerForKeyboardEvents;
@@ -518,11 +517,6 @@
 }
 
 #pragma Mark Action methods
-
-- (void)cancelForm {
-	[self.parentViewController dismissModalViewControllerAnimated:YES];
-	[self hideDialogView];
-}
 
 - (void)searchAction {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
