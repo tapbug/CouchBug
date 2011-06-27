@@ -111,7 +111,7 @@
 								   @"TRAVELING",
 								   nil];
 	NSArray *host1Section = [NSArray arrayWithObjects:
-							@"AGE", @"HAS SPACE FOR", @"LANGUAGE", @"LAST LOGIN", nil];
+							@"AGE", @"HAS SPACE FOR", @"LAST LOGIN", @"LANGUAGE", nil];
 	NSArray *host2Section = [NSArray arrayWithObjects:
 							 @"MALE", @"FEMALE", @"SEVERAL PEOPLE", @"HAS PHOTO", @"WHEELCHAIR ACCESSIBLE", nil];
 	NSArray *communitySection = [NSArray arrayWithObjects:@"VERIFIED", @"VOUCHED", @"AMBASSADOR", nil];
@@ -689,19 +689,17 @@
 }
 
 - (void)pickerView:(UIPickerView *)pickerView didSelectRow:(NSInteger)row inComponent:(NSInteger)component {
-	NSIndexPath *actualIndexPath = nil;
+	NSIndexPath *actualIndexPath = [_formTableView indexPathForSelectedRow];
 	if (_hasSpaceForPickerView == pickerView) {
 		NSUInteger newHasSpaceFor = [_hasSpaceForPickerView selectedRowInComponent:0];
 		if (self.filter.maxSurfers != newHasSpaceFor) {
 			self.filter.maxSurfers = newHasSpaceFor;
-			actualIndexPath = [NSIndexPath indexPathForRow:1 inSection:2];
 		}
 	} else if (_lastLoginPickerView == pickerView) {
 		NSUInteger oldRow = [self selectedLastLoginDays];
 		if (oldRow != row) {
 			NSUInteger selectedValue = [[[self.lastLoginsData objectAtIndex:row] objectAtIndex:1] intValue];
 			self.filter.lastLoginDays = selectedValue;
-			actualIndexPath = [NSIndexPath indexPathForRow:3 inSection:2];
 		}
 	} else if (_agePickerView == pickerView) {
 		NSUInteger actualAgeLow = 0;
@@ -717,18 +715,16 @@
 		}
 
 		if (self.filter.ageLow != actualAgeLow || self.filter.ageHigh != actualAgeHigh) {
-			actualIndexPath = [NSIndexPath indexPathForRow:0 inSection:2];
 			self.filter.ageLow = actualAgeLow;
 			self.filter.ageHigh = actualAgeHigh;
 		}
 	}
-	if (actualIndexPath != nil) {
-		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
-							  withRowAnimation:UITableViewRowAnimationNone];
-		[_formTableView selectRowAtIndexPath:actualIndexPath
-									animated:NO
-							  scrollPosition:UITableViewScrollPositionMiddle];
-	}
+
+	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
+						  withRowAnimation:UITableViewRowAnimationNone];
+	[_formTableView selectRowAtIndexPath:actualIndexPath
+								animated:NO
+						  scrollPosition:UITableViewScrollPositionMiddle];
 	
 }
 
