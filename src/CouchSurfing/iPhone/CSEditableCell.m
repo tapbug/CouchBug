@@ -54,6 +54,8 @@
 								   self.contentView.frame.size.width - valueX - 4,
 								   20);
 	_valueField.returnKeyType = UIReturnKeyDone;
+	_valueField.autocorrectionType = UITextAutocorrectionTypeNo;
+	_valueField.autocapitalizationType = UITextAutocapitalizationTypeNone;
 }
 
 @end
