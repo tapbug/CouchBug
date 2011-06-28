@@ -875,6 +875,7 @@
 	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
 						  withRowAnimation:UITableViewRowAnimationNone];
 	[_formTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+	//	TODO opravdu to tu ma byt???
 	[self.navigationController popViewControllerAnimated:YES];
 	[self registerForKeyboardEvents];
 }

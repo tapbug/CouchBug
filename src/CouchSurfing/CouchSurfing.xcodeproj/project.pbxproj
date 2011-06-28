@@ -83,8 +83,10 @@
 		6CAA94071285914E00CB1737 /* CouchSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94061285914E00CB1737 /* CouchSearchResultController.m */; };
 		6CAA940C128591BD00CB1737 /* CouchSearchResultControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */; };
 		6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */; };
+		6CAFE7A913BA551D0089559B /* CouchRequestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAFE7A813BA551C0089559B /* CouchRequestRequest.m */; };
 		6CC1DA1313A09276008F659F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC1DA1213A09276008F659F /* JSONKit.m */; };
 		6CC8B60813B8BA3100E9A556 /* LocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8B60713B8BA3100E9A556 /* LocationSearchController.m */; };
+		6CC8B60C13B90D6800E9A556 /* CouchRequestFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8B60B13B90D6800E9A556 /* CouchRequestFormController.m */; };
 		6CD0A6DF13AE395700700F01 /* libtidy.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CD0A6DE13AE395700700F01 /* libtidy.dylib */; };
 		6CDE85CA13A51AE70065A991 /* AuthControllersFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */; };
 		6CDE85D313A547510065A991 /* CouchSearchFilter.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D213A547510065A991 /* CouchSearchFilter.m */; };
@@ -245,10 +247,14 @@
 		6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchResultControllerFactory.m; sourceTree = "<group>"; };
 		6CAA94D61285A07E00CB1737 /* CouchSearchFormControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFormControllerFactory.h; sourceTree = "<group>"; };
 		6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormControllerFactory.m; sourceTree = "<group>"; };
+		6CAFE7A713BA551C0089559B /* CouchRequestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CouchRequestRequest.h; sourceTree = "<group>"; };
+		6CAFE7A813BA551C0089559B /* CouchRequestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchRequestRequest.m; sourceTree = "<group>"; };
 		6CC1DA1113A09276008F659F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		6CC1DA1213A09276008F659F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		6CC8B60613B8BA3100E9A556 /* LocationSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchController.h; sourceTree = "<group>"; };
 		6CC8B60713B8BA3100E9A556 /* LocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchController.m; sourceTree = "<group>"; };
+		6CC8B60A13B90D6800E9A556 /* CouchRequestFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchRequestFormController.h; sourceTree = "<group>"; };
+		6CC8B60B13B90D6800E9A556 /* CouchRequestFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchRequestFormController.m; sourceTree = "<group>"; };
 		6CD0A6DE13AE395700700F01 /* libtidy.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libtidy.dylib; path = usr/lib/libtidy.dylib; sourceTree = SDKROOT; };
 		6CDE85C813A51AE70065A991 /* AuthControllersFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthControllersFactory.h; sourceTree = "<group>"; };
 		6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthControllersFactory.m; sourceTree = "<group>"; };
@@ -312,12 +318,15 @@
 				6C9EACD813A09ECA00C1B19D /* images */,
 				6C87AEE1130BB61D0015B471 /* Auth */,
 				6CAA9303128546B900CB1737 /* CouchSearch */,
+				6CC8B60913B90D4300E9A556 /* CouchRequest */,
 				2860E325111B887F00E27156 /* AppDelegate_iPhone.h */,
 				2860E326111B887F00E27156 /* AppDelegate_iPhone.m */,
 				6C9EACE613A0D1AB00C1B19D /* MoreController.h */,
 				6C9EACE713A0D1AC00C1B19D /* MoreController.m */,
 				6C9EAD1413A1438700C1B19D /* ActivityOverlap.h */,
 				6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */,
+				6C7E868413B262C0000ED485 /* CSSelectedValueCell.h */,
+				6C7E868513B262C0000ED485 /* CSSelectedValueCell.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -610,8 +619,6 @@
 		6CAA94D51285A06200CB1737 /* Form */ = {
 			isa = PBXGroup;
 			children = (
-				6C7E868413B262C0000ED485 /* CSSelectedValueCell.h */,
-				6C7E868513B262C0000ED485 /* CSSelectedValueCell.m */,
 				6CAA9304128546F200CB1737 /* CouchSearchFormController.h */,
 				6CAA9305128546F200CB1737 /* CouchSearchFormController.m */,
 				6CAA94D61285A07E00CB1737 /* CouchSearchFormControllerFactory.h */,
@@ -636,6 +643,17 @@
 			);
 			name = JSONKit;
 			path = ../../libs/JSONKit;
+			sourceTree = "<group>";
+		};
+		6CC8B60913B90D4300E9A556 /* CouchRequest */ = {
+			isa = PBXGroup;
+			children = (
+				6CC8B60A13B90D6800E9A556 /* CouchRequestFormController.h */,
+				6CC8B60B13B90D6800E9A556 /* CouchRequestFormController.m */,
+				6CAFE7A713BA551C0089559B /* CouchRequestRequest.h */,
+				6CAFE7A813BA551C0089559B /* CouchRequestRequest.m */,
+			);
+			name = CouchRequest;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -812,6 +830,8 @@
 				6C99163A13B7B9C300E35900 /* NSDictionary+Location.m in Sources */,
 				6C99164013B7CFAC00E35900 /* CurrentLocationRequest.m in Sources */,
 				6CC8B60813B8BA3100E9A556 /* LocationSearchController.m in Sources */,
+				6CC8B60C13B90D6800E9A556 /* CouchRequestFormController.m in Sources */,
+				6CAFE7A913BA551D0089559B /* CouchRequestRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

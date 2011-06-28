@@ -11,9 +11,13 @@
 
 #import "CouchSurfer.h"
 
+#import "CouchRequestFormController.h"
+
 @interface ProfileController ()
 
 @property (nonatomic, retain) CouchSurfer *surfer;
+
+- (void)sendCouchRequest;
 
 @end
 
@@ -45,6 +49,12 @@
 
 - (void)viewDidLoad {
 	self.navigationItem.title = self.surfer.name;
+	
+	UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
+																			  style:UIBarButtonItemStyleBordered
+																			 target:self 
+																			 action:@selector(sendCouchRequest)] autorelease];
+	self.navigationItem.rightBarButtonItem = couchRequestBarButton;
 	
     CGRect viewFrame = self.view.frame;
     _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height)] autorelease];
@@ -100,6 +110,13 @@
 	if (self.surfer.image != nil) {
 		_photoView.image = [CSImageCropper scaleToSize:CGSizeMake(130, 130) image:self.surfer.image];
 	}
+}
+
+#pragma Mark Action methods
+
+- (void)sendCouchRequest {
+	CouchRequestFormController *controller = [[[CouchRequestFormController alloc] initWithSurfer:self.surfer] autorelease];
+	[self presentModalViewController:controller animated:YES];
 }
 
 @end
