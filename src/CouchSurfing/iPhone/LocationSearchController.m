@@ -84,17 +84,22 @@
 	[self.view addSubview:_tableView];
 	self.searchActivityOverlap = [[[ActivityOverlap alloc] initWithView:self.view 
 																 title:NSLocalizedString(@"LOADING LOCATIONS", nil)] autorelease];
-	
-	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
-    [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
-
 	[super viewDidLoad];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
+    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+
 	[_searchBar becomeFirstResponder];
 	[super viewDidAppear:animated];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
+    [nc removeObserver:self name:UIKeyboardWillShowNotification object:nil];
+    [nc removeObserver:self name:UIKeyboardWillHideNotification object:nil];
 }
 
 - (void)viewDidUnload

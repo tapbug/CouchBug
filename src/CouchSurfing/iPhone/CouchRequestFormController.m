@@ -365,7 +365,12 @@
 
 - (void)keyboardDidShow:(NSNotification *)notification {
 	keyboardOn = YES;	
-    CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];    
+
+	if (dialogViewOn) {
+		[self hideDialogView];		
+	}
+
+	CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];    
     
     CGFloat keyboardHeigh = 0;
     if (UIDeviceOrientationIsPortrait([UIApplication sharedApplication].statusBarOrientation)) {
@@ -373,9 +378,6 @@
     } else {
         keyboardHeigh = addFrame.size.width;
     }
-	if (dialogViewOn) {
-		[self hideDialogView];		
-	}
 	
     [UIView beginAnimations:@"showKeyboard" context:nil];
     [UIView setAnimationCurve:[[[notification userInfo] objectForKey:UIKeyboardAnimationCurveUserInfoKey] intValue]];
@@ -541,7 +543,6 @@
 	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
 						  withRowAnimation:UITableViewRowAnimationNone];
 	[_formTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-	[self registerForKeyboardEvents];
 }
 
 #pragma Mark Actions methods

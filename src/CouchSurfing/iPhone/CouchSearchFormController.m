@@ -159,9 +159,16 @@
 						   [NSArray arrayWithObjects:[NSString stringWithFormat:@"%d %@", 24, NSLocalizedString(@"HOURS", nil)], [NSNumber numberWithInt:1], nil],
 						   nil];
 	
-	[self registerForKeyboardEvents];
 	self.navigationController.delegate = self;
     [super viewDidLoad];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	[self registerForKeyboardEvents];
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	[self unregisterKeyboardEvents];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -490,13 +497,11 @@
 		LanguagesListController *controller = [[[LanguagesListController alloc] initWithFilter:self.filter] autorelease];
 		controller.delegate = self;
 		[self.navigationController pushViewController:controller animated:YES];
-		[self unregisterKeyboardEvents];
 		
 	} else if ([item isEqualToString:@"LOCATION"]) {
 		LocationSearchController *controller = [[[LocationSearchController alloc] initWithFilter:self.filter] autorelease];
 		controller.delegate = self;
 		[self.navigationController pushViewController:controller animated:YES];
-		[self unregisterKeyboardEvents];
 	}
 }
 
@@ -862,12 +867,14 @@
 
 - (void)languagesListDidSelectLanguage:(LanguagesListController *)languagesList {
 	[self refreshFormFilterInformation];
+	[self.navigationController popViewControllerAnimated:YES];	
 }
 
 #pragma  Mark LocationSearchControllerDelegate
 
 - (void)locationSearchDidSelectLocation:(LocationSearchController *)locationSearchController {
 	[self refreshFormFilterInformation];
+	[self.navigationController popViewControllerAnimated:YES];
 }
 
 - (void)refreshFormFilterInformation {
@@ -875,9 +882,6 @@
 	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
 						  withRowAnimation:UITableViewRowAnimationNone];
 	[_formTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
-	//	TODO opravdu to tu ma byt???
-	[self.navigationController popViewControllerAnimated:YES];
-	[self registerForKeyboardEvents];
 }
 
 #pragma Mark UINavigationControllerDelegate methods
