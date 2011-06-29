@@ -9,7 +9,7 @@
 #import "HomeController.h"
 #import "AuthControllersFactory.h"
 #import "ActivityOverlap.h"
-#import "ProfileRequestFactory.h"
+#import "HomeRequestFactory.h"
 #import "LoginAnnouncer.h"
 
 #import "CSTools.h"
@@ -18,10 +18,10 @@
 @interface HomeController ()
 
 @property (nonatomic, retain) AuthControllersFactory *authControllersFactory;
-@property (nonatomic, retain) ProfileRequestFactory *profileRequestFactory;
+@property (nonatomic, retain) HomeRequestFactory *profileRequestFactory;
 
 @property (nonatomic, retain) ActivityOverlap *loadingOverlap;
-@property (nonatomic, retain) ProfileRequest *profileRequest;
+@property (nonatomic, retain) HomeRequest *profileRequest;
 
 @property (nonatomic, retain) ActivityOverlap *logoutOverlap;
 @property (nonatomic, retain) LogoutRequest *logoutRequest;
@@ -52,7 +52,7 @@
 @synthesize items = _items;
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory
-               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory 
+               profileRequestFactory:(HomeRequestFactory *)profileRequestFactory 
                       loginAnnouncer:(id<LoginAnnouncer>) loginAnnouncer {
     
     self = [super init];
@@ -142,7 +142,7 @@
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
     
-    self.profileRequest = [self.profileRequestFactory createProfileRequest];
+    self.profileRequest = [self.profileRequestFactory createHomeRequest];
     self.profileRequest.delegate = self;
     [self.profileRequest loadProfile];
     
@@ -257,7 +257,7 @@
 
 #pragma Mark ProfileRequestDelegate methods
 
-- (void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
+- (void)profileRequest:(HomeRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
     self.navigationItem.title = [NSString stringWithFormat:@"%@", [profile objectForKey:@"name"]];
     
     self.navigationItem.leftBarButtonItem.enabled = YES;
@@ -321,7 +321,7 @@
     [_tableView reloadData];
 }
 
-- (void)profileRequestFailedToLogin:(ProfileRequest *)profileRequest {
+- (void)profileRequestFailedToLogin:(HomeRequest *)profileRequest {
     
 }
 

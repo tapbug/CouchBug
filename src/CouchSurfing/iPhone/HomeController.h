@@ -9,20 +9,20 @@
 #import <UIKit/UIKit.h>
 
 #import "LogoutRequest.h"
-#import "ProfileRequest.h"
+#import "HomeRequest.h"
 #import "CSImageDownloader.h"
 
 @class ActivityOverlap;
 @class AuthControllersFactory;
-@class ProfileRequestFactory;
+@class HomeRequestFactory;
 @protocol LoginAnnouncer;
 
 @interface HomeController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
     AuthControllersFactory *_authControllersFactory;
-    ProfileRequestFactory *_profileRequestFactory;
+    HomeRequestFactory *_profileRequestFactory;
     
     ActivityOverlap *_loadingOverlap;
-    ProfileRequest *_profileRequest;
+    HomeRequest *_profileRequest;
     
     ActivityOverlap *_logoutOverlap;
     LogoutRequest *_logoutRequest;
@@ -37,7 +37,7 @@
 }
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory 
-               profileRequestFactory:(ProfileRequestFactory *)profileRequestFactory
+               profileRequestFactory:(HomeRequestFactory *)profileRequestFactory
                       loginAnnouncer:(id<LoginAnnouncer>) loginAnnouncer;
 
 @end

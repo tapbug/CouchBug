@@ -8,13 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
-@class ProfileRequest;
+@class HomeRequest;
 @protocol LoginInformation;
 
-@interface ProfileRequestFactory : NSObject {
+@interface HomeRequestFactory : NSObject {
     id<LoginInformation> injLoginInformation;
 }
 
-- (ProfileRequest *)createProfileRequest;
+- (HomeRequest *)createHomeRequest;
 
 @end

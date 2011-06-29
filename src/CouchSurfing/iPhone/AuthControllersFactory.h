@@ -15,19 +15,19 @@
 @protocol LoginInformation;
 
 @class HomeController;
-@class ProfileRequestFactory;
+@class HomeRequestFactory;
 
 @interface AuthControllersFactory : NSObject {
     id<LoginAnnouncer> injLoginAnnouncer;
     id<LoginInformation> injLoginInformation;
     
-    ProfileRequestFactory *injProfileRequestFactory;
+    HomeRequestFactory *injProfileRequestFactory;
 }
 
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 
-@property (nonatomic, retain) ProfileRequestFactory *profileRequestFactory;
+@property (nonatomic, retain) HomeRequestFactory *profileRequestFactory;
 
 - (LoginController *)createLoginController;
 - (HomeController *)createProfileController;

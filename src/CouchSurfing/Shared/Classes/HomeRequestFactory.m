@@ -6,16 +6,16 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ProfileRequestFactory.h"
-#import "ProfileRequest.h"
+#import "HomeRequestFactory.h"
+#import "HomeRequest.h"
 
-@interface ProfileRequestFactory ()
+@interface HomeRequestFactory ()
 
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 
 @end
 
-@implementation ProfileRequestFactory
+@implementation HomeRequestFactory
 
 @synthesize loginInformation = injLoginInformation;
 
@@ -24,9 +24,9 @@
     [super dealloc];
 }
 
-- (ProfileRequest *)createProfileRequest {
-    ProfileRequest *profileRequest = 
-        [[[ProfileRequest alloc] initWithLoginInformation:self.loginInformation] autorelease];
+- (HomeRequest *)createHomeRequest {
+    HomeRequest *profileRequest = 
+        [[[HomeRequest alloc] initWithLoginInformation:self.loginInformation] autorelease];
     return profileRequest;
 }
 

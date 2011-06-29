@@ -12,7 +12,7 @@
 #import "AuthControllersFactory.h"
 #import "LoginAnnouncer.h"
 #import "IdentityManager.h"
-#import "ProfileRequestFactory.h"
+#import "HomeRequestFactory.h"
 
 //Couchsearch UI modules
 #import "CouchSearchFormControllerFactory.h"
@@ -121,7 +121,7 @@
 }
 
 - (void)injectAuth {
-    [self.container addComponent:[ProfileRequestFactory class]];
+    [self.container addComponent:[HomeRequestFactory class]];
     [self.container addComponent:[AuthControllersFactory class]];
     [[self.container withCache] addComponent:[IdentityManager class] 
                                 representing:[NSArray arrayWithObjects:@protocol(LoginAnnouncer), @protocol(LoginInformation), nil]];

@@ -6,12 +6,12 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "ProfileRequest.h"
+#import "HomeRequest.h"
 #import "LoginInformation.h"
 #import "TouchXML.h"
 #import "RegexKitLite.h"
 
-@interface ProfileRequest ()
+@interface HomeRequest ()
 
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 
@@ -22,7 +22,7 @@
 
 @end
 
-@implementation ProfileRequest
+@implementation HomeRequest
 
 @synthesize delegate = _delegate;
 @synthesize loginInformation = _loginInformation;

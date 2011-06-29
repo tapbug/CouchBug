@@ -15,7 +15,7 @@
 @protocol ProfileRequestDelegate;
 @protocol LoginInformation;
 
-@interface ProfileRequest : NSObject <MVUrlConnectionDelegate, LoginRequestDelegate> {
+@interface HomeRequest : NSObject <MVUrlConnectionDelegate, LoginRequestDelegate> {
     id<ProfileRequestDelegate> _delegate;
     id<LoginInformation> _loginInformation;
     MVUrlConnection *_homeConnection;
@@ -34,7 +34,7 @@
 
 @protocol ProfileRequestDelegate <NSObject>
 
-- (void)profileRequest:(ProfileRequest *)profileRequest didLoadProfile:(NSDictionary *)profile;
-- (void)profileRequestFailedToLogin:(ProfileRequest *)profileRequest;
+- (void)profileRequest:(HomeRequest *)profileRequest didLoadProfile:(NSDictionary *)profile;
+- (void)profileRequestFailedToLogin:(HomeRequest *)profileRequest;
 
 @end

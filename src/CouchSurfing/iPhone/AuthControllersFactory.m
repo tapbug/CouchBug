@@ -12,7 +12,7 @@
 #import "LoginAnnouncer.h"
 
 #import "HomeController.h"
-#import "ProfileRequestFactory.h"
+#import "HomeRequestFactory.h"
 
 @implementation AuthControllersFactory
 
