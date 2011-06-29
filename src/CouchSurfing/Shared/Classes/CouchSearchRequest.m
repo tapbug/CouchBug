@@ -24,8 +24,6 @@
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value key:(NSString *)key;
 - (NSString *)lastParameter:(NSString *)parameter value:(NSString *)value;
 
-- (NSData *)cleanUTF8:(NSData *)data;
-
 @end
 
 
@@ -116,7 +114,6 @@
     [urlRequest setValue:@"cs,en-us;q=0.7,en;q=0.3" forHTTPHeaderField:@"Accept-Language"];
     
     [urlRequest setValue:@"gzip, deflate" forHTTPHeaderField:@"Accept-Encoding"];
-    [urlRequest setValue:@"ISO-8859-2,utf-8;q=0.7,*;q=0.7" forHTTPHeaderField:@"Accept-Charset"];    
     [urlRequest setValue:@"XMLHttpRequest" forHTTPHeaderField:@"X-Requested-With"];
     [urlRequest setValue:@"1.7" forHTTPHeaderField:@"X-Prototype-Version"];
     [urlRequest setValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
@@ -162,30 +159,29 @@
 //  TODO misto URLConnection pouzit MVUrlConnection, protoze ma v sobe zabudovano i opravovani html
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSError *error;
-    NSString *responseString = [[[NSString alloc] initWithData:[self cleanUTF8:self.data] encoding:NSUTF8StringEncoding] autorelease];
-    NSString *responseRepairedString = [responseString stringByReplacingOccurrencesOfRegex:@"<(br|img)(.*?)/?>" withString:@"<$1$2 />"];
-    NSData *responseData = [responseRepairedString dataUsingEncoding:NSUTF8StringEncoding];
     
+	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
     CXMLDocument *doc = nil;
-    doc = [[CXMLDocument alloc] initWithData:responseData options:0 error:&error];
+	NSString *responseString = [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]autorelease];
+    doc = [[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error];
     
-    NSArray *nodes = [doc nodesForXPath:@"//div[@class='mod simple profile_result_item']" error:&error];
+    NSArray *nodes = [doc nodesForXPath:@"//x:div[@class='mod simple profile_result_item']" namespaceMappings:ns error:&error];
     
     NSMutableArray *surfers = [NSMutableArray array];
     
     for (CXMLNode *node in nodes) {
         CouchSurfer *surfer = [[[CouchSurfer alloc] init] autorelease];
-        NSArray *nameNodes = [node nodesForXPath:@".//span[@class='result_username']/a/text()" error:&error];
+        NSArray *nameNodes = [node nodesForXPath:@".//x:span[@class='result_username']/x:a/text()" namespaceMappings:ns error:&error];
         if ([nameNodes count] > 0) {
             surfer.name = [[nameNodes objectAtIndex:0] stringValue];
         }
         
-        NSArray *imageSrcNodes = [node nodesForXPath:@".//img[@class='profile_result_link_img']/@src" error:&error];
+        NSArray *imageSrcNodes = [node nodesForXPath:@".//x:img[@class='profile_result_link_img']/@src" namespaceMappings:ns error:&error];
         if ([imageSrcNodes count] > 0) {
             surfer.imageSrc = [[imageSrcNodes objectAtIndex:0] stringValue];
         }
         
-        NSArray *iconsInfoNodes = [node nodesForXPath:@".//div[@class='hd']/div[2]//img/@src" error:&error];
+        NSArray *iconsInfoNodes = [node nodesForXPath:@".//x:div[@class='hd']/x:div[2]//x:img/@src"namespaceMappings:ns error:&error];
         if ([iconsInfoNodes count] > 0) {
             for (CXMLNode *srcNode in iconsInfoNodes) {
                 if ([[srcNode stringValue] isEqual:@"/images/icon_couch_travel.gif"]) {
@@ -208,12 +204,12 @@
             }
         }
         
-        NSArray *aboutNodes = [node nodesForXPath:@".//li/div[text()='About']/following-sibling::div[1]/text()" error:&error];
+        NSArray *aboutNodes = [node nodesForXPath:@".//x:li/x:div[text()='About']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
         if ([aboutNodes count] > 0) {
             surfer.about = [[[aboutNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
         }
         
-        NSArray *basicNodes = [node nodesForXPath:@".//li/div[text()='Basics']/following-sibling::div[1]/text()" error:&error];
+        NSArray *basicNodes = [node nodesForXPath:@".//x:li/x:div[text()='Basics']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
         if ([basicNodes count] > 0) {
             NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
             NSString *regexp = @"([a-zA-Z ]+), ([0-9]+), ?(.*)$";
@@ -231,11 +227,11 @@
             surfer.job = [basics stringByMatching:regexp capture:3];
         }
         
-        NSArray *profileCountNodes = [node nodesForXPath:@".//ul[@class='profile_count']/li" error:&error];
+        NSArray *profileCountNodes = [node nodesForXPath:@".//x:ul[@class='profile_count']/x:li" namespaceMappings:ns error:&error];
         if ([profileCountNodes count] > 0) {
             for (CXMLNode *countNode in profileCountNodes) {
-                NSString *label = [[[countNode nodeForXPath:@"./text()" error:&error] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                NSString *count = [[countNode nodeForXPath:@"./span/text()" error:&error] stringValue];
+                NSString *label = [[[[countNode nodesForXPath:@"./text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+                NSString *count = [[[countNode nodesForXPath:@"./x:span/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
                 if ([label isEqualToString:@"References"]) {
                     surfer.referencesCount = count;
                 } else if ([label isEqualToString:@"Photos"]) {
@@ -288,27 +284,6 @@
 - (NSString *)lastParameter:(NSString *)parameter value:(NSString *)value {
     value = value == nil ? @"" : value;
     return [NSString stringWithFormat:@"%@=%@", parameter, value];
-}
-
-- (NSData *)cleanUTF8:(NSData *)data {
-    iconv_t cd = iconv_open("UTF-8", "UTF-8");
-    int one = 1;
-    iconvctl(cd, ICONV_SET_DISCARD_ILSEQ, &one);
-    
-    size_t inbytesleft, outbytesleft;
-    inbytesleft = outbytesleft = data.length;
-    char *inbuf  = (char *)data.bytes;
-    char *outbuf = malloc(sizeof(char) * data.length);
-    char *outptr = outbuf;
-    if (iconv(cd, &inbuf, &inbytesleft, &outptr, &outbytesleft)
-        == (size_t)-1) {
-        NSLog(@"iconv error");
-        return nil;
-    }
-    NSData *result = [NSData dataWithBytes:outbuf length:data.length - outbytesleft];
-    iconv_close(cd);
-    free(outbuf);
-    return result;
 }
 
 @end

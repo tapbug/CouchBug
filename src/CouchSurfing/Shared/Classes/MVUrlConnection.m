@@ -15,9 +15,6 @@
 @property(nonatomic, retain) NSURLConnection *actualConnection;
 @property(nonatomic, retain) NSMutableData *actualData;
 
-//  Opravi html tak aby bylo co nejvice validni
-- (NSString *)repairHtmlInString:(NSString *)html;
-
 @end
 
 @implementation MVUrlConnection
@@ -56,11 +53,6 @@
     self.actualConnection = [[NSURLConnection alloc] initWithRequest:self.urlRequest delegate:self];
 }
 
-- (void)sendRequestWithHtmlRepair {
-    self.actualConnection = [[NSURLConnection alloc] initWithRequest:self.urlRequest delegate:self];
-    _repairHtml = YES;
-}
-
 
 #pragma mark NSURLConnectionDelegate methods
 
@@ -76,22 +68,10 @@
     if ([self.delegate respondsToSelector:@selector(connection:didFinnishLoadingWithResponseString:)]) {
         
         NSString *responseString = [[[NSString alloc] initWithData:self.actualData encoding:NSUTF8StringEncoding] autorelease];        
-        if (_repairHtml) {
-            responseString = [self repairHtmlInString:responseString];
-        }
-        
         [self.delegate connection:self didFinnishLoadingWithResponseString:responseString];
     }
     if ([self.delegate respondsToSelector:@selector(connection:didFinnishLoadingWithResponseData:)]) {
-        NSData *responseData = nil;
-        if (_repairHtml) {
-            NSString *responseString = [[[NSString alloc] initWithData:self.actualData encoding:NSUTF8StringEncoding] autorelease];
-            responseString = [self repairHtmlInString:responseString];
-            responseData = [responseString dataUsingEncoding:NSUTF8StringEncoding];
-        } else {
-            responseData = self.actualData;
-        }
-        [self.delegate connection:self didFinnishLoadingWithResponseData:responseData];
+        [self.delegate connection:self didFinnishLoadingWithResponseData:self.actualData];
     }
 }
 
@@ -104,12 +84,6 @@
         [challenge.sender useCredential:[NSURLCredential credentialForTrust:challenge.protectionSpace.serverTrust] forAuthenticationChallenge:challenge];
     
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
-}
-
-#pragma Mark private methods
-
-- (NSString *)repairHtmlInString:(NSString *)html {
-    return [html stringByReplacingOccurrencesOfRegex:@" (.*?)=[\\\"](.*?) " withString:@" $1=\"$2\" "];
 }
 
 @end
