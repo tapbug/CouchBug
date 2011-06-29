@@ -434,6 +434,7 @@
 		}
 		
 		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		self.usernameTF.text = self.filter.username;
 		csCell.valueField = self.usernameTF;
 		[csCell makeLayout];
 		cell = csCell;
@@ -448,6 +449,7 @@
 		}
 		
 		csCell.keyLabel.text = NSLocalizedString(item, nil);
+		self.keywordTF.text = self.filter.keyword;
 		csCell.valueField = self.keywordTF;
 		[csCell makeLayout];
 		cell = csCell;

@@ -101,7 +101,8 @@ static NSDictionary *hasCouchIcons;
 	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
     if (!_initialLoadDone) {
 		if (self.filter.locationJSON == nil) {
-			[self gatherCurrentLocation];
+			//[self gatherCurrentLocation];
+			[self performSearch];
 		} else {
 			[self performSearch];
 		}

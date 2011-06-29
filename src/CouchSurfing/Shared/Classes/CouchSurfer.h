@@ -18,6 +18,7 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchTraveling;
 extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
 
 @interface CouchSurfer : NSObject {
+	NSString *ident;
     NSString *name;
     NSString *imageSrc;
     UIImage *image;
@@ -36,6 +37,7 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
     BOOL ambassador;
 }
 
+@property (nonatomic, retain) NSString *ident;
 @property (nonatomic, retain) NSString *name;
 @property (nonatomic, retain) NSString *imageSrc;
 @property (nonatomic, retain) UIImage *image;

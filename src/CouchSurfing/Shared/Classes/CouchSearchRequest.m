@@ -165,12 +165,13 @@
 	NSString *responseString = [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]autorelease];
     doc = [[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error];
     
-    NSArray *nodes = [doc nodesForXPath:@"//x:div[@class='mod simple profile_result_item']" namespaceMappings:ns error:&error];
+    NSArray *nodes = [doc nodesForXPath:@"//x:div[contains(@class, 'profile_result_item')]" namespaceMappings:ns error:&error];
     
     NSMutableArray *surfers = [NSMutableArray array];
     
     for (CXMLNode *node in nodes) {
         CouchSurfer *surfer = [[[CouchSurfer alloc] init] autorelease];
+		surfer.ident = [[[node nodeForXPath:@"@id" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"result_item-" withString:@""];
         NSArray *nameNodes = [node nodesForXPath:@".//x:span[@class='result_username']/x:a/text()" namespaceMappings:ns error:&error];
         if ([nameNodes count] > 0) {
             surfer.name = [[nameNodes objectAtIndex:0] stringValue];

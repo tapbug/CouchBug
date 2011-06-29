@@ -14,10 +14,13 @@
 
 @interface CouchRequestFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CouchRequestRequestDelegate> {
     CouchSurfer *_surfer;
+	
+	UIBarButtonItem *_sendButton;
 	UITableView *_formTableView;
 	UIView *_dialogView;
 	
 	UITextField *_subjectTF;
+	BOOL _subjectHasText;
 	UITextView *_messageTV;
 	UIResponder *_activeResponder;
 	

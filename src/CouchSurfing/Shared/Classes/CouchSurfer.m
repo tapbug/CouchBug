@@ -14,6 +14,7 @@
 
 @implementation CouchSurfer
 
+@synthesize ident;
 @synthesize name;
 @synthesize imageSrc;
 @synthesize image;
@@ -30,6 +31,7 @@
 @synthesize ambassador;
 
 - (void)dealloc {
+	self.ident = nil;
     self.name = nil;
     self.imageSrc = nil;
     self.image = nil;

@@ -49,12 +49,13 @@
 
 - (void)viewDidLoad {
 	self.navigationItem.title = self.surfer.name;
-	
-	UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
-																			  style:UIBarButtonItemStyleBordered
-																			 target:self 
-																			 action:@selector(sendCouchRequest)] autorelease];
-	self.navigationItem.rightBarButtonItem = couchRequestBarButton;
+	if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
+		UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
+																				   style:UIBarButtonItemStyleBordered
+																				  target:self 
+																				  action:@selector(sendCouchRequest)] autorelease];
+		self.navigationItem.rightBarButtonItem = couchRequestBarButton;
+	}
 	
     CGRect viewFrame = self.view.frame;
     _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height)] autorelease];

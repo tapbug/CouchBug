@@ -51,6 +51,9 @@
 
 - (void)arrivalDateChanged:(UIDatePicker *)sender;
 - (void)departureDateChanged:(UIDatePicker *)sender;
+
+- (void)revalidateSendButton;
+
 @end
 
 @implementation CouchRequestFormController
@@ -102,9 +105,10 @@
 																				  target:self
 																				   action:@selector(cancelAction)] autorelease];
 
-	UIBarButtonItem *sendButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SEND", nil) 
+	_sendButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SEND", nil) 
 																	style:UIBarButtonItemStyleDone target:self 
 																   action:@selector(sendAction)] autorelease];
+	_sendButton.enabled = NO;
 	
 	UIToolbar *toolbar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0,
 																	 0,
@@ -123,7 +127,7 @@
 	UIBarButtonItem *titleItem = [[[UIBarButtonItem alloc] initWithCustomView:titleLabel] autorelease];
 	
 	toolbar.autoresizingMask = UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
-	[toolbar setItems:[NSArray arrayWithObjects:cancelButton, flexibleSpace, titleItem, flexibleSpace, sendButton, nil]];
+	[toolbar setItems:[NSArray arrayWithObjects:cancelButton, flexibleSpace, titleItem, flexibleSpace, _sendButton, nil]];
 	toolbar.tintColor = UIColorFromRGB(0x3d4041);
 	[self.view addSubview:toolbar];
 	
@@ -231,8 +235,8 @@
 			}
 			CGFloat height = 22;
 			CGFloat width = cell.contentView.frame.size.width - 6;
-			self.subjectTF.frame = CGRectMake((cell.contentView.frame.size.width - width) / 2,
-											  (cell.contentView.frame.size.height - height) / 2,
+			self.subjectTF.frame = CGRectMake((int)(cell.contentView.frame.size.width - width) / 2,
+											  (int)(cell.contentView.frame.size.height - height) / 2,
 											  width,
 											  height);
 			cell.selectionStyle = UITableViewCellSelectionStyleNone;
@@ -504,8 +508,8 @@
 		_arrivingViaName = [[_arrivingViaData objectAtIndex:row] objectAtIndex:1]; 
 	}
 	
-	NSIndexPath *actualIndexPath = [_formTableView indexPathForSelectedRow];
-	
+	[self revalidateSendButton];
+	NSIndexPath *actualIndexPath = [_formTableView indexPathForSelectedRow];	
 	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
 						  withRowAnimation:UITableViewRowAnimationNone];
 	[_formTableView selectRowAtIndexPath:actualIndexPath
@@ -559,7 +563,7 @@
 	self.couchRequest.message = self.messageTV.text;
 	self.couchRequest.numberOfSurfers = _numberOfSurfers;
 	self.couchRequest.arrivalViaId = _arrivingViaId;
-	
+	self.couchRequest.surfer = self.surfer;
 	self.couchRequest.delegate = self;
 	[self.couchRequest sendCouchRequest];
 	[self.activityOverlap overlapView];
@@ -600,6 +604,16 @@
 	return YES;
 }
 
+- (void)textViewDidChange:(UITextView *)textView {
+	[self revalidateSendButton];
+}
+
+- (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
+	_subjectHasText = ![[textField.text stringByReplacingCharactersInRange:range withString:string] isEqualToString:@""];
+	[self revalidateSendButton];
+	return YES;
+}
+
 #pragma Mark CouchRequestRequestDelegate methods
 
 - (void)couchRequestRequestDidSent:(CouchRequestRequest *)request {
@@ -610,6 +624,23 @@
 											  otherButtonTitles:nil];
 	[alertView show];
 	[alertView release]; alertView = nil;
+	[self.parentViewController dismissModalViewControllerAnimated:YES];
+}
+
+#pragma Mark ViewController statuses
+
+- (void)revalidateSendButton {
+	BOOL enabled = YES;
+	if (_arrivingViaId == -1) {
+		enabled = NO;
+	}
+	if (!_subjectHasText) {
+		enabled = NO;
+	}
+	if (![self.messageTV hasText]) {
+		enabled = NO;
+	}
+	_sendButton.enabled = enabled;
 }
 
 @end

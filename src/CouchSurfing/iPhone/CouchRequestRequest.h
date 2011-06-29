@@ -13,7 +13,6 @@
 
 @class CouchSurfer;
 
-
 @interface CouchRequestRequest : NSObject <MVUrlConnectionDelegate> {
 	id<CouchRequestRequestDelegate> _delegate;
 	MVUrlConnection *_connection;
@@ -25,7 +24,8 @@
 	NSString *_message;
 	
 	NSInteger _numberOfSurfers;
-	NSInteger _arrivalViaId;	
+	NSInteger _arrivalViaId;
+	CouchSurfer *_surfer;
 }
 
 @property (nonatomic, assign) id<CouchRequestRequestDelegate> delegate;
@@ -38,6 +38,8 @@
 
 @property (nonatomic, assign) NSInteger numberOfSurfers;
 @property (nonatomic, assign) NSInteger arrivalViaId;
+
+@property (nonatomic, retain) CouchSurfer *surfer;
 
 - (void)sendCouchRequest;
 

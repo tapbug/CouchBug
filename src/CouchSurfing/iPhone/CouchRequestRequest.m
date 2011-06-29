@@ -9,6 +9,8 @@
 #import "CouchRequestRequest.h"
 #import "JSONKit.h"
 
+#import "CouchSurfer.h"
+
 @interface CouchRequestRequest () 
 
 @property (nonatomic, retain) MVUrlConnection *connection;
@@ -32,6 +34,8 @@
 @synthesize numberOfSurfers = _numberOfSurfers;
 @synthesize arrivalViaId = _arrivalViaId;
 
+@synthesize surfer = _surfer;
+
 - (void)dealloc {
 	self.connection.delegate = nil;
 	self.connection = nil;
@@ -42,20 +46,26 @@
 	self.subject = nil;
 	self.message = nil;
 	
+	self.surfer = nil;
 	[super dealloc];
 }
 
-- (void)sendCouchRequest {
+- (void)sendCouchRequest {	
 	NSString *urlString = @"http://www.couchsurfing.org/couchrequest/a_create";
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
 	[request setHTTPMethod:@"POST"];
 	
+	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
+	[dateFormatter setDateFormat:@"MM/dd/yyyy"];
+	NSString *arrivalDateString = [dateFormatter stringFromDate:self.arrivalDate];
+	NSString *departureDateString = [dateFormatter stringFromDate:self.departureDate];
+	
 	NSDictionary *encodedDict = [NSDictionary dictionaryWithObjectsAndKeys:
-		@"G8SF9OU", @"host_id",
+		self.surfer.ident, @"host_id",
 		@"classic", @"current_formstyle",
-		@"06/28/2011", @"date_arrival",
-		@"06/30/2011", @"date_departure", 
+		arrivalDateString, @"date_arrival",
+		departureDateString, @"date_departure", 
 		[NSString stringWithFormat:@"%d", self.numberOfSurfers], @"number_in_party", 
 		[NSString stringWithFormat:@"%d", self.arrivalViaId], @"arriving_via", 
 		@"", @"template_name", 
