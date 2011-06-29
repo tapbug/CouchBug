@@ -247,7 +247,7 @@
 		6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchResultControllerFactory.m; sourceTree = "<group>"; };
 		6CAA94D61285A07E00CB1737 /* CouchSearchFormControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFormControllerFactory.h; sourceTree = "<group>"; };
 		6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormControllerFactory.m; sourceTree = "<group>"; };
-		6CAFE7A713BA551C0089559B /* CouchRequestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; path = CouchRequestRequest.h; sourceTree = "<group>"; };
+		6CAFE7A713BA551C0089559B /* CouchRequestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchRequestRequest.h; sourceTree = "<group>"; };
 		6CAFE7A813BA551C0089559B /* CouchRequestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchRequestRequest.m; sourceTree = "<group>"; };
 		6CC1DA1113A09276008F659F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		6CC1DA1213A09276008F659F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
@@ -262,9 +262,9 @@
 		6CDE85D213A547510065A991 /* CouchSearchFilter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CouchSearchFilter.m; path = Shared/Classes/CouchSearchFilter.m; sourceTree = "<group>"; };
 		6CDE85D413A547610065A991 /* LogoutRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = LogoutRequest.h; path = Shared/Classes/LogoutRequest.h; sourceTree = "<group>"; };
 		6CDE85D513A547610065A991 /* LogoutRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = LogoutRequest.m; path = Shared/Classes/LogoutRequest.m; sourceTree = "<group>"; };
-		6CDE85D613A547610065A991 /* HomeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; name = HomeRequest.h; path = Shared/Classes/HomeRequest.h; sourceTree = "<group>"; };
+		6CDE85D613A547610065A991 /* HomeRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeRequest.h; path = Shared/Classes/HomeRequest.h; sourceTree = "<group>"; };
 		6CDE85D713A547610065A991 /* HomeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeRequest.m; path = Shared/Classes/HomeRequest.m; sourceTree = "<group>"; };
-		6CDE85D813A547610065A991 /* HomeRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; name = HomeRequestFactory.h; path = Shared/Classes/HomeRequestFactory.h; sourceTree = "<group>"; };
+		6CDE85D813A547610065A991 /* HomeRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeRequestFactory.h; path = Shared/Classes/HomeRequestFactory.h; sourceTree = "<group>"; };
 		6CDE85D913A547610065A991 /* HomeRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeRequestFactory.m; path = Shared/Classes/HomeRequestFactory.m; sourceTree = "<group>"; };
 		6CF1E0B313B6830400704662 /* Languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Languages.plist; sourceTree = "<group>"; };
 		6CF1E0B513B72E2900704662 /* LanguagesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagesListController.h; sourceTree = "<group>"; };
