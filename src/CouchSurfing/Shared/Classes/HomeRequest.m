@@ -136,6 +136,8 @@
             self.profileDictionary = nil;
         }
     }
+	
+	[doc release]; doc = nil;
 }
 
 #pragma Mark LoginRequestDelegate

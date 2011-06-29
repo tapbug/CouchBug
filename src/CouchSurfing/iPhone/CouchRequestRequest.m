@@ -53,7 +53,7 @@
 - (void)sendCouchRequest {	
 	NSString *urlString = @"http://www.couchsurfing.org/couchrequest/a_create";
 	NSURL *url = [NSURL URLWithString:urlString];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
 	[request setHTTPMethod:@"POST"];
 	
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];

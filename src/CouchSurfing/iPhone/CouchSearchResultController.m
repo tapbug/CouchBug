@@ -157,7 +157,7 @@ static NSDictionary *hasCouchIcons;
     if ([self.sourfers count] == indexPath.row && _tryLoadMore) {// vytvoreni bunky load more
         cell = [tableView dequeueReusableCellWithIdentifier:@"loadingMoreCell"];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"loadingMoreCell"];
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"loadingMoreCell"] autorelease];
             //Setup indicator view
             UIActivityIndicatorView *activityView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
             activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
@@ -173,7 +173,7 @@ static NSDictionary *hasCouchIcons;
             //setup containing view
             CGFloat loadingViewWidth = loadingLabel.frame.origin.x + loadingLabel.frame.size.width;
             CGFloat loadingViewHeight = loadingLabel.frame.size.height;
-            UIView *loadingView = [[UIView alloc] initWithFrame:CGRectMake((int)(cell.contentView.frame.size.width - loadingViewWidth) / 2, (int)(cell.contentView.frame.size.height - loadingViewHeight) / 2, loadingViewWidth, loadingViewHeight)];
+            UIView *loadingView = [[[UIView alloc] initWithFrame:CGRectMake((int)(cell.contentView.frame.size.width - loadingViewWidth) / 2, (int)(cell.contentView.frame.size.height - loadingViewHeight) / 2, loadingViewWidth, loadingViewHeight)] autorelease];
             loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
             [loadingView addSubview:activityView];
             [loadingView addSubview:loadingLabel];
@@ -184,7 +184,7 @@ static NSDictionary *hasCouchIcons;
     } else { // Vytvoreni bunky s couchsurferem
         CouchSearchResultCell *surferCell = (CouchSearchResultCell *)[tableView dequeueReusableCellWithIdentifier:@"surferCell"];
         if (surferCell == nil) {
-            surferCell = [[CouchSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"surferCell"];
+            surferCell = [[[CouchSearchResultCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"surferCell"] autorelease];
             surferCell.backgroundView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"searchRowBg.png"]] autorelease];
 
             
@@ -248,7 +248,7 @@ static NSDictionary *hasCouchIcons;
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([self.sourfers count] > indexPath.row) {
 		CouchSurfer *surfer = [self.sourfers objectAtIndex:indexPath.row];
-		ProfileController *profileController = [[ProfileController alloc] initWithSurfer:surfer];
+		ProfileController *profileController = [[[ProfileController alloc] initWithSurfer:surfer] autorelease];
 		[self.navigationController pushViewController:profileController animated:YES];
 	}
 }
@@ -390,13 +390,14 @@ static NSDictionary *hasCouchIcons;
 					CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
 					imageDownloader.delegate = self;
 					[imageDownloader downloadWithSrc:sourfer.imageSrc position:lastRow + i];
+					[imageDownloader release];
 				}
 			} else {
 				break;
 			}
-		} 
-
-	}    
+		}
+	}
+	[indexPaths release]; indexPaths = nil;
 }
 
 - (void)gatherCurrentLocation {

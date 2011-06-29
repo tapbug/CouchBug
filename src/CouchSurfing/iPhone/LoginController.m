@@ -83,8 +83,8 @@
     
     self.view.backgroundColor = [UIColor clearColor];
         
-    self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view
-                                                           title:NSLocalizedString(@"SIGNING IN", nil)];
+    self.activityOverlap = [[[ActivityOverlap alloc] initWithView:self.view
+                                                           title:NSLocalizedString(@"SIGNING IN", nil)] autorelease];
     
     self.usernameField = [[[UITextField alloc] init] autorelease];
     self.usernameField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -136,7 +136,7 @@
     if (indexPath.row == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"usernameCell"];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"usernameCell"];
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"usernameCell"] autorelease];
             self.usernameField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
             [cell.contentView addSubview:self.usernameField];
         }
@@ -144,7 +144,7 @@
     } else if (indexPath.row == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"passwordCell"];
         if (cell == nil) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"passwordCell"];
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"passwordCell"] autorelease];
             self.passwordField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
             [cell.contentView addSubview:self.passwordField];
         }

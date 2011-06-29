@@ -620,16 +620,16 @@
 		_dialogView.backgroundColor = [UIColor whiteColor];
 		[window addSubview:_dialogView];		
 		
-		UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, _dialogView.frame.size.width, toolBarHeight)];
+		UIToolbar *toolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, _dialogView.frame.size.width, toolBarHeight)] autorelease];
 		toolBar.tintColor = UIColorFromRGB(0x3d4041);
 		[_dialogView addSubview:toolBar];
 				
 		UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
 																					 target:self
 																					 action:@selector(hideDialogView)] autorelease];
-		UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+		UIBarButtonItem *flexibleSpace = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
 																					   target:nil
-																					   action:nil];
+																					   action:nil] autorelease];
 		[toolBar setItems:[NSArray arrayWithObjects:flexibleSpace, doneButton, nil]];		
 	}
 
@@ -764,7 +764,7 @@
 - (CSCheckboxCell *)getCheckboxCell {
 	CSCheckboxCell * cell = (CSCheckboxCell *)[_formTableView dequeueReusableCellWithIdentifier:@"checkboxCell"];
 	if (cell == nil) {
-		cell = [[CSCheckboxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"checkboxCell"];
+		cell = [[[CSCheckboxCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"checkboxCell"] autorelease];
 	}	
 	return cell;
 }
@@ -772,7 +772,7 @@
 - (CSSelectedValueCell *)createSelectedValueCell:(NSString *)title selected:(NSString *)selected {
 	CSSelectedValueCell * cell = (CSSelectedValueCell *)[_formTableView dequeueReusableCellWithIdentifier:@"selectedValueCell"];
 	if (cell == nil) {
-		cell = [[CSSelectedValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"selectedValueCell"];
+		cell = [[[CSSelectedValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"selectedValueCell"] autorelease];
 	}
 	cell.keyLabel.text = title;
 	cell.selectedValueLabel.text = (selected == nil) ? NSLocalizedString(@"ANY", nil) : selected;
@@ -784,7 +784,7 @@
 - (CSEditableCell *)getEditableCell {
 	CSEditableCell * cell = (CSEditableCell *)[_formTableView dequeueReusableCellWithIdentifier:@"editableValueCell"];
 	if (cell == nil) {
-		cell = [[CSEditableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"editableValueCell"];
+		cell = [[[CSEditableCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"editableValueCell"] autorelease];
 	}
 
 	cell.selectionStyle = UITableViewCellSelectionStyleNone;

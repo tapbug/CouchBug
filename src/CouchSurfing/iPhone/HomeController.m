@@ -191,7 +191,7 @@
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:cellType];
     if (cell == nil) {
         if ([cellType isEqualToString:@"pairCell"]) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"pairCell"];
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"pairCell"] autorelease];
             
             UILabel *valueLabel = [[[UILabel alloc] init] autorelease];
             valueLabel.tag = 1;
@@ -207,7 +207,7 @@
             descriptionLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin;
             [cell.contentView addSubview:descriptionLabel];            
         } else if([cellType isEqualToString:@"singleValueCell"]) {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"singleValueCell"];
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"singleValueCell"] autorelease];
             UILabel *valueLabel = [[[UILabel alloc] init] autorelease];
             valueLabel.font = [UIFont systemFontOfSize:12.5];
             valueLabel.backgroundColor = [UIColor clearColor];

@@ -71,6 +71,7 @@
                                                                                 kCFStringEncodingUTF8 );
     
     [bodyString appendString:[self parameter:@"location" value:locationEncoded]];
+	[locationEncoded release]; locationEncoded = nil;
     [bodyString appendString:[self parameter:@"search" value:@"Search!"]];
     
     if ([self.couchStatuses count] == 0) {
@@ -253,6 +254,7 @@
     
     self.connection = nil;
     self.data = nil;
+	[doc release]; doc = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {

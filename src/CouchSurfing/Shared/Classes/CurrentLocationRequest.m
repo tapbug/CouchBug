@@ -42,6 +42,7 @@
 	if ([self.delegate respondsToSelector:@selector(currentLocationRequest:didGatherLocation:)]) {
 		[self.delegate currentLocationRequest:self didGatherLocation:[locationString objectFromJSONString]];
 	}
+	[doc release]; doc = nil;
 }
 
 @end

@@ -81,6 +81,8 @@
 	self.couchRequest.delegate = nil;
 	self.couchRequest = nil;
 	self.activityOverlap = nil;
+	self.arrivalDate = nil;
+	self.departureDate = nil;
     [super dealloc];
 }
 
@@ -98,8 +100,8 @@
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
-	self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view
-														   title:NSLocalizedString(@"SENDING COUCH REQUEST", nil)];
+	self.activityOverlap = [[[ActivityOverlap alloc] initWithView:self.view
+														   title:NSLocalizedString(@"SENDING COUCH REQUEST", nil)] autorelease];
 	
 	UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 																				  target:self
@@ -249,8 +251,8 @@
 			}
 			CGFloat width = cell.contentView.frame.size.width - 6;
 			CGFloat height = cell.contentView.frame.size.height - 6;
-			self.messageTV.frame = CGRectMake((cell.contentView.frame.size.width - width) / 2,
-											  (cell.contentView.frame.size.height - height) / 2,
+			self.messageTV.frame = CGRectMake((int)(cell.contentView.frame.size.width - width) / 2,
+											  (int)(cell.contentView.frame.size.height - height) / 2,
 											  width,
 											  height);
 			
@@ -421,16 +423,16 @@
 		_dialogView.backgroundColor = [UIColor whiteColor];
 		[window addSubview:_dialogView];		
 		
-		UIToolbar *toolBar = [[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, _dialogView.frame.size.width, toolBarHeight)];
+		UIToolbar *toolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, _dialogView.frame.size.width, toolBarHeight)] autorelease];
 		toolBar.tintColor = UIColorFromRGB(0x3d4041);
 		[_dialogView addSubview:toolBar];
 		
 		UIBarButtonItem *doneButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemDone
 																					 target:self
 																					 action:@selector(hideDialogView)] autorelease];
-		UIBarButtonItem *flexibleSpace = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
+		UIBarButtonItem *flexibleSpace = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace
 																					   target:nil
-																					   action:nil];
+																					   action:nil] autorelease];
 		[toolBar setItems:[NSArray arrayWithObjects:flexibleSpace, doneButton, nil]];		
 	}
 	

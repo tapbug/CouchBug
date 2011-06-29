@@ -144,7 +144,7 @@
 	NSString *locationName = _searchBar.text;
 	NSString *urlString = [NSString stringWithFormat:@"http://www.couchsurfing.org/geography/locations_by_name/%@/city%@state%@country%@region", [locationName stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding], @"%3A", @"%3A", @"%3A"];
 	NSURL *url = [NSURL URLWithString:urlString];
-	NSMutableURLRequest *request = [[NSMutableURLRequest alloc] initWithURL:url];
+	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
 	[request setHTTPMethod:@"POST"];
 	
 	NSMutableString *bodyString = [NSMutableString string];
@@ -186,7 +186,7 @@
 	if ([self nonSearchMode]) {
 		cell = [tableView dequeueReusableCellWithIdentifier:@"controlCell"];
 		if (cell == nil) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"controlCell"];
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"controlCell"] autorelease];
 		}
 		
 		if (indexPath.row == 0) {
@@ -199,7 +199,7 @@
 	} else {
 		cell = [tableView dequeueReusableCellWithIdentifier:@"locationCell"];
 		if (cell == nil) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"locationCell"];
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"locationCell"] autorelease];
 		}
 		
 		NSDictionary *location = [self.locations objectAtIndex:indexPath.row];	

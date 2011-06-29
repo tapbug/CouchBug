@@ -50,7 +50,7 @@
 }
 
 - (void)sendRequest {
-    self.actualConnection = [[NSURLConnection alloc] initWithRequest:self.urlRequest delegate:self];
+    self.actualConnection = [[[NSURLConnection alloc] initWithRequest:self.urlRequest delegate:self] autorelease];
 }
 
 

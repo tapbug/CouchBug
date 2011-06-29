@@ -25,7 +25,7 @@
 }
 
 - (void)logout {
-    self.connection = [[MVUrlConnection alloc] initWithUrlString:@"https://www.couchsurfing.org/login.html?auth_logout=1"];
+    self.connection = [[[MVUrlConnection alloc] initWithUrlString:@"https://www.couchsurfing.org/login.html?auth_logout=1"] autorelease];
     self.connection.delegate = self;
     [self.connection sendRequest];
 }
