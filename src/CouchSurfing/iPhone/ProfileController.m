@@ -12,6 +12,7 @@
 #import "CouchSurfer.h"
 
 #import "CouchRequestFormController.h"
+#import "ProfileLocationCell.h"
 
 @interface ProfileController ()
 
@@ -60,7 +61,7 @@
 	}
 	
     CGRect viewFrame = self.view.frame;
-    _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height)] autorelease];
+    _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height) style:UITableViewStyleGrouped] autorelease];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
 	
@@ -239,7 +240,7 @@
 #pragma Mark UITableViewDelegate / DataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 0; //3
+	return 1; //3
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -252,12 +253,22 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	UITableViewCell *cell;
 	if (indexPath.section == 0) {
-		
+		ProfileLocationCell *customCell = (ProfileLocationCell *)[tableView dequeueReusableCellWithIdentifier:@"locationCell"];
+		if (customCell == nil) {
+			customCell = [[ProfileLocationCell alloc] initWithStyle:UITableViewCellStyleDefault
+													reuseIdentifier:@"locationCell"];
+		}		
 		if (indexPath.row == 0) {
-			
+			customCell.keyLabel.text = NSLocalizedString(@"FROM", nil);
+		} else if (indexPath.row == 1) {
+			customCell.keyLabel.text = NSLocalizedString(@"LAST LOGIN", nil);
 		}
+		[customCell makeLayout];
+		cell = customCell;
 	}
+	return cell;
 }
 
 #pragma Observing methods

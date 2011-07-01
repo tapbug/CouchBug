@@ -20,7 +20,8 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _keyLabel = [[[UILabel alloc] init] autorelease];
-		//_keyLabel.textColor
+		_keyLabel.font = [UIFont systemFontOfSize:11];
+		_keyLabel.textColor = [UIColor lightGrayColor];
 		[self.contentView addSubview:_keyLabel];
     }
     return self;
@@ -36,6 +37,13 @@
 - (void)dealloc
 {
     [super dealloc];
+}
+
+#pragma Public methods
+
+- (void)makeLayout {
+	_keyLabel.frame = CGRectMake(5, 5, 0, 0);
+	[_keyLabel sizeToFit];
 }
 
 @end

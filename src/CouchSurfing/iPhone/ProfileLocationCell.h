@@ -19,4 +19,6 @@
 @property (nonatomic, readonly) UILabel *valueLabel;
 @property (nonatomic, readonly) UILabel *dateLabel;
 
+- (void)makeLayout;
+
 @end
