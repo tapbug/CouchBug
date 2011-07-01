@@ -15,6 +15,7 @@
 	
 	UITableView *_tableView;
     UIImageView *_photoView;
+	BOOL _imageObserved;
 }
 
 - (id)initWithSurfer:(CouchSurfer *)surfer;

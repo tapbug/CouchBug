@@ -33,7 +33,9 @@
 }
 
 - (void)dealloc {
-	[self.surfer removeObserver:self forKeyPath:@"image"];
+	if (_imageObserved) {
+		[self.surfer removeObserver:self forKeyPath:@"image"];		
+	}
 	self.surfer = nil;
     [super dealloc];
 }
@@ -67,31 +69,105 @@
                                                                    0,
                                                                    headerBackgroundImage.size.width,
                                                                    headerBackgroundImage.size.height)] autorelease];
+	headerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	
     headerView.backgroundColor = [UIColor colorWithPatternImage:headerBackgroundImage];
     _tableView.tableHeaderView = headerView;
-    _photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(18,
+    _photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(headerView.frame.size.width - 18 - 130,
                                                                 18,
                                                                 130,
                                                                 130)] autorelease];
+	_photoView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 	if (self.surfer.image != nil) {
-		_photoView.image = [CSImageCropper scaleToSize:CGSizeMake(130, 130) image:self.surfer.image];		
+		_photoView.image = [CSImageCropper scaleToSize:CGSizeMake(130, 130) image:self.surfer.image];
 	} else {
 		[self.surfer addObserver:self forKeyPath:@"image" options:NSKeyValueObservingOptionNew context:nil];
+		_imageObserved = YES;
 	}
     [headerView addSubview:_photoView];
     
     UIImage *photoFrameImage = [UIImage imageNamed:@"photoFrameProfile"];
-    UIImageView *photoFrameView = [[[UIImageView alloc] initWithFrame:CGRectMake(8.5,
+    UIImageView *photoFrameView = [[[UIImageView alloc] initWithFrame:CGRectMake(headerView.frame.size.width - photoFrameImage.size.width - 8.5,
                                                                                  8.5,
                                                                                  photoFrameImage.size.width,
                                                                                  photoFrameImage.size.height)] autorelease];
+	photoFrameView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     photoFrameView.image = photoFrameImage;
     [headerView addSubview:photoFrameView];
-    
-    
+	
+	UIView *infoView = [[[UIView alloc] init] autorelease];
+	CGFloat infoViewWidth = (int)headerView.frame.size.width - (photoFrameView.frame.size.width + 2 * 8.5) - 8.5;
+	UILabel *nameLabel = [[[UILabel alloc] init] autorelease];
+	nameLabel.backgroundColor = [UIColor clearColor];
+	nameLabel.textColor = [UIColor whiteColor];
+	nameLabel.font = [UIFont boldSystemFontOfSize:17];
+	nameLabel.textAlignment = UITextAlignmentCenter;
+	nameLabel.text = self.surfer.name;
+
+	UILabel *basicsLabel = [[[UILabel alloc] init] autorelease];
+	basicsLabel.backgroundColor = [UIColor clearColor];
+	basicsLabel.textColor = [UIColor whiteColor];
+	basicsLabel.font = [UIFont systemFontOfSize:17];
+	basicsLabel.textAlignment = UITextAlignmentCenter;
+	basicsLabel.text = self.surfer.basicsForProfile;
+	
+	//	Current Mission
+	UILabel *currentMissionKeyLabel = [[[UILabel alloc] init] autorelease];
+	currentMissionKeyLabel.backgroundColor = [UIColor clearColor];
+	currentMissionKeyLabel.textColor = [UIColor whiteColor];
+	currentMissionKeyLabel.font = [UIFont systemFontOfSize:10];
+	currentMissionKeyLabel.textAlignment = UITextAlignmentCenter;
+	currentMissionKeyLabel.text = NSLocalizedString(@"Current mission", nil);
+
+	UILabel *currentMissionValueLabel = [[[UILabel alloc] init] autorelease];
+	currentMissionValueLabel.backgroundColor = [UIColor clearColor];
+	currentMissionValueLabel.textColor = [UIColor whiteColor];
+	currentMissionValueLabel.font = [UIFont systemFontOfSize:15];
+	currentMissionValueLabel.textAlignment = UITextAlignmentCenter;
+	currentMissionValueLabel.text = self.surfer.mission;
+	currentMissionValueLabel.numberOfLines = 4;
+	
+	NSLog(@"%@", self.surfer.mission);
+	
+	
+	CGFloat currentMissionKeyLabelHeight = [currentMissionKeyLabel.text sizeWithFont:currentMissionKeyLabel.font].height;
+	CGFloat currentMissionValueLabelHeight = [currentMissionValueLabel.text sizeWithFont:currentMissionValueLabel.font
+																	   constrainedToSize:CGSizeMake(infoViewWidth, 80) 
+																		   lineBreakMode:currentMissionValueLabel.lineBreakMode].height;
+	UIView *currentMissionView = [[[UIView alloc] init] autorelease];
+	
+	[currentMissionView addSubview:currentMissionKeyLabel];
+	[currentMissionView addSubview:currentMissionValueLabel];
+	
+	CGFloat nameLabelHeight = [self.surfer.name sizeWithFont:nameLabel.font].height;
+	CGFloat basicsLabelHeight = [self.surfer.basicsForProfile sizeWithFont:basicsLabel.font].height;
+	CGFloat currentMissionViewHeight = currentMissionKeyLabelHeight + currentMissionValueLabelHeight;
+	
+	CGFloat currentMissionViewPlaceholderHeight = MAX(currentMissionViewHeight, 80);
+	currentMissionView.frame = CGRectMake(0,(currentMissionViewPlaceholderHeight - currentMissionViewHeight) / 2, infoView.frame.size.width, currentMissionViewHeight);
+	
+	CGFloat infoViewHeight = nameLabelHeight + basicsLabelHeight + currentMissionViewPlaceholderHeight;
+	
+	infoView.frame = CGRectMake(17,
+								(int)(headerView.frame.size.height - infoViewHeight) / 2,
+								infoViewWidth,
+								infoViewHeight);
+	
+	nameLabel.frame = CGRectMake(0, 0, infoView.frame.size.width, nameLabelHeight);
+	basicsLabel.frame = CGRectMake(0, nameLabelHeight, infoView.frame.size.width, basicsLabelHeight);
+	currentMissionKeyLabel.frame = CGRectMake(0, 0, infoView.frame.size.width, currentMissionKeyLabelHeight);
+	currentMissionValueLabel.frame = CGRectMake(0, currentMissionKeyLabelHeight, infoView.frame.size.width, currentMissionValueLabelHeight);	
+		
+	UIView *currentMissionViewPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0, basicsLabelHeight + basicsLabel.frame.origin.y, infoViewWidth, currentMissionViewPlaceholderHeight)] autorelease];
+	[currentMissionViewPlaceholder addSubview:currentMissionView];
+	
+	[infoView addSubview:nameLabel];
+	[infoView addSubview:basicsLabel];
+	[infoView addSubview:currentMissionViewPlaceholder];
+	
+    [headerView addSubview:infoView];
+	
     [self.view addSubview:_tableView];
-	
-	
     [super viewDidLoad];
 }
 

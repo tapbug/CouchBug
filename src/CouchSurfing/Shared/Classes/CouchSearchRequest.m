@@ -157,7 +157,6 @@
 
 #pragma mark NSURLConnectionDelegate methods
 
-//  TODO misto URLConnection pouzit MVUrlConnection, protoze ma v sobe zabudovano i opravovani html
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     NSError *error;
     
@@ -178,6 +177,18 @@
             surfer.name = [[nameNodes objectAtIndex:0] stringValue];
         }
         
+		NSArray *locationNodes = [node nodesForXPath:@".//x:span[@class='result_username']/following-sibling::x:div/text()" namespaceMappings:ns error:&error];
+		if ([locationNodes count] > 0) {
+			surfer.livesIn = [[[locationNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"Lives in" withString:@""];
+		}
+		if ([locationNodes count] > 1) {
+			NSArray *lastLoginInfos = [[[locationNodes objectAtIndex:1] stringValue] componentsSeparatedByString:@" - "];
+			if ([lastLoginInfos count] >2) {
+				surfer.lastLoginLocation = [lastLoginInfos objectAtIndex:1];
+				surfer.lastLoginDate = [lastLoginInfos objectAtIndex:2];
+			}
+		}
+				
         NSArray *imageSrcNodes = [node nodesForXPath:@".//x:img[@class='profile_result_link_img']/@src" namespaceMappings:ns error:&error];
         if ([imageSrcNodes count] > 0) {
             surfer.imageSrc = [[imageSrcNodes objectAtIndex:0] stringValue];
@@ -206,14 +217,19 @@
             }
         }
         
-        NSArray *aboutNodes = [node nodesForXPath:@".//x:li/x:div[text()='About']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
+        NSArray *aboutNodes = [node nodesForXPath:@".//x:li/x:div[text()='About']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error];
         if ([aboutNodes count] > 0) {
-            surfer.about = [[[aboutNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+			NSMutableString *aboutString = [NSMutableString string];
+			for (CXMLNode *textNode in aboutNodes) {
+				[aboutString appendString:[textNode stringValue]];
+			}
+            surfer.about = [aboutString stringByReplacingOccurrencesOfString:@"... (more)" withString:@""];
         }
         
         NSArray *basicNodes = [node nodesForXPath:@".//x:li/x:div[text()='Basics']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
         if ([basicNodes count] > 0) {
-            NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+            NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+			NSLog(@"%@", basics);
             NSString *regexp = @"([a-zA-Z ]+), ([0-9]+), ?(.*)$";
             NSString *genderString = [basics stringByMatching:regexp capture:1];
             if ([genderString isEqualToString:@"Male"]) {
@@ -229,6 +245,8 @@
             surfer.job = [basics stringByMatching:regexp capture:3];
         }
         
+		surfer.mission = [[[[node nodesForXPath:@".//x:li/x:div[text()='Mission']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+		
         NSArray *profileCountNodes = [node nodesForXPath:@".//x:ul[@class='profile_count']/x:li" namespaceMappings:ns error:&error];
         if ([profileCountNodes count] > 0) {
             for (CXMLNode *countNode in profileCountNodes) {

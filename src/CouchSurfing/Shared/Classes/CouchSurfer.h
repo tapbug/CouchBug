@@ -20,6 +20,9 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
 @interface CouchSurfer : NSObject {
 	NSString *ident;
     NSString *name;
+	NSString *livesIn;
+	NSString *lastLoginLocation;
+	NSString *lastLoginDate;
     NSString *imageSrc;
     UIImage *image;
     
@@ -28,6 +31,7 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
     NSString *job;
     
     NSString *about;
+	NSString *mission;
     NSString *referencesCount;
     NSString *photosCount;
     NSString *replyRate;
@@ -39,6 +43,10 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
 
 @property (nonatomic, retain) NSString *ident;
 @property (nonatomic, retain) NSString *name;
+@property (nonatomic, retain) NSString *livesIn;
+@property (nonatomic, retain) NSString *lastLoginLocation;
+@property (nonatomic, retain) NSString *lastLoginDate;
+
 @property (nonatomic, retain) NSString *imageSrc;
 @property (nonatomic, retain) UIImage *image;
 
@@ -46,7 +54,10 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
 @property (nonatomic, retain) NSString *age;
 @property (nonatomic, retain) NSString *job;
 @property (nonatomic, retain) NSString *about;
+@property (nonatomic, retain) NSString *mission;
+
 @property (nonatomic, readonly) NSString *basics;
+@property (nonatomic, readonly) NSString *basicsForProfile;
 @property (nonatomic, retain) NSString *referencesCount;
 @property (nonatomic, retain) NSString *photosCount;
 @property (nonatomic, retain) NSString *replyRate;

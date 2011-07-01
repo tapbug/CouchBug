@@ -16,6 +16,9 @@
 
 @synthesize ident;
 @synthesize name;
+@synthesize livesIn;
+@synthesize lastLoginLocation;
+@synthesize lastLoginDate;
 @synthesize imageSrc;
 @synthesize image;
 @synthesize gender;
@@ -29,16 +32,21 @@
 @synthesize verified;
 @synthesize vouched;
 @synthesize ambassador;
+@synthesize mission;
 
 - (void)dealloc {
 	self.ident = nil;
     self.name = nil;
+	self.livesIn = nil;
+	self.lastLoginLocation = nil;
+	self.lastLoginDate = nil;
     self.imageSrc = nil;
     self.image = nil;
     self.about = nil;
     self.gender = nil;
     self.age = nil;
     self.job = nil;
+	self.mission = nil;
     self.referencesCount = nil;
     self.photosCount = nil;
     self.replyRate = nil;
@@ -54,6 +62,24 @@
         [basics appendFormat:@" • %@", self.job];
     }
     return basics;
+}
+
+- (NSString *)basicsForProfile {
+	NSString *longGender = nil;
+	
+	if ([self.gender isEqualToString:@"M"]) {
+		longGender = NSLocalizedString(@"male", nil);
+	} else if ([self.gender isEqualToString:@"F"]){
+		longGender = NSLocalizedString(@"female", nil);
+	} else if ([self.gender isEqualToString:@"Group"]) {
+		longGender = NSLocalizedString(@"Group", nil);
+	}
+	
+	NSMutableString *basics = [[longGender mutableCopy] autorelease];
+	if (![self.age isEqualToString:@""]) {
+        [basics appendFormat:@" • %@", self.age];
+    }
+	return basics;
 }
 
 @end

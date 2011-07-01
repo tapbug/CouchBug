@@ -51,7 +51,7 @@
         self.vouched = NO;
         self.ambassador = NO;
         self.wheelchairAccessible = NO;
-        self.username = @"karelbarel";
+        self.username = nil;
         self.keyword = nil;
     }
     return self;
