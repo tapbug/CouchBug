@@ -122,7 +122,7 @@
 	UILabel *currentMissionValueLabel = [[[UILabel alloc] init] autorelease];
 	currentMissionValueLabel.backgroundColor = [UIColor clearColor];
 	currentMissionValueLabel.textColor = [UIColor whiteColor];
-	currentMissionValueLabel.font = [UIFont systemFontOfSize:15];
+	currentMissionValueLabel.font = [UIFont italicSystemFontOfSize:15];
 	currentMissionValueLabel.textAlignment = UITextAlignmentCenter;
 	currentMissionValueLabel.text = self.surfer.mission;
 	currentMissionValueLabel.numberOfLines = 4;
