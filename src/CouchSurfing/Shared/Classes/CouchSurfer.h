@@ -61,7 +61,9 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
 @property (nonatomic, retain) NSString *referencesCount;
 @property (nonatomic, retain) NSString *photosCount;
 @property (nonatomic, retain) NSString *replyRate;
-@property (nonatomic, assign) CouchSurferHasCouch *couchStatus; 
+@property (nonatomic, assign) CouchSurferHasCouch *couchStatus;
+@property (nonatomic, readonly) UIImage *couchStatusImage;
+
 @property (nonatomic, assign) BOOL verified;
 @property (nonatomic, assign) BOOL vouched;
 @property (nonatomic, assign) BOOL ambassador;

@@ -22,8 +22,6 @@
 
 #import "ProfileController.h"
 
-static NSDictionary *hasCouchIcons;
-
 @interface CouchSearchResultController ()
 
 @property (nonatomic, retain) ActivityOverlap *locateActivity;
@@ -56,15 +54,6 @@ static NSDictionary *hasCouchIcons;
 @synthesize imageDownloaders = _imageDownloaders;
 @synthesize locationRequest = _locationRequest;
 @synthesize searchRequest = _searchRequest;
-
-+ (void)initialize {
-    hasCouchIcons = [[NSDictionary alloc] initWithObjectsAndKeys:[UIImage imageNamed:@"couchYes"], CouchSurferHasCouchYes,
-                     [UIImage imageNamed:@"couchNo"], CouchSurferHasCouchNo,
-                     [UIImage imageNamed:@"couchTravel"], CouchSurferHasCouchTraveling,
-                     [UIImage imageNamed: @"couchMaybe"], CouchSurferHasCouchMaybe,
-                     [UIImage imageNamed:@"couchCoffee"], CouchSurferHasCouchCoffeDrink,
-                     nil];
-}
 
 - (void)viewDidLoad {
     _currentPage = 1;
@@ -206,9 +195,7 @@ static NSDictionary *hasCouchIcons;
             surferCell.verifiedImageView.hidden = YES;
         }
         
-        if (surfer.couchStatus != nil && [hasCouchIcons objectForKey:surfer.couchStatus]) {
-            surferCell.hasCouchView.image = [hasCouchIcons objectForKey:surfer.couchStatus];
-        }
+        surferCell.hasCouchView.image = surfer.couchStatusImage;
         
         surferCell.vouchedView.hidden = !surfer.vouched;
         surferCell.ambassadorView.hidden = !surfer.ambassador;

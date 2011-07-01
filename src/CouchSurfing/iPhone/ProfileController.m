@@ -63,6 +63,9 @@
     _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height)] autorelease];
     _tableView.backgroundColor = [UIColor clearColor];
     _tableView.autoresizingMask = UIViewAutoresizingFlexibleHeight | UIViewAutoresizingFlexibleWidth;
+	
+	_tableView.delegate = self;
+	_tableView.dataSource = self;
     
     UIImage *headerBackgroundImage = [UIImage imageNamed:@"blackBg"];
     UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0,
@@ -93,7 +96,62 @@
                                                                                  photoFrameImage.size.height)] autorelease];
 	photoFrameView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
     photoFrameView.image = photoFrameImage;
-    [headerView addSubview:photoFrameView];
+    
+	CGFloat photoBarViewHeight = 26;
+	UIView *photoBarView = [[[UIView alloc] initWithFrame:CGRectMake(_photoView.frame.origin.x,
+																	_photoView.frame.origin.y + _photoView.frame.size.height - photoBarViewHeight,
+																	_photoView.frame.size.width,
+																	photoBarViewHeight)] autorelease];
+	
+	photoBarView.backgroundColor = [UIColor whiteColor];
+	photoBarView.alpha = 0.5;
+	[headerView addSubview:photoBarView];
+
+	UIImageView *couchStatusImageView = [[[UIImageView alloc] initWithImage:self.surfer.couchStatusImage] autorelease];
+	CGFloat nextIconPosition = photoBarView.frame.origin.x + 4;
+	couchStatusImageView.frame = CGRectMake(nextIconPosition, 
+											photoBarView.frame.origin.y + 4,
+											self.surfer.couchStatusImage.size.width,
+											self.surfer.couchStatusImage.size.height);
+	
+	[headerView addSubview:couchStatusImageView];
+	nextIconPosition += couchStatusImageView.frame.size.width + 4;
+	
+	
+	if (self.surfer.vouched) {
+		UIImage *vouchedImage = [UIImage imageNamed:@"iconVouched"];
+		UIImageView *vouchedImageView = [[[UIImageView alloc] initWithImage:vouchedImage] autorelease];
+		vouchedImageView.frame = CGRectMake(nextIconPosition, 
+												photoBarView.frame.origin.y + 4,
+												vouchedImage.size.width,
+												vouchedImage.size.height);
+		[headerView addSubview:vouchedImageView];
+		nextIconPosition += vouchedImage.size.width + 4;
+	}
+	
+	if (self.surfer.ambassador) {
+		UIImage *ambassadorImage = [UIImage imageNamed:@"iconAmbassador"];
+		UIImageView *ambassadorImageView = [[[UIImageView alloc] initWithImage:ambassadorImage] autorelease];
+		ambassadorImageView.frame = CGRectMake(nextIconPosition, 
+											photoBarView.frame.origin.y + 4,
+											ambassadorImage.size.width,
+											ambassadorImage.size.height);
+		[headerView addSubview:ambassadorImageView];
+		nextIconPosition += ambassadorImage.size.width + 4;
+	}	
+	
+	if (self.surfer.verified) {
+		UIImage *verifiedImage = [UIImage imageNamed:@"verified"];
+		UIImageView *verifiedImageView = [[[UIImageView alloc] initWithImage:verifiedImage] autorelease];
+		verifiedImageView.frame = CGRectMake(_photoView.frame.origin.x, 
+											 _photoView.frame.origin.y,
+											 verifiedImage.size.width,
+											 verifiedImage.size.height);
+		
+		[headerView addSubview:verifiedImageView];
+	}
+	
+	[headerView addSubview:photoFrameView];
 	
 	UIView *infoView = [[[UIView alloc] init] autorelease];
 	CGFloat infoViewWidth = (int)headerView.frame.size.width - (photoFrameView.frame.size.width + 2 * 8.5) - 8.5;
@@ -126,10 +184,7 @@
 	currentMissionValueLabel.textAlignment = UITextAlignmentCenter;
 	currentMissionValueLabel.text = self.surfer.mission;
 	currentMissionValueLabel.numberOfLines = 4;
-	
-	NSLog(@"%@", self.surfer.mission);
-	
-	
+		
 	CGFloat currentMissionKeyLabelHeight = [currentMissionKeyLabel.text sizeWithFont:currentMissionKeyLabel.font].height;
 	CGFloat currentMissionValueLabelHeight = [currentMissionValueLabel.text sizeWithFont:currentMissionValueLabel.font
 																	   constrainedToSize:CGSizeMake(infoViewWidth, 80) 
@@ -179,6 +234,30 @@
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
+}
+
+#pragma Mark UITableViewDelegate / DataSource methods
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+	return 0; //3
+}
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+	if (section == 0) {
+		return 2;
+	} else if(section == 1) {
+		return 1;
+	}
+	return 6;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 0) {
+		
+		if (indexPath.row == 0) {
+			
+		}
+	}
 }
 
 #pragma Observing methods

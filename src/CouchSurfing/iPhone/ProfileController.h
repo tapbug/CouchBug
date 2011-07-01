@@ -10,7 +10,7 @@
 
 @class CouchSurfer;
 
-@interface ProfileController : UIViewController {
+@interface ProfileController : UIViewController <UITableViewDelegate, UITableViewDataSource> {
 	CouchSurfer *_surfer;
 	
 	UITableView *_tableView;

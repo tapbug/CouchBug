@@ -8,6 +8,8 @@
 
 #import "CouchSurfer.h"
 
+static NSDictionary *hasCouchIcons;
+
 @interface CouchSurfer ()
 
 @end
@@ -53,6 +55,15 @@
     [super dealloc];
 }
 
++ (void)initialize {
+    hasCouchIcons = [[NSDictionary alloc] initWithObjectsAndKeys:[UIImage imageNamed:@"couchYes"], CouchSurferHasCouchYes,
+                     [UIImage imageNamed:@"couchNo"], CouchSurferHasCouchNo,
+                     [UIImage imageNamed:@"couchTravel"], CouchSurferHasCouchTraveling,
+                     [UIImage imageNamed: @"couchMaybe"], CouchSurferHasCouchMaybe,
+                     [UIImage imageNamed:@"couchCoffee"], CouchSurferHasCouchCoffeDrink,
+                     nil];
+}
+
 - (NSString *)basics {
     NSMutableString *basics = [[self.gender mutableCopy] autorelease];
     if (![self.age isEqualToString:@""]) {
@@ -80,6 +91,13 @@
         [basics appendFormat:@" • %@", self.age];
     }
 	return basics;
+}
+
+- (UIImage *)couchStatusImage {
+	if (self.couchStatus != nil && [hasCouchIcons objectForKey:self.couchStatus]) {
+		return [hasCouchIcons objectForKey:self.couchStatus];
+	}
+	return nil;
 }
 
 @end
