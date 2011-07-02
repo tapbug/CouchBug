@@ -618,7 +618,7 @@
 															   window.frame.size.width,
 															   0)];
 		_dialogView.backgroundColor = [UIColor whiteColor];
-		[window addSubview:_dialogView];		
+		[window addSubview:_dialogView];
 		
 		UIToolbar *toolBar = [[[UIToolbar alloc] initWithFrame:CGRectMake(0, 0, _dialogView.frame.size.width, toolBarHeight)] autorelease];
 		toolBar.tintColor = UIColorFromRGB(0x3d4041);

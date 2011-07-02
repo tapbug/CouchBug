@@ -20,9 +20,21 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         _keyLabel = [[[UILabel alloc] init] autorelease];
-		_keyLabel.font = [UIFont systemFontOfSize:11];
+		_keyLabel.font = [UIFont systemFontOfSize:12];
 		_keyLabel.textColor = [UIColor lightGrayColor];
 		[self.contentView addSubview:_keyLabel];
+		
+		_valueLabel = [[[UILabel alloc] init] autorelease];
+		_valueLabel.font = [UIFont boldSystemFontOfSize:12];
+		_valueLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+		[self.contentView addSubview:_valueLabel];
+		
+		_dateLabel = [[[UILabel alloc] init] autorelease];
+		_dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
+		_dateLabel.font = [UIFont systemFontOfSize:12];
+		_dateLabel.textColor = [UIColor brownColor];
+		[self.contentView addSubview:_dateLabel];
+		
     }
     return self;
 }
@@ -42,8 +54,17 @@
 #pragma Public methods
 
 - (void)makeLayout {
-	_keyLabel.frame = CGRectMake(5, 5, 0, 0);
+	_keyLabel.frame = CGRectMake(7, 7, 0, 0);
 	[_keyLabel sizeToFit];
+	_valueLabel.frame = CGRectMake(7,
+								   _keyLabel.frame.size.height + 7,
+								   self.contentView.frame.size.width - 14,
+								   [_valueLabel.text sizeWithFont:_valueLabel.font].height);
+	CGSize dateLabelSize = [_dateLabel.text sizeWithFont:_dateLabel.font];
+	_dateLabel.frame = CGRectMake(self.contentView.frame.size.width - 7 - dateLabelSize.width,
+								  _keyLabel.frame.origin.y,
+								  dateLabelSize.width,
+								  dateLabelSize.height);
 }
 
 @end

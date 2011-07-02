@@ -179,13 +179,13 @@
         
 		NSArray *locationNodes = [node nodesForXPath:@".//x:span[@class='result_username']/following-sibling::x:div/text()" namespaceMappings:ns error:&error];
 		if ([locationNodes count] > 0) {
-			surfer.livesIn = [[[locationNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"Lives in" withString:@""];
+			surfer.livesIn = [[[[locationNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"Lives in" withString:@""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
 		}
 		if ([locationNodes count] > 1) {
 			NSArray *lastLoginInfos = [[[locationNodes objectAtIndex:1] stringValue] componentsSeparatedByString:@" - "];
-			if ([lastLoginInfos count] >2) {
-				surfer.lastLoginLocation = [lastLoginInfos objectAtIndex:1];
-				surfer.lastLoginDate = [lastLoginInfos objectAtIndex:2];
+			if ([lastLoginInfos count] > 2) {
+				surfer.lastLoginDate = [lastLoginInfos objectAtIndex:1];				
+				surfer.lastLoginLocation = [lastLoginInfos objectAtIndex:2];
 			}
 		}
 				
@@ -223,13 +223,12 @@
 			for (CXMLNode *textNode in aboutNodes) {
 				[aboutString appendString:[textNode stringValue]];
 			}
-            surfer.about = [aboutString stringByReplacingOccurrencesOfString:@"... (more)" withString:@""];
+            surfer.about = [[aboutString stringByReplacingOccurrencesOfString:@"... (more)" withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
         }
         
         NSArray *basicNodes = [node nodesForXPath:@".//x:li/x:div[text()='Basics']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
         if ([basicNodes count] > 0) {
             NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
-			NSLog(@"%@", basics);
             NSString *regexp = @"([a-zA-Z ]+), ([0-9]+), ?(.*)$";
             NSString *genderString = [basics stringByMatching:regexp capture:1];
             if ([genderString isEqualToString:@"Male"]) {

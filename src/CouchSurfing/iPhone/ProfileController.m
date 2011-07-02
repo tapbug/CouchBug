@@ -17,6 +17,7 @@
 @interface ProfileController ()
 
 @property (nonatomic, retain) CouchSurfer *surfer;
+@property (nonatomic, retain) ProfileRequest *profileRequest;
 
 - (void)sendCouchRequest;
 
@@ -25,6 +26,7 @@
 @implementation ProfileController
 
 @synthesize surfer = _surfer;
+@synthesize profileRequest = _profileRequest;
 
 - (id)initWithSurfer:(CouchSurfer *)surfer {
 	if ((self = [super init])) {
@@ -34,6 +36,8 @@
 }
 
 - (void)dealloc {
+	self.profileRequest.delegate = nil;
+	self.profileRequest = nil;
 	if (_imageObserved) {
 		[self.surfer removeObserver:self forKeyPath:@"image"];		
 	}
@@ -103,7 +107,7 @@
 																	_photoView.frame.origin.y + _photoView.frame.size.height - photoBarViewHeight,
 																	_photoView.frame.size.width,
 																	photoBarViewHeight)] autorelease];
-	
+	photoBarView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 	photoBarView.backgroundColor = [UIColor whiteColor];
 	photoBarView.alpha = 0.5;
 	[headerView addSubview:photoBarView];
@@ -114,7 +118,7 @@
 											photoBarView.frame.origin.y + 4,
 											self.surfer.couchStatusImage.size.width,
 											self.surfer.couchStatusImage.size.height);
-	
+	couchStatusImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 	[headerView addSubview:couchStatusImageView];
 	nextIconPosition += couchStatusImageView.frame.size.width + 4;
 	
@@ -122,6 +126,7 @@
 	if (self.surfer.vouched) {
 		UIImage *vouchedImage = [UIImage imageNamed:@"iconVouched"];
 		UIImageView *vouchedImageView = [[[UIImageView alloc] initWithImage:vouchedImage] autorelease];
+		vouchedImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 		vouchedImageView.frame = CGRectMake(nextIconPosition, 
 												photoBarView.frame.origin.y + 4,
 												vouchedImage.size.width,
@@ -133,6 +138,7 @@
 	if (self.surfer.ambassador) {
 		UIImage *ambassadorImage = [UIImage imageNamed:@"iconAmbassador"];
 		UIImageView *ambassadorImageView = [[[UIImageView alloc] initWithImage:ambassadorImage] autorelease];
+		ambassadorImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 		ambassadorImageView.frame = CGRectMake(nextIconPosition, 
 											photoBarView.frame.origin.y + 4,
 											ambassadorImage.size.width,
@@ -144,6 +150,7 @@
 	if (self.surfer.verified) {
 		UIImage *verifiedImage = [UIImage imageNamed:@"verified"];
 		UIImageView *verifiedImageView = [[[UIImageView alloc] initWithImage:verifiedImage] autorelease];
+		verifiedImageView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 		verifiedImageView.frame = CGRectMake(_photoView.frame.origin.x, 
 											 _photoView.frame.origin.y,
 											 verifiedImage.size.width,
@@ -155,8 +162,10 @@
 	[headerView addSubview:photoFrameView];
 	
 	UIView *infoView = [[[UIView alloc] init] autorelease];
+	infoView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	CGFloat infoViewWidth = (int)headerView.frame.size.width - (photoFrameView.frame.size.width + 2 * 8.5) - 8.5;
 	UILabel *nameLabel = [[[UILabel alloc] init] autorelease];
+	nameLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	nameLabel.backgroundColor = [UIColor clearColor];
 	nameLabel.textColor = [UIColor whiteColor];
 	nameLabel.font = [UIFont boldSystemFontOfSize:17];
@@ -164,6 +173,7 @@
 	nameLabel.text = self.surfer.name;
 
 	UILabel *basicsLabel = [[[UILabel alloc] init] autorelease];
+	basicsLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	basicsLabel.backgroundColor = [UIColor clearColor];
 	basicsLabel.textColor = [UIColor whiteColor];
 	basicsLabel.font = [UIFont systemFontOfSize:17];
@@ -172,35 +182,38 @@
 	
 	//	Current Mission
 	UILabel *currentMissionKeyLabel = [[[UILabel alloc] init] autorelease];
+	currentMissionKeyLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	currentMissionKeyLabel.backgroundColor = [UIColor clearColor];
 	currentMissionKeyLabel.textColor = [UIColor whiteColor];
 	currentMissionKeyLabel.font = [UIFont systemFontOfSize:10];
 	currentMissionKeyLabel.textAlignment = UITextAlignmentCenter;
 	currentMissionKeyLabel.text = NSLocalizedString(@"Current mission", nil);
 
-	UILabel *currentMissionValueLabel = [[[UILabel alloc] init] autorelease];
-	currentMissionValueLabel.backgroundColor = [UIColor clearColor];
-	currentMissionValueLabel.textColor = [UIColor whiteColor];
-	currentMissionValueLabel.font = [UIFont italicSystemFontOfSize:15];
-	currentMissionValueLabel.textAlignment = UITextAlignmentCenter;
-	currentMissionValueLabel.text = self.surfer.mission;
-	currentMissionValueLabel.numberOfLines = 4;
+	_currentMissionValueLabel = [[[UILabel alloc] init] autorelease];
+	_currentMissionValueLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	_currentMissionValueLabel.backgroundColor = [UIColor clearColor];
+	_currentMissionValueLabel.textColor = [UIColor whiteColor];
+	_currentMissionValueLabel.font = [UIFont italicSystemFontOfSize:15];
+	_currentMissionValueLabel.textAlignment = UITextAlignmentCenter;
+	_currentMissionValueLabel.text = self.surfer.mission;
+	_currentMissionValueLabel.numberOfLines = 4;
 		
 	CGFloat currentMissionKeyLabelHeight = [currentMissionKeyLabel.text sizeWithFont:currentMissionKeyLabel.font].height;
-	CGFloat currentMissionValueLabelHeight = [currentMissionValueLabel.text sizeWithFont:currentMissionValueLabel.font
+	CGFloat currentMissionValueLabelHeight = [_currentMissionValueLabel.text sizeWithFont:_currentMissionValueLabel.font
 																	   constrainedToSize:CGSizeMake(infoViewWidth, 80) 
-																		   lineBreakMode:currentMissionValueLabel.lineBreakMode].height;
-	UIView *currentMissionView = [[[UIView alloc] init] autorelease];
+																		   lineBreakMode:_currentMissionValueLabel.lineBreakMode].height;
+	_currentMissionView = [[[UIView alloc] init] autorelease];
+	_currentMissionView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	
-	[currentMissionView addSubview:currentMissionKeyLabel];
-	[currentMissionView addSubview:currentMissionValueLabel];
+	[_currentMissionView addSubview:currentMissionKeyLabel];
+	[_currentMissionView addSubview:_currentMissionValueLabel];
 	
 	CGFloat nameLabelHeight = [self.surfer.name sizeWithFont:nameLabel.font].height;
 	CGFloat basicsLabelHeight = [self.surfer.basicsForProfile sizeWithFont:basicsLabel.font].height;
 	CGFloat currentMissionViewHeight = currentMissionKeyLabelHeight + currentMissionValueLabelHeight;
 	
 	CGFloat currentMissionViewPlaceholderHeight = MAX(currentMissionViewHeight, 80);
-	currentMissionView.frame = CGRectMake(0,(currentMissionViewPlaceholderHeight - currentMissionViewHeight) / 2, infoView.frame.size.width, currentMissionViewHeight);
+	_currentMissionView.frame = CGRectMake(0,(currentMissionViewPlaceholderHeight - currentMissionViewHeight) / 2, infoView.frame.size.width, currentMissionViewHeight);
 	
 	CGFloat infoViewHeight = nameLabelHeight + basicsLabelHeight + currentMissionViewPlaceholderHeight;
 	
@@ -212,14 +225,15 @@
 	nameLabel.frame = CGRectMake(0, 0, infoView.frame.size.width, nameLabelHeight);
 	basicsLabel.frame = CGRectMake(0, nameLabelHeight, infoView.frame.size.width, basicsLabelHeight);
 	currentMissionKeyLabel.frame = CGRectMake(0, 0, infoView.frame.size.width, currentMissionKeyLabelHeight);
-	currentMissionValueLabel.frame = CGRectMake(0, currentMissionKeyLabelHeight, infoView.frame.size.width, currentMissionValueLabelHeight);	
+	_currentMissionValueLabel.frame = CGRectMake(0, currentMissionKeyLabelHeight, infoView.frame.size.width, currentMissionValueLabelHeight);	
 		
-	UIView *currentMissionViewPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0, basicsLabelHeight + basicsLabel.frame.origin.y, infoViewWidth, currentMissionViewPlaceholderHeight)] autorelease];
-	[currentMissionViewPlaceholder addSubview:currentMissionView];
+	_currentMissionViewPlaceholder = [[[UIView alloc] initWithFrame:CGRectMake(0, basicsLabelHeight + basicsLabel.frame.origin.y, infoViewWidth, currentMissionViewPlaceholderHeight)] autorelease];
+	_currentMissionViewPlaceholder.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	[_currentMissionViewPlaceholder addSubview:_currentMissionView];
 	
 	[infoView addSubview:nameLabel];
 	[infoView addSubview:basicsLabel];
-	[infoView addSubview:currentMissionViewPlaceholder];
+	[infoView addSubview:_currentMissionViewPlaceholder];
 	
     [headerView addSubview:infoView];
 	
@@ -232,19 +246,31 @@
     [super viewDidUnload];
 }
 
+- (void)viewWillAppear:(BOOL)animated {
+	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
 {
 	return YES;
 }
 
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	[_tableView reloadData];
+	
+}
+
 #pragma Mark UITableViewDelegate / DataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 1; //3
+	return 2; //3
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == 0) {
+		if (self.surfer.lastLoginLocation == nil) {
+			return 1;
+		}
 		return 2;
 	} else if(section == 1) {
 		return 1;
@@ -262,13 +288,62 @@
 		}		
 		if (indexPath.row == 0) {
 			customCell.keyLabel.text = NSLocalizedString(@"FROM", nil);
+			customCell.valueLabel.text = self.surfer.livesIn;
 		} else if (indexPath.row == 1) {
 			customCell.keyLabel.text = NSLocalizedString(@"LAST LOGIN", nil);
+			customCell.valueLabel.text = self.surfer.lastLoginLocation;
+			customCell.dateLabel.text = self.surfer.lastLoginDate;
 		}
 		[customCell makeLayout];
 		cell = customCell;
+	} else if (indexPath.section == 1) {
+		cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
+		if (cell == nil) {
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"];			
+			UILabel *textLabel = [[[UILabel alloc] init] autorelease];
+			textLabel.font = [UIFont systemFontOfSize:12];
+			textLabel.numberOfLines = 0;
+			textLabel.tag = 1;
+			[cell.contentView addSubview:textLabel];
+		}
+
+		UILabel *textLabel = (UILabel *)[cell.contentView viewWithTag:1];
+		textLabel.text = self.surfer.about;
+		CGFloat tableViewWidth = _tableView.frame.size.width;
+		textLabel.frame = CGRectMake(7,
+									 7,
+									 tableViewWidth - 32,
+									 [self.surfer.about sizeWithFont:[UIFont systemFontOfSize:12]
+												   constrainedToSize:CGSizeMake(tableViewWidth - 32, MAXFLOAT)].height);
 	}
 	return cell;
+}
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		CGFloat tableViewWidth = _tableView.frame.size.width;
+		CGSize size = CGSizeMake(tableViewWidth - 32, MAXFLOAT);
+		return [self.surfer.about sizeWithFont:[UIFont systemFontOfSize:12]
+							 constrainedToSize:CGSizeMake(size.width, size.height)].height + 14;
+	}
+	
+	return 44;
+}
+
+- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+	if (section == 1) {
+		return NSLocalizedString(@"PERSONAL DESCRIPTION", nil);
+	}
+	return @"";
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	if (indexPath.section == 1) {
+		self.profileRequest = [[[ProfileRequest alloc] init] autorelease];
+		self.profileRequest.delegate = self;
+		self.profileRequest.surfer = self.surfer;
+		[self.profileRequest sendProfileRequest];
+	}
 }
 
 #pragma Observing methods
@@ -284,6 +359,12 @@
 - (void)sendCouchRequest {
 	CouchRequestFormController *controller = [[[CouchRequestFormController alloc] initWithSurfer:self.surfer] autorelease];
 	[self presentModalViewController:controller animated:YES];
+}
+
+#pragma Mark ProfileRequestDelegate methods
+
+- (void)profileRequest:(ProfileRequest *)request didLoadProfileData:(NSDictionary *)data {
+	
 }
 
 @end

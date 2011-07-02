@@ -15,6 +15,7 @@
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6C34AD2413A89D1D00E43729 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C34AD2213A89A2100E43729 /* RegexKitLite.m */; };
 		6C3A52CE13BE3C5000ABA77C /* ProfileLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A52CD13BE3C5000ABA77C /* ProfileLocationCell.m */; };
+		6C3A52D413BF7BBF00ABA77C /* ProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A52D313BF7BBF00ABA77C /* ProfileRequest.m */; };
 		6C4D8AB213B09D69008FD263 /* couchCoffee.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AA413B09D69008FD263 /* couchCoffee.png */; };
 		6C4D8AB313B09D69008FD263 /* couchCoffee@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AA513B09D69008FD263 /* couchCoffee@2x.png */; };
 		6C4D8AB413B09D69008FD263 /* couchMaybe.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AA613B09D69008FD263 /* couchMaybe.png */; };
@@ -142,6 +143,8 @@
 		6C34AD2213A89A2100E43729 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		6C3A52CC13BE3C5000ABA77C /* ProfileLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileLocationCell.h; sourceTree = "<group>"; };
 		6C3A52CD13BE3C5000ABA77C /* ProfileLocationCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileLocationCell.m; sourceTree = "<group>"; };
+		6C3A52D213BF7BBF00ABA77C /* ProfileRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ProfileRequest.h; path = Shared/Classes/ProfileRequest.h; sourceTree = "<group>"; };
+		6C3A52D313BF7BBF00ABA77C /* ProfileRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ProfileRequest.m; path = Shared/Classes/ProfileRequest.m; sourceTree = "<group>"; };
 		6C4D8AA413B09D69008FD263 /* couchCoffee.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = couchCoffee.png; sourceTree = "<group>"; };
 		6C4D8AA513B09D69008FD263 /* couchCoffee@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "couchCoffee@2x.png"; sourceTree = "<group>"; };
 		6C4D8AA613B09D69008FD263 /* couchMaybe.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = couchMaybe.png; sourceTree = "<group>"; };
@@ -553,6 +556,8 @@
 		6C9EACFA13A0FCD200C1B19D /* CouchSurf */ = {
 			isa = PBXGroup;
 			children = (
+				6C3A52D213BF7BBF00ABA77C /* ProfileRequest.h */,
+				6C3A52D313BF7BBF00ABA77C /* ProfileRequest.m */,
 				6C9EAD1013A0FD3A00C1B19D /* Auth */,
 				6C9EAD0F13A0FD0200C1B19D /* CouchSearch */,
 				6C9EACFF13A0FCF900C1B19D /* CouchSurfer.h */,
@@ -838,6 +843,7 @@
 				6CC8B60C13B90D6800E9A556 /* CouchRequestFormController.m in Sources */,
 				6CAFE7A913BA551D0089559B /* CouchRequestRequest.m in Sources */,
 				6C3A52CE13BE3C5000ABA77C /* ProfileLocationCell.m in Sources */,
+				6C3A52D413BF7BBF00ABA77C /* ProfileRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
