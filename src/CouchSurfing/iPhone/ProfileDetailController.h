@@ -7,20 +7,31 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "MVUrlConnection.h"
 
 @class CouchSurfer;
 @class ActivityOverlap;
 
-@interface ProfileDetailController : UIViewController {
+@interface ProfileDetailController : UIViewController <MVUrlConnectionDelegate> {
     NSString *_html;
+
 	CouchSurfer *_surfer;
 	NSString *_property;
 	
+	MVUrlConnection *_connection;
+	
 	ActivityOverlap *_activityOverlap;
+	
+	BOOL _withInlineStyles;
+	NSString *_styleName;
 }
+
+@property (nonatomic, assign) BOOL withInlineStyles;
+@property (nonatomic, assign) NSString *styleName;
 
 - (id)initWithHtmlString:(NSString *)html;
 - (id)initWithSurfer:(CouchSurfer *)surfer property:(NSString *)property;
+- (id)initWithConnection:(MVUrlConnection *)connection;
 
 
 @end

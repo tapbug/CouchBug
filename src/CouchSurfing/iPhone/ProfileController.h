@@ -33,6 +33,7 @@
 	NSArray *_couchInfoValues;
 	
 	BOOL _parsePersonalDescriptionAfterProfileDidLoad;
+	
 }
 
 - (id)initWithSurfer:(CouchSurfer *)surfer;

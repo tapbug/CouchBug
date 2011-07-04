@@ -14,6 +14,7 @@
 		2860E32E111B888700E27156 /* AppDelegate_iPad.m in Sources */ = {isa = PBXBuildFile; fileRef = 2860E32C111B888700E27156 /* AppDelegate_iPad.m */; };
 		288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 288765FC0DF74451002DB57D /* CoreGraphics.framework */; };
 		6C0597ED13C0A45B00912ADC /* ProfileDetailController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C0597EC13C0A45B00912ADC /* ProfileDetailController.m */; };
+		6C05980313C24C1A00912ADC /* references.css in Resources */ = {isa = PBXBuildFile; fileRef = 6C05980213C24C1A00912ADC /* references.css */; };
 		6C34AD2413A89D1D00E43729 /* RegexKitLite.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C34AD2213A89A2100E43729 /* RegexKitLite.m */; };
 		6C3A52CE13BE3C5000ABA77C /* ProfileLocationCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A52CD13BE3C5000ABA77C /* ProfileLocationCell.m */; };
 		6C3A52D413BF7BBF00ABA77C /* ProfileRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C3A52D313BF7BBF00ABA77C /* ProfileRequest.m */; };
@@ -142,6 +143,7 @@
 		32CA4F630368D1EE00C91783 /* CouchSurfing_Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSurfing_Prefix.pch; sourceTree = "<group>"; };
 		6C0597EB13C0A45B00912ADC /* ProfileDetailController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileDetailController.h; sourceTree = "<group>"; };
 		6C0597EC13C0A45B00912ADC /* ProfileDetailController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileDetailController.m; sourceTree = "<group>"; };
+		6C05980213C24C1A00912ADC /* references.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; path = references.css; sourceTree = "<group>"; };
 		6C34AD2113A89A2100E43729 /* RegexKitLite.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RegexKitLite.h; sourceTree = "<group>"; };
 		6C34AD2213A89A2100E43729 /* RegexKitLite.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RegexKitLite.m; sourceTree = "<group>"; };
 		6C3A52CC13BE3C5000ABA77C /* ProfileLocationCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileLocationCell.h; sourceTree = "<group>"; };
@@ -356,6 +358,7 @@
 				8D1107310486CEB800E47090 /* CouchSurfing-Info.plist */,
 				D0CBD80A13B024F4008BB7D9 /* Localizable.strings */,
 				6CF1E0B313B6830400704662 /* Languages.plist */,
+				6C05980213C24C1A00912ADC /* references.css */,
 			);
 			name = Shared;
 			sourceTree = "<group>";
@@ -787,6 +790,7 @@
 				6C4D8ABE13B09D69008FD263 /* iconVouched.png in Resources */,
 				6C4D8ABF13B09D69008FD263 /* iconVouched@2x.png in Resources */,
 				6CF1E0B413B6830400704662 /* Languages.plist in Resources */,
+				6C05980313C24C1A00912ADC /* references.css in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

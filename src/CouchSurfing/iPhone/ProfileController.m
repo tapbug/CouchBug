@@ -17,6 +17,7 @@
 #import "ProfileLocationCell.h"
 #import "CSSelectedValueCell.h"
 #import "TouchXML.h"
+#import "MVUrlConnection.h"
 
 @interface ProfileController ()
 
@@ -79,6 +80,8 @@
 	if (self.surfer.about != nil) {
 		[sections addObject:@"PERSONAL DESCRIPTION"];
 	}
+	
+	[sections addObject:@"REFERENCES"];
 	
 	[self loadProfile];
 	[sections addObject:@"LOADING PROFILE"];
@@ -322,6 +325,8 @@
 			num++;
 		}
 		return num;
+	} else if ([sectionName isEqualToString:@"REFERENCES"]) {
+		return 1;
 	} else if ([sectionName isEqualToString:@"LOADING PROFILE"]) {
 		return 1;
 	}
@@ -402,6 +407,13 @@
 										 [self.surfer.couchInfoShort sizeWithFont:[UIFont systemFontOfSize:12]
 													   constrainedToSize:CGSizeMake(tableViewWidth - 50, 120)].height);			
 		}
+	} else if([sectionName isEqualToString:@"REFERENCES"]) {
+		cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell"];
+		if (cell == nil) {
+			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"buttonCell"];
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		}
+		cell.textLabel.text = NSLocalizedString(@"REFERENCES", nil);
 	} else if([sectionName isEqualToString:@"LOADING PROFILE"]) {
 		cell = [tableView dequeueReusableCellWithIdentifier:@"loadingMoreCell"];
 		if (cell == nil) {
@@ -453,7 +465,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	NSString *sectionName = [self.sections objectAtIndex:section];
-	if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"] || [sectionName isEqualToString:@"LOADING PROFILE"]) {
+	if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"] || [sectionName isEqualToString:@"LOADING PROFILE"] || [sectionName isEqualToString:@"REFERENCES"]) {
 		return @"";
 	}
 	
@@ -477,6 +489,12 @@
 		[self.navigationController pushViewController:controller animated:YES];
 	} else if ([sectionName isEqualToString:@"COUCH INFORMATION"] && indexPath.row == [self.couchInfoValues count]) {
 		ProfileDetailController *controller = [[[ProfileDetailController alloc] initWithHtmlString:self.surfer.couchInfoHtml] autorelease];
+		[self.navigationController pushViewController:controller animated:YES];
+	} else if([sectionName isEqualToString:@"REFERENCES"] && indexPath.row == 0) {
+		MVUrlConnection *connection = [[[MVUrlConnection alloc] initWithUrlString:[NSString stringWithFormat:@"http://www.couchsurfing.org/profile.html?ajax_action=show_all_references&id=%@", self.surfer.ident]] autorelease];
+		ProfileDetailController *controller = [[[ProfileDetailController alloc] initWithConnection:connection] autorelease];
+		controller.withInlineStyles = YES;
+		controller.styleName = @"references";
 		[self.navigationController pushViewController:controller animated:YES];
 	}
 }

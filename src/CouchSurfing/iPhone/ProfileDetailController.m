@@ -15,8 +15,11 @@
 @interface ProfileDetailController ()
 
 @property (nonatomic, retain) NSString *html;
+
 @property (nonatomic, retain) CouchSurfer *surfer;
 @property (nonatomic, retain) NSString *property;
+
+@property (nonatomic, retain) MVUrlConnection *connection;
 
 @property (nonatomic, retain) ActivityOverlap *activityOverlap;
 
@@ -26,9 +29,15 @@
 
 @implementation ProfileDetailController
 
+@synthesize withInlineStyles = _withInlineStyles;
+@synthesize styleName = _styleName;
+
 @synthesize html = _html;
+
 @synthesize surfer = _surfer;
 @synthesize property = _property;
+
+@synthesize connection = _connection;
 
 @synthesize activityOverlap = _activityOverlap;
 
@@ -51,6 +60,14 @@
 	return self;
 }
 
+- (id)initWithConnection:(MVUrlConnection *)connection {
+    self = [super init];
+    if (self) {
+        self.connection = connection;
+    }
+    return self;
+}
+
 - (void)dealloc {
 	self.html = nil;
 	
@@ -61,6 +78,9 @@
 	self.surfer = nil;
 	self.property = nil;
 	
+	self.connection.delegate = nil;
+	self.connection = nil;
+	self.styleName = nil;
     [super dealloc];
 }
 
@@ -79,10 +99,15 @@
 - (void)viewDidLoad {
 	if (self.html != nil) {
 		[self showWebView];
-	} else {
+	} else if(self.surfer != nil && self.property != nil){
 		self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view title:NSLocalizedString(@"LOADNG PROFILE INFORMATION", nil)];
 		[self.activityOverlap overlapView];
 		[self.surfer addObserver:self forKeyPath:self.property options:NSKeyValueObservingOptionNew context:nil];
+	} else if (self.connection != nil) {
+		self.connection.delegate = self;
+		[self.connection sendRequest];
+		self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view title:NSLocalizedString(@"LOADNG PROFILE INFORMATION", nil)];
+		[self.activityOverlap overlapView];
 	}
     [super viewDidLoad];
 }
@@ -106,11 +131,28 @@
 	[self.activityOverlap removeOverlap];
 }
 
+- (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseString:(NSString *)responseString {
+	self.html = responseString;
+	[self showWebView];
+	[self.activityOverlap removeOverlap];
+}
+
 - (void)showWebView {
 	UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
 	webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
-	NSString *html = [self.html stringByReplacingOccurrencesOfRegex:@"style=\"(.*?)\"" withString:@""];
-	[webView loadHTMLString:html baseURL:nil];
+	NSString *html = nil;
+	if (self.withInlineStyles == YES) {
+		html = self.html;
+	} else {
+		html = [self.html stringByReplacingOccurrencesOfRegex:@"style=\"(.*?)\"" withString:@""];
+	}
+	html = [html stringByReplacingOccurrencesOfString:@"style=\"display: none\"" withString:@""];
+	if (self.styleName != nil) {
+		NSString *cssPath = [[NSBundle mainBundle] pathForResource:self.styleName ofType:@"css"];
+		NSString *css = [NSString stringWithContentsOfFile:cssPath encoding:NSUTF8StringEncoding error:nil];
+		html = [NSString stringWithFormat:@"<style>%@</style>%@", css, html];		
+	}
+	[webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://www.couchsurfing.org/"]];
 	[self.view addSubview:webView];
 }
 
