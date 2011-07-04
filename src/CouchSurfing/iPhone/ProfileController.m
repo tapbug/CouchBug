@@ -80,8 +80,7 @@
 		[sections addObject:@"PERSONAL DESCRIPTION"];
 	}
 	
-	//[self loadProfile];
-	[self performSelector:@selector(loadProfile) withObject:nil afterDelay:5];
+	[self loadProfile];
 	[sections addObject:@"LOADING PROFILE"];
 	
 	self.sections = sections;
