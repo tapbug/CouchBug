@@ -223,12 +223,12 @@
 			for (CXMLNode *textNode in aboutNodes) {
 				[aboutString appendString:[textNode stringValue]];
 			}
-            surfer.about = [[aboutString stringByReplacingOccurrencesOfString:@"... (more)" withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            surfer.about = [[aboutString stringByReplacingOccurrencesOfString:@"... (more)" withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
         }
         
         NSArray *basicNodes = [node nodesForXPath:@".//x:li/x:div[text()='Basics']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
         if ([basicNodes count] > 0) {
-            NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+            NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
             NSString *regexp = @"([a-zA-Z ]+), ([0-9]+), ?(.*)$";
             NSString *genderString = [basics stringByMatching:regexp capture:1];
             if ([genderString isEqualToString:@"Male"]) {
@@ -244,7 +244,7 @@
             surfer.job = [basics stringByMatching:regexp capture:3];
         }
         
-		surfer.mission = [[[[node nodesForXPath:@".//x:li/x:div[text()='Mission']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@""];
+		surfer.mission = [[[[node nodesForXPath:@".//x:li/x:div[text()='Mission']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
 		
         NSArray *profileCountNodes = [node nodesForXPath:@".//x:ul[@class='profile_count']/x:li" namespaceMappings:ns error:&error];
         if ([profileCountNodes count] > 0) {
