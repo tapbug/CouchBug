@@ -161,19 +161,21 @@
 	[self registerForKeyboardEvents];
 	
 	_numberOfSurfers = 1;
-	_arrivingViaId = -1;
+	_arrivingViaIndex = 0;
+	_arrivingViaId = 0;
 	_arrivingViaData = [[NSArray arrayWithObjects:
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:1], @"Plane", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:2], @"Motor Vehicle", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:3], @"Bus", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:4], @"Train", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:5], @"Bicycle", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:6], @"Foot", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:8], @"Metro", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:9], @"Boat", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:10], @"Hitch-Hiking", nil],
-						 [NSArray arrayWithObjects:[NSNumber numberWithInt:7], @"Other", nil], nil ] retain];
-	
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:0], @"CHOOSE", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:1], @"PLANE", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:2], @"MOTOR VEHICLE", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:3], @"BUS", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:4], @"TRAIN", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:5], @"BICYCLE", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:6], @"FOOT", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:8], @"METRO", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:9], @"BOAT", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:10], @"HITCH-HIKING", nil],
+						 [NSArray arrayWithObjects:[NSNumber numberWithInt:7], @"OTHER", nil], nil ] retain];
+	_arrivingViaName = [[_arrivingViaData objectAtIndex:0] objectAtIndex:1];
     [super viewDidLoad];
 }
 
@@ -270,13 +272,7 @@
 			csCell.selectedValueLabel.text = [NSString stringWithFormat:@"%d", _numberOfSurfers];
 		} else if (indexPath.row == 1){
 			csCell.keyLabel.text = NSLocalizedString(@"ARRIVING VIA", nil);
-			NSString *selectedArrivingViaName;
-			if (_arrivingViaId == -1) {
-				selectedArrivingViaName = NSLocalizedString(@"CHOOSE", nil);
-			} else {
-				selectedArrivingViaName = _arrivingViaName;
-			}
-			csCell.selectedValueLabel.text = selectedArrivingViaName;
+			csCell.selectedValueLabel.text = NSLocalizedString(_arrivingViaName, nil);;
 		}
 		[csCell makeLayout];
 		cell = csCell;
@@ -316,6 +312,7 @@
 			[pickerView selectRow:_numberOfSurfers - 1 inComponent:0 animated:NO];
 		} else if (indexPath.row == 1) {
 			_arrivingViaPickerView = pickerView;
+			[pickerView selectRow:_arrivingViaIndex inComponent:0 animated:NO];
 		}
 
 		[self showDialogViewWithContentView:pickerView];
@@ -508,6 +505,7 @@
 	} else if (_arrivingViaPickerView == pickerView) {
 		_arrivingViaId = [[[_arrivingViaData objectAtIndex:row] objectAtIndex:0] intValue];
 		_arrivingViaName = [[_arrivingViaData objectAtIndex:row] objectAtIndex:1]; 
+		_arrivingViaIndex = row;
 	}
 	
 	[self revalidateSendButton];
@@ -637,9 +635,6 @@
 
 - (void)revalidateSendButton {
 	BOOL enabled = YES;
-	if (_arrivingViaId == -1) {
-		enabled = NO;
-	}
 	if (!_subjectHasText) {
 		enabled = NO;
 	}

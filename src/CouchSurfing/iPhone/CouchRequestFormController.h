@@ -39,6 +39,7 @@
 	NSArray *_arrivingViaData;
 	NSInteger _arrivingViaId;
 	NSString *_arrivingViaName;
+	NSInteger _arrivingViaIndex;
 	
 	CouchRequestRequest *_couchRequest;
 	ActivityOverlap *_activityOverlap;
