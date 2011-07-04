@@ -739,12 +739,14 @@
 			self.filter.ageHigh = actualAgeHigh;
 		}
 	}
-
-	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
-						  withRowAnimation:UITableViewRowAnimationNone];
-	[_formTableView selectRowAtIndexPath:actualIndexPath
-								animated:NO
-						  scrollPosition:UITableViewScrollPositionMiddle];
+	
+	if (actualIndexPath != nil) {
+		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
+							  withRowAnimation:UITableViewRowAnimationNone];
+		[_formTableView selectRowAtIndexPath:actualIndexPath
+									animated:NO
+							  scrollPosition:UITableViewScrollPositionMiddle];		
+	}
 	
 }
 

@@ -511,12 +511,14 @@
 	}
 	
 	[self revalidateSendButton];
-	NSIndexPath *actualIndexPath = [_formTableView indexPathForSelectedRow];	
-	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
-						  withRowAnimation:UITableViewRowAnimationNone];
-	[_formTableView selectRowAtIndexPath:actualIndexPath
-								animated:NO
-						  scrollPosition:UITableViewScrollPositionMiddle];
+	NSIndexPath *actualIndexPath = [_formTableView indexPathForSelectedRow];
+	if (actualIndexPath != nil) {
+		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:actualIndexPath]
+							  withRowAnimation:UITableViewRowAnimationNone];
+		[_formTableView selectRowAtIndexPath:actualIndexPath
+									animated:NO
+							  scrollPosition:UITableViewScrollPositionMiddle];		
+	}
 	
 }
 
@@ -546,9 +548,11 @@
 
 - (void)refreshFormInformation {
 	NSIndexPath *indexPath = [_formTableView indexPathForSelectedRow];
-	[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
-						  withRowAnimation:UITableViewRowAnimationNone];
-	[_formTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];
+	if (indexPath != nil) {
+		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:indexPath]
+							  withRowAnimation:UITableViewRowAnimationNone];
+		[_formTableView selectRowAtIndexPath:indexPath animated:NO scrollPosition:UITableViewScrollPositionMiddle];		
+	}
 }
 
 #pragma Mark Actions methods
