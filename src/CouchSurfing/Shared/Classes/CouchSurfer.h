@@ -30,7 +30,7 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
     NSString *age;
     NSString *job;
     
-    NSString *about;
+    NSString *about; //zkraceny personalHtml
 	NSString *mission;
     NSString *referencesCount;
     NSString *photosCount;
@@ -39,6 +39,16 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
     BOOL verified;
     BOOL vouched;
     BOOL ambassador;
+	
+	NSString *personalDescription;
+	NSString *couchInfoShort;
+	NSString *couchInfoHtml;
+	NSString *preferredGender;
+	NSString *maxSurfersPerNight;
+	NSString *sharedSleepSurface;
+	NSString *sharedRoom;
+	
+	BOOL profileDataLoaded;
 }
 
 @property (nonatomic, retain) NSString *ident;
@@ -63,9 +73,23 @@ extern CouchSurferHasCouch * const CouchSurferHasCouchNo;
 @property (nonatomic, retain) NSString *replyRate;
 @property (nonatomic, assign) CouchSurferHasCouch *couchStatus;
 @property (nonatomic, readonly) UIImage *couchStatusImage;
+@property (nonatomic, readonly) NSString *couchStatusName;
 
 @property (nonatomic, assign) BOOL verified;
 @property (nonatomic, assign) BOOL vouched;
 @property (nonatomic, assign) BOOL ambassador;
+
+@property (nonatomic, retain) NSString *personalDescription;
+@property (nonatomic, retain) NSString *couchInfoShort;
+@property (nonatomic, retain) NSString *couchInfoHtml;
+
+@property (nonatomic, retain) NSString *preferredGender;
+@property (nonatomic, retain) NSString *maxSurfersPerNight;
+@property (nonatomic, retain) NSString *sharedSleepSurface;
+@property (nonatomic, retain) NSString *sharedRoom;
+
+@property (nonatomic, assign) BOOL profileDataLoaded;
+
+- (BOOL)hasSomeCouchInfo;
 
 @end

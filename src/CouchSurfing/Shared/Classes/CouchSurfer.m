@@ -9,6 +9,7 @@
 #import "CouchSurfer.h"
 
 static NSDictionary *hasCouchIcons;
+static NSDictionary *hasCouchNames;
 
 @interface CouchSurfer ()
 
@@ -35,6 +36,16 @@ static NSDictionary *hasCouchIcons;
 @synthesize vouched;
 @synthesize ambassador;
 @synthesize mission;
+@synthesize personalDescription;
+@synthesize couchInfoShort;
+@synthesize couchInfoHtml;
+
+@synthesize preferredGender;
+@synthesize maxSurfersPerNight;
+@synthesize sharedSleepSurface;
+@synthesize sharedRoom;
+
+@synthesize profileDataLoaded;
 
 - (void)dealloc {
 	self.ident = nil;
@@ -52,6 +63,15 @@ static NSDictionary *hasCouchIcons;
     self.referencesCount = nil;
     self.photosCount = nil;
     self.replyRate = nil;
+	
+	self.personalDescription = nil;
+	self.couchInfoShort = nil;
+	self.couchInfoHtml = nil;
+	
+	self.preferredGender = nil;
+	self.maxSurfersPerNight = nil;
+	self.sharedSleepSurface = nil;
+	self.sharedRoom = nil;
     [super dealloc];
 }
 
@@ -61,6 +81,13 @@ static NSDictionary *hasCouchIcons;
                      [UIImage imageNamed:@"couchTravel"], CouchSurferHasCouchTraveling,
                      [UIImage imageNamed: @"couchMaybe"], CouchSurferHasCouchMaybe,
                      [UIImage imageNamed:@"couchCoffee"], CouchSurferHasCouchCoffeDrink,
+                     nil];
+	
+    hasCouchNames = [[NSDictionary alloc] initWithObjectsAndKeys:@"YES", CouchSurferHasCouchYes,
+                     @"NO", CouchSurferHasCouchNo,
+                     @"TRAVELING", CouchSurferHasCouchTraveling,
+                     @"MAYBE", CouchSurferHasCouchMaybe,
+                     @"COFFEE OR DRINK", CouchSurferHasCouchCoffeDrink,
                      nil];
 }
 
@@ -98,6 +125,21 @@ static NSDictionary *hasCouchIcons;
 		return [hasCouchIcons objectForKey:self.couchStatus];
 	}
 	return nil;
+}
+
+- (NSString *)couchStatusName {
+	if (self.couchStatus != nil && [hasCouchNames objectForKey:self.couchStatus]) {
+		return NSLocalizedString([hasCouchNames objectForKey:self.couchStatus], nil);
+	}
+	return nil;
+}
+
+- (BOOL)hasSomeCouchInfo {
+	return !(self.couchInfoShort == nil
+			 && self.preferredGender == nil
+			 && self.maxSurfersPerNight == nil
+			 && self.sharedSleepSurface == nil
+			 && self.sharedRoom == nil);
 }
 
 @end

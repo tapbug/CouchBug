@@ -11,6 +11,7 @@
 
 @protocol ProfileRequestDelegate;
 @class CouchSurfer;
+@class CXMLDocument;
 
 @interface ProfileRequest : NSObject <MVUrlConnectionDelegate> {
     id<ProfileRequestDelegate> _delegate;
@@ -24,10 +25,12 @@
 
 - (void)sendProfileRequest;
 
++ (NSString *)parsePersonalDescription:(CXMLDocument*)doc;
+
 @end
 
 @protocol ProfileRequestDelegate <NSObject>
 
-- (void)profileRequest:(ProfileRequest *)request didLoadProfileData:(NSDictionary *)data;
+- (void)profileRequestDidFillSurfer:(ProfileRequest *)request withResultDocument:(CXMLDocument *)doc;
 
 @end

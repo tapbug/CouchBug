@@ -10,6 +10,7 @@
 #import "ProfileRequest.h"
 
 @class CouchSurfer;
+@class CXMLDocument;
 
 @interface ProfileController : UIViewController <UITableViewDelegate, UITableViewDataSource, ProfileRequestDelegate> {
 	CouchSurfer *_surfer;
@@ -23,6 +24,15 @@
 	UIView *_currentMissionViewPlaceholder;
 	
 	ProfileRequest *_profileRequest;
+	
+	NSArray *_sections;
+	
+	//	stazena stranka profile
+	CXMLDocument *_doc;
+	//	zpracovana data pro zobrazeni v tabulce of couch infu
+	NSArray *_couchInfoValues;
+	
+	BOOL _parsePersonalDescriptionAfterProfileDidLoad;
 }
 
 - (id)initWithSurfer:(CouchSurfer *)surfer;

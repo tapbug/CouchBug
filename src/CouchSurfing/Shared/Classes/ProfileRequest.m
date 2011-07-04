@@ -14,6 +14,9 @@
 
 @property (nonatomic, retain) MVUrlConnection *profileConnection;
 
+- (NSString *)joinHtmlNodesTextsTogether:(NSArray *)nodes;
++ (NSString *)joinTextNodesTextsTogether:(NSArray *)nodes;
+
 @end
 
 @implementation ProfileRequest
@@ -36,15 +39,76 @@
 
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseString:(NSString *)responseString {
 	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
-	CXMLDocument *doc = [[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:nil];
-	NSString *personalDescription = [[doc nodesForXPath:@"//*[@id='description_title']/following-sibbling::text()" namespaceMappings:ns error:nil] lastObject];
-	NSLog(@"%@", personalDescription);
-	
-	if ([self.delegate respondsToSelector:@selector(profileRequest:didLoadProfileData:)]) {
-		[self.delegate profileRequest:self didLoadProfileData:[NSDictionary dictionary]];
+	NSError *error;
+	CXMLDocument *doc = [[[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error] autorelease];
+		
+	//x:p[preceding::x:h2/@id='couchinfo'][following::x:h2[(preceding::x:h2)[last()]/@id='couchinfo']]
+	NSArray *couchInfoNodes = [doc nodesForXPath:@"//x:*[preceding-sibling::x:h2/@id='couchinfo'][following::x:h2[(preceding::x:h2)[last()]/@id='couchinfo']][self::x:p or self::x:div]"
+								   namespaceMappings:ns
+											   error:nil];
+	self.surfer.couchInfoHtml = [self joinHtmlNodesTextsTogether:couchInfoNodes];
+	for (CXMLNode *node in couchInfoNodes) {
+		NSString *text = [[[node stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+		if (![text isEqualToString:@""]) {
+			self.surfer.couchInfoShort = text;
+			break;
+		}
 	}
 	
-	[doc release]; doc = nil;
+	NSArray *couchInfoKeysNodes = [doc nodesForXPath:@"//x:strong[preceding::x:h2/@id='couchinfo'][following::x:h2[(preceding::x:h2)[last()]/@id='couchinfo']][contains(text(),':')]" namespaceMappings:ns error:nil];
+	for (CXMLNode *node in couchInfoKeysNodes) {
+		NSString *key = [[[node stringValue] stringByReplacingOccurrencesOfString:@":"
+																	   withString:@""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		NSString *value = [[[node nodeForXPath:@"./following-sibling::text()[1]" error:nil] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		if ([key isEqualToString:@"Preferred Gender"]) {
+			self.surfer.preferredGender = value;
+		} else if ([key isEqualToString:@"Max Surfers Per Night"]) {
+			self.surfer.maxSurfersPerNight = value;
+		} else if ([key isEqualToString:@"Shared Sleeping Surface"]) {
+			self.surfer.sharedSleepSurface = value;
+		} else if ([key isEqualToString:@"Shared Room"]) {
+			self.surfer.sharedRoom = value;
+		}
+	}
+	self.surfer.profileDataLoaded = YES;
+	if ([self.delegate respondsToSelector:@selector(profileRequestDidFillSurfer:withResultDocument:)]) {
+		[self.delegate profileRequestDidFillSurfer:self withResultDocument:doc];
+	}
+	
 }
+
+- (NSString *)joinHtmlNodesTextsTogether:(NSArray *)nodes {
+	NSMutableString *text = [NSMutableString string];
+	for (CXMLNode *node in nodes) {
+		NSString *part = [node XMLString];
+		if (![part isEqualToString:@""]) {
+			[text appendString:part];
+		}
+	}
+	return text;
+}
+
++ (NSString *)joinTextNodesTextsTogether:(NSArray *)nodes {
+	NSMutableString *text = [NSMutableString string];
+	for (CXMLNode *node in nodes) {
+		NSString *part = [[[node stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n"
+																																						   withString:@" "];
+		if (![part isEqualToString:@""]) {
+			[text appendFormat:@"%@ ", part];
+		}
+	}
+	return text;
+}
+
++ (NSString *)parsePersonalDescription:(CXMLDocument *)doc {
+	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
+	NSArray *personalDescriptionNodes = 
+	[doc nodesForXPath:@"//text()[preceding-sibling::x:h2/@id='description_title'][following::x:h2[(preceding::x:h2)[last()]/@id='description_title']] | //*[preceding-sibling::x:h2/@id='description_title'][following::x:h2[(preceding::x:h2)[last()]/@id='description_title']]/text()" 
+		  namespaceMappings:ns
+					  error:nil];
+	return [ProfileRequest joinTextNodesTextsTogether:personalDescriptionNodes];
+}
+
+
 
 @end

@@ -12,14 +12,25 @@
 #import "CouchSurfer.h"
 
 #import "CouchRequestFormController.h"
+#import "ProfileDetailController.h"
+
 #import "ProfileLocationCell.h"
+#import "CSSelectedValueCell.h"
+#import "TouchXML.h"
 
 @interface ProfileController ()
 
 @property (nonatomic, retain) CouchSurfer *surfer;
 @property (nonatomic, retain) ProfileRequest *profileRequest;
 
+@property (nonatomic, retain) NSArray *sections;
+
+@property (nonatomic, retain) CXMLDocument *doc;
+@property (nonatomic, retain) NSArray *couchInfoValues;
+
 - (void)sendCouchRequest;
+
+- (void)loadProfile;
 
 @end
 
@@ -27,6 +38,9 @@
 
 @synthesize surfer = _surfer;
 @synthesize profileRequest = _profileRequest;
+@synthesize sections = _sections;
+@synthesize doc = _doc;
+@synthesize couchInfoValues = _couchInfoValues;
 
 - (id)initWithSurfer:(CouchSurfer *)surfer {
 	if ((self = [super init])) {
@@ -42,6 +56,9 @@
 		[self.surfer removeObserver:self forKeyPath:@"image"];		
 	}
 	self.surfer = nil;
+	self.sections = nil;
+	self.couchInfoValues = nil;
+	self.doc = nil;
     [super dealloc];
 }
 
@@ -56,6 +73,19 @@
 
 - (void)viewDidLoad {
 	self.navigationItem.title = self.surfer.name;
+	
+	NSMutableArray *sections = [NSMutableArray array];
+	[sections addObject:@"LOCATIONS"];
+	if (self.surfer.about != nil) {
+		[sections addObject:@"PERSONAL DESCRIPTION"];
+	}
+	
+	//[self loadProfile];
+	[self performSelector:@selector(loadProfile) withObject:nil afterDelay:5];
+	[sections addObject:@"LOADING PROFILE"];
+	
+	self.sections = sections;
+	
 	if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
 		UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
 																				   style:UIBarButtonItemStyleBordered
@@ -212,8 +242,11 @@
 	CGFloat basicsLabelHeight = [self.surfer.basicsForProfile sizeWithFont:basicsLabel.font].height;
 	CGFloat currentMissionViewHeight = currentMissionKeyLabelHeight + currentMissionValueLabelHeight;
 	
-	CGFloat currentMissionViewPlaceholderHeight = MAX(currentMissionViewHeight, 80);
-	_currentMissionView.frame = CGRectMake(0,(currentMissionViewPlaceholderHeight - currentMissionViewHeight) / 2, infoView.frame.size.width, currentMissionViewHeight);
+	CGFloat currentMissionViewPlaceholderHeight = 0;
+	if (self.surfer.mission != nil) {
+		currentMissionViewPlaceholderHeight = MAX(currentMissionViewHeight, 80);		
+	}
+	_currentMissionView.frame = CGRectMake(0,(int)(currentMissionViewPlaceholderHeight - currentMissionViewHeight) / 2, infoView.frame.size.width, currentMissionViewHeight);
 	
 	CGFloat infoViewHeight = nameLabelHeight + basicsLabelHeight + currentMissionViewPlaceholderHeight;
 	
@@ -233,11 +266,14 @@
 	
 	[infoView addSubview:nameLabel];
 	[infoView addSubview:basicsLabel];
-	[infoView addSubview:_currentMissionViewPlaceholder];
+	if (self.surfer.mission != nil) {
+		[infoView addSubview:_currentMissionViewPlaceholder];		
+	}
 	
     [headerView addSubview:infoView];
 	
     [self.view addSubview:_tableView];
+	
     [super viewDidLoad];
 }
 
@@ -248,6 +284,12 @@
 
 - (void)viewWillAppear:(BOOL)animated {
 	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	if ([_tableView indexPathForSelectedRow] != nil) {
+		[_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
+	}
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation
@@ -263,28 +305,40 @@
 #pragma Mark UITableViewDelegate / DataSource methods
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-	return 2; //3
+	return [self.sections count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-	if (section == 0) {
+	NSString *sectionName = [self.sections objectAtIndex:section];
+	if ([sectionName isEqualToString:@"LOCATIONS"]) {
 		if (self.surfer.lastLoginLocation == nil) {
 			return 1;
 		}
 		return 2;
-	} else if(section == 1) {
+	} else if([sectionName isEqualToString:@"PERSONAL DESCRIPTION"]) {
+		return 1;
+	} else if([sectionName isEqualToString:@"COUCH INFORMATION"]) {
+		NSInteger num = [self.couchInfoValues count];
+		if (self.surfer.couchInfoShort != nil) {
+			num++;
+		}
+		return num;
+	} else if ([sectionName isEqualToString:@"LOADING PROFILE"]) {
 		return 1;
 	}
 	return 6;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+	NSString *sectionName = [self.sections objectAtIndex:indexPath.section];
 	UITableViewCell *cell;
-	if (indexPath.section == 0) {
+	
+	if ([sectionName isEqualToString:@"LOCATIONS"]) {
 		ProfileLocationCell *customCell = (ProfileLocationCell *)[tableView dequeueReusableCellWithIdentifier:@"locationCell"];
 		if (customCell == nil) {
-			customCell = [[ProfileLocationCell alloc] initWithStyle:UITableViewCellStyleDefault
-													reuseIdentifier:@"locationCell"];
+			customCell = [[[ProfileLocationCell alloc] initWithStyle:UITableViewCellStyleDefault
+													reuseIdentifier:@"locationCell"] autorelease];
+			customCell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}		
 		if (indexPath.row == 0) {
 			customCell.keyLabel.text = NSLocalizedString(@"FROM", nil);
@@ -296,10 +350,11 @@
 		}
 		[customCell makeLayout];
 		cell = customCell;
-	} else if (indexPath.section == 1) {
+	} else if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"]) {
 		cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
 		if (cell == nil) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"];			
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"] autorelease];			
+			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 			UILabel *textLabel = [[[UILabel alloc] init] autorelease];
 			textLabel.font = [UIFont systemFontOfSize:12];
 			textLabel.numberOfLines = 0;
@@ -312,18 +367,85 @@
 		CGFloat tableViewWidth = _tableView.frame.size.width;
 		textLabel.frame = CGRectMake(7,
 									 7,
-									 tableViewWidth - 32,
+									 tableViewWidth - 50,
 									 [self.surfer.about sizeWithFont:[UIFont systemFontOfSize:12]
-												   constrainedToSize:CGSizeMake(tableViewWidth - 32, MAXFLOAT)].height);
+												   constrainedToSize:CGSizeMake(tableViewWidth - 50, 120)].height);
+	} else if ([sectionName isEqualToString:@"COUCH INFORMATION"]) {
+		if ([self.couchInfoValues count] > indexPath.row) {
+			NSArray *pair = [self.couchInfoValues objectAtIndex:indexPath.row];
+			CSSelectedValueCell *customCell = (CSSelectedValueCell *)[tableView dequeueReusableCellWithIdentifier:@"couchInfoCell"];
+			if (customCell == nil) {
+				customCell = [[[CSSelectedValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"couchInfoCell"] autorelease];
+			}
+			customCell.keyLabel.text = [pair objectAtIndex:1];
+			customCell.selectedValueLabel.text = [pair objectAtIndex:0];
+			customCell.selectionStyle = UITableViewCellEditingStyleNone;
+			[customCell makeLayout];
+			cell = customCell;
+		} else if (indexPath.row - [self.couchInfoValues count] == 0) {
+			cell = [tableView dequeueReusableCellWithIdentifier:@"textCell"];
+			if (cell == nil) {
+				cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"textCell"] autorelease];			
+				cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+				UILabel *textLabel = [[[UILabel alloc] init] autorelease];
+				textLabel.font = [UIFont systemFontOfSize:12];
+				textLabel.numberOfLines = 0;
+				textLabel.tag = 1;
+				[cell.contentView addSubview:textLabel];
+			}
+			
+			UILabel *textLabel = (UILabel *)[cell.contentView viewWithTag:1];
+			textLabel.text = self.surfer.couchInfoShort;
+			CGFloat tableViewWidth = _tableView.frame.size.width;
+			textLabel.frame = CGRectMake(7,
+										 7,
+										 tableViewWidth - 50,
+										 [self.surfer.couchInfoShort sizeWithFont:[UIFont systemFontOfSize:12]
+													   constrainedToSize:CGSizeMake(tableViewWidth - 50, 120)].height);			
+		}
+	} else if([sectionName isEqualToString:@"LOADING PROFILE"]) {
+		cell = [tableView dequeueReusableCellWithIdentifier:@"loadingMoreCell"];
+		if (cell == nil) {
+			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"loadingMoreCell"] autorelease];
+			//Setup indicator view
+			UIActivityIndicatorView *activityView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
+			activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+			[activityView startAnimating];
+			
+			//setup label
+			UILabel *loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(activityView.frame.size.width + 5, 0, 0, 0)] autorelease];
+			loadingLabel.backgroundColor = [UIColor clearColor];
+			loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+			loadingLabel.text = NSLocalizedString(@"LOADING MORE", nil);
+			[loadingLabel sizeToFit];
+			
+			//setup containing view
+			CGFloat loadingViewWidth = loadingLabel.frame.origin.x + loadingLabel.frame.size.width;
+			CGFloat loadingViewHeight = loadingLabel.frame.size.height;
+			UIView *loadingView = [[[UIView alloc] initWithFrame:CGRectMake((int)(cell.contentView.frame.size.width - loadingViewWidth) / 2, (int)(cell.contentView.frame.size.height - loadingViewHeight) / 2, loadingViewWidth, loadingViewHeight)] autorelease];
+			loadingView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
+			[loadingView addSubview:activityView];
+			[loadingView addSubview:loadingLabel];
+			
+			[cell.contentView addSubview:loadingView];
+		}
 	}
 	return cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
+	NSString *sectionName = [self.sections objectAtIndex:indexPath.section];
+	
+	if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"] || ([sectionName isEqualToString:@"COUCH INFORMATION"] && indexPath.row - [self.couchInfoValues count] == 0)) {
 		CGFloat tableViewWidth = _tableView.frame.size.width;
-		CGSize size = CGSizeMake(tableViewWidth - 32, MAXFLOAT);
-		return [self.surfer.about sizeWithFont:[UIFont systemFontOfSize:12]
+		CGSize size = CGSizeMake(tableViewWidth - 50, 120);
+		NSString *forText = nil;
+		if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"]) {
+			forText = self.surfer.about;
+		} else if ([sectionName isEqualToString:@"COUCH INFORMATION"] && indexPath.row - [self.couchInfoValues count] == 0) {
+			forText = self.surfer.couchInfoShort;
+		}
+		return [forText sizeWithFont:[UIFont systemFontOfSize:12]
 							 constrainedToSize:CGSizeMake(size.width, size.height)].height + 14;
 	}
 	
@@ -331,18 +453,32 @@
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-	if (section == 1) {
-		return NSLocalizedString(@"PERSONAL DESCRIPTION", nil);
+	NSString *sectionName = [self.sections objectAtIndex:section];
+	if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"] || [sectionName isEqualToString:@"LOADING PROFILE"]) {
+		return @"";
 	}
-	return @"";
+	
+	return NSLocalizedString(sectionName, nil);
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (indexPath.section == 1) {
-		self.profileRequest = [[[ProfileRequest alloc] init] autorelease];
-		self.profileRequest.delegate = self;
-		self.profileRequest.surfer = self.surfer;
-		[self.profileRequest sendProfileRequest];
+	NSString *sectionName = [self.sections objectAtIndex:indexPath.section];
+	if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"]) {
+		ProfileDetailController *controller;
+		if (self.doc != nil) {
+			if (self.surfer.personalDescription == nil) {
+				self.surfer.personalDescription = [ProfileRequest parsePersonalDescription:self.doc];
+			}
+			controller = [[[ProfileDetailController alloc] initWithHtmlString:self.surfer.personalDescription] autorelease];
+		} else {
+			_parsePersonalDescriptionAfterProfileDidLoad = YES;
+			controller = [[[ProfileDetailController alloc] initWithSurfer:self.surfer property:@"personalDescription"] autorelease];			
+		}
+		
+		[self.navigationController pushViewController:controller animated:YES];
+	} else if ([sectionName isEqualToString:@"COUCH INFORMATION"] && indexPath.row == [self.couchInfoValues count]) {
+		ProfileDetailController *controller = [[[ProfileDetailController alloc] initWithHtmlString:self.surfer.couchInfoHtml] autorelease];
+		[self.navigationController pushViewController:controller animated:YES];
 	}
 }
 
@@ -363,8 +499,49 @@
 
 #pragma Mark ProfileRequestDelegate methods
 
-- (void)profileRequest:(ProfileRequest *)request didLoadProfileData:(NSDictionary *)data {
+- (void)profileRequestDidFillSurfer:(ProfileRequest *)request withResultDocument:(CXMLDocument *)doc {
 	
+	self.doc = doc;
+	
+	NSMutableArray *couchInfoValues = [NSMutableArray array];
+	if (self.surfer.couchStatusName != nil) {
+		[couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.couchStatusName, NSLocalizedString(@"COUCH STATUS", nil), nil]];
+	}
+	if (self.surfer.preferredGender != nil) {
+		[couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.preferredGender, NSLocalizedString(@"PREFERRED GENDER", nil), nil]];
+	}
+	 if (self.surfer.maxSurfersPerNight != nil) {
+		 [couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.maxSurfersPerNight, NSLocalizedString(@"MAX SURFERS PER NIGHT", nil), nil]];
+	 }
+	if (self.surfer.sharedSleepSurface != nil) {
+		[couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.sharedSleepSurface, NSLocalizedString(@"SHARED SLEEP SURFACE", nil), nil]];
+	}
+	if (self.surfer.sharedRoom != nil) {
+		[couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.sharedRoom, NSLocalizedString(@"SHARED ROOM", nil), nil]];
+	}
+	
+	self.couchInfoValues = couchInfoValues;
+	if ([self.surfer hasSomeCouchInfo]) {
+		NSMutableArray *sections = [[self.sections mutableCopy] autorelease];
+		[sections removeLastObject];
+		[sections addObject:@"COUCH INFORMATION"];
+		self.sections = sections;
+	}
+	
+	if (_parsePersonalDescriptionAfterProfileDidLoad) {
+		self.surfer.personalDescription = [ProfileRequest parsePersonalDescription:self.doc];
+	}
+	
+	[_tableView reloadData];
+}
+
+#pragma Mark Private methods
+
+- (void)loadProfile {
+	self.profileRequest = [[[ProfileRequest alloc] init] autorelease];
+	self.profileRequest.delegate = self;
+	self.profileRequest.surfer = self.surfer;
+	[self.profileRequest sendProfileRequest];
 }
 
 @end

@@ -58,7 +58,7 @@ if ((self = [super init]) != NULL)
 		}
 	#endif
 	
-	xmlDocPtr theDoc = xmlParseDoc((xmlChar *)[inString UTF8String]);
+	xmlDocPtr theDoc = xmlReadDoc((xmlChar *)[inString UTF8String], NULL, NULL, XML_PARSE_RECOVER | XML_PARSE_NOWARNING);
 	if (theDoc != NULL)
 		{
 		_node = (xmlNodePtr)theDoc;
