@@ -87,7 +87,6 @@
 }
 
 - (void)viewDidAppear:(BOOL)animated {
-	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
     if (!_initialLoadDone) {
 		if (self.filter.locationJSON == nil) {
 			//[self gatherCurrentLocation];
@@ -97,6 +96,10 @@
 		}
     }
     _initialLoadDone = YES;
+}
+
+- (void)viewWillAppear:(BOOL)animated {
+	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
