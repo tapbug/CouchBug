@@ -497,10 +497,11 @@
 			_parsePersonalDescriptionAfterProfileDidLoad = YES;
 			controller = [[[ProfileDetailController alloc] initWithSurfer:self.surfer property:@"personalDescription"] autorelease];			
 		}
-		
+		controller.styleName = @"personalDescription";
 		[self.navigationController pushViewController:controller animated:YES];
 	} else if ([sectionName isEqualToString:@"COUCH INFORMATION"] && indexPath.row == [self.couchInfoValues count]) {
 		ProfileDetailController *controller = [[[ProfileDetailController alloc] initWithHtmlString:self.surfer.couchInfoHtml] autorelease];
+		controller.styleName = @"couchInfo";
 		[self.navigationController pushViewController:controller animated:YES];
 	} else if([sectionName isEqualToString:@"PROFILE DATA"] && indexPath.row == 0) {
 		MVUrlConnection *connection = [[[MVUrlConnection alloc] initWithUrlString:[NSString stringWithFormat:@"http://www.couchsurfing.org/profile.html?ajax_action=show_all_references&id=%@", self.surfer.ident]] autorelease];

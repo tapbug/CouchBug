@@ -160,6 +160,7 @@
 	if (self.styleName != nil) {
 		NSString *cssPath = [[NSBundle mainBundle] pathForResource:self.styleName ofType:@"css"];
 		NSString *css = [NSString stringWithContentsOfFile:cssPath encoding:NSUTF8StringEncoding error:nil];
+		html = [NSString stringWithFormat:@"<html><body>%@</body></html>", html];
 		html = [NSString stringWithFormat:@"<style>%@</style>%@", css, html];		
 	}
 	[webView loadHTMLString:html baseURL:[NSURL URLWithString:@"http://www.couchsurfing.org/"]];
