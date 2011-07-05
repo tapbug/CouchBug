@@ -227,6 +227,7 @@
 			dateString = [dateFormatter stringForObjectValue:self.departureDate];
 		}
 		csCell.selectedValueLabel.text = dateString;
+		csCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		[csCell makeLayout];
 		cell = csCell;
 	} else if (indexPath.section == 1) {		
@@ -274,6 +275,7 @@
 			csCell.keyLabel.text = NSLocalizedString(@"ARRIVING VIA", nil);
 			csCell.selectedValueLabel.text = NSLocalizedString(_arrivingViaName, nil);;
 		}
+		csCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
 		[csCell makeLayout];
 		cell = csCell;
 	}
