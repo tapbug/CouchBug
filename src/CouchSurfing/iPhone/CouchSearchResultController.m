@@ -64,10 +64,11 @@
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
 
     self.navigationItem.rightBarButtonItem =
-        [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemSearch
-                                                      target:self
-                                                      action:@selector(showSearchForm)];
-    _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
+		[[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"FILTER", nil) style:UIBarButtonItemStyleBordered 
+										 target:self
+										 action:@selector(showSearchForm)] autorelease];
+
+	 _tableView = [[[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain] autorelease];
     _tableView.backgroundView = nil;
 	_tableView.backgroundColor = [UIColor clearColor];
     _tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
