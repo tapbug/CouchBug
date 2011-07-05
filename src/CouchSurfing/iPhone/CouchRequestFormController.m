@@ -557,6 +557,7 @@
 
 - (void)cancelAction {
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
+	[self hideDialogView];
 }
 
 - (void)sendAction {
