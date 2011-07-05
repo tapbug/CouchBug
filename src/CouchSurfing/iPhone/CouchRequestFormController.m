@@ -629,9 +629,9 @@
 														message:nil
 													   delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil)
 											  otherButtonTitles:nil];
+	alertView.delegate = self;
 	[alertView show];
 	[alertView release]; alertView = nil;
-	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 
 - (void)couchRequestDidFailedWithErrors:(NSDictionary *)errors {
@@ -646,6 +646,12 @@
 											  otherButtonTitles:nil];
 	[alertView show];
 	[alertView release]; alertView = nil;
+}
+
+#pragma Mark UIAlertViewDelegate methods
+
+- (void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex {
+	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 
 #pragma Mark ViewController statuses

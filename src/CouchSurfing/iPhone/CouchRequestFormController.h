@@ -12,7 +12,7 @@
 @class CouchSurfer;
 @class ActivityOverlap;
 
-@interface CouchRequestFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CouchRequestRequestDelegate> {
+@interface CouchRequestFormController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, UITextViewDelegate, UIPickerViewDelegate, UIPickerViewDataSource, CouchRequestRequestDelegate, UIAlertViewDelegate> {
     CouchSurfer *_surfer;
 	
 	UIBarButtonItem *_sendButton;
