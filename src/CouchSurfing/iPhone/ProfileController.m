@@ -76,7 +76,7 @@
 	self.navigationItem.title = self.surfer.name;
 	
 	NSMutableArray *sections = [NSMutableArray array];
-	[sections addObject:@"LOCATIONS"];
+	[sections addObject:@"LOCATION"];
 	if (self.surfer.about != nil) {
 		[sections addObject:@"PERSONAL DESCRIPTION"];
 	}
@@ -89,7 +89,7 @@
 	self.sections = sections;
 	
 	if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
-		UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
+		UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCH REQUEST BUTTON", nil)
 																				   style:UIBarButtonItemStyleBordered
 																				  target:self 
 																				  action:@selector(sendCouchRequest)] autorelease];
@@ -219,7 +219,7 @@
 	currentMissionKeyLabel.textColor = [UIColor whiteColor];
 	currentMissionKeyLabel.font = [UIFont systemFontOfSize:10];
 	currentMissionKeyLabel.textAlignment = UITextAlignmentCenter;
-	currentMissionKeyLabel.text = NSLocalizedString(@"Current mission", nil);
+	currentMissionKeyLabel.text = NSLocalizedString(@"CURRENT MISSION", nil);
 
 	_currentMissionValueLabel = [[[UILabel alloc] init] autorelease];
 	_currentMissionValueLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
@@ -312,7 +312,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	NSString *sectionName = [self.sections objectAtIndex:section];
-	if ([sectionName isEqualToString:@"LOCATIONS"]) {
+	if ([sectionName isEqualToString:@"LOCATION"]) {
 		if (self.surfer.lastLoginLocation == nil) {
 			return 1;
 		}
@@ -337,7 +337,7 @@
 	NSString *sectionName = [self.sections objectAtIndex:indexPath.section];
 	UITableViewCell *cell;
 	
-	if ([sectionName isEqualToString:@"LOCATIONS"]) {
+	if ([sectionName isEqualToString:@"LOCATION"]) {
 		ProfileLocationCell *customCell = (ProfileLocationCell *)[tableView dequeueReusableCellWithIdentifier:@"locationCell"];
 		if (customCell == nil) {
 			customCell = [[[ProfileLocationCell alloc] initWithStyle:UITableViewCellStyleDefault
@@ -427,7 +427,7 @@
 			UILabel *loadingLabel = [[[UILabel alloc] initWithFrame:CGRectMake(activityView.frame.size.width + 5, 0, 0, 0)] autorelease];
 			loadingLabel.backgroundColor = [UIColor clearColor];
 			loadingLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
-			loadingLabel.text = NSLocalizedString(@"LOADING MORE", nil);
+			loadingLabel.text = NSLocalizedString(@"LOADING", nil);
 			[loadingLabel sizeToFit];
 			
 			//setup containing view
@@ -531,7 +531,7 @@
 		 [couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.maxSurfersPerNight, NSLocalizedString(@"MAX SURFERS PER NIGHT", nil), nil]];
 	 }
 	if (self.surfer.sharedSleepSurface != nil) {
-		[couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.sharedSleepSurface, NSLocalizedString(@"SHARED SLEEP SURFACE", nil), nil]];
+		[couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.sharedSleepSurface, NSLocalizedString(@"SHARED SLEEPING SURFACE", nil), nil]];
 	}
 	if (self.surfer.sharedRoom != nil) {
 		[couchInfoValues addObject:[NSArray arrayWithObjects:self.surfer.sharedRoom, NSLocalizedString(@"SHARED ROOM", nil), nil]];

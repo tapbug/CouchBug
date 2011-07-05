@@ -86,19 +86,19 @@
         _referencesCountLabel = [self createCountLabel];
         [self.contentView addSubview:_referencesCountLabel];
         
-        _referencesLabel = [self createLabelForCount:NSLocalizedString(@"REFERENCES", nil)];
+        _referencesLabel = [self createLabelForCount:NSLocalizedString(@"REFERENCES LOWERCASE", nil)];
         [self.contentView addSubview:_referencesLabel];
         
         _photosCountLabel = [self createCountLabel];
         [self.contentView addSubview:_photosCountLabel];
         
-        _photosLabel = [self createLabelForCount:NSLocalizedString(@"PHOTOS", nil)];
+        _photosLabel = [self createLabelForCount:NSLocalizedString(@"PHOTOS LOWERCASE", nil)];
         [self.contentView addSubview:_photosLabel];
         
         _replyRateCountLabel = [self createCountLabel];
         [self.contentView addSubview:_replyRateCountLabel];
         
-        _replyRateLabel = [self createLabelForCount:NSLocalizedString(@"REPLY RATE", nil)];
+        _replyRateLabel = [self createLabelForCount:NSLocalizedString(@"REPLY RATE LOWERCASE", nil)];
         [self.contentView addSubview:_replyRateLabel];
         
         _hasCouchView = [[[UIImageView alloc] init] autorelease];

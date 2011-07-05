@@ -3,7 +3,7 @@
 "SEARCH" = "Search";
 "MORE" = "More";
 
-// Profile tab
+// Home tab
 "MEMBERS ONLINE" = "CouchSurfers online";
 "PROFILE VIEWS" = "profile views";
 "UNREAD MESSAGE" = "unread message";
@@ -19,9 +19,9 @@
 "LOADING COUCHES" = "Loading couches…";
 
 // Search result cell
-"REFERENCES" = "references";
-"PHOTOS" = "photos";
-"REPLY RATE" = "reply rate";
+"REFERENCES LOWERCASE" = "references";
+"PHOTOS LOWERCASE" = "photos";
+"REPLY RATE LOWERCASE" = "reply rate";
 
 // Search filter
 "LOCATION" = "Location";
@@ -59,6 +59,20 @@
 "CURRENT LOCATION" = "Current location";
 "EVERYWHERE" = "Everywhere";
 
+// User's profile
+"COUCH REQUEST BUTTON" = "CouchRequest";
+"FROM" = "From";
+"REFERENCES" = "References";
+"FRIENDS" = "Friends";
+"CURRENT MISSION" = "Current mission";
+"PERSONAL DESCRIPTION" = "Personal description";
+"COUCH INFORMATION" = "Couch information";
+"LOADING" = "Loading…";
+
+"PREFERRED GENDER" = "Preferred gender";
+"MAX SURFERS PER NIGHT" = "Max surfers per night";
+"SHARED SLEEPING SURFACE" = "Shared sleeping surface";
+"SHARED ROOM" = "Shared room";
 
 // Login / logout
 "USERNAME" = "Username";

@@ -293,7 +293,7 @@
 		D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoNone@2x.png"; sourceTree = "<group>"; };
 		D073DF3A13AAAC9E002D00F9 /* worldBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldBg.png; sourceTree = "<group>"; };
 		D073DF3B13AAAC9E002D00F9 /* worldBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "worldBg@2x.png"; sourceTree = "<group>"; };
-		D0CBD80913B024F4008BB7D9 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		D0CBD80913B024F4008BB7D9 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
