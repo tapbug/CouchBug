@@ -653,7 +653,7 @@
 - (void)revalidateSendButton {
 	BOOL enabled = YES;
 	if (!_subjectHasText) {
-		//enabled = NO;
+		enabled = NO;
 	}
 	if (![self.messageTV hasText]) {
 		enabled = NO;
