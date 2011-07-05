@@ -62,7 +62,7 @@
     _currentPage = 1;
 	self.navigationItem.title = NSLocalizedString(@"COUCHSEARCH", nil);
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
-
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
     self.navigationItem.rightBarButtonItem =
 		[[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"FILTER", nil) style:UIBarButtonItemStyleBordered 
 										 target:self
@@ -101,10 +101,6 @@
 		}
     }
     _initialLoadDone = YES;
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"worldBg"]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {

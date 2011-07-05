@@ -70,9 +70,9 @@
     [super dealloc];
 }
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
+- (void)viewDidLoad {    
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+	
     //Setup navigation baru
     
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
@@ -125,11 +125,9 @@
 	// TODO odhlaseni od prijimani udalosti
     NSNotificationCenter *nc = [NSNotificationCenter defaultCenter];
     [nc addObserver:self selector:@selector(keyboardDidShow:) name:UIKeyboardWillShowNotification object:nil];
-    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];    
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+    [nc addObserver:self selector:@selector(keyboardDidHide:) name:UIKeyboardWillHideNotification object:nil];
+	
+	[super viewDidLoad];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {

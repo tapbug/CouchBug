@@ -75,6 +75,8 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+	
 	NSMutableArray *sections = [NSMutableArray array];
 	[sections addObject:@"LOCATION"];
 	if (self.surfer.about != nil) {
@@ -284,10 +286,6 @@
 - (void)viewDidUnload
 {
     [super viewDidUnload];
-}
-
-- (void)viewWillAppear:(BOOL)animated {
-	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 }
 
 - (void)viewDidAppear:(BOOL)animated {

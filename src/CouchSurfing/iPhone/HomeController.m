@@ -91,7 +91,10 @@
 
 #pragma mark - View lifecycle
 
-- (void)viewDidLoad {    
+- (void)viewDidLoad {
+	
+	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+	
     CGRect viewFrame = self.view.frame;
     _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height)] autorelease];
     _tableView.backgroundColor = [UIColor clearColor];
@@ -155,10 +158,6 @@
     [super viewDidUnload];
     // Release any retained subviews of the main view.
     // e.g. self.myOutlet = nil;
-}
-
-- (void)viewDidAppear:(BOOL)animated {
-	[UIApplication sharedApplication].keyWindow.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 }
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
