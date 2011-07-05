@@ -73,8 +73,6 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
-	self.navigationItem.title = self.surfer.name;
-	
 	NSMutableArray *sections = [NSMutableArray array];
 	[sections addObject:@"LOCATION"];
 	if (self.surfer.about != nil) {
