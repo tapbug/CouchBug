@@ -48,5 +48,6 @@
 @protocol CouchRequestRequestDelegate <NSObject>
 
 - (void)couchRequestRequestDidSent:(CouchRequestRequest *)request;
+- (void)couchRequestDidFailedWithErrors:(NSDictionary *)errors;
 
 @end

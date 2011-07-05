@@ -94,17 +94,31 @@
 #pragma Mark MVUrlConnectionDelegate methods
 
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
+	BOOL couchRequestRequestDidSent = NO;
 	NSArray *responseArray = [responseData objectFromJSONData];
 	if ([responseArray isKindOfClass:[NSArray class]] && [responseArray count] > 0) {
 		NSDictionary *responseDict = [responseArray objectAtIndex:0];
-		if ([responseDict isKindOfClass:[NSDictionary class]]) {
-			if ([[[responseDict objectForKey:@"data"] objectForKey:@"message"] isEqual:@"CouchRequest Sent!"]) {
-				if ([self.delegate respondsToSelector:@selector(couchRequestRequestDidSent:)]) {
-					[self.delegate couchRequestRequestDidSent:self];
+		if (![responseDict isEqual:[NSNull null]]) {
+			NSDictionary *dataDict = [responseDict objectForKey:@"data"];
+			if (![dataDict isEqual:[NSNull null]]) {
+				NSString *messageStr = [dataDict objectForKey:@"message"];
+				if ([messageStr isEqual:@"CouchRequest Sent!"]) {
+					if ([self.delegate respondsToSelector:@selector(couchRequestRequestDidSent:)]) {
+						[self.delegate couchRequestRequestDidSent:self];
+						couchRequestRequestDidSent = YES;
+					}
+				} else {
+					NSDictionary *errors = [dataDict objectForKey:@"errors"];
+					if (![errors isEqual:[NSNull null]]) {
+						if ([self.delegate respondsToSelector:@selector(couchRequestDidFailedWithErrors:)]) {
+							[self.delegate couchRequestDidFailedWithErrors:errors];
+						}							
+					}
 				}
 			}
 		}
 	}
+	
 
 }
 

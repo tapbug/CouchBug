@@ -634,12 +634,26 @@
 	[self.parentViewController dismissModalViewControllerAnimated:YES];
 }
 
+- (void)couchRequestDidFailedWithErrors:(NSDictionary *)errors {
+	[self.activityOverlap removeOverlap];
+	NSMutableArray *messages = [NSMutableArray array];
+	for (NSString *key in errors) {
+		[messages addObject:[errors objectForKey:key]];
+	}
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil) 
+														message:[messages componentsJoinedByString:@"\n"]
+													   delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil)
+											  otherButtonTitles:nil];
+	[alertView show];
+	[alertView release]; alertView = nil;
+}
+
 #pragma Mark ViewController statuses
 
 - (void)revalidateSendButton {
 	BOOL enabled = YES;
 	if (!_subjectHasText) {
-		enabled = NO;
+		//enabled = NO;
 	}
 	if (![self.messageTV hasText]) {
 		enabled = NO;
