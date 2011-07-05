@@ -29,6 +29,8 @@
 @property(nonatomic, retain) ActivityOverlap *activityOverlap;
 
 - (void)loginAction;
+- (void)signUpAction;
+
 - (void)hideLoading;
 - (void)hideKeyboard;
 
@@ -80,7 +82,13 @@
                                          style:UIBarButtonItemStyleBordered
                                         target:self
                                         action:@selector(loginAction)];
-    
+
+	self.navigationItem.leftBarButtonItem = 
+		[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SIGN UP", nil)
+										 style:UIBarButtonItemStyleBordered
+										target:self
+										action:@selector(signUpAction)];
+	
     self.view.backgroundColor = [UIColor clearColor];
         
     self.activityOverlap = [[[ActivityOverlap alloc] initWithView:self.view
@@ -285,6 +293,11 @@
     self.loginRequest.username = self.usernameField.text;
     self.loginRequest.password = self.passwordField.text;
     [self.loginRequest login];
+}
+
+- (void)signUpAction {
+	NSURL *url = [NSURL URLWithString:@"http://www.couchsurfing.org/register.html"];
+	[[UIApplication sharedApplication] openURL:url];
 }
 
 - (void)hideKeyboard {
