@@ -114,11 +114,23 @@
     self.passwordField.returnKeyType = UIReturnKeyJoin;
     self.passwordField.text = self.loginInformation.password;
     
-    _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 108) / 2), self.view.frame.size.width - 20, 108)
+    _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 150) / 2), self.view.frame.size.width - 20, 150)
                                                 style:UITableViewStyleGrouped] autorelease];    
     _loginTabel.backgroundView = nil;
     _loginTabel.backgroundColor = [UIColor clearColor];
-    
+	
+	UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 46)] autorelease];
+	UIImageView *logoView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"csLogo"]] autorelease];
+	logoView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+	CGRect logoViewFrame = logoView.frame;
+	logoViewFrame.origin.x = (int)(headerView.frame.size.width - logoViewFrame.size.width) / 2;
+	logoViewFrame.origin.y = 20;
+	logoView.frame = logoViewFrame;
+
+	[headerView addSubview:logoView];
+	
+	_loginTabel.tableHeaderView = headerView;
+	
     [_loginTabel setScrollEnabled:NO];
     _loginTabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     _loginTabel.delegate = self;

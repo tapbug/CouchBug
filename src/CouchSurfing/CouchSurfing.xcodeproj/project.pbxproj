@@ -100,6 +100,8 @@
 		6CE8A5F713C3985F00BF66DC /* couchInfo.css in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5F413C3985F00BF66DC /* couchInfo.css */; };
 		6CE8A5F813C3985F00BF66DC /* personalDescription.css in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5F513C3985F00BF66DC /* personalDescription.css */; };
 		6CE8A5F913C3985F00BF66DC /* references.css in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5F613C3985F00BF66DC /* references.css */; };
+		6CE8A5FC13C3A06C00BF66DC /* csLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5FA13C3A06C00BF66DC /* csLogo.png */; };
+		6CE8A5FD13C3A06C00BF66DC /* csLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5FB13C3A06C00BF66DC /* csLogo@2x.png */; };
 		6CF1E0B413B6830400704662 /* Languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B313B6830400704662 /* Languages.plist */; };
 		6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B613B72E2900704662 /* LanguagesListController.m */; };
 		6CF39A4713A7F01D008148ED /* photoFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4113A7F01D008148ED /* photoFrame.png */; };
@@ -284,6 +286,8 @@
 		6CE8A5F413C3985F00BF66DC /* couchInfo.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = couchInfo.css; path = Shared/couchInfo.css; sourceTree = "<group>"; };
 		6CE8A5F513C3985F00BF66DC /* personalDescription.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = personalDescription.css; path = Shared/personalDescription.css; sourceTree = "<group>"; };
 		6CE8A5F613C3985F00BF66DC /* references.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = references.css; path = Shared/references.css; sourceTree = "<group>"; };
+		6CE8A5FA13C3A06C00BF66DC /* csLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = csLogo.png; sourceTree = "<group>"; };
+		6CE8A5FB13C3A06C00BF66DC /* csLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "csLogo@2x.png"; sourceTree = "<group>"; };
 		6CF1E0B313B6830400704662 /* Languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Languages.plist; sourceTree = "<group>"; };
 		6CF1E0B513B72E2900704662 /* LanguagesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagesListController.h; sourceTree = "<group>"; };
 		6CF1E0B613B72E2900704662 /* LanguagesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagesListController.m; sourceTree = "<group>"; };
@@ -523,6 +527,8 @@
 		6C9EACD813A09ECA00C1B19D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				6CE8A5FA13C3A06C00BF66DC /* csLogo.png */,
+				6CE8A5FB13C3A06C00BF66DC /* csLogo@2x.png */,
 				6C4D8AA413B09D69008FD263 /* couchCoffee.png */,
 				6C4D8AA513B09D69008FD263 /* couchCoffee@2x.png */,
 				6C4D8AA613B09D69008FD263 /* couchMaybe.png */,
@@ -812,6 +818,8 @@
 				6CE8A5F713C3985F00BF66DC /* couchInfo.css in Resources */,
 				6CE8A5F813C3985F00BF66DC /* personalDescription.css in Resources */,
 				6CE8A5F913C3985F00BF66DC /* references.css in Resources */,
+				6CE8A5FC13C3A06C00BF66DC /* csLogo.png in Resources */,
+				6CE8A5FD13C3A06C00BF66DC /* csLogo@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
