@@ -14,7 +14,7 @@
 
 @property (nonatomic, retain) MVUrlConnection *profileConnection;
 
-- (NSString *)joinHtmlNodesTextsTogether:(NSArray *)nodes;
++ (NSString *)joinHtmlNodesTextsTogether:(NSArray *)nodes;
 + (NSString *)joinTextNodesTextsTogether:(NSArray *)nodes;
 
 @end
@@ -46,7 +46,7 @@
 	NSArray *couchInfoNodes = [doc nodesForXPath:@"//x:*[preceding-sibling::x:h2/@id='couchinfo'][following::x:h2[(preceding::x:h2)[last()]/@id='couchinfo']][self::x:p or self::x:div]"
 								   namespaceMappings:ns
 											   error:nil];
-	self.surfer.couchInfoHtml = [self joinHtmlNodesTextsTogether:couchInfoNodes];
+	self.surfer.couchInfoHtml = [ProfileRequest joinHtmlNodesTextsTogether:couchInfoNodes];
 
 	NSString *couchInfoShort = [NSString string];
 	for (CXMLNode *node in couchInfoNodes) {
@@ -87,7 +87,7 @@
 	
 }
 
-- (NSString *)joinHtmlNodesTextsTogether:(NSArray *)nodes {
++ (NSString *)joinHtmlNodesTextsTogether:(NSArray *)nodes {
 	NSMutableString *text = [NSMutableString string];
 	for (CXMLNode *node in nodes) {
 		NSString *part = [node XMLString];
@@ -113,10 +113,10 @@
 + (NSString *)parsePersonalDescription:(CXMLDocument *)doc {
 	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
 	NSArray *personalDescriptionNodes = 
-	[doc nodesForXPath:@"//text()[preceding-sibling::x:h2/@id='description_title'][following::x:h2[(preceding::x:h2)[last()]/@id='description_title']] | //*[preceding-sibling::x:h2/@id='description_title'][following::x:h2[(preceding::x:h2)[last()]/@id='description_title']]/text()" 
+	[doc nodesForXPath:@"//text()[preceding-sibling::x:h2/@id='description_title'][following::x:h2[(preceding::x:h2)[last()]/@id='description_title']] | //*[preceding-sibling::x:h2/@id='description_title'][following::x:h2[(preceding::x:h2)[last()]/@id='description_title']]" 
 		  namespaceMappings:ns
 					  error:nil];
-	return [ProfileRequest joinTextNodesTextsTogether:personalDescriptionNodes];
+	return [ProfileRequest joinHtmlNodesTextsTogether:personalDescriptionNodes];
 }
 
 
