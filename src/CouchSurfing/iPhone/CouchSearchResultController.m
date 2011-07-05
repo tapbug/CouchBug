@@ -60,6 +60,7 @@
 
 - (void)viewDidLoad {
     _currentPage = 1;
+	self.navigationItem.title = NSLocalizedString(@"COUCHSEARCH", nil);
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
 
     self.navigationItem.rightBarButtonItem =
