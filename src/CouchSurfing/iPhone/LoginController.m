@@ -81,7 +81,7 @@
     
     self.navigationItem.rightBarButtonItem = 
         [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SIGN IN", nil)
-                                         style:UIBarButtonItemStyleBordered
+                                         style:UIBarButtonItemStyleDone
                                         target:self
                                         action:@selector(loginAction)];
 
