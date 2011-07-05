@@ -31,6 +31,7 @@ static NSDictionary *hasCouchNames;
 @synthesize referencesCount;
 @synthesize photosCount;
 @synthesize replyRate;
+@synthesize friendsCount;
 @synthesize couchStatus;
 @synthesize verified;
 @synthesize vouched;
@@ -63,6 +64,7 @@ static NSDictionary *hasCouchNames;
     self.referencesCount = nil;
     self.photosCount = nil;
     self.replyRate = nil;
+	self.friendsCount = nil;
 	
 	self.personalDescription = nil;
 	self.couchInfoShort = nil;

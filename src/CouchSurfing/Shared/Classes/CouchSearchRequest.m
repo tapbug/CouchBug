@@ -257,7 +257,9 @@
                     surfer.photosCount = count;
                 } else if ([label isEqualToString:@"Reply Rate"]) {
                     surfer.replyRate = count;
-                }
+                } else if ([label isEqualToString:@"Friends"]) {
+					surfer.friendsCount = count;
+				}
             }
         }
         

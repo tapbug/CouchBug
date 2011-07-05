@@ -328,7 +328,7 @@
 		}
 		return num;
 	} else if ([sectionName isEqualToString:@"PROFILE DATA"]) {
-		return 1;
+		return 2;
 	} else if ([sectionName isEqualToString:@"LOADING PROFILE"]) {
 		return 1;
 	}
@@ -419,6 +419,10 @@
 			customCell.keyLabel.text = NSLocalizedString(@"REFERENCES", nil);
 			customCell.selectedValueLabel.text = self.surfer.referencesCount;
 			customCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		} else if (indexPath.row == 1) {
+			customCell.keyLabel.text = NSLocalizedString(@"FRIENDS", nil);
+			customCell.selectedValueLabel.text = self.surfer.friendsCount;
+			customCell.accessoryType = UITableViewCellAccessoryNone;		
 		}
 		[customCell makeLayout];
 		cell = customCell;
