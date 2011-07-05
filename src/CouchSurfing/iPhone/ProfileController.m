@@ -81,7 +81,7 @@
 		[sections addObject:@"PERSONAL DESCRIPTION"];
 	}
 	
-	[sections addObject:@"REFERENCES"];
+	[sections addObject:@"PROFILE DATA"];
 	
 	[self loadProfile];
 	[sections addObject:@"LOADING PROFILE"];
@@ -327,7 +327,7 @@
 			num++;
 		}
 		return num;
-	} else if ([sectionName isEqualToString:@"REFERENCES"]) {
+	} else if ([sectionName isEqualToString:@"PROFILE DATA"]) {
 		return 1;
 	} else if ([sectionName isEqualToString:@"LOADING PROFILE"]) {
 		return 1;
@@ -409,13 +409,19 @@
 										 [self.surfer.couchInfoShort sizeWithFont:[UIFont systemFontOfSize:12]
 													   constrainedToSize:CGSizeMake(tableViewWidth - 50, 80)].height);			
 		}
-	} else if([sectionName isEqualToString:@"REFERENCES"]) {
-		cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell"];
-		if (cell == nil) {
-			cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"buttonCell"];
-			cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+	} else if([sectionName isEqualToString:@"PROFILE DATA"]) {
+		CSSelectedValueCell *customCell = (CSSelectedValueCell *)[tableView dequeueReusableCellWithIdentifier:@"buttonCell"];
+		if (customCell == nil) {
+			customCell = [[[CSSelectedValueCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"buttonCell"] autorelease];
 		}
-		cell.textLabel.text = NSLocalizedString(@"REFERENCES", nil);
+
+		if (indexPath.row == 0) {
+			customCell.keyLabel.text = NSLocalizedString(@"REFERENCES", nil);
+			customCell.selectedValueLabel.text = self.surfer.referencesCount;
+			customCell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+		}
+		[customCell makeLayout];
+		cell = customCell;
 	} else if([sectionName isEqualToString:@"LOADING PROFILE"]) {
 		cell = [tableView dequeueReusableCellWithIdentifier:@"loadingMoreCell"];
 		if (cell == nil) {
@@ -467,7 +473,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	NSString *sectionName = [self.sections objectAtIndex:section];
-	if ([sectionName isEqualToString:@"LOADING PROFILE"] || [sectionName isEqualToString:@"REFERENCES"]) {
+	if ([sectionName isEqualToString:@"LOADING PROFILE"] || [sectionName isEqualToString:@"PROFILE DATA"]) {
 		return @"";
 	}
 	
@@ -492,7 +498,7 @@
 	} else if ([sectionName isEqualToString:@"COUCH INFORMATION"] && indexPath.row == [self.couchInfoValues count]) {
 		ProfileDetailController *controller = [[[ProfileDetailController alloc] initWithHtmlString:self.surfer.couchInfoHtml] autorelease];
 		[self.navigationController pushViewController:controller animated:YES];
-	} else if([sectionName isEqualToString:@"REFERENCES"] && indexPath.row == 0) {
+	} else if([sectionName isEqualToString:@"PROFILE DATA"] && indexPath.row == 0) {
 		MVUrlConnection *connection = [[[MVUrlConnection alloc] initWithUrlString:[NSString stringWithFormat:@"http://www.couchsurfing.org/profile.html?ajax_action=show_all_references&id=%@", self.surfer.ident]] autorelease];
 		ProfileDetailController *controller = [[[ProfileDetailController alloc] initWithConnection:connection] autorelease];
 		controller.withInlineStyles = YES;
