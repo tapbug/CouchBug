@@ -505,17 +505,24 @@
 		controller.delegate = self;
 		[self.navigationController pushViewController:controller animated:YES];
 	}
+	
+	id selectedCell = [_formTableView cellForRowAtIndexPath:indexPath];
+	
+	if ([selectedCell isKindOfClass:[CSEditableCell class]]) {
+		[((CSEditableCell*)selectedCell).valueField becomeFirstResponder];
+	}
 }
 
 - (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (keyboardOn) {
-		[self hideKeyboard];
-	}
-
 	if ([[tableView indexPathForSelectedRow] isEqual:indexPath]) {
 		if (dialogViewOn) {
 			[self hideDialogView];
 		}
+
+		if (keyboardOn) {
+			[self hideKeyboard];
+		}
+
 		return nil;
 	}
 	return indexPath;
@@ -560,6 +567,7 @@
 
 - (void)hideKeyboard {
 	[_activeField resignFirstResponder];
+	[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:NO];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification {
