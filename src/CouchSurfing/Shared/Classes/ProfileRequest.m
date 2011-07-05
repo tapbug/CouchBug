@@ -47,12 +47,22 @@
 								   namespaceMappings:ns
 											   error:nil];
 	self.surfer.couchInfoHtml = [self joinHtmlNodesTextsTogether:couchInfoNodes];
+
+	NSString *couchInfoShort = [NSString string];
 	for (CXMLNode *node in couchInfoNodes) {
 		NSString *text = [[[node stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
 		if (![text isEqualToString:@""]) {
-			self.surfer.couchInfoShort = text;
+			couchInfoShort = [couchInfoShort stringByAppendingFormat:@"%@ ", text];
+		}
+		if ([couchInfoShort length] >= 256) {
 			break;
 		}
+	}
+	
+	NSLog(@"%@", couchInfoShort);
+	
+	if (![couchInfoShort isEqualToString:@""]) {
+		self.surfer.couchInfoShort = couchInfoShort;		
 	}
 	
 	NSArray *couchInfoKeysNodes = [doc nodesForXPath:@"//x:strong[preceding::x:h2/@id='couchinfo'][following::x:h2[(preceding::x:h2)[last()]/@id='couchinfo']][contains(text(),':')]" namespaceMappings:ns error:nil];

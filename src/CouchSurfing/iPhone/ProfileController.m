@@ -375,7 +375,7 @@
 									 7,
 									 tableViewWidth - 50,
 									 [self.surfer.about sizeWithFont:[UIFont systemFontOfSize:12]
-												   constrainedToSize:CGSizeMake(tableViewWidth - 50, 120)].height);
+												   constrainedToSize:CGSizeMake(tableViewWidth - 50, 80)].height);
 	} else if ([sectionName isEqualToString:@"COUCH INFORMATION"]) {
 		if ([self.couchInfoValues count] > indexPath.row) {
 			NSArray *pair = [self.couchInfoValues objectAtIndex:indexPath.row];
@@ -407,7 +407,7 @@
 										 7,
 										 tableViewWidth - 50,
 										 [self.surfer.couchInfoShort sizeWithFont:[UIFont systemFontOfSize:12]
-													   constrainedToSize:CGSizeMake(tableViewWidth - 50, 120)].height);			
+													   constrainedToSize:CGSizeMake(tableViewWidth - 50, 80)].height);			
 		}
 	} else if([sectionName isEqualToString:@"REFERENCES"]) {
 		cell = [tableView dequeueReusableCellWithIdentifier:@"buttonCell"];
@@ -451,7 +451,7 @@
 	
 	if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"] || ([sectionName isEqualToString:@"COUCH INFORMATION"] && indexPath.row - [self.couchInfoValues count] == 0)) {
 		CGFloat tableViewWidth = _tableView.frame.size.width;
-		CGSize size = CGSizeMake(tableViewWidth - 50, 120);
+		CGSize size = CGSizeMake(tableViewWidth - 50, 80);
 		NSString *forText = nil;
 		if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"]) {
 			forText = self.surfer.about;
