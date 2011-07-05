@@ -229,7 +229,7 @@
 	_currentMissionValueLabel.textColor = [UIColor whiteColor];
 	_currentMissionValueLabel.font = [UIFont italicSystemFontOfSize:15];
 	_currentMissionValueLabel.textAlignment = UITextAlignmentCenter;
-	_currentMissionValueLabel.text = self.surfer.mission;
+	_currentMissionValueLabel.text = [NSString stringWithFormat:@"\"%@\"", self.surfer.mission];
 	_currentMissionValueLabel.numberOfLines = 4;
 		
 	CGFloat currentMissionKeyLabelHeight = [currentMissionKeyLabel.text sizeWithFont:currentMissionKeyLabel.font].height;
