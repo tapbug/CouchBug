@@ -45,6 +45,8 @@
 
 "TO" = "to";
 "ANY" = "Any";
+"DAYS" = "days";
+"HOURS" = "hours";
 
 "COMMUNITY" = "Community";
 "VERIFIED" = "Verified";
@@ -53,6 +55,9 @@
 
 "NAME USERNAME" = "Name / Username";
 "KEYWORD" = "Keyword";
+
+// Language picker
+"ANY LANGUAGE" = "Any language";
 
 // Search location
 "LOADING LOCATIONS" = "Loading locations…";

@@ -100,13 +100,13 @@
 	if (self.html != nil) {
 		[self showWebView];
 	} else if(self.surfer != nil && self.property != nil){
-		self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view title:NSLocalizedString(@"LOADNG PROFILE INFORMATION", nil)];
+		self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view title:NSLocalizedString(@"LOADING", nil)];
 		[self.activityOverlap overlapView];
 		[self.surfer addObserver:self forKeyPath:self.property options:NSKeyValueObservingOptionNew context:nil];
 	} else if (self.connection != nil) {
 		self.connection.delegate = self;
 		[self.connection sendRequest];
-		self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view title:NSLocalizedString(@"LOADNG PROFILE INFORMATION", nil)];
+		self.activityOverlap = [[ActivityOverlap alloc] initWithView:self.view title:NSLocalizedString(@"LOADING", nil)];
 		[self.activityOverlap overlapView];
 	}
     [super viewDidLoad];
