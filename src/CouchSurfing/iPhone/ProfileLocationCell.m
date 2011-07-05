@@ -7,7 +7,7 @@
 //
 
 #import "ProfileLocationCell.h"
-
+#import "CSTools.h"
 
 @implementation ProfileLocationCell
 
@@ -32,7 +32,7 @@
 		_dateLabel = [[[UILabel alloc] init] autorelease];
 		_dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 		_dateLabel.font = [UIFont systemFontOfSize:12];
-		_dateLabel.textColor = [UIColor brownColor];
+		_dateLabel.textColor = UIColorFromRGB(0x2957ff);
 		[self.contentView addSubview:_dateLabel];
 		
     }

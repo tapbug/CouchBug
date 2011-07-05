@@ -239,6 +239,7 @@
 	if ([self.sourfers count] > indexPath.row) {
 		CouchSurfer *surfer = [self.sourfers objectAtIndex:indexPath.row];
 		ProfileController *profileController = [[[ProfileController alloc] initWithSurfer:surfer] autorelease];
+		profileController.hidesBottomBarWhenPushed = YES;
 		[self.navigationController pushViewController:profileController animated:YES];
 	}
 }

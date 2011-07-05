@@ -139,6 +139,16 @@
 
 - (void)showWebView {
 	UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+	
+	UIScrollView *scrollView = nil;
+	for (UIView *subview in [webView subviews]) {
+		if ([subview isKindOfClass:[UIScrollView class]]) {  
+			scrollView = (UIScrollView *)subview;
+			break;
+		}
+	}
+	scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
+	
 	webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	NSString *html = nil;
 	if (self.withInlineStyles == YES) {
