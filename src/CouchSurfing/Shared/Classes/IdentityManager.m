@@ -51,4 +51,8 @@
     return _password;
 }
 
+- (BOOL)isLogged {
+	return self.username != nil && self.password != nil;
+}
+
 @end

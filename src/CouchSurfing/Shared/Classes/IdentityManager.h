@@ -17,5 +17,6 @@
 
 @property (readonly) NSString *username;
 @property (readonly) NSString *password;
+@property (readonly) BOOL isLogged;
 
 @end

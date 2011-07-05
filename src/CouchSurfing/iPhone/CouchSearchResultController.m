@@ -16,6 +16,8 @@
 #import "CouchSearchFilter.h"
 #import "CouchSearchFormControllerFactory.h"
 #import "CouchSearchFormController.h"
+#import "ProfileControllerFactory.h"
+#import "ProfileController.h"
 #import "CouchSearchRequest.h"
 #import "CouchSurfer.h"
 #import "CSTools.h"
@@ -47,6 +49,7 @@
 
 @synthesize filter = _filter;
 @synthesize formControllerFactory = _formControllerFactory;
+@synthesize profileControllerFactory = _profileControllerFactory;
 @synthesize locateActivity = _locateActivity;
 @synthesize searchActivity = _searchActivity;
 
@@ -238,7 +241,9 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if ([self.sourfers count] > indexPath.row) {
 		CouchSurfer *surfer = [self.sourfers objectAtIndex:indexPath.row];
-		ProfileController *profileController = [[[ProfileController alloc] initWithSurfer:surfer] autorelease];
+		ProfileController *profileController = 
+			[self.profileControllerFactory createProfileControllerWithSurfer:surfer];
+		
 		profileController.hidesBottomBarWhenPushed = YES;
 		[self.navigationController pushViewController:profileController animated:YES];
 	}
@@ -297,6 +302,7 @@
     self.imageDownloaders = nil;
     self.sourfers = nil;
 	self.formControllerFactory = nil;
+	self.profileControllerFactory = nil;
     [super dealloc];
 }
 

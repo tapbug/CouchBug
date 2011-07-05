@@ -11,8 +11,10 @@
 
 @class CouchSurfer;
 @class CXMLDocument;
+@protocol LoginInformation;
 
 @interface ProfileController : UIViewController <UITableViewDelegate, UITableViewDataSource, ProfileRequestDelegate> {
+	id<LoginInformation> _loginInformation;
 	CouchSurfer *_surfer;
 	
 	UITableView *_tableView;
@@ -35,6 +37,8 @@
 	BOOL _parsePersonalDescriptionAfterProfileDidLoad;
 	
 }
+
+@property (nonatomic, assign) id<LoginInformation> loginInformation;
 
 - (id)initWithSurfer:(CouchSurfer *)surfer;
 

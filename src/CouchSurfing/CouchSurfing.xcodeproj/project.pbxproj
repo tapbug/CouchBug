@@ -97,6 +97,7 @@
 		6CDE85DA13A547610065A991 /* LogoutRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D513A547610065A991 /* LogoutRequest.m */; };
 		6CDE85DB13A547610065A991 /* HomeRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D713A547610065A991 /* HomeRequest.m */; };
 		6CDE85DC13A547610065A991 /* HomeRequestFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CDE85D913A547610065A991 /* HomeRequestFactory.m */; };
+		6CE8A5D313C2FE7300BF66DC /* ProfileControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CE8A5D213C2FE7300BF66DC /* ProfileControllerFactory.m */; };
 		6CF1E0B413B6830400704662 /* Languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B313B6830400704662 /* Languages.plist */; };
 		6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B613B72E2900704662 /* LanguagesListController.m */; };
 		6CF39A4713A7F01D008148ED /* photoFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4113A7F01D008148ED /* photoFrame.png */; };
@@ -277,6 +278,8 @@
 		6CDE85D713A547610065A991 /* HomeRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeRequest.m; path = Shared/Classes/HomeRequest.m; sourceTree = "<group>"; };
 		6CDE85D813A547610065A991 /* HomeRequestFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = HomeRequestFactory.h; path = Shared/Classes/HomeRequestFactory.h; sourceTree = "<group>"; };
 		6CDE85D913A547610065A991 /* HomeRequestFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = HomeRequestFactory.m; path = Shared/Classes/HomeRequestFactory.m; sourceTree = "<group>"; };
+		6CE8A5D113C2FE7200BF66DC /* ProfileControllerFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileControllerFactory.h; sourceTree = "<group>"; };
+		6CE8A5D213C2FE7300BF66DC /* ProfileControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileControllerFactory.m; sourceTree = "<group>"; };
 		6CF1E0B313B6830400704662 /* Languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Languages.plist; sourceTree = "<group>"; };
 		6CF1E0B513B72E2900704662 /* LanguagesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagesListController.h; sourceTree = "<group>"; };
 		6CF1E0B613B72E2900704662 /* LanguagesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagesListController.m; sourceTree = "<group>"; };
@@ -430,6 +433,8 @@
 				6C3A52CD13BE3C5000ABA77C /* ProfileLocationCell.m */,
 				6C0597EB13C0A45B00912ADC /* ProfileDetailController.h */,
 				6C0597EC13C0A45B00912ADC /* ProfileDetailController.m */,
+				6CE8A5D113C2FE7200BF66DC /* ProfileControllerFactory.h */,
+				6CE8A5D213C2FE7300BF66DC /* ProfileControllerFactory.m */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -854,6 +859,7 @@
 				6C3A52CE13BE3C5000ABA77C /* ProfileLocationCell.m in Sources */,
 				6C3A52D413BF7BBF00ABA77C /* ProfileRequest.m in Sources */,
 				6C0597ED13C0A45B00912ADC /* ProfileDetailController.m in Sources */,
+				6CE8A5D313C2FE7300BF66DC /* ProfileControllerFactory.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -22,10 +22,12 @@ typedef enum {
 @class CouchSearchFilter;
 @class CouchSearchFormControllerFactory;
 @class ActivityOverlap;
+@class ProfileControllerFactory;
 
 @interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationRequestDelegate, UINavigationControllerDelegate> {
     CouchSearchFilter *_filter;
     CouchSearchFormControllerFactory *_formControllerFactory;
+	ProfileControllerFactory *_profileControllerFactory;
 	
     UITableView *_tableView;
 	ActivityOverlap *_locateActivity;
@@ -49,6 +51,7 @@ typedef enum {
 
 @property (nonatomic, assign) CouchSearchFilter *filter;
 @property (nonatomic, retain) CouchSearchFormControllerFactory *formControllerFactory;
+@property (nonatomic, retain) ProfileControllerFactory *profileControllerFactory;
 
 //  Spusti hledani podle filteru
 - (void)performSearch;

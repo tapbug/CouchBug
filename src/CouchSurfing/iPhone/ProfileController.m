@@ -10,6 +10,7 @@
 #import "CSImageCropper.h"
 
 #import "CouchSurfer.h"
+#import "LoginInformation.h"
 
 #import "CouchRequestFormController.h"
 #import "ProfileDetailController.h"
@@ -38,6 +39,7 @@
 @implementation ProfileController
 
 @synthesize surfer = _surfer;
+@synthesize loginInformation = _loginInformation;
 @synthesize profileRequest = _profileRequest;
 @synthesize sections = _sections;
 @synthesize doc = _doc;
@@ -86,12 +88,14 @@
 	
 	self.sections = sections;
 	
-	if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
-		UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
-																				   style:UIBarButtonItemStyleBordered
-																				  target:self 
-																				  action:@selector(sendCouchRequest)] autorelease];
-		self.navigationItem.rightBarButtonItem = couchRequestBarButton;
+	if (self.loginInformation.isLogged) {
+		if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
+			UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
+																					   style:UIBarButtonItemStyleBordered
+																					  target:self 
+																					  action:@selector(sendCouchRequest)] autorelease];
+			self.navigationItem.rightBarButtonItem = couchRequestBarButton;
+		}		
 	}
 	
     CGRect viewFrame = self.view.frame;

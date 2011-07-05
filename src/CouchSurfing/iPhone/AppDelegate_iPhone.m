@@ -18,6 +18,8 @@
 #import "CouchSearchFormControllerFactory.h"
 #import "CouchSearchResultController.h"
 #import "CouchSearchResultControllerFactory.h"
+//Profile UI modules
+#import "ProfileControllerFactory.h"
 //Couchsearch core modules
 #import "CouchSearchFilter.h"
 
@@ -116,6 +118,7 @@
     [self.container addComponent:[CouchSearchResultControllerFactory class]];
     [self.container addComponent:[CouchSearchFormControllerFactory class]];
     
+	[self.container addComponent:[ProfileControllerFactory class]];
     //Core modules
     [[self.container withCache] addComponent:[CouchSearchFilter class]];
 }
