@@ -23,7 +23,7 @@
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 @property (nonatomic, retain) AuthControllersFactory *authControllerFactory;
 
-
+@property (nonatomic, retain) UIBarButtonItem *signUpBarButton;
 @property(nonatomic, retain) UITextField *usernameField;
 @property(nonatomic, retain) UITextField *passwordField;
 @property(nonatomic, retain) ActivityOverlap *activityOverlap;
@@ -44,6 +44,7 @@
 @synthesize loginInformation = _loginInformation;
 @synthesize authControllerFactory = _authControllerFactory;
 
+@synthesize signUpBarButton = _signUpBarButton;
 @synthesize usernameField = _usernameField;
 @synthesize passwordField = _passwordField;
 @synthesize activityOverlap = _activityOverlap;
@@ -67,6 +68,7 @@
     self.usernameField = nil;
     self.passwordField = nil;
     self.activityOverlap = nil;
+	self.signUpBarButton = nil;
     [super dealloc];
 }
 
@@ -83,11 +85,13 @@
                                         target:self
                                         action:@selector(loginAction)];
 
-	self.navigationItem.leftBarButtonItem = 
+	self.signUpBarButton =  
 		[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SIGN UP", nil)
 										 style:UIBarButtonItemStyleBordered
 										target:self
 										action:@selector(signUpAction)];
+	
+	self.navigationItem.leftBarButtonItem = self.signUpBarButton;
 	
     self.view.backgroundColor = [UIColor clearColor];
         
@@ -268,7 +272,7 @@
     self.view.frame = viewFrame;
     [UIView commitAnimations];
 	
-    self.navigationItem.leftBarButtonItem = nil;
+    self.navigationItem.leftBarButtonItem = self.signUpBarButton;
 }
 
 - (void)hideLoading {

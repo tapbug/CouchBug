@@ -16,6 +16,7 @@
 @class ActivityOverlap;
 
 @interface LoginController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, LoginRequestDelegate, UIAlertViewDelegate> {
+	UIBarButtonItem *_signUpBarButton;
     UITableView *_loginTabel;
     UITextField *_usernameField;
     UITextField *_passwordField;
@@ -24,7 +25,6 @@
     ActivityOverlap *_activityOverlap;
     
     UIAlertView *_loggedAlert;
-
     
     LoginRequest *_loginRequest;
     id<LoginAnnouncer> _loginAnnouncer;
