@@ -17,6 +17,8 @@
 // Search results tab
 "LOCATING" = "Locating…";
 "LOADING COUCHES" = "Loading couches…";
+"FILTER" = "Filter";
+"COUCHSEARCH" = "CouchSearch";
 
 // Search result cell
 "REFERENCES LOWERCASE" = "references";
