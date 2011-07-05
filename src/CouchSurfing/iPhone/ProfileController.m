@@ -467,7 +467,7 @@
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
 	NSString *sectionName = [self.sections objectAtIndex:section];
-	if ([sectionName isEqualToString:@"PERSONAL DESCRIPTION"] || [sectionName isEqualToString:@"LOADING PROFILE"] || [sectionName isEqualToString:@"REFERENCES"]) {
+	if ([sectionName isEqualToString:@"LOADING PROFILE"] || [sectionName isEqualToString:@"REFERENCES"]) {
 		return @"";
 	}
 	
