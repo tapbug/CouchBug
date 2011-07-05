@@ -303,8 +303,13 @@
 			_datePicker.date = self.departureDate;
 		}
 		[self showDialogViewWithContentView:_datePicker];
-	}
-	if (indexPath.section == 2) {
+	} else if (indexPath.section == 1) {
+		if (indexPath.row == 0) {
+			[self.subjectTF becomeFirstResponder];
+		} else if (indexPath.row == 1) {
+			[self.messageTV becomeFirstResponder];
+		}
+	} else if (indexPath.section == 2) {
 		UIPickerView *pickerView = [[[UIPickerView alloc] init] autorelease];
 		pickerView.showsSelectionIndicator = YES;
 		pickerView.delegate = self;
@@ -321,14 +326,13 @@
 	}
 }
 
-- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-	if (keyboardOn) {
-		[self hideKeyboard];
-	}
-	
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath {	
 	if ([[tableView indexPathForSelectedRow] isEqual:indexPath]) {
 		if (dialogViewOn) {
 			[self hideDialogView];
+		}
+		if (keyboardOn) {
+			[self hideKeyboard];
 		}
 		return nil;
 	}
@@ -366,6 +370,7 @@
 
 - (void)hideKeyboard {
 	[_activeResponder resignFirstResponder];
+	[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:NO];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification {
@@ -410,6 +415,9 @@
 #pragma Mark DialogView methods
 
 - (void)showDialogViewWithContentView:(UIView *)contentView {
+	if (keyboardOn) {
+		[self hideKeyboard];
+	}
 	dialogViewOn = YES;
 	CGFloat toolBarHeight = 30;
 	if (_dialogView == nil) {
