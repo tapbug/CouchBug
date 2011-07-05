@@ -87,7 +87,7 @@
 	self.sections = sections;
 	
 	if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
-		UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCH REQUEST BUTTON", nil)
+		UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
 																				   style:UIBarButtonItemStyleBordered
 																				  target:self 
 																				  action:@selector(sendCouchRequest)] autorelease];

@@ -65,7 +65,7 @@
 "EVERYWHERE" = "Everywhere";
 
 // User's profile
-"COUCH REQUEST BUTTON" = "CouchRequest";
+"COUCHREQUEST" = "CouchRequest";
 "FROM" = "From";
 "REFERENCES" = "References";
 "FRIENDS" = "Friends";
@@ -78,6 +78,31 @@
 "MAX SURFERS PER NIGHT" = "Max surfers per night";
 "SHARED SLEEPING SURFACE" = "Shared sleeping surface";
 "SHARED ROOM" = "Shared room";
+
+// CouchRequest form
+"SENDING" = "Sending…";
+"SEND" = "Send";
+"SUBJECT" = "Subject";
+"CHOOSE" = "Choose";
+
+"ARRIVAL DATE" = "Arrival date";
+"DEPARTURE DATE" = "Departure date";
+
+"NUMBER OF SURFERS" = "Number of surfers";
+"ARRIVING VIA" = "Arriving via";
+
+"PLANE" = "Plane";
+"MOTOR VEHICLE" = "Motor vehicle";
+"BUS" = "Bus";
+"TRAIN" = "Train";
+"BICYCLE" = "Bicycle";
+"FOOT" = "Foot";
+"METRO" = "Metro";
+"BOAT" = "Boat";
+"HITCH-HIKING" = "Hitch-hiking";
+"OTHER" = "Other"; 
+
+"COUCHREQUEST SENT" = "CouchRequest sent successfully!";
 
 // Login / logout
 "USERNAME" = "Username";

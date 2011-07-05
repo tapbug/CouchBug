@@ -101,7 +101,7 @@
 	self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 
 	self.activityOverlap = [[[ActivityOverlap alloc] initWithView:self.view
-														   title:NSLocalizedString(@"SENDING COUCH REQUEST", nil)] autorelease];
+														   title:NSLocalizedString(@"SENDING", nil)] autorelease];
 	
 	UIBarButtonItem *cancelButton = [[[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
 																				  target:self
@@ -622,8 +622,8 @@
 
 - (void)couchRequestRequestDidSent:(CouchRequestRequest *)request {
 	[self.activityOverlap removeOverlap];
-	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"SUCCESSFULL", nil) 
-														message:NSLocalizedString(@"COUCHREQUEST SENT", nil)
+	UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST SENT", nil) 
+														message:nil
 													   delegate:nil cancelButtonTitle:NSLocalizedString(@"OK", nil)
 											  otherButtonTitles:nil];
 	[alertView show];
