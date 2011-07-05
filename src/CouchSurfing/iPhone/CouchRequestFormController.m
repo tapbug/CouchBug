@@ -496,7 +496,7 @@
 	if (_numberOfSurfersPickerView == pickerView) {
 		return [NSString stringWithFormat:@"%d", row + 1];
 	} else if (_arrivingViaPickerView == pickerView) {
-		return [[_arrivingViaData objectAtIndex:row] objectAtIndex:1];
+		return NSLocalizedString([[_arrivingViaData objectAtIndex:row] objectAtIndex:1], nil);
 	}
 	return [NSString stringWithFormat:@"%d", row];
 }
