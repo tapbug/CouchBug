@@ -1,3 +1,24 @@
 body {
-	background-color : gray;
+	font-family: Helvetica;
+	color: black;
+	padding: 2pt 5pt;
+	font-size: 12pt;
+	line-height: 1.4;
+}
+
+img {
+	border-radius: 5pt;
+	margin: 3pt;	
+}
+
+img[alt^="Couch picture"] {
+	margin: 8pt 0 5pt 8pt;
+}
+
+:root div:nth-of-type(1) {
+	float: right;
+}
+
+:root div:nth-of-type(1) br:nth-of-type(1) {
+	display: none;
 }
