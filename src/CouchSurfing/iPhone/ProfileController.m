@@ -428,6 +428,7 @@
 		cell = [tableView dequeueReusableCellWithIdentifier:@"loadingMoreCell"];
 		if (cell == nil) {
 			cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"loadingMoreCell"] autorelease];
+			cell.selectionStyle = UITableViewCellSelectionStyleNone;
 			//Setup indicator view
 			UIActivityIndicatorView *activityView = [[[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray] autorelease];
 			activityView.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleRightMargin | UIViewAutoresizingFlexibleBottomMargin;
