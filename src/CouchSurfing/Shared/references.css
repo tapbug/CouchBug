@@ -1,3 +1,29 @@
-body {
-	background-color : gray;
-}
+:root,body		{ font-family:Helvetica; color:black; padding:0; margin:0; font-size:12; line-height:1.4; }
+div, p			{ padding:0; margin:0; }
+a				{ color:#000; text-decoration:none; }
+
+div.reference_admin_buttons		{ display:none; }
+img[src^="/images/links/"]		{ display:none; }
+img[alt^="Met "]				{ display:none; }
+h2#references_left_others_title	{ display:none; }
+
+img[src^="http://s3.amazonaws.com/"]	{ border-radius:5; padding:0; margin:3; }
+div.reference_from_to_box				{  }
+
+div.reference_from		{ background-color:#ebeef0; }
+div.refnotIRL			{ display: none; }
+div.reference_to		{ background-color:#ccd1d3; display: none; }
+
+div.reference_from_to_box div[class^="ref"]								{ position:relative; padding-top:4; border-bottom:1 solid #c4c4c4; border-top:1 solid #FFF; }
+div.reference_from_to_box div[class^="ref"] br							{ display: none; }
+div.reference_from_to_box div[class^="ref"] a.profile-image				{ position:absolute; top:3; left:0; width:60; height:60; }
+div.reference_from_to_box div[class^="ref"] strong						{ display:block; font-weight:normal; font-size: 13; padding-left:70; }
+div.reference_from_to_box div[class^="ref"] strong a					{ font-weight:bold; }
+div.reference_from_to_box div[class^="ref"] small						{ display:block; font-style:italic; padding-left:67; }
+div.reference_from_to_box div[class^="ref"] sup							{ display:none; }
+div.reference_from_to_box div[class^="ref"] p							{ width:240; padding-left:70; position: relative; top:-10; }
+div.reference_from_to_box div[class^="ref"] p br						{ display: block; }
+div.reference_from_to_box div[class^="ref"] div[style^="color:"]		{ position:absolute; top:68; left:3; }
+div.reference_from_to_box div[class^="ref"] img[src^="/images/icon_"]	{ position:absolute; top:86; left:3; }
+
+
