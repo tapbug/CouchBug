@@ -93,8 +93,6 @@
 	
 	self.navigationItem.leftBarButtonItem = self.signUpBarButton;
 	
-    self.view.backgroundColor = [UIColor clearColor];
-        
     self.activityOverlap = [[[ActivityOverlap alloc] initWithView:self.view
                                                            title:NSLocalizedString(@"SIGNING IN", nil)] autorelease];
     
