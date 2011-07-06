@@ -98,6 +98,7 @@
 
 // Implement viewDidLoad to do additional setup after loading the view, typically from a nib.
 - (void)viewDidLoad {
+	//self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 	if (self.html != nil) {
 		[self showWebView];
 	} else if(self.surfer != nil && self.property != nil){
@@ -151,6 +152,10 @@
 	scrollView.decelerationRate = UIScrollViewDecelerationRateNormal;
 	
 	webView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	webView.opaque = NO;
+	webView.backgroundColor = [UIColor clearColor];
+	webView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+	
 	NSString *html = nil;
 	if (self.withInlineStyles == YES) {
 		html = self.html;
