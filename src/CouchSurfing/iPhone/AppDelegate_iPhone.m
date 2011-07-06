@@ -44,6 +44,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     application.statusBarStyle = UIStatusBarStyleBlackOpaque;
+	application.statusBarHidden = NO;
     
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
