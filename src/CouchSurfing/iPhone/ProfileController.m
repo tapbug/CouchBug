@@ -507,6 +507,7 @@
 		ProfileDetailController *controller = [[[ProfileDetailController alloc] initWithConnection:connection] autorelease];
 		controller.withInlineStyles = YES;
 		controller.styleName = @"references";
+		controller.title = NSLocalizedString(@"REFERENCES", nil);
 		[self.navigationController pushViewController:controller animated:YES];
 	}
 }

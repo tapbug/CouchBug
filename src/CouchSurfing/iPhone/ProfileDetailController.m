@@ -81,6 +81,7 @@
 	self.connection.delegate = nil;
 	self.connection = nil;
 	self.styleName = nil;
+	self.title = nil;
     [super dealloc];
 }
 
