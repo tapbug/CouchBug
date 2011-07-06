@@ -20,6 +20,7 @@
 #import "CouchSearchResultControllerFactory.h"
 //Profile UI modules
 #import "ProfileControllerFactory.h"
+#import "LoginController.h"
 //Couchsearch core modules
 #import "CouchSearchFilter.h"
 
@@ -55,10 +56,12 @@
     id<LoginInformation> loginInformation = [self.container getComponent:@protocol(LoginInformation)];
     AuthControllersFactory *authControllerFactory = [self.container getComponent:[AuthControllersFactory class]];
     id authController = nil;
+	LoginController *loginController = nil;
     if (loginInformation.username && loginInformation.password) {
         authController = [authControllerFactory createProfileController];
     } else {
         authController = [authControllerFactory createLoginController];
+		loginController = authController;
     }
     UINavigationController *loginNavigationController = 
         [[[UINavigationController alloc] initWithRootViewController:(UIViewController *)authController] autorelease];
@@ -69,10 +72,9 @@
     [loginNavigationController setTabBarItem: loginTabBarItem];
     
     //Tvorba CouchSearchTabu
-    CouchSearchResultControllerFactory *resultControllerFactory =
-        [self.container getComponent:[CouchSearchResultControllerFactory class]];
+    _searchResultController =
+        [self.container getComponent:[CouchSearchResultController class]];
     
-	_searchResultController = [resultControllerFactory createController];
     _searchNavigationController = 
     [[[UINavigationController alloc] initWithRootViewController:_searchResultController] autorelease];
     UITabBarItem *searchTabBarItem =
@@ -95,7 +97,9 @@
                                              moreController,
                                              nil];
 	self.tabBarController.delegate = self;
-        
+	
+	loginController.couchSearchController = _searchResultController;
+	
     // zmena vzhledu TabBaru
     /*
     CGSize tabBarSize = [self.tabBarController.tabBar frame].size;
@@ -115,7 +119,11 @@
 #pragma mark Injections methods
 
 - (void)injectCouchSearch {
-    [self.container addComponent:[CouchSearchResultControllerFactory class]];
+	[[[self.container withInjectionType:MVIOCFactoryInjectionTypeDefault]
+		withCache]
+		addComponent:[CouchSearchResultControllerFactory class]
+		representing:[CouchSearchResultController class]];
+	
     [self.container addComponent:[CouchSearchFormControllerFactory class]];
     
 	[self.container addComponent:[ProfileControllerFactory class]];

@@ -16,6 +16,7 @@
 @class AuthControllersFactory;
 @class HomeRequestFactory;
 @protocol LoginAnnouncer;
+@class CouchSearchResultController;
 
 @interface HomeController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
     AuthControllersFactory *_authControllersFactory;
@@ -34,7 +35,11 @@
     CSImageDownloader *_avatarDownloader;
     
     NSArray *_items;
+	
+	CouchSearchResultController *_couchSearchController;
 }
+
+@property (nonatomic, assign) CouchSearchResultController *couchSearchController;
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory 
                profileRequestFactory:(HomeRequestFactory *)profileRequestFactory

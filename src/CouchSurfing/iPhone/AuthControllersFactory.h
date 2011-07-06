@@ -16,18 +16,21 @@
 
 @class HomeController;
 @class HomeRequestFactory;
+@class CouchSearchResultController;
 
 @interface AuthControllersFactory : NSObject {
     id<LoginAnnouncer> injLoginAnnouncer;
     id<LoginInformation> injLoginInformation;
     
     HomeRequestFactory *injProfileRequestFactory;
+	CouchSearchResultController *injCouchSearchResultController;
 }
 
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 
 @property (nonatomic, retain) HomeRequestFactory *profileRequestFactory;
+@property (nonatomic, assign) CouchSearchResultController *couchSearchResultController;
 
 - (LoginController *)createLoginController;
 - (HomeController *)createProfileController;

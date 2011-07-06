@@ -13,6 +13,7 @@
 #import "LoginAnnouncer.h"
 #import "LoginInformation.h"
 #import "AuthControllersFactory.h"
+#import "CouchSearchResultController.h"
 
 #import "CSTools.h"
 
@@ -43,6 +44,7 @@
 @synthesize loginAnnouncer = _loginAnnouncer;
 @synthesize loginInformation = _loginInformation;
 @synthesize authControllerFactory = _authControllerFactory;
+@synthesize couchSearchController = _couchSearchController;
 
 @synthesize signUpBarButton = _signUpBarButton;
 @synthesize usernameField = _usernameField;
@@ -208,6 +210,7 @@
 #pragma mark LoginRequestDelegate
 
 - (void)loginRequestDidFinnishLogin:(LoginRequest *)request {
+	[self.couchSearchController shouldReload];
     [self.loginAnnouncer user:request.username hasLoggedWithPassword:request.password];
     [self hideLoading];
     id profileController = [self.authControllerFactory createProfileController];

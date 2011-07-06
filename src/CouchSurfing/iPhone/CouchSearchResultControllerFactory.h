@@ -23,6 +23,6 @@
 @property (nonatomic, retain) CouchSearchFormControllerFactory *formControllerFactory;
 @property (nonatomic, retain) ProfileControllerFactory *profileControllerFactory;
 
-- (id)createController;
+- (id)createInstance;
 
 @end

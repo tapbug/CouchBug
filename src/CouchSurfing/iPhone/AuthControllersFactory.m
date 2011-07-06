@@ -19,6 +19,7 @@
 @synthesize loginAnnouncer = injLoginAnnouncer;
 @synthesize loginInformation = injLoginInformation;
 @synthesize profileRequestFactory = injProfileRequestFactory;
+@synthesize couchSearchResultController = injCouchSearchResultController;
 
 - (void)dealloc {
     self.profileRequestFactory = nil;
@@ -26,15 +27,21 @@
 }
 
 - (LoginController *)createLoginController {
-    return [[[LoginController alloc] initWithLoginAnnouncer:self.loginAnnouncer
-                                          loginInformation:self.loginInformation
-                                  authControllerFactory:self] autorelease];
+    LoginController *loginController = [[[LoginController alloc] initWithLoginAnnouncer:self.loginAnnouncer
+																	  loginInformation:self.loginInformation
+																 authControllerFactory:self] autorelease];
+
+	loginController.couchSearchController = self.couchSearchResultController;
+	
+	return loginController;
 }
 
 - (HomeController *)createProfileController {
-    return [[[HomeController alloc] initWithAuthControllersFactory:self
-                                                profileRequestFactory:self.profileRequestFactory
-                                                       loginAnnouncer:self.loginAnnouncer] autorelease];
+    HomeController *homeController = [[[HomeController alloc] initWithAuthControllersFactory:self
+																	   profileRequestFactory:self.profileRequestFactory
+																			  loginAnnouncer:self.loginAnnouncer] autorelease];
+	homeController.couchSearchController = self.couchSearchResultController;
+	return homeController;
 }
 
 @end

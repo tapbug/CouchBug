@@ -14,6 +14,7 @@
 
 #import "CSTools.h"
 #import "CSImageCropper.h"
+#import "CouchSearchResultController.h"
 
 @interface HomeController ()
 
@@ -50,6 +51,8 @@
 @synthesize avatarDownloader = _avatarDownloader;
 
 @synthesize items = _items;
+
+@synthesize couchSearchController = _couchSearchController;
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory
                profileRequestFactory:(HomeRequestFactory *)profileRequestFactory 
@@ -327,6 +330,7 @@
 #pragma Mark LogoutRequestDelegate methods
 
 - (void)logoutDidFinnish:(LogoutRequest *)logoutReqeust {
+	[self.couchSearchController shouldReload];
     [self.loginAnnouncer userHasLoggedOut];
     [self.logoutOverlap removeOverlap];
     id loginController = [self.authControllersFactory createLoginController];

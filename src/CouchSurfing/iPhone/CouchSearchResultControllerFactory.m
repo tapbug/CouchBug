@@ -17,7 +17,7 @@
 @synthesize formControllerFactory = injFormControllerFactory;
 @synthesize profileControllerFactory = injProfileControllerFactory;
 
-- (id)createController {
+- (id)createInstance {
     CouchSearchResultController *controller = [[[CouchSearchResultController alloc] init] autorelease];
     controller.filter = self.filter;
 	controller.formControllerFactory = self.formControllerFactory;

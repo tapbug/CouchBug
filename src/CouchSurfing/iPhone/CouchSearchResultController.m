@@ -410,4 +410,8 @@
     }	
 }
 
+- (void)shouldReload {
+	_initialLoadDone = NO;
+}
+
 @end

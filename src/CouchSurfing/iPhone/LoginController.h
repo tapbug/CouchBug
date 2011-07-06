@@ -14,6 +14,7 @@
 @protocol LoginInformation;
 @class AuthControllersFactory;
 @class ActivityOverlap;
+@class CouchSearchResultController;
 
 @interface LoginController : UIViewController <UITableViewDelegate, UITableViewDataSource, UITextFieldDelegate, LoginRequestDelegate, UIAlertViewDelegate> {
 	UIBarButtonItem *_signUpBarButton;
@@ -31,7 +32,10 @@
     id<LoginInformation> _loginInformation;
     
     AuthControllersFactory *_authControllerFactory;
+	CouchSearchResultController *_couchSearchController;
 }
+
+@property (nonatomic, assign) CouchSearchResultController *couchSearchController;
 
 - (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer
             loginInformation:(id<LoginInformation>)loginInformation

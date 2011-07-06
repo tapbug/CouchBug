@@ -57,5 +57,6 @@ typedef enum {
 - (void)performSearch;
 //	Zaskroluje nalezeny vysledek nahoru
 - (void)scrollToTop;
-
+//	Pri zobrazeni view probehne nove hledani
+- (void)shouldReload;
 @end
