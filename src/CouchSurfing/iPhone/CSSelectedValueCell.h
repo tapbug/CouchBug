@@ -12,11 +12,12 @@
 @interface CSSelectedValueCell : UITableViewCell {
 	UILabel *_keyLabel;
 	UILabel *_selectedValueLabel;
-	
+	BOOL _simulateDisclosure;
 }
 
 @property (readonly) UILabel *keyLabel;
 @property (readonly) UILabel *selectedValueLabel;
+@property (nonatomic, assign) BOOL simulateDisclosure;
 
 - (void)makeLayout;
 

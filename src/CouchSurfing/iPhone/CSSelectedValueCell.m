@@ -13,6 +13,7 @@
 
 @synthesize keyLabel = _keyLabel;
 @synthesize selectedValueLabel = _selectedValueLabel;
+@synthesize simulateDisclosure = _simulateDisclosure;
 
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
@@ -55,8 +56,15 @@
 	
 	[_selectedValueLabel sizeToFit];
 	CGRect selectedValueFrame = _selectedValueLabel.frame;
-	selectedValueFrame.origin.x = self.contentView.frame.size.width - selectedValueFrame.size.width - 15;
+	
+	if (self.simulateDisclosure) {
+		selectedValueFrame.origin.x = self.contentView.frame.size.width - selectedValueFrame.size.width - 15 - 20;
+	} else {
+		selectedValueFrame.origin.x = self.contentView.frame.size.width - selectedValueFrame.size.width - 15;
+	}
+
 	selectedValueFrame.origin.y = (int)((self.contentView.frame.size.height - selectedValueFrame.size.height) / 2);
+
 	_selectedValueLabel.frame = selectedValueFrame;
 }
 

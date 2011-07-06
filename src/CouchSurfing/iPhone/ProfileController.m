@@ -420,7 +420,9 @@
 		} else if (indexPath.row == 1) {
 			customCell.keyLabel.text = NSLocalizedString(@"FRIENDS", nil);
 			customCell.selectedValueLabel.text = self.surfer.friendsCount;
-			customCell.accessoryType = UITableViewCellAccessoryNone;		
+			customCell.simulateDisclosure = YES;
+			customCell.accessoryType = UITableViewCellAccessoryNone;
+			customCell.selectionStyle = UITableViewCellSelectionStyleNone;
 		}
 		[customCell makeLayout];
 		cell = customCell;
