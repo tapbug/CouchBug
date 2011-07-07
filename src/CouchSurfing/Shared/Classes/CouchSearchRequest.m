@@ -222,7 +222,7 @@
             surfer.imageSrc = [[imageSrcNodes objectAtIndex:0] stringValue];
         }
         
-        NSArray *iconsInfoNodes = [node nodesForXPath:@".//x:div[@class='hd']/x:div[2]//x:img/@src"namespaceMappings:ns error:&error];
+        NSArray *iconsInfoNodes = [node nodesForXPath:@".//x:div[@class='hd']//x:img/@src"namespaceMappings:ns error:&error];
         if ([iconsInfoNodes count] > 0) {
             for (CXMLNode *srcNode in iconsInfoNodes) {
                 if ([[srcNode stringValue] isEqual:@"/images/icon_couch_travel.gif"]) {
