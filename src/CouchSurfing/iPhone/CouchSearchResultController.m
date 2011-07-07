@@ -339,13 +339,22 @@
 	[manager stopUpdatingLocation];
 	[self.locateActivity removeOverlap];
 	if (error) {
-		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
-															message:@"LOCATION CANNOT BE DISCOVERED. CHOOSE LOCATION YOURSELF"
-														   delegate:nil
-												  cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
-		[alertView show];
-		[alertView release]; alertView = nil;
-		[self showSearchForm];
+		if (manager.locationServicesEnabled == NO) {
+			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
+																message:@"GPS DISABLED"
+															   delegate:nil
+													  cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+			[alertView show];
+			[alertView release]; alertView = nil;			
+		} else {
+			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
+																message:@"LOCATION CANNOT BE DISCOVERED. CHOOSE LOCATION YOURSELF"
+															   delegate:nil
+													  cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+			[alertView show];
+			[alertView release]; alertView = nil;
+			[self showSearchForm];
+		}
 	}
 }
 

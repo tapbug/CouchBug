@@ -40,6 +40,7 @@
 	_tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
 											  style:UITableViewStyleGrouped] autorelease];
 	
+	_tableView.backgroundColor = [UIColor clearColor];
 	_tableView.delegate = self;
 	_tableView.dataSource = self;
 	_tableView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -48,7 +49,7 @@
 	_tableView.tableFooterView = footerView;
 	
 	UIView *footerContentView = [[[UIView alloc] init] autorelease];
-	footerContentView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin;
+	footerContentView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 	[footerView addSubview:footerContentView];
 	UIImageView *iconView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon"]] autorelease];
 	
