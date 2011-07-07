@@ -24,6 +24,7 @@
 #import "CSTools.h"
 
 #import "ProfileController.h"
+#import "LocationDisabledOverlap.h"
 
 @interface CouchSearchResultController ()
 
@@ -34,6 +35,7 @@
 @property (nonatomic, retain) NSMutableArray *imageDownloaders;
 
 @property (nonatomic, retain) CurrentLocationObjectRequest *locationObjectRequest;
+@property (nonatomic, retain) LocationDisabledOverlap *locationDisabledOverlap;
 @property (nonatomic, retain) CLLocationManager *locationManager;
 @property (nonatomic, retain) CLLocation *currentLocationLatLng;
 
@@ -62,7 +64,7 @@
 @synthesize profileControllerFactory = _profileControllerFactory;
 @synthesize locateActivity = _locateActivity;
 @synthesize searchActivity = _searchActivity;
-
+@synthesize locationDisabledOverlap = _locationDisabledOverlap;
 @synthesize sourfers = _sourfers;
 @synthesize imageDownloaders = _imageDownloaders;
 @synthesize locationObjectRequest = _locationRequest;
@@ -303,6 +305,7 @@
 	self.locationManager = nil;
     self.searchRequest.delegate = nil;
     self.searchRequest = nil;
+	self.locationDisabledOverlap = nil;
     for (CSImageDownloader *downloader in self.imageDownloaders) {
         downloader.delegate = nil;
     }
@@ -339,13 +342,14 @@
 	[manager stopUpdatingLocation];
 	[self.locateActivity removeOverlap];
 	if (error) {
-		if (manager.locationServicesEnabled == NO) {
-			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
-																message:@"GPS DISABLED"
-															   delegate:nil
-													  cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
-			[alertView show];
-			[alertView release]; alertView = nil;			
+		
+		if ([error code] == kCLErrorDenied) {
+			if (self.locationDisabledOverlap == nil) {
+				self.locationDisabledOverlap = [[LocationDisabledOverlap alloc] initWithView:self.view
+																					   title:NSLocalizedString(@"LOCATION WARNING TITLE", nil)
+																						body:NSLocalizedString(@"LOCATION WARNING BODY", nil)];				
+			}
+			[self.locationDisabledOverlap overlapView];
 		} else {
 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
 																message:@"LOCATION CANNOT BE DISCOVERED. CHOOSE LOCATION YOURSELF"

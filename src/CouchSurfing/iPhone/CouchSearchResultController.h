@@ -24,6 +24,7 @@ typedef enum {
 @class CouchSearchFormControllerFactory;
 @class ActivityOverlap;
 @class ProfileControllerFactory;
+@class LocationDisabledOverlap;
 
 @interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationObjectRequestDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate> {
     CouchSearchFilter *_filter;
@@ -34,6 +35,7 @@ typedef enum {
 	ActivityOverlap *_locateActivity;
     ActivityOverlap *_searchActivity;
 
+	LocationDisabledOverlap *_locationDisabledOverlap;
 	CurrentLocationObjectRequest *_locationRequest;
 	CLLocationManager *_locationManager;
 	//	pouziva se pro zapamatovani kde ma pokracovat searchMore

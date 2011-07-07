@@ -37,6 +37,7 @@
 		6C59C0A113B1E6F200D68F3E /* CSImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */; };
 		6C5C77FA13B5217E00115B5D /* TapableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5C77F913B5217E00115B5D /* TapableTableView.m */; };
 		6C6DEE6313C5D3EF0014DC85 /* NSData+UTF8.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DEE6213C5D3EE0014DC85 /* NSData+UTF8.m */; };
+		6C6DEE6613C65BE20014DC85 /* LocationDisabledOverlap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DEE6513C65BE20014DC85 /* LocationDisabledOverlap.m */; };
 		6C71C70713A91A06005FE511 /* CouchSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */; };
 		6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */; };
 		6C7E868313B244F4000ED485 /* CSCheckboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E868213B244F4000ED485 /* CSCheckboxCell.m */; };
@@ -183,6 +184,8 @@
 		6C5C77F913B5217E00115B5D /* TapableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapableTableView.m; sourceTree = "<group>"; };
 		6C6DEE6113C5D3EE0014DC85 /* NSData+UTF8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+UTF8.h"; sourceTree = "<group>"; };
 		6C6DEE6213C5D3EE0014DC85 /* NSData+UTF8.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+UTF8.m"; sourceTree = "<group>"; };
+		6C6DEE6413C65BE20014DC85 /* LocationDisabledOverlap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationDisabledOverlap.h; sourceTree = "<group>"; };
+		6C6DEE6513C65BE20014DC85 /* LocationDisabledOverlap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationDisabledOverlap.m; sourceTree = "<group>"; };
 		6C71C70513A91A06005FE511 /* CouchSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchResultCell.h; sourceTree = "<group>"; };
 		6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CouchSearchResultCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6C71C70913A93FD8005FE511 /* CSTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSTools.h; path = Shared/Classes/CSTools.h; sourceTree = "<group>"; };
@@ -356,10 +359,10 @@
 				6CC8B60913B90D4300E9A556 /* CouchRequest */,
 				2860E325111B887F00E27156 /* AppDelegate_iPhone.h */,
 				2860E326111B887F00E27156 /* AppDelegate_iPhone.m */,
+				6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */,
+				6C9EAD1413A1438700C1B19D /* ActivityOverlap.h */,
 				6C9EACE613A0D1AB00C1B19D /* MoreController.h */,
 				6C9EACE713A0D1AC00C1B19D /* MoreController.m */,
-				6C9EAD1413A1438700C1B19D /* ActivityOverlap.h */,
-				6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */,
 				6C7E868413B262C0000ED485 /* CSSelectedValueCell.h */,
 				6C7E868513B262C0000ED485 /* CSSelectedValueCell.m */,
 			);
@@ -683,6 +686,8 @@
 				6C5C77F913B5217E00115B5D /* TapableTableView.m */,
 				6CF1E0B513B72E2900704662 /* LanguagesListController.h */,
 				6CF1E0B613B72E2900704662 /* LanguagesListController.m */,
+				6C6DEE6413C65BE20014DC85 /* LocationDisabledOverlap.h */,
+				6C6DEE6513C65BE20014DC85 /* LocationDisabledOverlap.m */,
 			);
 			name = Form;
 			sourceTree = "<group>";
@@ -906,6 +911,7 @@
 				6C0597ED13C0A45B00912ADC /* ProfileDetailController.m in Sources */,
 				6CE8A5D313C2FE7300BF66DC /* ProfileControllerFactory.m in Sources */,
 				6C6DEE6313C5D3EF0014DC85 /* NSData+UTF8.m in Sources */,
+				6C6DEE6613C65BE20014DC85 /* LocationDisabledOverlap.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
