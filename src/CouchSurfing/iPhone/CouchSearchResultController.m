@@ -485,4 +485,8 @@
 	_initialLoadDone = NO;
 }
 
+- (void)dismissLocationDisabledWarning {
+	[self.locationDisabledOverlap removeOverlap];
+}
+
 @end

@@ -6,6 +6,8 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <CoreLocation/CoreLocation.h>
+
 #import "AppDelegate_iPhone.h"
 
 //Auth module
@@ -166,9 +168,9 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-    /*
-     Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
-     */
+	if ([CLLocationManager locationServicesEnabled]) {
+		[_searchResultController dismissLocationDisabledWarning];
+	}
 }
 
 

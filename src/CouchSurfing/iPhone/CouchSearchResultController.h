@@ -68,4 +68,6 @@ typedef enum {
 - (void)scrollToTop;
 //	Pri zobrazeni view probehne nove hledani
 - (void)shouldReload;
+
+- (void)dismissLocationDisabledWarning;
 @end
