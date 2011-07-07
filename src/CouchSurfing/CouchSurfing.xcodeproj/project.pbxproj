@@ -32,8 +32,11 @@
 		6C4D8ABE13B09D69008FD263 /* iconVouched.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AB013B09D69008FD263 /* iconVouched.png */; };
 		6C4D8ABF13B09D69008FD263 /* iconVouched@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AB113B09D69008FD263 /* iconVouched@2x.png */; };
 		6C4D8AC613B1D6C6008FD263 /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D8AC513B1D6C6008FD263 /* ProfileController.m */; };
+		6C51FBAD13C4C2C400AE40B3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51FBAC13C4C2C300AE40B3 /* CoreLocation.framework */; };
+		6C51FBAF13C590AA00AE40B3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51FBAE13C590AA00AE40B3 /* MapKit.framework */; };
 		6C59C0A113B1E6F200D68F3E /* CSImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */; };
 		6C5C77FA13B5217E00115B5D /* TapableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C5C77F913B5217E00115B5D /* TapableTableView.m */; };
+		6C6DEE6313C5D3EF0014DC85 /* NSData+UTF8.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C6DEE6213C5D3EE0014DC85 /* NSData+UTF8.m */; };
 		6C71C70713A91A06005FE511 /* CouchSearchResultCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */; };
 		6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */; };
 		6C7E868313B244F4000ED485 /* CSCheckboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E868213B244F4000ED485 /* CSCheckboxCell.m */; };
@@ -60,7 +63,7 @@
 		6C94EC2913ACCC4C00DF96B1 /* photoFrameProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2313ACCC4C00DF96B1 /* photoFrameProfile.png */; };
 		6C94EC2A13ACCC4C00DF96B1 /* photoFrameProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */; };
 		6C99163A13B7B9C300E35900 /* NSDictionary+Location.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163913B7B9C300E35900 /* NSDictionary+Location.m */; };
-		6C99164013B7CFAC00E35900 /* CurrentLocationRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163F13B7CFAC00E35900 /* CurrentLocationRequest.m */; };
+		6C99164013B7CFAC00E35900 /* CurrentLocationObjectRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C99163F13B7CFAC00E35900 /* CurrentLocationObjectRequest.m */; };
 		6C9EACDD13A09ECA00C1B19D /* profileCard.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACD913A09ECA00C1B19D /* profileCard.png */; };
 		6C9EACDE13A09ECA00C1B19D /* profileCard@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */; };
 		6C9EACDF13A09ECA00C1B19D /* search.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACDB13A09ECA00C1B19D /* search.png */; };
@@ -172,10 +175,14 @@
 		6C4D8AB113B09D69008FD263 /* iconVouched@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconVouched@2x.png"; sourceTree = "<group>"; };
 		6C4D8AC413B1D6C6008FD263 /* ProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileController.h; sourceTree = "<group>"; };
 		6C4D8AC513B1D6C6008FD263 /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileController.m; sourceTree = "<group>"; };
+		6C51FBAC13C4C2C300AE40B3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		6C51FBAE13C590AA00AE40B3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6C59C09F13B1E6F200D68F3E /* CSImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSImageCropper.h; path = Shared/Classes/CSImageCropper.h; sourceTree = "<group>"; };
 		6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CSImageCropper.m; path = Shared/Classes/CSImageCropper.m; sourceTree = "<group>"; };
 		6C5C77F813B5217E00115B5D /* TapableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TapableTableView.h; sourceTree = "<group>"; };
 		6C5C77F913B5217E00115B5D /* TapableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TapableTableView.m; sourceTree = "<group>"; };
+		6C6DEE6113C5D3EE0014DC85 /* NSData+UTF8.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSData+UTF8.h"; sourceTree = "<group>"; };
+		6C6DEE6213C5D3EE0014DC85 /* NSData+UTF8.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSData+UTF8.m"; sourceTree = "<group>"; };
 		6C71C70513A91A06005FE511 /* CouchSearchResultCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchResultCell.h; sourceTree = "<group>"; };
 		6C71C70613A91A06005FE511 /* CouchSearchResultCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = CouchSearchResultCell.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
 		6C71C70913A93FD8005FE511 /* CSTools.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSTools.h; path = Shared/Classes/CSTools.h; sourceTree = "<group>"; };
@@ -222,8 +229,8 @@
 		6C94EC2413ACCC4C00DF96B1 /* photoFrameProfile@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoFrameProfile@2x.png"; sourceTree = "<group>"; };
 		6C99163813B7B9C300E35900 /* NSDictionary+Location.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+Location.h"; path = "Shared/Classes/NSDictionary+Location.h"; sourceTree = "<group>"; };
 		6C99163913B7B9C300E35900 /* NSDictionary+Location.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+Location.m"; path = "Shared/Classes/NSDictionary+Location.m"; sourceTree = "<group>"; };
-		6C99163E13B7CFAC00E35900 /* CurrentLocationRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentLocationRequest.h; path = Shared/Classes/CurrentLocationRequest.h; sourceTree = "<group>"; };
-		6C99163F13B7CFAC00E35900 /* CurrentLocationRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentLocationRequest.m; path = Shared/Classes/CurrentLocationRequest.m; sourceTree = "<group>"; };
+		6C99163E13B7CFAC00E35900 /* CurrentLocationObjectRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CurrentLocationObjectRequest.h; path = Shared/Classes/CurrentLocationObjectRequest.h; sourceTree = "<group>"; };
+		6C99163F13B7CFAC00E35900 /* CurrentLocationObjectRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = CurrentLocationObjectRequest.m; path = Shared/Classes/CurrentLocationObjectRequest.m; sourceTree = "<group>"; };
 		6C9EACD913A09ECA00C1B19D /* profileCard.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = profileCard.png; sourceTree = "<group>"; };
 		6C9EACDA13A09ECA00C1B19D /* profileCard@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "profileCard@2x.png"; sourceTree = "<group>"; };
 		6C9EACDB13A09ECA00C1B19D /* search.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = search.png; sourceTree = "<group>"; };
@@ -316,6 +323,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6C51FBAF13C590AA00AE40B3 /* MapKit.framework in Frameworks */,
+				6C51FBAD13C4C2C400AE40B3 /* CoreLocation.framework in Frameworks */,
 				6CD0A6DF13AE395700700F01 /* libtidy.dylib in Frameworks */,
 				6C94EC1D13ABDD1500DF96B1 /* libiconv.dylib in Frameworks */,
 				6C71C70B13A9E0CF005FE511 /* QuartzCore.framework in Frameworks */,
@@ -408,6 +417,8 @@
 				6C9EAD1213A1009700C1B19D /* MVUrlConnection.m */,
 				32CA4F630368D1EE00C91783 /* CouchSurfing_Prefix.pch */,
 				29B97316FDCFA39411CA2CEA /* main.m */,
+				6C6DEE6113C5D3EE0014DC85 /* NSData+UTF8.h */,
+				6C6DEE6213C5D3EE0014DC85 /* NSData+UTF8.m */,
 			);
 			name = "Other Sources";
 			sourceTree = "<group>";
@@ -415,6 +426,8 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6C51FBAE13C590AA00AE40B3 /* MapKit.framework */,
+				6C51FBAC13C4C2C300AE40B3 /* CoreLocation.framework */,
 				6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */,
 				1DF5F4DF0D08C38300B7A737 /* UIKit.framework */,
 				1D30AB110D05D00D00671497 /* Foundation.framework */,
@@ -600,8 +613,8 @@
 		6C9EAD0F13A0FD0200C1B19D /* CouchSearch */ = {
 			isa = PBXGroup;
 			children = (
-				6C99163E13B7CFAC00E35900 /* CurrentLocationRequest.h */,
-				6C99163F13B7CFAC00E35900 /* CurrentLocationRequest.m */,
+				6C99163E13B7CFAC00E35900 /* CurrentLocationObjectRequest.h */,
+				6C99163F13B7CFAC00E35900 /* CurrentLocationObjectRequest.m */,
 				6CDE85D113A547510065A991 /* CouchSearchFilter.h */,
 				6CDE85D213A547510065A991 /* CouchSearchFilter.m */,
 				6C9EACFB13A0FCF900C1B19D /* CouchSearchRequest.h */,
@@ -884,7 +897,7 @@
 				6C5C77FA13B5217E00115B5D /* TapableTableView.m in Sources */,
 				6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */,
 				6C99163A13B7B9C300E35900 /* NSDictionary+Location.m in Sources */,
-				6C99164013B7CFAC00E35900 /* CurrentLocationRequest.m in Sources */,
+				6C99164013B7CFAC00E35900 /* CurrentLocationObjectRequest.m in Sources */,
 				6CC8B60813B8BA3100E9A556 /* LocationSearchController.m in Sources */,
 				6CC8B60C13B90D6800E9A556 /* CouchRequestFormController.m in Sources */,
 				6CAFE7A913BA551D0089559B /* CouchRequestRequest.m in Sources */,
@@ -892,6 +905,7 @@
 				6C3A52D413BF7BBF00ABA77C /* ProfileRequest.m in Sources */,
 				6C0597ED13C0A45B00912ADC /* ProfileDetailController.m in Sources */,
 				6CE8A5D313C2FE7300BF66DC /* ProfileControllerFactory.m in Sources */,
+				6C6DEE6313C5D3EF0014DC85 /* NSData+UTF8.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

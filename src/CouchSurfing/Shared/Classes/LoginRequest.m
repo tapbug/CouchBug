@@ -9,6 +9,7 @@
 #import "LoginRequest.h"
 #import "TouchXML.h"
 #import "RegexKitLite.h"
+#import "NSData+UTF8.h"
 
 @interface LoginRequest ()
 
@@ -77,7 +78,7 @@
     if (_isSuccessfull) {
         [self.delegate loginRequestDidFinnishLogin:self];
     } else {
-        CXMLDocument *doc = [[[CXMLDocument alloc] initWithData:_data options:0 error:nil] autorelease];
+        CXMLDocument *doc = [[[CXMLDocument alloc] initWithData:[_data dataByCleanUTF8] options:0 error:nil] autorelease];
         NSString *titleValue = [[doc nodeForXPath:@"//title/text()" error:nil] stringValue];
         if ([titleValue stringByMatching:@".*Login"]) {
             [self.delegate loginRequestDidFail:self];

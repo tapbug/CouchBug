@@ -246,7 +246,10 @@
 		}
 		UILabel *textLabel = (UILabel *)[cell.contentView viewWithTag:1];
 		NSString *locationName = NSLocalizedString(@"EVERYWHERE", nil);
-		if (self.filter.locationJSON != nil) {
+		if (self.filter.currentLocationRectSearch == YES) {
+			locationName = NSLocalizedString(@"CURRENT LOCATION", nil);
+			textLabel.textColor = UIColorFromRGB(0x2957ff);
+		} else if (self.filter.locationJSON != nil) {
 			locationName = [self.filter.locationJSON locationName];
 		}
 		textLabel.text = locationName;

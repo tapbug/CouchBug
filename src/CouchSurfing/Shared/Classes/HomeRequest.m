@@ -10,6 +10,7 @@
 #import "LoginInformation.h"
 #import "TouchXML.h"
 #import "RegexKitLite.h"
+#import "NSData+UTF8.h"
 
 @interface HomeRequest ()
 
@@ -57,7 +58,7 @@
 
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
     NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
-    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:responseData options:CXMLDocumentTidyHTML error:nil];
+    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:[responseData dataByCleanUTF8] options:CXMLDocumentTidyHTML error:nil];
     if (connection == self.homeConnection) {
         self.profileDictionary = [NSMutableDictionary dictionary];
         CXMLNode *isNotLoggedNode = [doc nodeForXPath:@"//*[@id='auth_loginaction']" error:nil];

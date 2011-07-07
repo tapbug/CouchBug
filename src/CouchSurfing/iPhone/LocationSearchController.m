@@ -209,9 +209,16 @@
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+	_filter.currentLocationRectSearch = NO;
+	
 	if ([self nonSearchMode]) {
 		if (indexPath.row == 1) {
 			_filter.locationJSON = nil;
+			if ([self.delegate respondsToSelector:@selector(locationSearchDidSelectLocation:)]) {
+				[self.delegate locationSearchDidSelectLocation:self];
+			}			
+		} else if (indexPath.row == 0) {
+			_filter.currentLocationRectSearch = YES;
 			if ([self.delegate respondsToSelector:@selector(locationSearchDidSelectLocation:)]) {
 				[self.delegate locationSearchDidSelectLocation:self];
 			}			

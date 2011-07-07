@@ -16,6 +16,7 @@
 @implementation CouchSearchFilter
 
 @synthesize locationJSON;
+@synthesize currentLocationRectSearch;
 
 @synthesize hasCouchYes;
 @synthesize hasCouchMaybe;
@@ -43,6 +44,7 @@
     self = [super init];
     if (self) {
 		//self.locationJSON = [@"{\"state_id\":\"4384\",\"state\":\"Praha\",\"latitude\":\"50.087814\",\"longitude\":\"14.420453\",\"type\":\"state\",\"country_id\":\"75\",\"country\":\"Czech Republic\",\"region_id\":\"6\",\"region\":\"Europe\"}" objectFromJSONString];
+		self.currentLocationRectSearch = YES;
 		self.hasCouchYes = YES;
 		self.hasCouchTraveling = YES;
 		self.hasCouchCoffeeOrDrink = YES;
@@ -77,7 +79,7 @@
 	} else {
 		request.location = [self.locationJSON JSONString];
 	}
-    
+	
 	NSMutableArray *couchStatusesTemp = [NSMutableArray array];
 	if (self.hasCouchYes) {
 		[couchStatusesTemp addObject:CouchSurferHasCouchYes];

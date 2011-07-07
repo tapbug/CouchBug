@@ -6,6 +6,8 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+#import <MapKit/MapKit.h>
+
 #import "CouchSearchRequest.h"
 #import "CouchSurfer.h"
 
@@ -13,7 +15,7 @@
 #import "JSONKit.h"
 #import "RegexKitLite.h"
 
-#import "iconv.h"
+#import "NSData+UTF8.h"
 
 @interface CouchSearchRequest ()
 
@@ -35,7 +37,7 @@
 
 @synthesize page = _page;
 @synthesize location = _location;
-@synthesize mapEdges = _mapEdges;
+@synthesize latLngLocation = _latLngLocation;
 @synthesize couchStatuses = _couchStatuses;
 @synthesize ageLow = _ageLow;
 @synthesize ageHigh = _ageHigh;
@@ -63,15 +65,43 @@
     [bodyString appendString:[self parameter:@"order_by" value:@"default"]];
     [bodyString appendString:[self parameter:@"encoded_data" value:@""]];
     
-    NSString *locationEncoded = (NSString *)CFURLCreateStringByAddingPercentEscapes(
-                                                                                NULL,
-                                                                                (CFStringRef)self.location,
-                                                                                NULL,
-                                                                                (CFStringRef)@"!*'();:@&=+$,/?%#[]",
-                                                                                kCFStringEncodingUTF8 );
-    
-    [bodyString appendString:[self parameter:@"location" value:locationEncoded]];
-	[locationEncoded release]; locationEncoded = nil;
+	if (self.latLngLocation == nil) {
+		NSString *locationEncoded = (NSString *)CFURLCreateStringByAddingPercentEscapes(
+																						NULL,
+																						(CFStringRef)self.location,
+																						NULL,
+																						(CFStringRef)@"!*'();:@&=+$,/?%#[]",
+																						kCFStringEncodingUTF8 );
+		
+		[bodyString appendString:[self parameter:@"location" value:locationEncoded]];
+		[locationEncoded release]; locationEncoded = nil;
+	} else {
+		//	Spocitani rozlohy hledani
+		CLLocationCoordinate2D center = self.latLngLocation.coordinate;
+		MKCoordinateRegion region = MKCoordinateRegionMakeWithDistance(center, 20000.0, 20000.0);
+		CLLocationCoordinate2D northWestCorner, southEastCorner, southWest, northEast;
+		
+		northWestCorner.latitude  = center.latitude  - (region.span.latitudeDelta  / 2.0);
+		northWestCorner.longitude = center.longitude + (region.span.longitudeDelta / 2.0);
+		southEastCorner.latitude  = center.latitude  + (region.span.latitudeDelta  / 2.0);
+		southEastCorner.longitude = center.longitude - (region.span.longitudeDelta / 2.0);
+		
+		southWest.latitude  = center.latitude  - (region.span.latitudeDelta  / 2.0);
+		southWest.longitude = center.longitude - (region.span.longitudeDelta / 2.0);
+		northEast.latitude  = center.latitude  + (region.span.latitudeDelta  / 2.0);
+		northEast.longitude = center.longitude + (region.span.longitudeDelta / 2.0);
+		
+		NSString *southWestLatStr = [NSString stringWithFormat:@"%g", southWest.latitude];
+		NSString *southWestLngStr = [NSString stringWithFormat:@"%g", southWest.longitude];
+		NSString *northEastLatStr = [NSString stringWithFormat:@"%g", northEast.latitude];
+		NSString *northEastLngStr = [NSString stringWithFormat:@"%g", northEast.longitude];
+		
+		[bodyString appendString:[self parameter:@"map_edges" 
+										   value:[NSString stringWithFormat:@"{\"northEast\":{\"lat\":%@,\"lng\":%@},\"southWest\":{\"lat\":%@,\"lng\":%@}}", northEastLatStr, northEastLngStr, southWestLatStr, southWestLngStr]]];
+		[bodyString appendString:[self parameter:@"results_follows_map" value:@"1"]];
+	}
+	
+	
     [bodyString appendString:[self parameter:@"search" value:@"Search!"]];
     
     if ([self.couchStatuses count] == 0) {
@@ -107,7 +137,7 @@
     [bodyString appendString:[self parameter:@"dataonly" value:@"true"]];
     [bodyString appendString:[self parameter:@"csstandard_request" value:@"true"]];
 	[bodyString appendString:[self lastParameter:@"type" value:@"html"]];
-    
+	
     //podivat se na zbytek parametru
 
     [urlRequest setValue:@"Mozilla/5.0 (Macintosh; Intel Mac OS X 10.6; rv:2.0.1) Gecko/20100101 Firefox/4.0.1 FirePHP/0.5" forHTTPHeaderField:@"User-Agent"];
@@ -134,7 +164,7 @@
 
     self.page = nil;
     self.location = nil;
-    self.mapEdges = nil;
+	self.latLngLocation = nil;
     self.couchStatuses = nil;
     self.ageLow = nil;
     self.ageHigh = nil;
@@ -162,7 +192,7 @@
     
 	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
     CXMLDocument *doc = nil;
-	NSString *responseString = [[[NSString alloc] initWithData:self.data encoding:NSUTF8StringEncoding]autorelease];
+	NSString *responseString = [[[NSString alloc] initWithData:[self.data dataByCleanUTF8] encoding:NSUTF8StringEncoding]autorelease];
     doc = [[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error];
     
     NSArray *nodes = [doc nodesForXPath:@"//x:div[contains(@class, 'profile_result_item')]" namespaceMappings:ns error:&error];

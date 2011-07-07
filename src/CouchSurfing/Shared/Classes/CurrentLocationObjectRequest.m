@@ -6,17 +6,19 @@
 //  Copyright 2011 __MyCompanyName__. All rights reserved.
 //
 
-#import "CurrentLocationRequest.h"
+#import "CurrentLocationObjectRequest.h"
 #import "TouchXML.h"
 #import "JSONKit.h"
 
-@interface CurrentLocationRequest ()
+#import "NSData+UTF8.h"
+
+@interface CurrentLocationObjectRequest ()
 
 @property (nonatomic, retain) MVUrlConnection *connection;
 
 @end
 
-@implementation CurrentLocationRequest
+@implementation CurrentLocationObjectRequest
 
 @synthesize connection = _connection;
 @synthesize delegate = _delegate;
@@ -37,10 +39,10 @@
 
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
 	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
-    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:responseData options:CXMLDocumentTidyHTML error:nil];
-	NSString *locationString = [[[[doc nodesForXPath:@"//x:input[@id='location']/@value" namespaceMappings:ns error:nil] lastObject] stringValue] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""];
-	if ([self.delegate respondsToSelector:@selector(currentLocationRequest:didGatherLocation:)]) {
-		[self.delegate currentLocationRequest:self didGatherLocation:[locationString objectFromJSONString]];
+    CXMLDocument * doc = [[CXMLDocument alloc] initWithData:[responseData dataByCleanUTF8] options:CXMLDocumentTidyHTML error:nil];
+	NSString *locationString = [[[[[doc nodesForXPath:@"//x:input[@id='location']/@data" namespaceMappings:ns error:nil] lastObject] stringValue] stringByReplacingOccurrencesOfString:@"&quot;" withString:@"\""] stringByReplacingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+	if ([self.delegate respondsToSelector:@selector(currentLocationObjectRequest:didGatherLocation:)]) {
+		[self.delegate currentLocationObjectRequest:self didGatherLocation:[locationString objectFromJSONString]];
 	}
 	[doc release]; doc = nil;
 }

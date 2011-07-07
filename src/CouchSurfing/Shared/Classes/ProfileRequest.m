@@ -9,6 +9,7 @@
 #import "ProfileRequest.h"
 #import "CouchSurfer.h"
 #import "TouchXML.h"
+#import "NSData+UTF8.h"
 
 @interface ProfileRequest ()
 
@@ -37,9 +38,10 @@
 	[self.profileConnection sendRequest];
 }
 
-- (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseString:(NSString *)responseString {
+- (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseData:(NSData *)responseData {
 	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
 	NSError *error;
+	NSString *responseString = [[NSString alloc] initWithData:[responseData dataByCleanUTF8] encoding:NSUTF8StringEncoding];
 	CXMLDocument *doc = [[[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error] autorelease];
 		
 	//x:p[preceding::x:h2/@id='couchinfo'][following::x:h2[(preceding::x:h2)[last()]/@id='couchinfo']]

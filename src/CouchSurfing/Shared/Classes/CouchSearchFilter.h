@@ -10,11 +10,13 @@
 //  Tzn. to, jak je nastaveny vyhledavaci formular
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @class CouchSearchRequest;
 
 @interface CouchSearchFilter : NSObject {
     NSString *location;
+	BOOL currentLocationRectSearch;
 	
 	BOOL hasCouchYes;
 	BOOL hasCouchMaybe;
@@ -42,6 +44,7 @@
 
 @property (nonatomic , retain) NSDictionary *locationJSON;
 @property (nonatomic, readonly) NSString *locationName;
+@property (nonatomic, assign) BOOL currentLocationRectSearch;
 
 @property (nonatomic, assign) BOOL hasCouchYes;
 @property (nonatomic, assign) BOOL hasCouchMaybe;

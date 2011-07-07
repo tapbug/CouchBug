@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreLocation/CoreLocation.h>
 
 @protocol CouchSearchRequestDelegate;
 
@@ -18,7 +19,8 @@
     
     NSString *_page;
     NSString *_location;
-    NSString *_mapEdges;
+	CLLocation *_latLngLocation;
+	
     NSArray *_couchStatuses;
     NSString *_ageLow;
     NSString *_ageHigh;    
@@ -43,15 +45,13 @@
     NSString *_countryId;
     NSString *_stateId;
     NSString *_cityId;
-    NSString *_radius;
-    NSString *_radiusType;    
 }
 
 @property (nonatomic, assign) id<CouchSearchRequestDelegate> delegate;
 
 @property (nonatomic, retain) NSString *page;
 @property (nonatomic, retain) NSString *location;
-@property (nonatomic, retain) NSString *mapEdges;
+@property (nonatomic, retain) CLLocation *latLngLocation;
 @property (nonatomic, retain) NSArray *couchStatuses;
 @property (nonatomic, retain) NSString *ageLow;
 @property (nonatomic, retain) NSString *ageHigh;

@@ -6,6 +6,7 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
+
 #import "CouchSearchResultController.h"
 
 #import "CSImageCropper.h"
@@ -32,14 +33,23 @@
 @property (nonatomic, retain) NSArray *sourfers;
 @property (nonatomic, retain) NSMutableArray *imageDownloaders;
 
-@property (nonatomic, retain) CurrentLocationRequest *locationRequest;
+@property (nonatomic, retain) CurrentLocationObjectRequest *locationObjectRequest;
+@property (nonatomic, retain) CLLocationManager *locationManager;
+@property (nonatomic, retain) CLLocation *currentLocationLatLng;
+
 @property (nonatomic, retain) CouchSearchRequest *searchRequest;
 
-- (void)gatherCurrentLocation;
-- (void)showSearchForm;
-
+//	Zjisti  current lokaci jako objekt (nazev, id ...) pro CouchSurfing
+- (void)gatherCurrentLocationObjectAndSearch;
+//	Zjisti current lokaci jako latLng pro hledani v rectangle na CouchSurfing
+- (void)gatherCurrentLocationLatLngAndSearch;
+//	spusti hledaci cast (dalsi casti jsou zjistovani pozice)
+- (void)performSearchRequest;
 //  Spusti vyhledavani dalsich vysledku (strankovani)
 - (void)performSearchMore;
+
+- (void)showSearchForm;
+
 - (void)loadImages;
 
 @end
@@ -55,7 +65,10 @@
 
 @synthesize sourfers = _sourfers;
 @synthesize imageDownloaders = _imageDownloaders;
-@synthesize locationRequest = _locationRequest;
+@synthesize locationObjectRequest = _locationRequest;
+@synthesize locationManager = _locationManager;
+@synthesize currentLocationLatLng = _currentLocationLatLng;
+
 @synthesize searchRequest = _searchRequest;
 
 - (void)viewDidLoad {
@@ -93,12 +106,7 @@
 
 - (void)viewDidAppear:(BOOL)animated {
     if (!_initialLoadDone) {
-		if (self.filter.locationJSON == nil) {
-			//[self gatherCurrentLocation];
-			[self performSearch];
-		} else {
-			[self performSearch];
-		}
+		[self performSearch];
     }
     _initialLoadDone = YES;
 }
@@ -116,6 +124,7 @@
     } else if (_loadingAction == CouchSearchResultControllerMore) {
         self.sourfers = [self.sourfers arrayByAddingObjectsFromArray:sourfers];
         [UIApplication sharedApplication].networkActivityIndicatorVisible = NO;
+		_isLoadingMore = NO;
     }
     
     if ([sourfers count] <10) {
@@ -223,7 +232,7 @@
 }
 
 - (void)tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.sourfers count] - 3 && _tryLoadMore) {//indexpath loading cellu
+    if (indexPath.row == [self.sourfers count] - 3 && _tryLoadMore && _isLoadingMore == NO) {//indexpath loading cellu
         [self performSearchMore];
     }
 }
@@ -288,8 +297,10 @@
 
 
 - (void)dealloc {
-	self.locationRequest.delegate = nil;
-	self.locationRequest = nil;
+	self.locationObjectRequest.delegate = nil;
+	self.locationObjectRequest = nil;
+	self.locationManager.delegate = nil;
+	self.locationManager = nil;
     self.searchRequest.delegate = nil;
     self.searchRequest = nil;
     for (CSImageDownloader *downloader in self.imageDownloaders) {
@@ -306,10 +317,36 @@
 
 #pragma Mark CurrentLocationRequestDelegate methods
 
-- (void)currentLocationRequest:(CurrentLocationRequest *)request didGatherLocation:(NSDictionary *)location {
+- (void)currentLocationObjectRequest:(CurrentLocationObjectRequest *)request didGatherLocation:(NSDictionary *)location {
 	self.filter.locationJSON = location;
 	[self.locateActivity removeOverlap];
-	[self performSearch];
+	[self performSearchRequest];
+}
+
+#pragma Mark CLLocationManagerDelegate
+
+- (void)locationManager:(CLLocationManager *)manager 
+	didUpdateToLocation:(CLLocation *)newLocation 
+		   fromLocation:(CLLocation *)oldLocation {
+	
+	self.currentLocationLatLng = newLocation;
+	[manager stopUpdatingLocation];
+	[self.locateActivity removeOverlap];
+	[self performSearchRequest];
+}
+
+- (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
+	[manager stopUpdatingLocation];
+	[self.locateActivity removeOverlap];
+	if (error) {
+		UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
+															message:@"LOCATION CANNOT BE DISCOVERED. CHOOSE LOCATION YOURSELF"
+														   delegate:nil
+												  cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
+		[alertView show];
+		[alertView release]; alertView = nil;
+		[self showSearchForm];
+	}
 }
 
 #pragma Mark UINavigationControllerDelegate methods
@@ -333,21 +370,24 @@
 
 #pragma mark Private methods
 
-- (void)performSearch {
+- (void)performSearchRequest {
 	[self scrollToTop];
     _loadingAction = CouchSearchResultControllerFirst;
     [self.searchActivity overlapView];
-    CouchSearchRequest *request = [self.filter createRequest];
-    request.delegate = self;
-    self.searchRequest = request;
-    
-    [self.searchRequest send];
+	CouchSearchRequest *request = [self.filter createRequest];
+	request.delegate = self;
+	request.latLngLocation = self.currentLocationLatLng;
+	self.searchRequest = request;
+		
+	[self.searchRequest send];
 }
 
 - (void)performSearchMore {
+	_isLoadingMore = YES;
     _loadingAction = CouchSearchResultControllerMore;
     CouchSearchRequest *request = [self.filter createRequest];
     request.delegate = self;
+	request.latLngLocation = self.currentLocationLatLng;
     self.searchRequest = request;
     request.page = [NSString stringWithFormat:@"%d", ++_currentPage];
     [UIApplication sharedApplication].networkActivityIndicatorVisible = YES;
@@ -395,14 +435,31 @@
 	[indexPaths release]; indexPaths = nil;
 }
 
-- (void)gatherCurrentLocation {
+- (void)gatherCurrentLocationObjectAndSearch {
 	[self.locateActivity overlapView];
-	self.locationRequest = [[[CurrentLocationRequest alloc] init] autorelease];
-	self.locationRequest.delegate = self;
-	[self.locationRequest gatherCurrentLocation];
+	self.locationObjectRequest = [[[CurrentLocationObjectRequest alloc] init] autorelease];
+	self.locationObjectRequest.delegate = self;
+	[self.locationObjectRequest gatherCurrentLocation];
 }
 
-#pragma Public methods
+- (void)gatherCurrentLocationLatLngAndSearch {
+	[self.locateActivity overlapView];
+	self.locationManager = [[[CLLocationManager alloc] init] autorelease];
+	self.locationManager.desiredAccuracy = kCLLocationAccuracyThreeKilometers;
+	self.locationManager.delegate = self;
+	[self.locationManager startUpdatingLocation];
+}
+
+#pragma Mark Public methods
+
+- (void)performSearch {
+	self.currentLocationLatLng = nil;
+	if (self.filter.currentLocationRectSearch == YES) {
+		[self gatherCurrentLocationLatLngAndSearch];
+	} else {
+		[self performSearchRequest];
+	}
+}
 
 - (void)scrollToTop {
     if ([self.sourfers count] > 0) {

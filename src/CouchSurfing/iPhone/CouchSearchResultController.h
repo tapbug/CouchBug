@@ -7,10 +7,11 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CoreLocation/CoreLocation.h>
 
 #import "CouchSearchRequest.h"
 #import "CSImageDownloader.h"
-#import "CurrentLocationRequest.h"
+#import "CurrentLocationObjectRequest.h"
 
 //  Konstanty stavu, ktere rikaji co se zrovna deje
 typedef enum {
@@ -24,7 +25,7 @@ typedef enum {
 @class ActivityOverlap;
 @class ProfileControllerFactory;
 
-@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationRequestDelegate, UINavigationControllerDelegate> {
+@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationObjectRequestDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate> {
     CouchSearchFilter *_filter;
     CouchSearchFormControllerFactory *_formControllerFactory;
 	ProfileControllerFactory *_profileControllerFactory;
@@ -33,16 +34,22 @@ typedef enum {
 	ActivityOverlap *_locateActivity;
     ActivityOverlap *_searchActivity;
 
-	CurrentLocationRequest *_locationRequest;
+	CurrentLocationObjectRequest *_locationRequest;
+	CLLocationManager *_locationManager;
+	//	pouziva se pro zapamatovani kde ma pokracovat searchMore
+	CLLocation *_currentLocationLatLng;
+	
     CouchSearchRequest *_searchRequest;
     NSMutableArray *_imageDownloaders;
     
-    //oznacuje, jaky druh loadingu se zrovna deje
+    //oznacuje, jaky druh loadingu se bude zrovna dit
     CouchSearchResultControllerLoadingActions _loadingAction;
     //cislo aktualni stranky
     NSUInteger _currentPage;
     //zobrazit, nezobrazit show more posledni cell
     BOOL _tryLoadMore;
+	//probiha zrovna ted loadovani more vysledku?
+	BOOL _isLoadingMore;
     //seznam surferu ktery zobrazujeme
     NSArray *_sourfers;
     //znaci, ze jiz probehlo prvni hledani po zapnuti appky
