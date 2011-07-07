@@ -94,8 +94,8 @@
     //Nastaveni TabBar controlleru
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
-                                             _searchNavigationController,
                                              loginNavigationController,
+                                             _searchNavigationController,
                                              moreController,
                                              nil];
 	self.tabBarController.delegate = self;
