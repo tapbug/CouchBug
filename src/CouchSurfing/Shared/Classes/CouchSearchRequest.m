@@ -207,17 +207,15 @@
             surfer.name = [[nameNodes objectAtIndex:0] stringValue];
         }
         
-		NSArray *locationNodes = [node nodesForXPath:@".//x:span[@class='result_username']/following-sibling::x:div/text()" namespaceMappings:ns error:&error];
-		if ([locationNodes count] > 0) {
-			surfer.livesIn = [[[[locationNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"Lives in" withString:@""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+		surfer.livesIn = [[[node nodesForXPath:@"(.//x:div[text()='Lives in:']/following-sibling::x:div/text())[1]" namespaceMappings:ns error:&error] lastObject] stringValue];
+		
+		NSString *lastLoginInfoStr = [[[node nodesForXPath:@".//x:div[text()='Last in:']/following-sibling::x:div/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
+		NSArray *lastLoginInfos = [lastLoginInfoStr componentsSeparatedByString:@" - "];
+		if ([lastLoginInfos count] == 2) {
+			surfer.lastLoginDate = [lastLoginInfos objectAtIndex:1];				
+			surfer.lastLoginLocation = [lastLoginInfos objectAtIndex:0];
 		}
-		if ([locationNodes count] > 1) {
-			NSArray *lastLoginInfos = [[[locationNodes objectAtIndex:1] stringValue] componentsSeparatedByString:@" - "];
-			if ([lastLoginInfos count] > 2) {
-				surfer.lastLoginDate = [lastLoginInfos objectAtIndex:1];				
-				surfer.lastLoginLocation = [lastLoginInfos objectAtIndex:2];
-			}
-		}
+		
 				
         NSArray *imageSrcNodes = [node nodesForXPath:@".//x:img[@class='profile_result_link_img']/@src" namespaceMappings:ns error:&error];
         if ([imageSrcNodes count] > 0) {
