@@ -121,3 +121,13 @@
 "LOGIN ERROR" = "Username and password combination is not valid";
 
 "LOADING PROFILE" = "Loading profile…";
+
+// More tab
+"COUCHSURFING" = "CouchSurfing";
+"ABOUT COUCHSURFING" = "About CouchSurfing";
+"FAQ" = "FAQ";
+"CONTACT CS" = "Contact CS";
+
+"COUCHBUG APP" = "CouchBug app";
+"ABOUT COUCHBUG" = "About CouchBug";
+"REVIEW ON ITUNES" = "Review on iTunes";

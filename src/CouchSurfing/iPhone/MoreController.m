@@ -66,7 +66,7 @@
 	versionLabel.font = [UIFont systemFontOfSize:18];
 	[versionLabel sizeToFit];
 	
-	companyLabel.text = @"created by tabpub";
+	companyLabel.text = @"created by tapbug";
 	companyLabel.backgroundColor = [UIColor clearColor];
 	companyLabel.font = [UIFont systemFontOfSize:18];
 	[companyLabel sizeToFit];
@@ -136,17 +136,17 @@
 	}
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
-			cell.textLabel.text = NSLocalizedString(@"ABOUT CHOUCHSURFING", nil);
+			cell.textLabel.text = NSLocalizedString(@"ABOUT CS", nil);
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = NSLocalizedString(@"FAQ", nil);
 		} else if (indexPath.row == 2) {
-			cell.textLabel.text = NSLocalizedString(@"CONTACT COUCHSURFING", nil);
+			cell.textLabel.text = NSLocalizedString(@"CONTACT CS", nil);
 		}
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
 			cell.textLabel.text = NSLocalizedString(@"ABOUT COUCHBUG", nil);			
 		} else if (indexPath.row == 1) {
-			cell.textLabel.text = @"Twitter @couchbug";
+			cell.textLabel.text = @"Twitter @CouchBug";
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = @"Facebook";
 		} else if (indexPath.row == 3) {
