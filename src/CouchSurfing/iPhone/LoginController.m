@@ -126,11 +126,12 @@ enum HeaderViewTags {
 	CGFloat labelViewWidth = footerViewWidth - 20;
 	
 	UILabel *label = [[[UILabel alloc] init] autorelease];
-	label.frame = CGRectMake((int)(footerViewWidth - labelViewWidth) / 2, 0, labelViewWidth, 0);
+	label.frame = CGRectMake((int)(footerViewWidth - labelViewWidth) / 2, 5, labelViewWidth, 0);
 	label.tag = LabelHeaderViewTag;
 	label.numberOfLines = 0;
 	label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
-	label.text = NSLocalizedString(@"Ministr školství Josef Dobeš (VV) může v nejbližších dnech očekávat pomyslnou složenku na 35 miliónů korun. Tentokrát se nejedná o předvolební ", nil);
+	label.text = NSLocalizedString(@"LOGIN DESCRIPTION", nil);
+	label.textAlignment = UITextAlignmentCenter;
 	label.backgroundColor = [UIColor clearColor];
 	
 	self.footerView = [[[UIView alloc] init] autorelease];
@@ -158,7 +159,7 @@ enum HeaderViewTags {
 	
 	_loginTabel.tableHeaderView = headerView;
 		
-    [_loginTabel setScrollEnabled:NO];
+    [_loginTabel setScrollEnabled:YES];
     _loginTabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     _loginTabel.delegate = self;
     _loginTabel.dataSource = self;
@@ -292,7 +293,7 @@ enum HeaderViewTags {
 	
 	CGRect loginTableFrame = _loginTabel.frame;
 	loginTableFrame.size.height = tableViewHeight;
-	loginTableFrame.origin.y = (self.view.frame.size.height - tableViewHeight) / 2;
+	loginTableFrame.origin.y = (int)(self.view.frame.size.height - tableViewHeight) / 2;
 	_loginTabel.frame = loginTableFrame;
 }
 
