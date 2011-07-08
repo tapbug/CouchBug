@@ -12,7 +12,7 @@
 @class CouchSurfer;
 @class ActivityOverlap;
 
-@interface ProfileDetailController : UIViewController <MVUrlConnectionDelegate> {
+@interface ProfileDetailController : UIViewController <MVUrlConnectionDelegate, UIWebViewDelegate> {
     NSString *_html;
 
 	CouchSurfer *_surfer;

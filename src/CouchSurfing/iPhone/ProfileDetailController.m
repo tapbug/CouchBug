@@ -136,11 +136,11 @@
 - (void)connection:(MVUrlConnection *)connection didFinnishLoadingWithResponseString:(NSString *)responseString {
 	self.html = responseString;
 	[self showWebView];
-	[self.activityOverlap removeOverlap];
 }
 
 - (void)showWebView {
 	UIWebView *webView = [[[UIWebView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)] autorelease];
+	webView.delegate = self;
 	
 	UIScrollView *scrollView = nil;
 	for (UIView *subview in [webView subviews]) {
