@@ -32,6 +32,7 @@
 		6C4D8ABE13B09D69008FD263 /* iconVouched.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AB013B09D69008FD263 /* iconVouched.png */; };
 		6C4D8ABF13B09D69008FD263 /* iconVouched@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C4D8AB113B09D69008FD263 /* iconVouched@2x.png */; };
 		6C4D8AC613B1D6C6008FD263 /* ProfileController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4D8AC513B1D6C6008FD263 /* ProfileController.m */; };
+		6C4F60E013C6E5DE004FBCE9 /* CSWebViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C4F60DF13C6E5DE004FBCE9 /* CSWebViewController.m */; };
 		6C51FBAD13C4C2C400AE40B3 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51FBAC13C4C2C300AE40B3 /* CoreLocation.framework */; };
 		6C51FBAF13C590AA00AE40B3 /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6C51FBAE13C590AA00AE40B3 /* MapKit.framework */; };
 		6C59C0A113B1E6F200D68F3E /* CSImageCropper.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C59C0A013B1E6F200D68F3E /* CSImageCropper.m */; };
@@ -176,6 +177,8 @@
 		6C4D8AB113B09D69008FD263 /* iconVouched@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "iconVouched@2x.png"; sourceTree = "<group>"; };
 		6C4D8AC413B1D6C6008FD263 /* ProfileController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ProfileController.h; sourceTree = "<group>"; };
 		6C4D8AC513B1D6C6008FD263 /* ProfileController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ProfileController.m; sourceTree = "<group>"; };
+		6C4F60DE13C6E5DE004FBCE9 /* CSWebViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CSWebViewController.h; sourceTree = "<group>"; };
+		6C4F60DF13C6E5DE004FBCE9 /* CSWebViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSWebViewController.m; sourceTree = "<group>"; };
 		6C51FBAC13C4C2C300AE40B3 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		6C51FBAE13C590AA00AE40B3 /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		6C59C09F13B1E6F200D68F3E /* CSImageCropper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CSImageCropper.h; path = Shared/Classes/CSImageCropper.h; sourceTree = "<group>"; };
@@ -365,6 +368,8 @@
 				6C9EACE713A0D1AC00C1B19D /* MoreController.m */,
 				6C7E868413B262C0000ED485 /* CSSelectedValueCell.h */,
 				6C7E868513B262C0000ED485 /* CSSelectedValueCell.m */,
+				6C4F60DE13C6E5DE004FBCE9 /* CSWebViewController.h */,
+				6C4F60DF13C6E5DE004FBCE9 /* CSWebViewController.m */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";
@@ -912,6 +917,7 @@
 				6CE8A5D313C2FE7300BF66DC /* ProfileControllerFactory.m in Sources */,
 				6C6DEE6313C5D3EF0014DC85 /* NSData+UTF8.m in Sources */,
 				6C6DEE6613C65BE20014DC85 /* LocationDisabledOverlap.m in Sources */,
+				6C4F60E013C6E5DE004FBCE9 /* CSWebViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

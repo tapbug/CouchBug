@@ -7,7 +7,7 @@
 //
 
 #import "MoreController.h"
-
+#import "CSWebViewController.h"
 
 @implementation MoreController
 
@@ -36,6 +36,7 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
+	self.title = NSLocalizedString(@"More", nil);
 	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 	_tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, self.view.frame.size.height)
 											  style:UITableViewStyleGrouped] autorelease];
@@ -171,15 +172,21 @@
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
-			
+			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
+			webController.urlString = @"http://www.couchsurfing.org/about.html";
+			[self.navigationController pushViewController:webController animated:YES];
 		} else if (indexPath.row == 1) {
-		
+			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
+			webController.urlString = @"http://www.couchsurfing.org/help.html";
+			[self.navigationController pushViewController:webController animated:YES];
 		} else if (indexPath.row == 2) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:info@couchsurfing.org"]];
 		}
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
-			
+			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
+			webController.urlString = @"http://couchbug.com/about.html";
+			[self.navigationController pushViewController:webController animated:YES];
 		} else if(indexPath.row == 1) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/CouchBug"]];			
 		} else if (indexPath.row == 2) {

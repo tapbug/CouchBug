@@ -87,16 +87,18 @@
     
     //Tvorba MoreTabu
     UIViewController *moreController = [[[MoreController alloc] init] autorelease];
+	UINavigationController *moreNavController = [[[UINavigationController alloc] initWithRootViewController:moreController] autorelease];
+	moreNavController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
     UITabBarItem *moreTabBarItem =
         [[[UITabBarItem alloc] initWithTabBarSystemItem:UITabBarSystemItemMore tag:2] autorelease];
-    [moreController setTabBarItem:moreTabBarItem];
+    [moreNavController setTabBarItem:moreTabBarItem];
     
     //Nastaveni TabBar controlleru
     self.tabBarController = [[[UITabBarController alloc] init] autorelease];
     self.tabBarController.viewControllers = [NSArray arrayWithObjects:
                                              loginNavigationController,
                                              _searchNavigationController,
-                                             moreController,
+                                             moreNavController,
                                              nil];
 	self.tabBarController.delegate = self;
 	
