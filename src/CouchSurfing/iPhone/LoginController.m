@@ -114,7 +114,7 @@
     self.passwordField.returnKeyType = UIReturnKeyJoin;
     self.passwordField.text = self.loginInformation.password;
     
-    _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 150) / 2), self.view.frame.size.width - 20, 150)
+    _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 150) / 2), self.view.frame.size.width - 20, 170)
                                                 style:UITableViewStyleGrouped] autorelease];    
     _loginTabel.backgroundView = nil;
     _loginTabel.backgroundColor = [UIColor clearColor];
@@ -192,9 +192,23 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	UIView *footerView;
-	UILabel *_label = [[[UILabel alloc] init] autorelease];
+	UILabel *label = [[[UILabel alloc] init] autorelease];
+	label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
+	label.text = NSLocalizedString(@"LOGIN DESCRIPTION", nil);
+	label.backgroundColor = [UIColor clearColor];
+	[label sizeToFit];
+
+	UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0,
+																  0,
+																  _loginTabel.frame.size.width,
+																  label.frame.size.height)];
 	
+	label.frame = CGRectMake((int)(footerView.frame.size.width - label.frame.size.width) / 2,
+							  0, 
+							  label.frame.size.width,
+							  label.frame.size.height);
+	
+	[footerView addSubview:label];
 	return footerView;
 }
 
