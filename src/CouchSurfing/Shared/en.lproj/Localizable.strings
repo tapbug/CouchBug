@@ -122,6 +122,8 @@
 "SIGNING IN" = "Signing in…";
 "SIGNING OUT" = "Signing out…";
 
+"LOGIN DESCRIPTION" = "Sign in with your CouchSurfing credentials. If you don't have an account, you can sign up for one. To find more about CouchSurfing, tap on More.";
+
 "SORRY" = "Sorry";
 "LOGIN ERROR" = "Username and password combination is not valid";
 
