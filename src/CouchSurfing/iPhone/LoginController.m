@@ -159,7 +159,7 @@ enum HeaderViewTags {
 	
 	_loginTabel.tableHeaderView = headerView;
 		
-    [_loginTabel setScrollEnabled:YES];
+    [_loginTabel setScrollEnabled:NO];
     _loginTabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     _loginTabel.delegate = self;
     _loginTabel.dataSource = self;
