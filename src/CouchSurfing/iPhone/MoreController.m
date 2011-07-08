@@ -112,6 +112,13 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)viewDidAppear:(BOOL)animated {
+	NSIndexPath *indexPath = [_tableView indexPathForSelectedRow];
+	if (indexPath) {
+		[_tableView deselectRowAtIndexPath:indexPath animated:YES];
+	}
+}
+
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
 }

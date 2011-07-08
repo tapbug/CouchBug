@@ -368,7 +368,7 @@
 - (void)navigationController:(UINavigationController *)navigationController 
 	   didShowViewController:(UIViewController *)viewController animated:(BOOL)animated {
 	if (viewController == self) {
-		[_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];		
+		[_tableView deselectRowAtIndexPath:[_tableView indexPathForSelectedRow] animated:YES];
 	}
 }
 
