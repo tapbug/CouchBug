@@ -23,6 +23,8 @@
     UITextField *_passwordField;
     UITextField *_activeTextField;
     
+	UIView *_footerView;
+	
     ActivityOverlap *_activityOverlap;
     
     UIAlertView *_loggedAlert;

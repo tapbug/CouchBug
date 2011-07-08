@@ -17,12 +17,18 @@
 
 #import "CSTools.h"
 
+enum HeaderViewTags {
+	LabelHeaderViewTag = 1
+};
+
 @interface LoginController ()
 
 @property (nonatomic, retain) LoginRequest *loginRequest;
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
 @property (nonatomic, retain) AuthControllersFactory *authControllerFactory;
+
+@property (nonatomic, retain) UIView *footerView;
 
 @property (nonatomic, retain) UIBarButtonItem *signUpBarButton;
 @property(nonatomic, retain) UITextField *usernameField;
@@ -34,7 +40,7 @@
 
 - (void)hideLoading;
 - (void)hideKeyboard;
-
+- (void)countSizes;
 @end
 
 
@@ -45,7 +51,7 @@
 @synthesize loginInformation = _loginInformation;
 @synthesize authControllerFactory = _authControllerFactory;
 @synthesize couchSearchController = _couchSearchController;
-
+@synthesize footerView = _footerView;
 @synthesize signUpBarButton = _signUpBarButton;
 @synthesize usernameField = _usernameField;
 @synthesize passwordField = _passwordField;
@@ -71,6 +77,7 @@
     self.passwordField = nil;
     self.activityOverlap = nil;
 	self.signUpBarButton = nil;
+	self.footerView = nil;
     [super dealloc];
 }
 
@@ -114,10 +121,30 @@
     self.passwordField.returnKeyType = UIReturnKeyJoin;
     self.passwordField.text = self.loginInformation.password;
     
-    _loginTabel = [[[UITableView alloc] initWithFrame:CGRectMake(10, (int)((self.view.frame.size.height - 150) / 2), self.view.frame.size.width - 20, 170)
-                                                style:UITableViewStyleGrouped] autorelease];    
-    _loginTabel.backgroundView = nil;
+	CGFloat tableViewWidth = self.view.frame.size.width;
+	CGFloat footerViewWidth = tableViewWidth;
+	CGFloat labelViewWidth = footerViewWidth - 20;
+	
+	UILabel *label = [[[UILabel alloc] init] autorelease];
+	label.frame = CGRectMake((int)(footerViewWidth - labelViewWidth) / 2, 0, labelViewWidth, 0);
+	label.tag = LabelHeaderViewTag;
+	label.numberOfLines = 0;
+	label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	label.text = NSLocalizedString(@"Ministr školství Josef Dobeš (VV) může v nejbližších dnech očekávat pomyslnou složenku na 35 miliónů korun. Tentokrát se nejedná o předvolební ", nil);
+	label.backgroundColor = [UIColor clearColor];
+	
+	self.footerView = [[[UIView alloc] init] autorelease];
+	self.footerView.frame = CGRectMake(0, 0, footerViewWidth, 0);
+	self.footerView.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+	[self.footerView addSubview:label];
+		
+    _loginTabel = [[[UITableView alloc] initWithFrame:CGRectNull
+                                                style:UITableViewStyleGrouped] autorelease];
+    _loginTabel.frame = CGRectMake(0, 0, tableViewWidth, 0);
+	_loginTabel.backgroundView = nil;
     _loginTabel.backgroundColor = [UIColor clearColor];
+	
+	[self countSizes];
 	
 	UIView *headerView = [[[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.frame.size.width, 46)] autorelease];
 	UIImageView *logoView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"csLogo"]] autorelease];
@@ -148,6 +175,10 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation {
     return YES;
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation {
+	[self countSizes];
 }
 
 #pragma UITableViewDataSource methods
@@ -192,24 +223,8 @@
 }
 
 - (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
-	UILabel *label = [[[UILabel alloc] init] autorelease];
-	label.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
-	label.text = NSLocalizedString(@"LOGIN DESCRIPTION", nil);
-	label.backgroundColor = [UIColor clearColor];
-	[label sizeToFit];
 
-	UIView *footerView = [[UIView alloc] initWithFrame:CGRectMake(0,
-																  0,
-																  _loginTabel.frame.size.width,
-																  label.frame.size.height)];
-	
-	label.frame = CGRectMake((int)(footerView.frame.size.width - label.frame.size.width) / 2,
-							  0, 
-							  label.frame.size.width,
-							  label.frame.size.height);
-	
-	[footerView addSubview:label];
-	return footerView;
+	return self.footerView;
 }
 
 #pragma mark UITextFieldDelegate methods
@@ -256,6 +271,30 @@
 }
 
 #pragma mark Private methods
+
+- (void)countSizes {
+	UILabel *label = (UILabel *)[self.footerView viewWithTag:LabelHeaderViewTag];
+	CGFloat tableViewWidth = self.view.frame.size.width;
+	CGFloat footerViewWidth = tableViewWidth;
+	CGSize labelViewSize = [label.text sizeWithFont:label.font
+									 constrainedToSize:CGSizeMake(footerViewWidth - 20, MAXFLOAT) 
+										 lineBreakMode:label.lineBreakMode];
+	CGFloat footerViewHeight = labelViewSize.height + 5;
+	CGFloat tableViewHeight = 150 + footerViewHeight;
+
+	CGRect labelFrame = label.frame;
+	labelFrame.size.height = labelViewSize.height;
+	label.frame = labelFrame;
+	
+	CGRect footerViewFrame = self.footerView.frame;
+	footerViewFrame.size.height = footerViewHeight;
+	self.footerView.frame = footerViewFrame;
+	
+	CGRect loginTableFrame = _loginTabel.frame;
+	loginTableFrame.size.height = tableViewHeight;
+	loginTableFrame.origin.y = (self.view.frame.size.height - tableViewHeight) / 2;
+	_loginTabel.frame = loginTableFrame;
+}
 
 - (void)keyboardDidShow:(NSNotification *)notification {
     CGRect addFrame = [[[notification userInfo] objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];    
