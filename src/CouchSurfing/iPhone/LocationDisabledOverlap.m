@@ -71,8 +71,8 @@
 		CGFloat containerWidth = MAX(titleLabelFrame.size.width, _bodyLabel.frame.size.width);
 		CGFloat containerHeight = titleLabelFrame.size.height + _bodyLabel.frame.size.height + 10;
 		
-		containerView.frame = CGRectMake((_view.frame.size.width - containerWidth) / 2,
-										 (_view.frame.size.height - containerHeight) / 2,
+		containerView.frame = CGRectMake((int)(_view.frame.size.width - containerWidth) / 2,
+										 (int)(_view.frame.size.height - containerHeight) / 2,
 										 containerWidth, 
 										 containerHeight);
 
