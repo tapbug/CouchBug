@@ -77,8 +77,8 @@
 	CGFloat footerContentHeight = iconView.frame.size.height;
 	
 	
-	footerContentView.frame = CGRectMake((_tableView.frame.size.width - footerContentWidth) / 2,
-										 (footerView.frame.size.height - footerContentHeight) / 2,
+	footerContentView.frame = CGRectMake((int)(_tableView.frame.size.width - footerContentWidth) / 2,
+										 (int)(footerView.frame.size.height - footerContentHeight) / 2,
 										 footerContentWidth,
 										 footerContentHeight);
 	
