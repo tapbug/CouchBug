@@ -33,7 +33,7 @@
 }
 
 - (void)sendProfileRequest {
-	self.profileConnection = [[MVUrlConnection alloc] initWithUrlString:[NSString stringWithFormat:@"http://www.couchsurfing.org/profile.html?id=%@", self.surfer.ident]];
+	self.profileConnection = [[[MVUrlConnection alloc] initWithUrlString:[NSString stringWithFormat:@"http://www.couchsurfing.org/profile.html?id=%@", self.surfer.ident]] autorelease];
 	self.profileConnection.delegate = self;
 	[self.profileConnection sendRequest];
 }
