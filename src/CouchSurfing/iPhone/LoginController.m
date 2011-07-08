@@ -130,7 +130,7 @@
 	[headerView addSubview:logoView];
 	
 	_loginTabel.tableHeaderView = headerView;
-	
+		
     [_loginTabel setScrollEnabled:NO];
     _loginTabel.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleBottomMargin | UIViewAutoresizingFlexibleWidth;
     _loginTabel.delegate = self;
@@ -191,6 +191,12 @@
     return nil;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForFooterInSection:(NSInteger)section {
+	UIView *footerView;
+	UILabel *_label = [[[UILabel alloc] init] autorelease];
+	
+	return footerView;
+}
 
 #pragma mark UITextFieldDelegate methods
 

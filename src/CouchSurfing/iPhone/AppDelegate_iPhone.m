@@ -168,10 +168,7 @@
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	if ([CLLocationManager locationServicesEnabled]) {
-		[_searchResultController dismissLocationDisabledWarning];
-		[_searchResultController shouldReload];
-	}
+	[_searchResultController searchAgainBecauseOfLocationDisabled];
 }
 
 

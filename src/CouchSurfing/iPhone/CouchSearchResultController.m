@@ -350,6 +350,7 @@
 																						body:NSLocalizedString(@"LOCATION WARNING BODY", nil)];				
 			}
 			[self.locationDisabledOverlap overlapView];
+			_locationDisabled = YES;
 		} else {
 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
 																message:@"LOCATION CANNOT BE DISCOVERED. CHOOSE LOCATION YOURSELF"
@@ -467,6 +468,8 @@
 #pragma Mark Public methods
 
 - (void)performSearch {
+	[self.locationDisabledOverlap removeOverlap];
+	_locationDisabled = NO;
 	self.currentLocationLatLng = nil;
 	if (self.filter.currentLocationRectSearch == YES) {
 		[self gatherCurrentLocationLatLngAndSearch];
@@ -485,8 +488,19 @@
 	_initialLoadDone = NO;
 }
 
-- (void)dismissLocationDisabledWarning {
-	[self.locationDisabledOverlap removeOverlap];
+- (void)searchAgainBecauseOfLocationDisabled {
+	if (_locationDisabled) {
+		BOOL searched = NO;
+		if ([self.tabBarController.selectedViewController isKindOfClass:[UINavigationController class]]) {
+			if ([(UINavigationController *)self.tabBarController.selectedViewController topViewController] == self) {
+				[self performSearch];
+				searched = YES;
+			}
+		}
+		if (searched == NO) {
+			_initialLoadDone = NO;
+		}
+	}
 }
 
 @end

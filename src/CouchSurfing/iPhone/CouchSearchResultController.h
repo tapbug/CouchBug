@@ -56,6 +56,8 @@ typedef enum {
     NSArray *_sourfers;
     //znaci, ze jiz probehlo prvni hledani po zapnuti appky
     BOOL _initialLoadDone;
+	//ukazuje se zrovna hlaska  o locationDisabled
+	BOOL _locationDisabled;
 }
 
 @property (nonatomic, assign) CouchSearchFilter *filter;
@@ -68,6 +70,5 @@ typedef enum {
 - (void)scrollToTop;
 //	Pri zobrazeni view probehne nove hledani
 - (void)shouldReload;
-
-- (void)dismissLocationDisabledWarning;
+- (void)searchAgainBecauseOfLocationDisabled;
 @end
