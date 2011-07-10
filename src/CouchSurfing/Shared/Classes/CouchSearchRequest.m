@@ -188,120 +188,125 @@
 #pragma mark NSURLConnectionDelegate methods
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    NSError *error;
-    
-	NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
-    CXMLDocument *doc = nil;
-	NSString *responseString = [[[NSString alloc] initWithData:[self.data dataByCleanUTF8] encoding:NSUTF8StringEncoding]autorelease];
-    doc = [[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error];
-    
-    NSArray *nodes = [doc nodesForXPath:@"//x:div[contains(@class, 'profile_result_item')]" namespaceMappings:ns error:&error];
-    
-    NSMutableArray *surfers = [NSMutableArray array];
-    
-    for (CXMLNode *node in nodes) {
-        CouchSurfer *surfer = [[[CouchSurfer alloc] init] autorelease];
-		surfer.ident = [[[node nodeForXPath:@"@id" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"result_item-" withString:@""];
-        NSArray *nameNodes = [node nodesForXPath:@".//x:span[@class='result_username']/x:a/text()" namespaceMappings:ns error:&error];
-        if ([nameNodes count] > 0) {
-            surfer.name = [[nameNodes objectAtIndex:0] stringValue];
-        }
-        
-		surfer.livesIn = [[[node nodesForXPath:@"(.//x:div[text()='Lives in:']/following-sibling::x:div/text())[1]" namespaceMappings:ns error:&error] lastObject] stringValue];
+	NSData *dataTemp = self.data;
+	id<CouchSearchRequestDelegate> delegateTemp = self.delegate;
+	
+	dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+		NSError *error;
+		NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
+		CXMLDocument *doc = nil;
+		NSString *responseString = [[[NSString alloc] initWithData:[dataTemp dataByCleanUTF8] encoding:NSUTF8StringEncoding]autorelease];
+		doc = [[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error];
 		
-		NSString *lastLoginInfoStr = [[[node nodesForXPath:@".//x:div[text()='Last in:']/following-sibling::x:div/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
-		NSArray *lastLoginInfos = [lastLoginInfoStr componentsSeparatedByString:@" - "];
-		if ([lastLoginInfos count] == 2) {
-			surfer.lastLoginDate = [lastLoginInfos objectAtIndex:1];				
-			surfer.lastLoginLocation = [lastLoginInfos objectAtIndex:0];
-		}
+		NSArray *nodes = [doc nodesForXPath:@"//x:div[contains(@class, 'profile_result_item')]" namespaceMappings:ns error:&error];
 		
-				
-        NSArray *imageSrcNodes = [node nodesForXPath:@".//x:img[@class='profile_result_link_img']/@src" namespaceMappings:ns error:&error];
-        if ([imageSrcNodes count] > 0) {
-            surfer.imageSrc = [[imageSrcNodes objectAtIndex:0] stringValue];
-        }
-        
-        NSArray *iconsInfoNodes = [node nodesForXPath:@".//x:div[@class='hd']//x:img/@src"namespaceMappings:ns error:&error];
-        if ([iconsInfoNodes count] > 0) {
-            for (CXMLNode *srcNode in iconsInfoNodes) {
-                if ([[srcNode stringValue] isEqual:@"/images/icon_couch_travel.gif"]) {
-                    surfer.couchStatus = CouchSurferHasCouchTraveling;
-                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_day.gif"]) {
-                    surfer.couchStatus = CouchSurferHasCouchCoffeDrink;
-                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_maybe.gif"]) {
-                    surfer.couchStatus = CouchSurferHasCouchMaybe;
-                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_yes.gif"]) {
-                    surfer.couchStatus = CouchSurferHasCouchYes;
-                } else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_no.gif"]) {
-                    surfer.couchStatus = CouchSurferHasCouchNo;
-                } else if ([[srcNode stringValue] isEqual:@"/images/ambassador-hands.gif"]) {
-                    surfer.vouched = YES;
-                } else if ([[srcNode stringValue] isEqual:@"/images/flag.png"]) {
-                    surfer.ambassador = YES;
-                } else if ([[srcNode stringValue] isEqual:@"/images/verification/verified-search-icon.gif"]) {
-                    surfer.verified = YES;
-                }
-            }
-        }
-        
-        NSArray *aboutNodes = [node nodesForXPath:@".//x:li/x:div[text()='About']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error];
-        if ([aboutNodes count] > 0) {
-			NSMutableString *aboutString = [NSMutableString string];
-			for (CXMLNode *textNode in aboutNodes) {
-				[aboutString appendString:[textNode stringValue]];
+		NSMutableArray *surfers = [NSMutableArray array];
+		
+		for (CXMLNode *node in nodes) {
+			CouchSurfer *surfer = [[[CouchSurfer alloc] init] autorelease];
+			surfer.ident = [[[node nodeForXPath:@"@id" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"result_item-" withString:@""];
+			NSArray *nameNodes = [node nodesForXPath:@".//x:span[@class='result_username']/x:a/text()" namespaceMappings:ns error:&error];
+			if ([nameNodes count] > 0) {
+				surfer.name = [[nameNodes objectAtIndex:0] stringValue];
 			}
-            surfer.about = [[aboutString stringByReplacingOccurrencesOfString:@"... (more)" withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-        }
-        
-        NSArray *basicNodes = [node nodesForXPath:@".//x:li/x:div[text()='Basics']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
-        if ([basicNodes count] > 0) {
-            NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-            NSString *regexp = @"([a-zA-Z ]+), ([0-9]+), ?(.*)$";
-            NSString *genderString = [basics stringByMatching:regexp capture:1];
-            if ([genderString isEqualToString:@"Male"]) {
-                surfer.gender = @"M";
-            } else if ([genderString isEqualToString:@"Female"]){
-                surfer.gender = @"F";
-            } else if ([genderString isEqualToString:@"Several people"]) {
-                surfer.gender = @"Group";
-            }
-            
-            
-            surfer.age = [basics stringByMatching:regexp capture:2];
-            surfer.job = [basics stringByMatching:regexp capture:3];
-        }
-        
-		surfer.mission = [[[[node nodesForXPath:@".//x:li/x:div[text()='Mission']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
-		
-        NSArray *profileCountNodes = [node nodesForXPath:@".//x:ul[@class='profile_count']/x:li" namespaceMappings:ns error:&error];
-        if ([profileCountNodes count] > 0) {
-            for (CXMLNode *countNode in profileCountNodes) {
-                NSString *label = [[[[countNode nodesForXPath:@"./text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
-                NSString *count = [[[countNode nodesForXPath:@"./x:span/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
-                if ([label isEqualToString:@"References"]) {
-                    surfer.referencesCount = count;
-                } else if ([label isEqualToString:@"Photos"]) {
-                    surfer.photosCount = count;
-                } else if ([label isEqualToString:@"Reply Rate"]) {
-                    surfer.replyRate = count;
-                } else if ([label isEqualToString:@"Friends"]) {
-					surfer.friendsCount = count;
+			
+			surfer.livesIn = [[[node nodesForXPath:@"(.//x:div[text()='Lives in:']/following-sibling::x:div/text())[1]" namespaceMappings:ns error:&error] lastObject] stringValue];
+			
+			NSString *lastLoginInfoStr = [[[node nodesForXPath:@".//x:div[text()='Last in:']/following-sibling::x:div/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
+			NSArray *lastLoginInfos = [lastLoginInfoStr componentsSeparatedByString:@" - "];
+			if ([lastLoginInfos count] == 2) {
+				surfer.lastLoginDate = [lastLoginInfos objectAtIndex:1];				
+				surfer.lastLoginLocation = [lastLoginInfos objectAtIndex:0];
+			}
+			
+			
+			NSArray *imageSrcNodes = [node nodesForXPath:@".//x:img[@class='profile_result_link_img']/@src" namespaceMappings:ns error:&error];
+			if ([imageSrcNodes count] > 0) {
+				surfer.imageSrc = [[imageSrcNodes objectAtIndex:0] stringValue];
+			}
+			
+			NSArray *iconsInfoNodes = [node nodesForXPath:@".//x:div[@class='hd']//x:img/@src"namespaceMappings:ns error:&error];
+			if ([iconsInfoNodes count] > 0) {
+				for (CXMLNode *srcNode in iconsInfoNodes) {
+					if ([[srcNode stringValue] isEqual:@"/images/icon_couch_travel.gif"]) {
+						surfer.couchStatus = CouchSurferHasCouchTraveling;
+					} else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_day.gif"]) {
+						surfer.couchStatus = CouchSurferHasCouchCoffeDrink;
+					} else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_maybe.gif"]) {
+						surfer.couchStatus = CouchSurferHasCouchMaybe;
+					} else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_yes.gif"]) {
+						surfer.couchStatus = CouchSurferHasCouchYes;
+					} else if ([[srcNode stringValue] isEqual:@"/images/icon_couch_no.gif"]) {
+						surfer.couchStatus = CouchSurferHasCouchNo;
+					} else if ([[srcNode stringValue] isEqual:@"/images/ambassador-hands.gif"]) {
+						surfer.vouched = YES;
+					} else if ([[srcNode stringValue] isEqual:@"/images/flag.png"]) {
+						surfer.ambassador = YES;
+					} else if ([[srcNode stringValue] isEqual:@"/images/verification/verified-search-icon.gif"]) {
+						surfer.verified = YES;
+					}
 				}
-            }
-        }
-        
-        [surfers addObject:surfer];
-        
-    }
-        
-    if ([self.delegate respondsToSelector:@selector(couchSearchRequest:didRecieveResult:)]) {
-        [self.delegate couchSearchRequest:self didRecieveResult:surfers];
-    }
+			}
+			
+			NSArray *aboutNodes = [node nodesForXPath:@".//x:li/x:div[text()='About']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error];
+			if ([aboutNodes count] > 0) {
+				NSMutableString *aboutString = [NSMutableString string];
+				for (CXMLNode *textNode in aboutNodes) {
+					[aboutString appendString:[textNode stringValue]];
+				}
+				surfer.about = [[aboutString stringByReplacingOccurrencesOfString:@"... (more)" withString:@""] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+			}
+			
+			NSArray *basicNodes = [node nodesForXPath:@".//x:li/x:div[text()='Basics']/following-sibling::x:div[1]/text()" namespaceMappings:ns error:&error];
+			if ([basicNodes count] > 0) {
+				NSString *basics = [[[basicNodes objectAtIndex:0] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+				NSString *regexp = @"([a-zA-Z ]+), ([0-9]+), ?(.*)$";
+				NSString *genderString = [basics stringByMatching:regexp capture:1];
+				if ([genderString isEqualToString:@"Male"]) {
+					surfer.gender = @"M";
+				} else if ([genderString isEqualToString:@"Female"]){
+					surfer.gender = @"F";
+				} else if ([genderString isEqualToString:@"Several people"]) {
+					surfer.gender = @"Group";
+				}
+				
+				
+				surfer.age = [basics stringByMatching:regexp capture:2];
+				surfer.job = [basics stringByMatching:regexp capture:3];
+			}
+			
+			surfer.mission = [[[[node nodesForXPath:@".//x:li/x:div[text()='Mission']/following-sibling::x:div[1]//text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByReplacingOccurrencesOfString:@"\n" withString:@" "];
+			
+			NSArray *profileCountNodes = [node nodesForXPath:@".//x:ul[@class='profile_count']/x:li" namespaceMappings:ns error:&error];
+			if ([profileCountNodes count] > 0) {
+				for (CXMLNode *countNode in profileCountNodes) {
+					NSString *label = [[[[countNode nodesForXPath:@"./text()" namespaceMappings:ns error:&error] lastObject] stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
+					NSString *count = [[[countNode nodesForXPath:@"./x:span/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
+					if ([label isEqualToString:@"References"]) {
+						surfer.referencesCount = count;
+					} else if ([label isEqualToString:@"Photos"]) {
+						surfer.photosCount = count;
+					} else if ([label isEqualToString:@"Reply Rate"]) {
+						surfer.replyRate = count;
+					} else if ([label isEqualToString:@"Friends"]) {
+						surfer.friendsCount = count;
+					}
+				}
+			}
+			
+			[surfers addObject:surfer];
+		}
+		[doc release]; doc = nil;
+        dispatch_async(dispatch_get_main_queue(), ^{
+			if ([delegateTemp respondsToSelector:@selector(couchSearchRequest:didRecieveResult:)]) {
+				[delegateTemp couchSearchRequest:self didRecieveResult:surfers];
+			}			
+		});
+	});
+
     
     self.connection = nil;
     self.data = nil;
-	[doc release]; doc = nil;
 }
 
 - (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {

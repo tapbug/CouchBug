@@ -42,7 +42,7 @@ typedef enum {
 	CLLocation *_currentLocationLatLng;
 	
     CouchSearchRequest *_searchRequest;
-    NSMutableArray *_imageDownloaders;
+    NSMutableDictionary *_imageDownloaders;
     
     //oznacuje, jaky druh loadingu se bude zrovna dit
     CouchSearchResultControllerLoadingActions _loadingAction;
