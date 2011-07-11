@@ -442,7 +442,6 @@
 		2860E324111B887F00E27156 /* iPhone */ = {
 			isa = PBXGroup;
 			children = (
-				6C235E1513CADE6C007A0D4F /* Tidy */,
 				6C9EACD813A09ECA00C1B19D /* images */,
 				6C87AEE1130BB61D0015B471 /* Auth */,
 				6CAA9303128546B900CB1737 /* CouchSearch */,
@@ -499,6 +498,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6C235E1513CADE6C007A0D4F /* Tidy */,
 				6C34AD2013A89A2100E43729 /* RegexKitLite */,
 				6C9EACFA13A0FCD200C1B19D /* CouchSurf */,
 				6C9365FA13A22EA700FA8960 /* TouchXML */,
@@ -541,7 +541,7 @@
 				6C235E1B13CADE6D007A0D4F /* src */,
 			);
 			name = Tidy;
-			path = ../../../libs/Tidy;
+			path = ../../libs/Tidy;
 			sourceTree = "<group>";
 		};
 		6C235E1613CADE6C007A0D4F /* include */ = {
