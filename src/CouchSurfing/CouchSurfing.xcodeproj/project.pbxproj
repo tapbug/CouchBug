@@ -992,7 +992,7 @@
 					/usr/include/tidy,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
@@ -1026,7 +1026,7 @@
 					/usr/include/tidy,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
@@ -1058,7 +1058,7 @@
 					../../libs/JSONKit/,
 					"../../libs/TouchXML/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -1087,7 +1087,7 @@
 					../../libs/JSONKit/,
 					"../../libs/TouchXML/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-all_load",
