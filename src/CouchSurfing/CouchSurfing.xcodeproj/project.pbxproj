@@ -989,7 +989,7 @@
 					../../libs/objectiveioc/src/Classes,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
-					/usr/include/tidy,
+					../../libs/Tidy/include,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
@@ -1023,7 +1023,7 @@
 					../../libs/objectiveioc/src/Classes,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
-					/usr/include/tidy,
+					../../libs/Tidy/include,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
