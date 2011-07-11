@@ -16,6 +16,7 @@
 #import "CouchSearchResultController.h"
 
 #import "CSTools.h"
+#import "FlurryAPI.h"
 
 enum HeaderViewTags {
 	LabelHeaderViewTag = 1
@@ -255,6 +256,11 @@ enum HeaderViewTags {
     [self hideLoading];
     id profileController = [self.authControllerFactory createProfileController];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:profileController] animated:YES];
+	
+	[FlurryAPI logEvent:@"Login" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+												 @"SUCCESS", 
+												 @"STATUS", 
+												 nil]];
 }
 
 - (void)loginRequestDidFail:(LoginRequest *)request {
@@ -265,6 +271,11 @@ enum HeaderViewTags {
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
+	
+	[FlurryAPI logEvent:@"Login" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+												 @"FAIL", 
+												 @"STATUS", 
+												 nil]];
 }
 
 #pragma mark UIAlertViewDelegate

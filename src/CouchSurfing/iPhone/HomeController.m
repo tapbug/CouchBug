@@ -15,6 +15,7 @@
 #import "CSTools.h"
 #import "CSImageCropper.h"
 #import "CouchSearchResultController.h"
+#import "FlurryAPI.h"
 
 @interface HomeController ()
 
@@ -152,6 +153,8 @@
     self.profileRequest.delegate = self;
     [self.profileRequest loadProfile];
     
+	
+	
     [super viewDidLoad];
      
 }
@@ -321,6 +324,10 @@
     
     self.items = tempItems;
     [_tableView reloadData];
+	
+	[FlurryAPI setUserID:[NSString stringWithFormat:@"%@", [profile objectForKey:@"name"]]];
+	//[FlurryAPI setAge:21];
+	//[FlurryAPI setGender:@"m"];
 }
 
 - (void)profileRequestFailedToLogin:(HomeRequest *)profileRequest {

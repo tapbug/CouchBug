@@ -30,6 +30,7 @@
 
 #import "RegexKitLite.h"
 #import "CSTools.h"
+#import "FlurryAPI.h"
 
 @interface AppDelegate_iPhone ()
 
@@ -49,6 +50,8 @@
     application.statusBarStyle = UIStatusBarStyleBlackOpaque;
 	application.statusBarHidden = NO;
     
+	[FlurryAPI startSession:@"227PC2P2Y2XM5P5VLITG"];
+	
     self.container = [[[MVIOCContainer alloc] init] autorelease];
 
     [self injectAuth];
@@ -116,6 +119,8 @@
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
     [self.window addSubview:self.tabBarController.view];
     [self.window makeKeyAndVisible];
+	
+	[FlurryAPI logAllPageViews:self.tabBarController];
         
     return YES;
 }
