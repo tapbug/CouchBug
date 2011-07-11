@@ -123,6 +123,7 @@
 
 - (void)couchSearchRequest:(CouchSearchRequest *)request didRecieveResult:(NSArray *)sourfers {
     if (_loadingAction == CouchSearchResultControllerFirst) {
+		self.imageDownloaders = [NSMutableDictionary dictionary];
         self.sourfers = sourfers;
         [self.searchActivity removeOverlap];        
     } else if (_loadingAction == CouchSearchResultControllerMore) {
