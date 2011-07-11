@@ -145,17 +145,17 @@
 	}
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
-			cell.textLabel.text = NSLocalizedString(@"ABOUT CS", nil);
+			cell.textLabel.text = NSLocalizedString(@"ABOUT", nil);
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = NSLocalizedString(@"FAQ", nil);
 		} else if (indexPath.row == 2) {
-			cell.textLabel.text = NSLocalizedString(@"CONTACT CS", nil);
+			cell.textLabel.text = NSLocalizedString(@"CONTACT", nil);
 		}
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
-			cell.textLabel.text = NSLocalizedString(@"ABOUT COUCHBUG", nil);			
+			cell.textLabel.text = NSLocalizedString(@"ABOUT", nil);			
 		} else if (indexPath.row == 1) {
-			cell.textLabel.text = @"Twitter @CouchBug";
+			cell.textLabel.text = @"Twitter";
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = @"Facebook";
 		} else if (indexPath.row == 3) {
@@ -171,7 +171,7 @@
 	if (section == 0) {
 		return NSLocalizedString(@"COUCHSURFING", nil);
 	} else if (section == 1) {
-		return NSLocalizedString(@"COUCHBUG APP", nil);
+		return NSLocalizedString(@"COUCHBUG", nil);
 	}
 	return nil;
 }
@@ -180,11 +180,11 @@
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
 			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
-			webController.urlString = @"http://www.couchsurfing.org/about.html";
+			webController.urlString = @"http://dl.dropbox.com/u/6223494/CouchBug/AboutCS.html";
 			[self.navigationController pushViewController:webController animated:YES];
 		} else if (indexPath.row == 1) {
 			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
-			webController.urlString = @"http://www.couchsurfing.org/help.html";
+			webController.urlString = @"http://dl.dropbox.com/u/6223494/CouchBug/FAQ.html";
 			[self.navigationController pushViewController:webController animated:YES];
 		} else if (indexPath.row == 2) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:info@couchsurfing.org"]];
@@ -192,14 +192,14 @@
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
 			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
-			webController.urlString = @"http://couchbug.com/about.html";
+			webController.urlString = @"http://dl.dropbox.com/u/6223494/CouchBug/AboutCB.html";
 			[self.navigationController pushViewController:webController animated:YES];
 		} else if(indexPath.row == 1) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/CouchBug"]];			
 		} else if (indexPath.row == 2) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/apps/application.php?id=199154550133876"]];
 		} else if (indexPath.row == 3) {
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=CouchBug&id=448515181"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=448515181"]];
 		}
 	}
 }

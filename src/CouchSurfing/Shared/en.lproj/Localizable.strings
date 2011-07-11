@@ -133,10 +133,9 @@
 
 // More tab
 "COUCHSURFING" = "CouchSurfing";
-"ABOUT CS" = "About CouchSurfing";
+"ABOUT" = "About";
 "FAQ" = "FAQ";
-"CONTACT CS" = "Contact CS";
+"CONTACT" = "Contact";
 
-"COUCHBUG APP" = "CouchBug app";
-"ABOUT COUCHBUG" = "About CouchBug";
+"COUCHBUG" = "CouchBug";
 "REVIEW ON ITUNES" = "Review on iTunes";
