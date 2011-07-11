@@ -359,7 +359,7 @@
 			_locationDisabled = YES;
 		} else {
 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
-																message:@"LOCATION NOT FOUND"
+																message:NSLocalizedString(@"LOCATION NOT FOUND", nil)
 															   delegate:nil
 													  cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
 			[alertView show];
