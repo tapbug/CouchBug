@@ -52,7 +52,7 @@
 	UIView *footerContentView = [[[UIView alloc] init] autorelease];
 	footerContentView.autoresizingMask = UIViewAutoresizingFlexibleTopMargin | UIViewAutoresizingFlexibleLeftMargin | UIViewAutoresizingFlexibleRightMargin;
 	[footerView addSubview:footerContentView];
-	UIImageView *iconView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"Icon"]] autorelease];
+	UIImageView *iconView = [[[UIImageView alloc] initWithImage:[UIImage imageNamed:@"appIconRounded"]] autorelease];
 	
 	UILabel *appLabel = [[[UILabel alloc] init] autorelease];
 	UILabel *companyLabel = [[[UILabel alloc] init] autorelease];

@@ -123,6 +123,8 @@
 		D0CBD80813B024F4008BB7D9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0CBD80A13B024F4008BB7D9 /* Localizable.strings */; };
 		D0DD3A3113C3E29D00EE5C94 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DD3A2F13C3E29D00EE5C94 /* Default.png */; };
 		D0DD3A3213C3E29D00EE5C94 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DD3A3013C3E29D00EE5C94 /* Default@2x.png */; };
+		D0FE2EFA13CA864900D633E3 /* appIconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = D0FE2EF813CA864900D633E3 /* appIconRounded.png */; };
+		D0FE2EFB13CA864900D633E3 /* appIconRounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0FE2EF913CA864900D633E3 /* appIconRounded@2x.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,6 +324,8 @@
 		D0CBD80913B024F4008BB7D9 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0DD3A2F13C3E29D00EE5C94 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D0DD3A3013C3E29D00EE5C94 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D0FE2EF813CA864900D633E3 /* appIconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appIconRounded.png; sourceTree = "<group>"; };
+		D0FE2EF913CA864900D633E3 /* appIconRounded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appIconRounded@2x.png"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -552,6 +556,8 @@
 		6C9EACD813A09ECA00C1B19D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D0FE2EF813CA864900D633E3 /* appIconRounded.png */,
+				D0FE2EF913CA864900D633E3 /* appIconRounded@2x.png */,
 				D0DD3A2F13C3E29D00EE5C94 /* Default.png */,
 				D0DD3A3013C3E29D00EE5C94 /* Default@2x.png */,
 				6CE8A5FA13C3A06C00BF66DC /* csLogo.png */,
@@ -851,6 +857,8 @@
 				6CE8A5FD13C3A06C00BF66DC /* csLogo@2x.png in Resources */,
 				D0DD3A3113C3E29D00EE5C94 /* Default.png in Resources */,
 				D0DD3A3213C3E29D00EE5C94 /* Default@2x.png in Resources */,
+				D0FE2EFA13CA864900D633E3 /* appIconRounded.png in Resources */,
+				D0FE2EFB13CA864900D633E3 /* appIconRounded@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
