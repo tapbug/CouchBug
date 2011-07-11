@@ -25,6 +25,7 @@
 
 #import "ProfileController.h"
 #import "LocationDisabledOverlap.h"
+#import "FlurryAPI.h"
 
 @interface CouchSearchResultController ()
 
@@ -338,6 +339,11 @@
 	[manager stopUpdatingLocation];
 	[self.locateActivity removeOverlap];
 	[self performSearchRequest];
+	
+	[FlurryAPI setLatitude:newLocation.coordinate.latitude
+				 longitude:newLocation.coordinate.longitude
+		horizontalAccuracy:newLocation.horizontalAccuracy
+		  verticalAccuracy:newLocation.verticalAccuracy]; 
 }
 
 - (void)locationManager:(CLLocationManager *)manager didFailWithError:(NSError *)error {
@@ -355,7 +361,7 @@
 			_locationDisabled = YES;
 		} else {
 			UIAlertView *alertView = [[UIAlertView alloc] initWithTitle:NSLocalizedString(@"ERROR", nil)
-																message:@"LOCATION CANNOT BE DISCOVERED. CHOOSE LOCATION YOURSELF"
+																message:NSLocalizedString(@"LOCATION NOT FOUND", nil)
 															   delegate:nil
 													  cancelButtonTitle:NSLocalizedString(@"OK", nil) otherButtonTitles:nil];
 			[alertView show];
@@ -397,6 +403,8 @@
 	self.searchRequest = request;
 		
 	[self.searchRequest send];
+	
+	[FlurryAPI logEvent:@"Search"];
 }
 
 - (void)performSearchMore {

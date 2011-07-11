@@ -16,6 +16,7 @@
 #import "CouchSearchResultController.h"
 
 #import "CSTools.h"
+#import "FlurryAPI.h"
 
 enum HeaderViewTags {
 	LabelHeaderViewTag = 1
@@ -132,6 +133,10 @@ enum HeaderViewTags {
 	label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	label.text = NSLocalizedString(@"LOGIN DESCRIPTION", nil);
 	label.textAlignment = UITextAlignmentCenter;
+	label.textColor = UIColorFromRGB(0x4c566c);
+	label.shadowOffset = CGSizeMake(0, 1);
+	label.shadowColor = [UIColor whiteColor];
+	label.font = [UIFont boldSystemFontOfSize:11];
 	label.backgroundColor = [UIColor clearColor];
 	
 	self.footerView = [[[UIView alloc] init] autorelease];
@@ -251,6 +256,11 @@ enum HeaderViewTags {
     [self hideLoading];
     id profileController = [self.authControllerFactory createProfileController];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:profileController] animated:YES];
+	
+	[FlurryAPI logEvent:@"Login" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+												 @"SUCCESS", 
+												 @"STATUS", 
+												 nil]];
 }
 
 - (void)loginRequestDidFail:(LoginRequest *)request {
@@ -261,6 +271,11 @@ enum HeaderViewTags {
                                           otherButtonTitles:nil];
     [alert show];
     [alert release];
+	
+	[FlurryAPI logEvent:@"Login" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+												 @"FAIL", 
+												 @"STATUS", 
+												 nil]];
 }
 
 #pragma mark UIAlertViewDelegate

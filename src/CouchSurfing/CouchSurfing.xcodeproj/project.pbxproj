@@ -123,6 +123,9 @@
 		D0CBD80813B024F4008BB7D9 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = D0CBD80A13B024F4008BB7D9 /* Localizable.strings */; };
 		D0DD3A3113C3E29D00EE5C94 /* Default.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DD3A2F13C3E29D00EE5C94 /* Default.png */; };
 		D0DD3A3213C3E29D00EE5C94 /* Default@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0DD3A3013C3E29D00EE5C94 /* Default@2x.png */; };
+		D0FE2EFA13CA864900D633E3 /* appIconRounded.png in Resources */ = {isa = PBXBuildFile; fileRef = D0FE2EF813CA864900D633E3 /* appIconRounded.png */; };
+		D0FE2EFB13CA864900D633E3 /* appIconRounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0FE2EF913CA864900D633E3 /* appIconRounded@2x.png */; };
+		D0FE2F0313CA93EF00D633E3 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0FE2F0213CA93EF00D633E3 /* libFlurry.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -322,6 +325,13 @@
 		D0CBD80913B024F4008BB7D9 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0DD3A2F13C3E29D00EE5C94 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
 		D0DD3A3013C3E29D00EE5C94 /* Default@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default@2x.png"; sourceTree = "<group>"; };
+		D0FE2EF813CA864900D633E3 /* appIconRounded.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = appIconRounded.png; sourceTree = "<group>"; };
+		D0FE2EF913CA864900D633E3 /* appIconRounded@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "appIconRounded@2x.png"; sourceTree = "<group>"; };
+		D0FE2EFE13CA93EF00D633E3 /* FlurryAdDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAdDelegate.h; sourceTree = "<group>"; };
+		D0FE2EFF13CA93EF00D633E3 /* FlurryAPI+AppCircle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FlurryAPI+AppCircle.h"; sourceTree = "<group>"; };
+		D0FE2F0013CA93EF00D633E3 /* FlurryOffer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryOffer.h; sourceTree = "<group>"; };
+		D0FE2F0113CA93EF00D633E3 /* FlurryAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FlurryAPI.h; sourceTree = "<group>"; };
+		D0FE2F0213CA93EF00D633E3 /* libFlurry.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; path = libFlurry.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -339,6 +349,7 @@
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
 				6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */,
 				6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */,
+				D0FE2F0313CA93EF00D633E3 /* libFlurry.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -434,6 +445,7 @@
 		29B97323FDCFA39411CA2CEA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				D0FE2EFC13CA93EF00D633E3 /* FlurryLib */,
 				6C51FBAE13C590AA00AE40B3 /* MapKit.framework */,
 				6C51FBAC13C4C2C300AE40B3 /* CoreLocation.framework */,
 				6C71C70A13A9E0CF005FE511 /* QuartzCore.framework */,
@@ -552,6 +564,8 @@
 		6C9EACD813A09ECA00C1B19D /* images */ = {
 			isa = PBXGroup;
 			children = (
+				D0FE2EF813CA864900D633E3 /* appIconRounded.png */,
+				D0FE2EF913CA864900D633E3 /* appIconRounded@2x.png */,
 				D0DD3A2F13C3E29D00EE5C94 /* Default.png */,
 				D0DD3A3013C3E29D00EE5C94 /* Default@2x.png */,
 				6CE8A5FA13C3A06C00BF66DC /* csLogo.png */,
@@ -728,6 +742,27 @@
 			name = styles;
 			sourceTree = "<group>";
 		};
+		D0FE2EFC13CA93EF00D633E3 /* FlurryLib */ = {
+			isa = PBXGroup;
+			children = (
+				D0FE2EFD13CA93EF00D633E3 /* AppCircle */,
+				D0FE2F0113CA93EF00D633E3 /* FlurryAPI.h */,
+				D0FE2F0213CA93EF00D633E3 /* libFlurry.a */,
+			);
+			name = FlurryLib;
+			path = ../../libs/FlurryLib;
+			sourceTree = "<group>";
+		};
+		D0FE2EFD13CA93EF00D633E3 /* AppCircle */ = {
+			isa = PBXGroup;
+			children = (
+				D0FE2EFE13CA93EF00D633E3 /* FlurryAdDelegate.h */,
+				D0FE2EFF13CA93EF00D633E3 /* FlurryAPI+AppCircle.h */,
+				D0FE2F0013CA93EF00D633E3 /* FlurryOffer.h */,
+			);
+			path = AppCircle;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -851,6 +886,8 @@
 				6CE8A5FD13C3A06C00BF66DC /* csLogo@2x.png in Resources */,
 				D0DD3A3113C3E29D00EE5C94 /* Default.png in Resources */,
 				D0DD3A3213C3E29D00EE5C94 /* Default@2x.png in Resources */,
+				D0FE2EFA13CA864900D633E3 /* appIconRounded.png in Resources */,
+				D0FE2EFB13CA864900D633E3 /* appIconRounded@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -952,13 +989,14 @@
 					../../libs/objectiveioc/src/Classes,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
-					/usr/include/tidy,
+					../../libs/Tidy/include,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
+					"\"$(SRCROOT)/../../libs/FlurryLib\"",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -974,7 +1012,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				COPY_PHASE_STRIP = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CouchSurfing_Prefix.pch;
@@ -984,13 +1023,14 @@
 					../../libs/objectiveioc/src/Classes,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
-					/usr/include/tidy,
+					../../libs/Tidy/include,
 				);
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
+					"\"$(SRCROOT)/../../libs/FlurryLib\"",
 				);
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -1007,7 +1047,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Petr Cekyl (ED285PZCB2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1018,7 +1058,7 @@
 					../../libs/JSONKit/,
 					"../../libs/TouchXML/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				ONLY_ACTIVE_ARCH = NO;
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -1026,9 +1066,8 @@
 					"-licucore",
 				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D2DC60A-E598-49D3-B465-82E4997F2A43";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Debug;
@@ -1037,7 +1076,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Petr Cekyl (ED285PZCB2)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
 				GCC_C_LANGUAGE_STANDARD = c99;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
@@ -1048,7 +1087,7 @@
 					../../libs/JSONKit/,
 					"../../libs/TouchXML/**",
 				);
-				IPHONEOS_DEPLOYMENT_TARGET = 3.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.0;
 				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
 				OTHER_LDFLAGS = (
 					"-all_load",
@@ -1056,9 +1095,8 @@
 					"-licucore",
 				);
 				PREBINDING = NO;
-				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "6D2DC60A-E598-49D3-B465-82E4997F2A43";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 				USER_HEADER_SEARCH_PATHS = "";
 			};
 			name = Release;
