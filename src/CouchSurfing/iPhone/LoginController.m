@@ -132,6 +132,10 @@ enum HeaderViewTags {
 	label.autoresizingMask = UIViewAutoresizingFlexibleWidth;
 	label.text = NSLocalizedString(@"LOGIN DESCRIPTION", nil);
 	label.textAlignment = UITextAlignmentCenter;
+	label.textColor = UIColorFromRGB(0x4c566c);
+	label.shadowOffset = CGSizeMake(0, 1);
+	label.shadowColor = [UIColor whiteColor];
+	label.font = [UIFont boldSystemFontOfSize:11];
 	label.backgroundColor = [UIColor clearColor];
 	
 	self.footerView = [[[UIView alloc] init] autorelease];
