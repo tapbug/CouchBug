@@ -18,7 +18,9 @@
 "LOCATING" = "Locating…";
 "LOCATION WARNING TITLE" = "CouchBug needs your current location";
 "LOCATION WARNING BODY" = "To find couches near you, CouchBug needs to know your current location.\nPlease enable Location Services for CouchBug in the Settings app (under \"General\" → \"Location Services\") and relaunch CouchBug or tap on \"Continue\" and select location manually.";
-"CONTINUE" = "Countinue";
+
+"ERROR" = "Error";
+"LOCATION NOT FOUND" = "Your location couldn't be determined. Select location manually.";
 
 // Search results tab
 "LOADING COUCHES" = "Loading couches…";
