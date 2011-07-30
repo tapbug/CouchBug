@@ -209,7 +209,7 @@
         
 		surfer.livesIn = [[[node nodesForXPath:@"(.//x:div[text()='Lives in:']/following-sibling::x:div/text())[1]" namespaceMappings:ns error:&error] lastObject] stringValue];
 		
-		NSString *lastLoginInfoStr = [[[node nodesForXPath:@".//x:div[text()='Last in:']/following-sibling::x:div/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
+		NSString *lastLoginInfoStr = [[[node nodesForXPath:@".//x:div[text()='Last In:']/following-sibling::x:div/text()" namespaceMappings:ns error:&error] lastObject] stringValue];
 		NSArray *lastLoginInfos = [lastLoginInfoStr componentsSeparatedByString:@" - "];
 		if ([lastLoginInfos count] == 2) {
 			surfer.lastLoginDate = [lastLoginInfos objectAtIndex:1];				
