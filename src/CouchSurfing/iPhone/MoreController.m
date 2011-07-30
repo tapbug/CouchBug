@@ -133,7 +133,7 @@
 	if (section == 0) {
 		return 3;
 	} else if (section == 1) {
-		return 4;
+		return 5;
 	}
 	return 0;
 }
@@ -159,6 +159,8 @@
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = @"Facebook";
 		} else if (indexPath.row == 3) {
+			cell.textLabel.text = @"CouchSurfing Group";
+		} else if (indexPath.row == 4) {
 			cell.textLabel.text = NSLocalizedString(@"REVIEW ON ITUNES", nil);
 		}
 	}
@@ -197,8 +199,10 @@
 		} else if(indexPath.row == 1) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/CouchBug"]];			
 		} else if (indexPath.row == 2) {
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/apps/application.php?id=199154550133876"]];
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/CouchBugApp"]];
 		} else if (indexPath.row == 3) {
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.couchsurfing.org/group.html?gid=44209"]];
+		} else if (indexPath.row == 4) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=448515181"]];
 		}
 	}
