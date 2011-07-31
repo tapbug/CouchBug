@@ -8,6 +8,7 @@
 
 #import "MoreController.h"
 #import "CSWebViewController.h"
+#import "FlurryAPI.h"
 
 @implementation MoreController
 
@@ -184,12 +185,24 @@
 			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
 			webController.urlString = @"http://dl.dropbox.com/u/6223494/CouchBug/AboutCS.html";
 			[self.navigationController pushViewController:webController animated:YES];
+			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+														 @"About CS", 
+														 @"Link", 
+														 nil]];
 		} else if (indexPath.row == 1) {
 			CSWebViewController *webController = [[[CSWebViewController alloc] init] autorelease];
 			webController.urlString = @"http://dl.dropbox.com/u/6223494/CouchBug/FAQ.html";
 			[self.navigationController pushViewController:webController animated:YES];
+			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+															 @"FAQ CS", 
+															 @"Link", 
+															 nil]];
 		} else if (indexPath.row == 2) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:info@couchsurfing.org"]];
+			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+															 @"Contact CS", 
+															 @"Link", 
+															 nil]];
 		}
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
@@ -197,13 +210,29 @@
 			webController.urlString = @"http://dl.dropbox.com/u/6223494/CouchBug/AboutCB.html";
 			[self.navigationController pushViewController:webController animated:YES];
 		} else if(indexPath.row == 1) {
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/CouchBug"]];			
+			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://twitter.com/CouchBug"]];
+			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+															 @"Twitter CB", 
+															 @"Link", 
+															 nil]];
 		} else if (indexPath.row == 2) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.facebook.com/CouchBugApp"]];
+			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+															 @"Facebook CB", 
+															 @"Link", 
+															 nil]];
 		} else if (indexPath.row == 3) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://www.couchsurfing.org/group.html?gid=44209"]];
+			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+															 @"Group CB", 
+															 @"Link", 
+															 nil]];
 		} else if (indexPath.row == 4) {
 			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"itms-apps://ax.itunes.apple.com/WebObjects/MZStore.woa/wa/viewContentsUserReviews?type=Purple+Software&id=448515181"]];
+			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+															 @"Review", 
+															 @"Link", 
+															 nil]];
 		}
 	}
 }

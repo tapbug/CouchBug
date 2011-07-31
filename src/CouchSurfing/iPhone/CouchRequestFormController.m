@@ -13,6 +13,7 @@
 
 #import "CSSelectedValueCell.h"
 #import "ActivityOverlap.h"
+#import "FlurryAPI.h"
 
 @interface CouchRequestFormController ()
 
@@ -640,6 +641,11 @@
 	alertView.delegate = self;
 	[alertView show];
 	[alertView release]; alertView = nil;
+	
+	[FlurryAPI logEvent:@"CouchRequest" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+													 @"YES", 
+													 @"Sent", 
+													 nil]];
 }
 
 - (void)couchRequestDidFailedWithErrors:(NSDictionary *)errors {
@@ -654,6 +660,16 @@
 											  otherButtonTitles:nil];
 	[alertView show];
 	[alertView release]; alertView = nil;
+	
+	[FlurryAPI logEvent:@"CouchRequest" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+														@"NO", 
+														@"Sent", 
+														nil]];
+	
+	[FlurryAPI logEvent:@"CouchRequest Error" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
+														messages, 
+														@"Error", 
+														nil]];
 }
 
 #pragma Mark UIAlertViewDelegate methods

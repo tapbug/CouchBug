@@ -50,7 +50,7 @@
 	[super dealloc];
 }
 
-- (void)sendCouchRequest {	
+- (void)sendCouchRequest {
 	NSString *urlString = @"http://www.couchsurfing.org/couchrequest/a_create";
 	NSURL *url = [NSURL URLWithString:urlString];
 	NSMutableURLRequest *request = [[[NSMutableURLRequest alloc] initWithURL:url] autorelease];
