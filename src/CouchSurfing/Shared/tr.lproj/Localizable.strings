@@ -1,0 +1,143 @@
+// TabBar
+"PROFILE" = "Profil";
+"SEARCH" = "Arama Yap";
+"MORE" = "Daha Fazla";
+
+// Home tab
+"MEMBERS ONLINE" = "Online KanepeSörfçüleri";
+"PROFILE VIEWS" = "profil izlemesi";
+"UNREAD MESSAGE" = "okunmamış mesaj";
+"UNREAD MESSAGES" = "okunmamış mesajlar";
+"FRIEND REQUEST" = "arkadaşlık isteği";
+"FRIEND REQUESTS" = "arkadaşlık istekleri";
+"COUCH REQUEST" = "kanepe isteği";
+"COUCH REQUESTS" = "kanepe istekleri";
+"MEMBER SINCE" = "üyelik tarihi";
+
+// Location
+"LOCATING" = "Yer bilginiz alınıyor…";
+"LOCATION WARNING TITLE" = "CouchBug'ın konum bilgilerinize ulaşmasını onaylayınız";
+
+"LOCATION WARNING BODY" = "Çevrenizdeki kanepeleri bulabilmek için konum bilgileriniz gerekmektedir.\n\nLütfen Konum Servislerinden CouchBug'ı aktif hale getiriniz. \"Ayarlar\" → \"Konum Servisleri\" or tap on \"Filtrele\" and select location manually.";
+
+
+"ERROR" = "Hata";
+"LOCATION NOT FOUND" = "Konumunuz algılanamadı. Konumunuzu manuel olarak seçiniz.";
+
+// Search results tab
+"LOADING COUCHES" = "Kanepeler yükleniyor...";
+"FILTER" = "Filtrele";
+"COUCHSEARCH" = "KanepeAra";
+
+// Search result cell
+"REFERENCES LOWERCASE" = "referanslar";
+"PHOTOS LOWERCASE" = "fotoğraflar";
+"REPLY RATE LOWERCASE" = "yanıt oranı";
+
+// Search filter
+"LOCATION" = "Konum";
+
+"COUCH STATUS" = "Kanepe durumu";
+"YES" = "Evet";
+"MAYBE" = "Belki";
+"COFFEE" = "Kahve veya içki";
+"TRAVELING" = "Seyahatte";
+
+"HOST" = "Konuk eden";
+"AGE" = "Yaş";
+"HAS SPACE FOR" = "Yer kapasitesi";
+"LANGUAGE" = "Dil";
+"LAST LOGIN" = "Son giriş tarihi";
+"MALE" = "Erkek";
+"FEMALE" = "Bayan";
+"SEVERAL PEOPLE" = "Birden çok kişi";
+"HAS PHOTO" = "Fotoğrafı var";
+"WHEELCHAIR ACCESSIBLE" = "Tekerlekli sandalye uyumlu";
+
+"TO" = "to";
+"ANY" = "Hepsi";
+"DAYS" = "günler";
+"HOURS" = "saatler";
+
+"COMMUNITY" = "Topluluk";
+"VERIFIED" = "Onaylı";
+"VOUCHED" = "Kefili var";
+"AMBASSADOR" = "Büyükelçi";
+
+"NAME USERNAME" = "İsim";
+"KEYWORD" = "Anahtar kelime";
+
+// Language picker
+"ANY LANGUAGE" = "Tüm diller";
+
+// Search location
+"LOADING LOCATIONS" = "Konumlar alınıyor...";
+"CURRENT LOCATION" = "Şu anki konum";
+"EVERYWHERE" = "Her yer";
+
+// User's profile
+"COUCHREQUEST" = "Kanepeİsteği";
+"FROM" = "Nereden";
+"REFERENCES" = "Referansları";
+"FRIENDS" = "Arkadaşları";
+"CURRENT MISSION" = "Şu anki misyonu";
+"PERSONAL DESCRIPTION" = "Kişisel Tanım";
+"COUCH INFORMATION" = "Kanepe Bilgisi";
+"LOADING" = "Yükleniyor...";
+
+"PREFERRED GENDER" = "Tercih edilen cinsiyet";
+"MAX SURFERS PER NIGHT" = "Konuk Edebileceğim Maksimum Sörfçü Sayısı";
+"SHARED SLEEPING SURFACE" = "Yatak Paylaşımı";
+"SHARED ROOM" = "Oda Paylaşımı";
+
+// CouchRequest form
+"SENDING" = "Gönderiliyor...";
+"SEND" = "Gönder";
+"SUBJECT" = "Konu";
+"CHOOSE" = "Seçiniz";
+
+"ARRIVAL DATE" = "Geliş tarihi";
+"DEPARTURE DATE" = "Gidiş tarihi";
+
+"NUMBER OF SURFERS" = "Sörfçü sayısı";
+"ARRIVING VIA" = "Seyahat aracı";
+
+"PLANE" = "Uçak";
+"MOTOR VEHICLE" = "Motorlu taşıt";
+"BUS" = "Otobüs";
+"TRAIN" = "Tren";
+"BICYCLE" = "Bisiklet";
+"FOOT" = "Yürüyerek";
+"METRO" = "Metro";
+"BOAT" = "Vapur";
+"HITCH-HIKING" = "Otostop";
+"OTHER" = "Diğer";
+
+"COUCHREQUEST SENT" = "Kanepeİsteği başarıyla gönderildi!";
+
+// Login / logout
+"USERNAME" = "kullanıcı adı";
+"PASSWORD" = "şifre";
+"CANCEL" = "iptal";
+
+"SIGN UP" = "Üye ol";
+"SIGN IN" = "Giriş yap";
+"SIGN OUT" = "Çıkış yap";
+"SIGNING IN" = "Giriş yapılıyor...";
+"SIGNING OUT" = "Çıkış yapılıyor...";
+
+"LOGIN DESCRIPTION" = "CS bilgilerinizle giriş yapınız. Üyeliğiniz yok ise, üye olabilirsiniz. CouchSurfing ile ilgili daha fazla bilgi için Fazla'ya basınız.";
+
+"SORRY" = "Üzgünüz";
+"LOGIN ERROR" = "Kullanıcı adı ve şifre kombinasyonu hatalı";
+
+"LOADING PROFILE" = "Profil yükleniyor…";
+
+// More tab
+"COUCHSURFING" = "CouchSurfing";
+"ABOUT" = "Hakkında";
+"FAQ" = "SSS";
+"CONTACT" = "İletişim";
+
+"COUCHBUG" = "CouchBug";
+"REVIEW ON ITUNES" = "iTunes'da yorum yapın";
