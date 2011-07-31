@@ -6,8 +6,6 @@
 //  Copyright 2010 __MyCompanyName__. All rights reserved.
 //
 
-#import <CoreLocation/CoreLocation.h>
-
 #import "AppDelegate_iPhone.h"
 
 //Auth module
@@ -49,7 +47,6 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     application.statusBarStyle = UIStatusBarStyleBlackOpaque;
 	application.statusBarHidden = NO;
-    
 	[FlurryAPI startSession:@"227PC2P2Y2XM5P5VLITG"];
 	
     self.container = [[[MVIOCContainer alloc] init] autorelease];
