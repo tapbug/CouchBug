@@ -1,0 +1,7 @@
+1.1
+✦ (null) user name & profile picture fixed
+✦ last login date and location is shown at user's profile again
+✦ link to our CouchSurfing group added to About page
+✦ other bug fixes
+
+Thanks for your support! Please leave us review in AppStore after every update…

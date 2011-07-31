@@ -4,10 +4,12 @@ Travel around the world for free, explore places like locals and meet awesome fr
 
 CouchBug has not been developed by CouchSurfing International Inc.
 
-CouchSurfing is an international non-profit network that connects travelers with locals in over 230 countries around the world. Since 2004, members have been using CS system to come together for cultural exchange, friendship, and learning experiences. Today, CouchSurfing has around 3 million members.
+CouchSurfing is an international non-profit network that connects travelers with locals in over 230 countries around the world. Since 2004, members have been using CS system to come together for cultural exchange, friendship and learning experiences. Today, CouchSurfing has more than 3 million members.
 
-With CouchBug application you can access CouchSurfing network on your iPhone or iPod Touch. We are CouchSurfers too and we know that you don't always have your laptop with you on your travels. That's why we decided to create CouchBug. An easy, beautiful and fast way to access CS on the go. We implement basic features so far, but we are committed to work really hard on this app and bring you more features soon.
+With CouchBug application you can access CouchSurfing network on your iPhone and iPod Touch. 
+We are CouchSurfers too and we know that you don't always have your laptop with you on your travels. That's why we decided to create CouchBug. An easy, beautiful and fast way to access CS on the go. 
 
+We implemented basic features so far, but we are committed to work really hard on this app and bring you more features soon.
 Contact us on Facebook and Twitter and let us know what would you like to see next.
 
 FEATURES
