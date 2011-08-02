@@ -399,6 +399,7 @@
 		D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "photoNone@2x.png"; sourceTree = "<group>"; };
 		D073DF3A13AAAC9E002D00F9 /* worldBg.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = worldBg.png; sourceTree = "<group>"; };
 		D073DF3B13AAAC9E002D00F9 /* worldBg@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "worldBg@2x.png"; sourceTree = "<group>"; };
+		D0A9943D13E83D2C00270330 /* es */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = es; path = /Users/peter/Projects/git_CouchSurfing/src/CouchSurfing/Shared/es.lproj/Localizable.strings; sourceTree = "<absolute>"; };
 		D0B7961913E4DFE100DA111D /* tr */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = tr; path = tr.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0CBD80913B024F4008BB7D9 /* en */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		D0DD3A2F13C3E29D00EE5C94 /* Default.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Default.png; sourceTree = "<group>"; };
@@ -1152,6 +1153,7 @@
 				D0CBD80913B024F4008BB7D9 /* en */,
 				D0B7961913E4DFE100DA111D /* tr */,
 				D0E41CDF13E6085700C42612 /* de */,
+				D0A9943D13E83D2C00270330 /* es */,
 			);
 			name = Localizable.strings;
 			path = Shared;

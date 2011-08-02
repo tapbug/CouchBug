@@ -1,0 +1,141 @@
+// TabBar                                                           					              
+"PROFILE" = "Perfil";                        						
+"SEARCH" = "Buscar";                         							
+"MORE" = "Más";                          								    
+
+// Home tab                                  								 
+"MEMBERS ONLINE" = "CouchSurfers en línea";    						 
+"PROFILE VIEWS" = "Visitas al perfíl";								
+"UNREAD MESSAGE" = "Mensaje sin leer";                                                                            
+"UNREAD MESSAGES" = "Mensajes sin leer";                                                                         
+"FRIEND REQUEST" = "Solucitud de amistad";                                                                                   
+"FRIEND REQUESTS" = "Solucitudes de amistad";                                                                                 
+"COUCH REQUEST" = "Solicitud de sofá";                                                                                  
+"COUCH REQUESTS" = "Solicitudes de sofá";                                                                             
+"MEMBER SINCE" = "Miembro desde";                                                                                       
+
+// Location                                                                                                                                 
+"LOCATING" = "Ubicando...";                                                                                                     
+"LOCATION WARNING TITLE" = "CouchBug necesita tu ubicación actual";                                    
+"LOCATION WARNING BODY" = "Para encontrar sofas cerca de tí la app necesita saber tu ubicación actual.\n\n Por favor activa Servicios de Ubicación para Couchbug en \"Ajustes\" ? \"Servicios de Ubicación\" o utiliza \"Filtro\" y selecciona tu ubicación manualmente.";
+
+"ERROR" = "Error";                                                                                                                   
+"LOCATION NOT FOUND" = "Tu ubicación no puede ser encontrada. Selecciona la ubicación manualmente.";       
+
+// Search results tab                                                                                                                   
+"LOADING COUCHES" = "Cargando sofas…";                                                                          
+"FILTER" = "Filtro";                                                                                                                  
+"COUCHSEARCH" = "BuscaSofa";                                                                                         
+
+// Search result cell                                                                                                                   
+"REFERENCES LOWERCASE" = "Referencias";                                                                           
+"PHOTOS LOWERCASE" = "Fotos";                                                                                        
+"REPLY RATE LOWERCASE" = "Porcentaje de respuesta";                                                                               
+
+// Search filter
+"LOCATION" = "Ubicación";
+
+"COUCH STATUS" = "Estado del Sofa";
+"YES" = "Sí";
+"MAYBE" = "Tal vez";
+"COFFEE" = "Café o una Bebida";
+"TRAVELING" = "Viajando";
+
+"HOST" = "Anfitrión";
+"AGE" = "Edad";
+"HAS SPACE FOR" = "Tiene espacio para";
+"LANGUAGE" = "Idioma";
+"LAST LOGIN" = "Última conexión";
+"MALE" = "Hombre";
+"FEMALE" = "Mujer";
+"SEVERAL PEOPLE" = "Varias personas";
+"HAS PHOTO" = "Tiene foto";
+"WHEELCHAIR ACCESSIBLE" = "Acceso para silla de ruedas";
+
+"TO" = "a";
+"ANY" = "Cualquier";
+"DAYS" = "días";
+"HOURS" = "horas";
+
+"COMMUNITY" = "Comunidad";
+"VERIFIED" = "Verificado";
+"VOUCHED" = "Avalado";
+"AMBASSADOR" = "Embajador";
+
+"NAME USERNAME" = "Nombre";
+"KEYWORD" = "Contraseña";
+
+// Language picker
+"ANY LANGUAGE" = "Cualquier idioma";
+
+// Search location
+"LOADING LOCATIONS" = "Cargando ubicaciones…";
+"CURRENT LOCATION" = "Ubicación actual";
+"EVERYWHERE" = "Cualquier lugar";
+
+// User's profile
+"COUCHREQUEST" = "Solicitud de Sofa";
+"FROM" = "De";
+"REFERENCES" = "Referencias";
+"FRIENDS" = "Amigos";
+"CURRENT MISSION" = "Misión Actual";
+"PERSONAL DESCRIPTION" = "Descripción personal";
+"COUCH INFORMATION" = "Información del sofa";
+"LOADING" = "Cargando…";
+
+"PREFERRED GENDER" = "Género preferido";
+"MAX SURFERS PER NIGHT" = "Maximos surfers por noche";
+"SHARED SLEEPING SURFACE" = "Superficie para dormir compartida";
+"SHARED ROOM" = "Habitación compartida";
+
+// CouchRequest form
+"SENDING" = "Enviando…";
+"SEND" = "Enviar";
+"SUBJECT" = "Título";
+"CHOOSE" = "Elegir";
+
+"ARRIVAL DATE" = "Fecha de llegada";
+"DEPARTURE DATE" = "Fecha de partida";
+
+"NUMBER OF SURFERS" = "Número de surfers";
+"ARRIVING VIA" = "Llegando via";
+
+"PLANE" = "Avión";
+"MOTOR VEHICLE" = "Automóvil";
+"BUS" = "Autobus";
+"TRAIN" = "Tren";
+"BICYCLE" = "Bicicleta";
+"FOOT" = "A pie";
+"METRO" = "Metro";
+"BOAT" = "Barco";
+"HITCH-HIKING" = "Dedo";
+"OTHER" = "Otro";
+
+"COUCHREQUEST SENT" = "Solicitud de Sofa enviada exitosamente!";
+
+// Login / logout
+"USERNAME" = "Nombre del usuario";
+"PASSWORD" = "Contraseña";
+"CANCEL" = "Cancelar";
+
+"SIGN UP" = "Registrarse";
+"SIGN IN" = "Ingresar";
+"SIGN OUT" = "Salir";
+"SIGNING IN" = "Ingresando…";
+"SIGNING OUT" = "Saliendo…";
+
+"LOGIN DESCRIPTION" = "Ingresando con cuenta CS. Si no tienes una cuenta, puedes registrarte para obtener una. Para saber mas acerca de CouchSurfing presiona sobre Más.";
+
+"SORRY" = "Disculpa";
+"LOGIN ERROR" = "Nombre de usuario u contraseña no validos";
+
+"LOADING PROFILE" = "Cargando perfil…";
+
+// More tab
+"COUCHSURFING" = "CouchSurfing";
+"ABOUT" = "Acerca";
+"FAQ" = "FAQ";
+"CONTACT" = "Contacto";
+
+"COUCHBUG" = "CouchBug";
+"REVIEW ON ITUNES" = "Reseña en iTunes";
