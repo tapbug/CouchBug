@@ -8,11 +8,14 @@
 
 #import "AppDelegate_iPhone.h"
 
+#import "ActiveControllersSetter.h"
+
 //Auth module
 #import "AuthControllersFactory.h"
 #import "LoginAnnouncer.h"
 #import "IdentityManager.h"
 #import "HomeRequestFactory.h"
+#import "HomeController.h"
 
 //Couchsearch UI modules
 #import "CouchSearchFormControllerFactory.h"
@@ -50,7 +53,7 @@
 	[FlurryAPI startSession:@"227PC2P2Y2XM5P5VLITG"];
 	
     self.container = [[[MVIOCContainer alloc] init] autorelease];
-
+	[self.container addComponent:self representing:[NSArray arrayWithObject:@protocol(ActiveControllersSetter)]];
     [self injectAuth];
     [self injectCouchSearch];
     
@@ -61,6 +64,7 @@
 	LoginController *loginController = nil;
     if (loginInformation.username && loginInformation.password) {
         authController = [authControllerFactory createProfileController];
+		[self setHomeController:authController];
     } else {
         authController = [authControllerFactory createLoginController];
 		loginController = authController;
@@ -165,16 +169,13 @@
 
 
 - (void)applicationWillEnterForeground:(UIApplication *)application {
-    /*
-     Called as part of  transition from the background to the inactive state: here you can undo many of the changes made on entering the background.
-     */
+	[_searchResultController searchAgainBecauseOfLocationDisabled];
+	[_activeHomeController refreshHomeInformation];
 }
 
 
 - (void)applicationDidBecomeActive:(UIApplication *)application {
-	[_searchResultController searchAgainBecauseOfLocationDisabled];
 }
-
 
 - (void)applicationWillTerminate:(UIApplication *)application {
     /*
@@ -210,6 +211,12 @@
 			[_searchResultController scrollToTop];
 		}
 	}
+}
+
+#pragma Mark ActiveControllersSetter role
+
+- (void)setHomeController:(HomeController *)controller {
+	_activeHomeController = controller;
 }
 
 @end

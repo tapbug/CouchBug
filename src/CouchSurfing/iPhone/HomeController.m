@@ -16,6 +16,7 @@
 #import "CSImageCropper.h"
 #import "CouchSearchResultController.h"
 #import "FlurryAPI.h"
+#import "ActiveControllersSetter.h"
 
 @interface HomeController ()
 
@@ -33,7 +34,8 @@
 
 @property (nonatomic, retain) NSArray *items;
 
--(void)logoutAction;
+- (void)logoutAction;
+- (void)loadHomeInformation;
 
 @end
 
@@ -48,6 +50,7 @@
 @synthesize logoutOverlap = _logoutOverlap;
 @synthesize logoutRequest = _logoutRequest;
 @synthesize loginAnnouncer = _loginAnnouncer;
+@synthesize activeControllersSetter = _activeControllersSetter;
 
 @synthesize avatarDownloader = _avatarDownloader;
 
@@ -139,7 +142,6 @@
         [[[ActivityOverlap alloc] initWithView:self.view
                                          title:NSLocalizedString(@"SIGNING OUT", nil)] autorelease];
     
-    [self.loadingOverlap overlapView];
     self.navigationItem.leftBarButtonItem = 
         [[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"SIGN OUT", nil)
                                          style:UIBarButtonItemStyleBordered
@@ -148,12 +150,8 @@
     
     self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
-    
-    self.profileRequest = [self.profileRequestFactory createHomeRequest];
-    self.profileRequest.delegate = self;
-    [self.profileRequest loadProfile];
-    
 	
+	[self loadHomeInformation];
 	
     [super viewDidLoad];
      
@@ -168,6 +166,18 @@
 
 - (BOOL)shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return YES;
+}
+
+- (void)viewDidAppear:(BOOL)animated {
+	if (_shouldReload) {
+		[self loadHomeInformation];
+		_shouldReload = NO;
+	}
+	_isActive = YES;
+}
+
+- (void)viewDidDisappear:(BOOL)animated {
+	_isActive = NO;
 }
 
 #pragma Mark UITableViewDataSource methods
@@ -341,6 +351,7 @@
     [self.loginAnnouncer userHasLoggedOut];
     [self.logoutOverlap removeOverlap];
     id loginController = [self.authControllersFactory createLoginController];
+	[self.activeControllersSetter setHomeController:nil];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:loginController] animated:YES];
 }
 
@@ -358,6 +369,25 @@
     self.logoutRequest = [[[LogoutRequest alloc] init] autorelease];
     self.logoutRequest.delegate = self;
     [self.logoutRequest logout];
+}
+
+#pragma Mark private methods
+
+- (void)loadHomeInformation {
+	[self.loadingOverlap overlapView];
+    self.profileRequest = [self.profileRequestFactory createHomeRequest];
+    self.profileRequest.delegate = self;
+    [self.profileRequest loadProfile];
+}
+
+#pragma Mark Public methods
+
+- (void)refreshHomeInformation {
+	if (_isActive) {
+		[self loadHomeInformation];
+	} else {
+		_shouldReload = YES;
+	}
 }
 
 @end

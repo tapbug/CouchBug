@@ -20,6 +20,7 @@
 @synthesize loginInformation = injLoginInformation;
 @synthesize profileRequestFactory = injProfileRequestFactory;
 @synthesize couchSearchResultController = injCouchSearchResultController;
+@synthesize activeControllersSetter = injActiveControllersSetter;
 
 - (void)dealloc {
     self.profileRequestFactory = nil;
@@ -32,7 +33,7 @@
 																 authControllerFactory:self] autorelease];
 
 	loginController.couchSearchController = self.couchSearchResultController;
-	
+	loginController.activeControllersSetter = self.activeControllersSetter;
 	return loginController;
 }
 

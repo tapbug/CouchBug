@@ -13,6 +13,7 @@
 @class LoginController;
 @protocol LoginAnnouncer;
 @protocol LoginInformation;
+@protocol ActiveControllersSetter;
 
 @class HomeController;
 @class HomeRequestFactory;
@@ -24,10 +25,12 @@
     
     HomeRequestFactory *injProfileRequestFactory;
 	CouchSearchResultController *injCouchSearchResultController;
+	id<ActiveControllersSetter> injActiveControllersSetter;
 }
 
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
 @property (nonatomic, assign) id<LoginInformation> loginInformation;
+@property (nonatomic, assign) id<ActiveControllersSetter> activeControllersSetter;
 
 @property (nonatomic, retain) HomeRequestFactory *profileRequestFactory;
 @property (nonatomic, assign) CouchSearchResultController *couchSearchResultController;

@@ -8,16 +8,20 @@
 
 #import <UIKit/UIKit.h>
 #import "MVIOC/MVIOC.h"
+#import "ActiveControllersSetter.h"
 
 @class CouchSearchResultController;
+@class HomeController;
 
-@interface AppDelegate_iPhone : NSObject <UIApplicationDelegate, UITabBarControllerDelegate> {
+@interface AppDelegate_iPhone : NSObject <UIApplicationDelegate, UITabBarControllerDelegate, ActiveControllersSetter> {
     UIWindow *_window;
     MVIOCContainer *_container;
     UITabBarController *_tabBarController;
 	
 	UINavigationController *_searchNavigationController;
 	CouchSearchResultController *_searchResultController;
+	
+	HomeController *_activeHomeController;
 }
 
 @property (nonatomic, retain) UIWindow *window;

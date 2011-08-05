@@ -366,6 +366,7 @@
 		6CC8B60713B8BA3100E9A556 /* LocationSearchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocationSearchController.m; sourceTree = "<group>"; };
 		6CC8B60A13B90D6800E9A556 /* CouchRequestFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchRequestFormController.h; sourceTree = "<group>"; };
 		6CC8B60B13B90D6800E9A556 /* CouchRequestFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchRequestFormController.m; sourceTree = "<group>"; };
+		6CD9B4F113EC5C30008AB923 /* ActiveControllersSetter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveControllersSetter.h; sourceTree = "<group>"; };
 		6CDE85C813A51AE70065A991 /* AuthControllersFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AuthControllersFactory.h; sourceTree = "<group>"; };
 		6CDE85C913A51AE70065A991 /* AuthControllersFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AuthControllersFactory.m; sourceTree = "<group>"; };
 		6CDE85D113A547510065A991 /* CouchSearchFilter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = CouchSearchFilter.h; path = Shared/Classes/CouchSearchFilter.h; sourceTree = "<group>"; };
@@ -458,6 +459,7 @@
 				6C7E868513B262C0000ED485 /* CSSelectedValueCell.m */,
 				6C4F60DE13C6E5DE004FBCE9 /* CSWebViewController.h */,
 				6C4F60DF13C6E5DE004FBCE9 /* CSWebViewController.m */,
+				6CD9B4F113EC5C30008AB923 /* ActiveControllersSetter.h */,
 			);
 			path = iPhone;
 			sourceTree = "<group>";

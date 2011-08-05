@@ -18,6 +18,8 @@
 #import "CSTools.h"
 #import "FlurryAPI.h"
 
+#import "ActiveControllersSetter.h"
+
 enum HeaderViewTags {
 	LabelHeaderViewTag = 1
 };
@@ -57,6 +59,7 @@ enum HeaderViewTags {
 @synthesize usernameField = _usernameField;
 @synthesize passwordField = _passwordField;
 @synthesize activityOverlap = _activityOverlap;
+@synthesize activeControllersSetter = _activeControllersSetter;
 
 - (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer
             loginInformation:(id<LoginInformation>)loginInformation
@@ -256,7 +259,7 @@ enum HeaderViewTags {
     [self hideLoading];
     id profileController = [self.authControllerFactory createProfileController];
     [self.navigationController setViewControllers:[NSArray arrayWithObject:profileController] animated:YES];
-	
+	[self.activeControllersSetter setHomeController:profileController];
 	[FlurryAPI logEvent:@"Login" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
 												 @"SUCCESS", 
 												 @"STATUS", 

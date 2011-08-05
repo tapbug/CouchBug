@@ -12,6 +12,7 @@
 
 @protocol LoginAnnouncer;
 @protocol LoginInformation;
+@protocol ActiveControllersSetter;
 @class AuthControllersFactory;
 @class ActivityOverlap;
 @class CouchSearchResultController;
@@ -35,9 +36,11 @@
     
     AuthControllersFactory *_authControllerFactory;
 	CouchSearchResultController *_couchSearchController;
+	id<ActiveControllersSetter> _activeControllersSetter;
 }
 
 @property (nonatomic, assign) CouchSearchResultController *couchSearchController;
+@property (nonatomic, assign) id<ActiveControllersSetter> activeControllersSetter;
 
 - (id)initWithLoginAnnouncer:(id<LoginAnnouncer>)loginAnnouncer
             loginInformation:(id<LoginInformation>)loginInformation

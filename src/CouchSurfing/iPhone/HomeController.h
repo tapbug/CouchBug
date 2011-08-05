@@ -17,6 +17,7 @@
 @class HomeRequestFactory;
 @protocol LoginAnnouncer;
 @class CouchSearchResultController;
+@protocol ActiveControllersSetter;
 
 @interface HomeController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
     AuthControllersFactory *_authControllersFactory;
@@ -37,12 +38,18 @@
     NSArray *_items;
 	
 	CouchSearchResultController *_couchSearchController;
+	id<ActiveControllersSetter> _activeControllersSetter;
+	BOOL _shouldReload;
+	BOOL _isActive;
 }
 
 @property (nonatomic, assign) CouchSearchResultController *couchSearchController;
+@property (nonatomic, assign) id<ActiveControllersSetter> activeControllersSetter;
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory 
                profileRequestFactory:(HomeRequestFactory *)profileRequestFactory
                       loginAnnouncer:(id<LoginAnnouncer>) loginAnnouncer;
+
+- (void)refreshHomeInformation;
 
 @end
