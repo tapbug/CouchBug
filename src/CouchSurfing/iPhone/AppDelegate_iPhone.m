@@ -114,7 +114,7 @@
      */
     
     self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
-    [self.window addSubview:self.tabBarController.view];
+    self.window.rootViewController = self.tabBarController;
     [self.window makeKeyAndVisible];
 	
 	[FlurryAPI logAllPageViews:self.tabBarController];

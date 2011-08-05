@@ -33,7 +33,7 @@
 @property (nonatomic, retain) ActivityOverlap *searchActivity;
 
 @property (nonatomic, retain) NSArray *sourfers;
-@property (nonatomic, retain) NSMutableArray *imageDownloaders;
+@property (nonatomic, retain) NSMutableDictionary *imageDownloaders;
 
 @property (nonatomic, retain) CurrentLocationObjectRequest *locationObjectRequest;
 @property (nonatomic, retain) LocationDisabledOverlap *locationDisabledOverlap;
@@ -54,6 +54,7 @@
 - (void)showSearchForm;
 
 - (void)loadImages;
+- (void)loadImageForIndex:(NSInteger)index surfer:(CouchSurfer *)surfer;
 
 @end
 
@@ -102,7 +103,7 @@
         [[ActivityOverlap alloc] initWithView:self.view 
                                         title:NSLocalizedString(@"LOADING COUCHES", nil)];
     
-    self.imageDownloaders = [NSMutableArray array];
+    self.imageDownloaders = [NSMutableDictionary dictionary];
 	self.navigationController.delegate = self;
     [super viewDidLoad];
 }
@@ -122,6 +123,7 @@
 
 - (void)couchSearchRequest:(CouchSearchRequest *)request didRecieveResult:(NSArray *)sourfers {
     if (_loadingAction == CouchSearchResultControllerFirst) {
+		self.imageDownloaders = [NSMutableDictionary dictionary];
         self.sourfers = sourfers;
         [self.searchActivity removeOverlap];        
     } else if (_loadingAction == CouchSearchResultControllerMore) {
@@ -220,13 +222,17 @@
         
         if (surfer.image == nil) {
             if (tableView.dragging == NO && tableView.decelerating == NO) {
-                CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
-                imageDownloader.delegate = self;
-                [imageDownloader downloadWithSrc:surfer.imageSrc position:indexPath.row];
-                [imageDownloader release];
+				[self loadImageForIndex:indexPath.row surfer:surfer];
             }
         } else {
-            surferCell.photoView.image = [CSImageCropper scaleToSize:CGSizeMake(61, 61) image:surfer.image];
+			dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^{
+				UIImage *croppedImage = [[CSImageCropper scaleToSize:CGSizeMake(61, 61) image:surfer.image] retain];
+				dispatch_async(dispatch_get_main_queue(), ^{
+					surferCell.photoView.image = croppedImage;
+					[croppedImage release];
+				});
+			});
+			
         }
         cell = surferCell;
     }
@@ -307,9 +313,6 @@
     self.searchRequest.delegate = nil;
     self.searchRequest = nil;
 	self.locationDisabledOverlap = nil;
-    for (CSImageDownloader *downloader in self.imageDownloaders) {
-        downloader.delegate = nil;
-    }
 	self.locateActivity = nil;	
 	self.searchActivity = nil;
     self.imageDownloaders = nil;
@@ -432,10 +435,7 @@
         lastRow = indexPath.row;
         CouchSurfer *sourfer = [self.sourfers objectAtIndex:indexPath.row];
         if (sourfer.image == nil) {
-            CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
-            imageDownloader.delegate = self;
-            [imageDownloader downloadWithSrc:sourfer.imageSrc position:indexPath.row];
-            [imageDownloader release];            
+			[self loadImageForIndex:indexPath.row surfer:sourfer];
         }
     }
     if ([self.sourfers count] > 0) {
@@ -445,10 +445,7 @@
 			if (lastRowPosition >= rowToLoad) {
 				CouchSurfer *sourfer = [self.sourfers objectAtIndex:lastRow + i];
 				if (sourfer.image == nil) {
-					CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
-					imageDownloader.delegate = self;
-					[imageDownloader downloadWithSrc:sourfer.imageSrc position:lastRow + i];
-					[imageDownloader release];
+					[self loadImageForIndex:lastRow + 1 surfer:sourfer];
 				}
 			} else {
 				break;
@@ -508,6 +505,16 @@
 		if (searched == NO) {
 			_initialLoadDone = NO;
 		}
+	}
+}
+
+- (void)loadImageForIndex:(NSInteger)index surfer:(CouchSurfer *)surfer {
+	if ([self.imageDownloaders objectForKey:[NSNumber numberWithInt:index]] == nil) {
+		[self.imageDownloaders setObject:[NSNumber numberWithBool:YES] forKey:[NSNumber numberWithInt:index]];
+		CSImageDownloader *imageDownloader = [[CSImageDownloader alloc] init];
+		imageDownloader.delegate = self;
+		[imageDownloader downloadWithSrc:surfer.imageSrc position:index];
+		[imageDownloader release];		
 	}
 }
 
