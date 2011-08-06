@@ -132,7 +132,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 	if (section == 0) {
-		return 3;
+		return 2;
 	} else if (section == 1) {
 		return 5;
 	}
@@ -149,8 +149,6 @@
 			cell.textLabel.text = NSLocalizedString(@"ABOUT", nil);
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = NSLocalizedString(@"FAQ", nil);
-		} else if (indexPath.row == 2) {
-			cell.textLabel.text = NSLocalizedString(@"CONTACT", nil);
 		}
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
@@ -195,12 +193,6 @@
 			[self.navigationController pushViewController:webController animated:YES];
 			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
 															 @"FAQ CS", 
-															 @"Link", 
-															 nil]];
-		} else if (indexPath.row == 2) {
-			[[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"mailto:info@couchsurfing.org"]];
-			[FlurryAPI logEvent:@"LinkClick" withParameters:[NSDictionary dictionaryWithObjectsAndKeys:
-															 @"Contact CS", 
 															 @"Link", 
 															 nil]];
 		}
