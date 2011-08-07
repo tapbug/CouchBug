@@ -2,8 +2,8 @@
 //  CouchSearchFilter.h
 //  CouchSurfing
 //
-//  Created by Michal Vašíček on 6/10/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 6/10/11.
+//  Copyright 2011 tapbug. All rights reserved.
 //
 
 //  Trida ma za ukol drzet aktualni filter pro hledani

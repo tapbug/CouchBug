@@ -2,8 +2,8 @@
 //  IdentityManager.h
 //  CouchSurfing
 //
-//  Created by Michal Vašíček on 2/16/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 2/16/11.
+//  Copyright 2011 tapbug. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

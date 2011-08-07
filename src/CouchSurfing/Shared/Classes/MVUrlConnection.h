@@ -1,9 +1,9 @@
 //
 //  MVUrlConnection.h
-//  devianART
+//  CouchSurfing
 //
-//  Created by Michal Vašíček on 3/19/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 3/19/11.
+//  Copyright 2011 tapbug. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

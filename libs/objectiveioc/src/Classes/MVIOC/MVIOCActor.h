@@ -2,8 +2,8 @@
 //  MVIOCActor.h
 //  IOC
 //
-//  Created by Michal Vašíček on 9/5/10.
-//  Copyright 2010 __MyCompanyName__. All rights reserved.
+//  Created on 9/5/10.
+//  Copyright 2011 tapbug. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

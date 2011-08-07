@@ -2,8 +2,8 @@
 //  TapableTableView.h
 //  CouchSurfing
 //
-//  Created by Michal Vašíček on 6/24/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 6/24/11.
+//  Copyright 2011 tapbug. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

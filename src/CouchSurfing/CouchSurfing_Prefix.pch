@@ -1,5 +1,5 @@
 //
-// Prefix header for all source files of the 'CouchSourfing' target in the 'CouchSourfing' project
+// Prefix header for all source files of the 'CouchSurfing' target in the 'CouchSurfing' project
 //
 
 #ifdef __OBJC__

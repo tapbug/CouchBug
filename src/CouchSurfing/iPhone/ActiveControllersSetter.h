@@ -2,8 +2,8 @@
 //  ActiveControllersSetter.h
 //  CouchSurfing
 //
-//  Created by Michal Vašíček on 8/5/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 8/5/11.
+//  Copyright 2011 tapbug. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>

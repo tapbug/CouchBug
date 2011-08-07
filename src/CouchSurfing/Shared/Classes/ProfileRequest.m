@@ -2,8 +2,8 @@
 //  ProfileRequest.m
 //  CouchSurfing
 //
-//  Created by Michal Vašíček on 7/2/11.
-//  Copyright 2011 __MyCompanyName__. All rights reserved.
+//  Created on 7/2/11.
+//  Copyright 2011 tapbug. All rights reserved.
 //
 
 #import "ProfileRequest.h"
