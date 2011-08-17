@@ -1,0 +1,143 @@
+﻿// TabBar
+"PROFILE" = "Profil";
+"SEARCH" = "Recherche";
+"MORE" = "More";
+
+// Home tab
+"MEMBERS ONLINE" = "CouchSurfeurs en ligne";
+"PROFILE VIEWS" = "voir le profil";
+"UNREAD MESSAGE" = "message non lu";
+"UNREAD MESSAGES" = "messages non lus";
+"FRIEND REQUEST" = "demande d'amitié";
+"FRIEND REQUESTS" = "demandes d'amitiés";
+"COUCH REQUEST" = "demande d'hébergement";
+"COUCH REQUESTS" = "demandes d'hébergement";
+"MEMBER SINCE" = "inscrit depuis";
+
+// Location
+"LOCATING" = "Localisation…";
+"LOCATION WARNING TITLE" = "CouchBug a besoin de votre localisation actuelle";
+"LOCATION WARNING BODY" = "Pour trouver des canapés à proximité, votre application a besoin de votre localisation actuelle.\n\nS’il vous plait activer votre service de localisation pour Couchbug dans \"Options\" → \"Service de localisation\" ou appuyez sur \"Filtre\" et sélectionnez localisation manuelle.";
+
+"ERROR" = "Erreur";
+"LOCATION NOT FOUND" = "votre localisation n'a pu être déterminée. Sélectionnez la localisation manuellement.";
+
+// Search results tab
+"LOADING COUCHES" = "Chargement en cours…";
+"FILTER" = "Filtre";
+"COUCHSEARCH" = "Recherche de Canapé";
+
+// Search result cell
+"REFERENCES LOWERCASE" = "références";
+"PHOTOS LOWERCASE" = "photos";
+"REPLY RATE LOWERCASE" = "pourcentages de réponses";
+
+// Search filter
+"LOCATION" = "Localisation";
+
+"COUCH STATUS" = "Disponibilité";
+"YES" = "Oui";
+"MAYBE" = "Peut-être";
+"COFFEE" = "Aller boire un verre";
+"TRAVELING" = "En voyage";
+
+"HOST" = "Hôte";
+"AGE" = "Âge";
+"HAS SPACE FOR" = "A l'espace pour";
+"LANGUAGE" = "Langue";
+"LAST LOGIN" = "Dernière connexion";
+"MALE" = "homme";
+"FEMALE" = "Femme";
+"SEVERAL PEOPLE" = "Plusieurs personnes";
+"HAS PHOTO" = "a des photos";
+"WHEELCHAIR ACCESSIBLE" = "Accesible en fauteuil roulant";
+
+"TO" = "pour";
+"ANY" = "tout";
+"DAYS" = "jours";
+"HOURS" = "heures";
+
+"COMMUNITY" = "Communauté";
+"VERIFIED" = "Verifié";
+"VOUCHED" = "Cautionné";
+"AMBASSADOR" = "Ambassadeur";
+
+"NAME USERNAME" = "Nom d'utilisateur";
+"KEYWORD" = "Mots clés";
+
+// Language picker
+"ANY LANGUAGE" = "tous langages";
+
+// Search location
+"LOADING LOCATIONS" = "Localisation en cours…";
+"CURRENT LOCATION" = "Localisation actuelle";
+"EVERYWHERE" = "Partout";
+
+// User's profile
+"COUCHREQUEST" = "Envoyer une demande de canapé";
+"FROM" = "de";
+"REFERENCES" = "Références";
+"FRIENDS" = "Amis";
+"CURRENT MISSION" = "Objectif Actuel";
+"PERSONAL DESCRIPTION" = "Description personnelle";
+"COUCH INFORMATION" = "infos sur le canapé";
+"LOADING" = "Chargement…";
+
+"PREFERRED GENDER" = "Sexe des surfeurs que vous préféreriez recevoir";
+"MAX SURFERS PER NIGHT" = "Maximum de surfeurs par nuit";
+"SHARED SLEEPING SURFACE" = "La surface où dormir est partagée";
+"SHARED ROOM" = "La pièce où j'héberge est partagée";
+
+// CouchRequest form
+"SENDING" = "En envoi…";
+"SEND" = "Envoyé";
+"SUBJECT" = "Sujet";
+"CHOOSE" = "Choississez";
+
+"REQUEST SIGNATURE" = "\n\nSent from my iPhone with CouchBug\nhttp://itun.es/iBf5W2";
+
+"ARRIVAL DATE" = "Date d'arrivée";
+"DEPARTURE DATE" = "Date de départ";
+
+"NUMBER OF SURFERS" = "Nombre de surfeurs";
+"ARRIVING VIA" = "Moyens de transports";
+
+"PLANE" = "Avion";
+"MOTOR VEHICLE" = "Moto";
+"BUS" = "Bus";
+"TRAIN" = "Train";
+"BICYCLE" = "Vélo";
+"FOOT" = "à Pied";
+"METRO" = "Métro";
+"BOAT" = "Bateau";
+"HITCH-HIKING" = "Auto-stop";
+"OTHER" = "Autre"; 
+
+"COUCHREQUEST SENT" = "Demande d'hébergement envoyé avec succès!";
+
+// Login / logout
+"USERNAME" = "Pseudonyme";
+"PASSWORD" = "Mot de passe";
+"CANCEL" = "Annuler";
+
+"SIGN UP" = "S'inscrire";
+"SIGN IN" = "Se connecter";
+"SIGN OUT" = "Se déconnecter";
+"SIGNING IN" = "Se connecte…";
+"SIGNING OUT" = "Se déconnecte…";
+
+"LOGIN DESCRIPTION" = "Connectez-vous avec vos identifiants CS. Si vous n'avez pas un compte, vous pouvez vous inscrire pour en avoir un. Pour en savoir plus sur le CouchSurfing,  appuyez sur More.";
+
+"SORRY" = "Désolé";
+"LOGIN ERROR" = "Votre pseudonyme ou votre mot de passe est incorrect";
+
+"LOADING PROFILE" = "Profil en chargement…";
+
+// More tab
+"COUCHSURFING" = "CouchSurfing";
+"ABOUT" = "A propos";
+"FAQ" = "FAQ";
+"CONTACT" = "Contact";
+
+"COUCHBUG" = "CouchBug";
+"REVIEW ON ITUNES" = "Critique sur iTunes";
