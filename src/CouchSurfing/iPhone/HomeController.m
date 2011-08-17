@@ -116,7 +116,7 @@
                                                                    headerBackgroundImage.size.height)] autorelease];
     headerView.backgroundColor = [UIColor colorWithPatternImage:headerBackgroundImage];
     _tableView.tableHeaderView = headerView;
-    UIImage *photoNoneImage = [UIImage imageNamed:@"photoNone"];
+    UIImage *photoNoneImage = [UIImage imageNamed:@"photoNoneProfile"];
     _photoView = [[[UIImageView alloc] initWithFrame:CGRectMake(18,
                                                                 18,
                                                                 130,
