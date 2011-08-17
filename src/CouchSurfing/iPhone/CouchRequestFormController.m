@@ -156,7 +156,7 @@
 	self.subjectTF.delegate = self;
 	
 	self.messageTV = [[[UITextView alloc] init] autorelease];
-	//self.messageTV.placeholder = NSLocalizedString(@"MESSAGE", nil);
+	self.messageTV.text = NSLocalizedString(@"REQUEST SIGNATURE", nil);
 	self.messageTV.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
 	self.messageTV.delegate = self;
 	[self registerForKeyboardEvents];
