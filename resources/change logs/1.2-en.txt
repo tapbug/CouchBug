@@ -1,0 +1,8 @@
+✦ faster performance in CouchSearch
+✦ homepage auto re-loading
+✦ added German translation by Christina Anderson (annao.)
+✦ added Spanish translation by Jeshú Gutti (jeshugutti)
+✦ added French translation by Juda Nguyên (yinzo)
+✦ other bug fixes
+
+Thanks for your support! Please leave us review in AppStore after every update…
