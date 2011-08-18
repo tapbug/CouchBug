@@ -385,6 +385,7 @@
 
 - (void)showSearchForm {
 	[self.locationDisabledOverlap removeOverlap];
+	[self.locateActivity removeOverlap];
 	CouchSearchFormController *formController = [self.formControllerFactory createController];
 	formController.searchResultController = self;
 	UINavigationController *navController = [[[UINavigationController alloc] initWithRootViewController:formController] autorelease];
