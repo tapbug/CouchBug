@@ -111,7 +111,12 @@
 		6C9EAD0E13A0FCF900C1B19D /* LoginRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD0813A0FCF900C1B19D /* LoginRequest.m */; };
 		6C9EAD1313A1009700C1B19D /* MVUrlConnection.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD1213A1009700C1B19D /* MVUrlConnection.m */; };
 		6C9EAD1613A1438800C1B19D /* ActivityOverlap.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */; };
-		6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA91E71284A0E700CB1737 /* libIOC.a */; };
+		6CA6AEC113FD7B6600FAF1A0 /* MVIOCControllerActor.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6AEB613FD7B6600FAF1A0 /* MVIOCControllerActor.m */; };
+		6CA6AEC213FD7B6600FAF1A0 /* MVIOCContainer.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6AEBC13FD7B6600FAF1A0 /* MVIOCContainer.m */; };
+		6CA6AEC313FD7B6600FAF1A0 /* MVIOCFactoryInjectionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6AEBD13FD7B6600FAF1A0 /* MVIOCFactoryInjectionType.m */; };
+		6CA6AEC413FD7B6600FAF1A0 /* MVIOCProperty.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6AEBE13FD7B6600FAF1A0 /* MVIOCProperty.m */; };
+		6CA6AEC513FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6AEBF13FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.m */; };
+		6CA6AEC613FD7B6600FAF1A0 /* MVIOCSingletonCache.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CA6AEC013FD7B6600FAF1A0 /* MVIOCSingletonCache.m */; };
 		6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = 6CAA922E12852D6E00CB1737 /* libxml2.dylib */; };
 		6CAA9306128546F200CB1737 /* CouchSearchFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA9305128546F200CB1737 /* CouchSearchFormController.m */; };
 		6CAA94071285914E00CB1737 /* CouchSearchResultController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94061285914E00CB1737 /* CouchSearchResultController.m */; };
@@ -165,23 +170,6 @@
 		D0FE2EFB13CA864900D633E3 /* appIconRounded@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0FE2EF913CA864900D633E3 /* appIconRounded@2x.png */; };
 		D0FE2F0313CA93EF00D633E3 /* libFlurry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = D0FE2F0213CA93EF00D633E3 /* libFlurry.a */; };
 /* End PBXBuildFile section */
-
-/* Begin PBXContainerItemProxy section */
-		6CAA91E41284A0E700CB1737 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6C1D739511F21E8400F0EFC2;
-			remoteInfo = UnitTests;
-		};
-		6CAA91E61284A0E700CB1737 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 6C07A88211FEDDCA00358364;
-			remoteInfo = IOC;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		1D30AB110D05D00D00671497 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -360,7 +348,22 @@
 		6C9EAD1213A1009700C1B19D /* MVUrlConnection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = MVUrlConnection.m; path = Shared/Classes/MVUrlConnection.m; sourceTree = "<group>"; };
 		6C9EAD1413A1438700C1B19D /* ActivityOverlap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActivityOverlap.h; sourceTree = "<group>"; };
 		6C9EAD1513A1438700C1B19D /* ActivityOverlap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ActivityOverlap.m; sourceTree = "<group>"; };
-		6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = IOC.xcodeproj; path = ../../libs/objectiveioc/src/IOC.xcodeproj; sourceTree = SOURCE_ROOT; };
+		6CA6AEB113FD7B6600FAF1A0 /* MVIOC.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOC.h; sourceTree = "<group>"; };
+		6CA6AEB213FD7B6600FAF1A0 /* MVIOCActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCActor.h; sourceTree = "<group>"; };
+		6CA6AEB313FD7B6600FAF1A0 /* MVIOCCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCCache.h; sourceTree = "<group>"; };
+		6CA6AEB413FD7B6600FAF1A0 /* MVIOCContainer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCContainer.h; sourceTree = "<group>"; };
+		6CA6AEB513FD7B6600FAF1A0 /* MVIOCControllerActor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCControllerActor.h; sourceTree = "<group>"; };
+		6CA6AEB613FD7B6600FAF1A0 /* MVIOCControllerActor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVIOCControllerActor.m; sourceTree = "<group>"; };
+		6CA6AEB713FD7B6600FAF1A0 /* MVIOCFactoryInjectionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCFactoryInjectionType.h; sourceTree = "<group>"; };
+		6CA6AEB813FD7B6600FAF1A0 /* MVIOCInjectionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCInjectionType.h; sourceTree = "<group>"; };
+		6CA6AEB913FD7B6600FAF1A0 /* MVIOCProperty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCProperty.h; sourceTree = "<group>"; };
+		6CA6AEBA13FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCPropertyInjectionType.h; sourceTree = "<group>"; };
+		6CA6AEBB13FD7B6600FAF1A0 /* MVIOCSingletonCache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MVIOCSingletonCache.h; sourceTree = "<group>"; };
+		6CA6AEBC13FD7B6600FAF1A0 /* MVIOCContainer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVIOCContainer.m; sourceTree = "<group>"; };
+		6CA6AEBD13FD7B6600FAF1A0 /* MVIOCFactoryInjectionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVIOCFactoryInjectionType.m; sourceTree = "<group>"; };
+		6CA6AEBE13FD7B6600FAF1A0 /* MVIOCProperty.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVIOCProperty.m; sourceTree = "<group>"; };
+		6CA6AEBF13FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVIOCPropertyInjectionType.m; sourceTree = "<group>"; };
+		6CA6AEC013FD7B6600FAF1A0 /* MVIOCSingletonCache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MVIOCSingletonCache.m; sourceTree = "<group>"; };
 		6CAA922E12852D6E00CB1737 /* libxml2.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libxml2.dylib; path = usr/lib/libxml2.dylib; sourceTree = SDKROOT; };
 		6CAA9304128546F200CB1737 /* CouchSearchFormController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchSearchFormController.h; sourceTree = "<group>"; };
 		6CAA9305128546F200CB1737 /* CouchSearchFormController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormController.m; sourceTree = "<group>"; };
@@ -442,7 +445,6 @@
 				1D60589F0D05DD5A006BFB54 /* Foundation.framework in Frameworks */,
 				1DF5F4E00D08C38300B7A737 /* UIKit.framework in Frameworks */,
 				288765FD0DF74451002DB57D /* CoreGraphics.framework in Frameworks */,
-				6CAA91E91284A13300CB1737 /* libIOC.a in Frameworks */,
 				6CAA922F12852D6E00CB1737 /* libxml2.dylib in Frameworks */,
 				D0FE2F0313CA93EF00D633E3 /* libFlurry.a in Frameworks */,
 			);
@@ -505,7 +507,6 @@
 		29B97314FDCFA39411CA2CEA /* CustomTemplate */ = {
 			isa = PBXGroup;
 			children = (
-				6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */,
 				2860E32A111B888700E27156 /* iPad */,
 				2860E324111B887F00E27156 /* iPhone */,
 				29B97315FDCFA39411CA2CEA /* Other Sources */,
@@ -519,6 +520,7 @@
 		29B97315FDCFA39411CA2CEA /* Other Sources */ = {
 			isa = PBXGroup;
 			children = (
+				6CA6AEAF13FD7B6600FAF1A0 /* objectiveioc */,
 				6C235E1513CADE6C007A0D4F /* Tidy */,
 				6C34AD2013A89A2100E43729 /* RegexKitLite */,
 				6C9EACFA13A0FCD200C1B19D /* CouchSurf */,
@@ -838,13 +840,36 @@
 			name = Auth;
 			sourceTree = "<group>";
 		};
-		6CAA91DD1284A0E700CB1737 /* Products */ = {
+		6CA6AEAF13FD7B6600FAF1A0 /* objectiveioc */ = {
 			isa = PBXGroup;
 			children = (
-				6CAA91E51284A0E700CB1737 /* UnitTests.octest */,
-				6CAA91E71284A0E700CB1737 /* libIOC.a */,
+				6CA6AEB013FD7B6600FAF1A0 /* MVIOC */,
+				6CA6AEBC13FD7B6600FAF1A0 /* MVIOCContainer.m */,
+				6CA6AEBD13FD7B6600FAF1A0 /* MVIOCFactoryInjectionType.m */,
+				6CA6AEBE13FD7B6600FAF1A0 /* MVIOCProperty.m */,
+				6CA6AEBF13FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.m */,
+				6CA6AEC013FD7B6600FAF1A0 /* MVIOCSingletonCache.m */,
 			);
-			name = Products;
+			name = objectiveioc;
+			path = ../../libs/objectiveioc;
+			sourceTree = "<group>";
+		};
+		6CA6AEB013FD7B6600FAF1A0 /* MVIOC */ = {
+			isa = PBXGroup;
+			children = (
+				6CA6AEB113FD7B6600FAF1A0 /* MVIOC.h */,
+				6CA6AEB213FD7B6600FAF1A0 /* MVIOCActor.h */,
+				6CA6AEB313FD7B6600FAF1A0 /* MVIOCCache.h */,
+				6CA6AEB413FD7B6600FAF1A0 /* MVIOCContainer.h */,
+				6CA6AEB513FD7B6600FAF1A0 /* MVIOCControllerActor.h */,
+				6CA6AEB613FD7B6600FAF1A0 /* MVIOCControllerActor.m */,
+				6CA6AEB713FD7B6600FAF1A0 /* MVIOCFactoryInjectionType.h */,
+				6CA6AEB813FD7B6600FAF1A0 /* MVIOCInjectionType.h */,
+				6CA6AEB913FD7B6600FAF1A0 /* MVIOCProperty.h */,
+				6CA6AEBA13FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.h */,
+				6CA6AEBB13FD7B6600FAF1A0 /* MVIOCSingletonCache.h */,
+			);
+			path = MVIOC;
 			sourceTree = "<group>";
 		};
 		6CAA9303128546B900CB1737 /* CouchSearch */ = {
@@ -982,35 +1007,12 @@
 			);
 			mainGroup = 29B97314FDCFA39411CA2CEA /* CustomTemplate */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 6CAA91DD1284A0E700CB1737 /* Products */;
-					ProjectRef = 6CAA91DC1284A0E700CB1737 /* IOC.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				1D6058900D05DD3D006BFB54 /* CouchSurfing */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		6CAA91E51284A0E700CB1737 /* UnitTests.octest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = UnitTests.octest;
-			remoteRef = 6CAA91E41284A0E700CB1737 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		6CAA91E71284A0E700CB1737 /* libIOC.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libIOC.a;
-			remoteRef = 6CAA91E61284A0E700CB1737 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		1D60588D0D05DD3D006BFB54 /* Resources */ = {
@@ -1174,6 +1176,12 @@
 				6C235E6313CADE6D007A0D4F /* tmbstr.c in Sources */,
 				6C235E6413CADE6D007A0D4F /* utf8.c in Sources */,
 				6C235E6513CADE6D007A0D4F /* win32tc.c in Sources */,
+				6CA6AEC113FD7B6600FAF1A0 /* MVIOCControllerActor.m in Sources */,
+				6CA6AEC213FD7B6600FAF1A0 /* MVIOCContainer.m in Sources */,
+				6CA6AEC313FD7B6600FAF1A0 /* MVIOCFactoryInjectionType.m in Sources */,
+				6CA6AEC413FD7B6600FAF1A0 /* MVIOCProperty.m in Sources */,
+				6CA6AEC513FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.m in Sources */,
+				6CA6AEC613FD7B6600FAF1A0 /* MVIOCSingletonCache.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1210,7 +1218,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					../../libs/xpathfinder/Classes,
-					../../libs/objectiveioc/src/Classes,
+					../../libs/objectiveioc/MVIOC,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
 					../../libs/Tidy/include,
@@ -1218,7 +1226,6 @@
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
 					"\"$(SRCROOT)/../../libs/FlurryLib\"",
 				);
 				OTHER_LDFLAGS = (
@@ -1244,7 +1251,7 @@
 				GCC_VERSION = com.apple.compilers.llvmgcc42;
 				HEADER_SEARCH_PATHS = (
 					../../libs/xpathfinder/Classes,
-					../../libs/objectiveioc/src/Classes,
+					../../libs/objectiveioc/MVIOC,
 					/usr/include/libxml2,
 					../../libs/JSONKit,
 					../../libs/Tidy/include,
@@ -1252,7 +1259,6 @@
 				INFOPLIST_FILE = "CouchSurfing-Info.plist";
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
-					"\"$(SRCROOT)/../../libs/objectiveioc/src/OCMock\"",
 					"\"$(SRCROOT)/../../libs/FlurryLib\"",
 				);
 				OTHER_LDFLAGS = (

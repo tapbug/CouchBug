@@ -7,7 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
-#import "MVIOC/MVIOC.h"
+#import "MVIOC.h"
 #import "ActiveControllersSetter.h"
 
 @class CouchSearchResultController;
