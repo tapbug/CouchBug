@@ -147,20 +147,27 @@
 	if (indexPath.section == 0) {
 		if (indexPath.row == 0) {
 			cell.textLabel.text = NSLocalizedString(@"ABOUT", nil);
+			cell.imageView.image = [UIImage imageNamed:@"LinkAbout"];
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = NSLocalizedString(@"FAQ", nil);
+			cell.imageView.image = [UIImage imageNamed:@"LinkFAQ"];
 		}
 	} else if (indexPath.section == 1) {
 		if (indexPath.row == 0) {
 			cell.textLabel.text = NSLocalizedString(@"ABOUT", nil);			
+			cell.imageView.image = [UIImage imageNamed:@"LinkAbout"];
 		} else if (indexPath.row == 1) {
 			cell.textLabel.text = @"Twitter";
+			cell.imageView.image = [UIImage imageNamed:@"LinkTwitter"];
 		} else if (indexPath.row == 2) {
 			cell.textLabel.text = @"Facebook";
+			cell.imageView.image = [UIImage imageNamed:@"LinkFacebook"];
 		} else if (indexPath.row == 3) {
 			cell.textLabel.text = @"CouchSurfing Group";
-		} else if (indexPath.row == 4) {
+			cell.imageView.image = [UIImage imageNamed:@"LinkCouchSurfing"];
+	} else if (indexPath.row == 4) {
 			cell.textLabel.text = NSLocalizedString(@"REVIEW ON ITUNES", nil);
+			cell.imageView.image = [UIImage imageNamed:@"LinkAppStore"];
 		}
 	}
 	cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
