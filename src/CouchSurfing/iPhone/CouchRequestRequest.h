@@ -9,14 +9,19 @@
 #import <Foundation/Foundation.h>
 #import "MVUrlConnection.h"
 
+#import "PreferencesRequest.h"
+
 @protocol CouchRequestRequestDelegate;
 
 @class CouchSurfer;
 
-@interface CouchRequestRequest : NSObject <MVUrlConnectionDelegate> {
+@interface CouchRequestRequest : NSObject <MVUrlConnectionDelegate, PreferencesRequestDelegate> {
 	id<CouchRequestRequestDelegate> _delegate;
 	MVUrlConnection *_connection;
 	
+	PreferencesRequest *_preferencesRequest;
+	
+	NSString *_dateFormat;
 	NSDate *_arrivalDate;
 	NSDate *_departureDate;
 	
@@ -26,10 +31,15 @@
 	NSInteger _numberOfSurfers;
 	NSInteger _arrivalViaId;
 	CouchSurfer *_surfer;
+	
+	//	pokud je toto opravny pokud
+	//	napr. z duvodu spatneho formatu datumu
+	BOOL _isRepaired;
 }
 
 @property (nonatomic, assign) id<CouchRequestRequestDelegate> delegate;
 
+@property (nonatomic, retain) NSString *dateFormat;
 @property (nonatomic, retain) NSDate *arrivalDate;
 @property (nonatomic, retain) NSDate *departureDate;
 

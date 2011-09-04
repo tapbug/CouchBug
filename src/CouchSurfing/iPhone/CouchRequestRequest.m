@@ -14,6 +14,7 @@
 @interface CouchRequestRequest () 
 
 @property (nonatomic, retain) MVUrlConnection *connection;
+@property (nonatomic, retain) PreferencesRequest *preferencesRequest;
 
 - (NSString *)parameter:(NSString *)parameter value:(NSString *)value;
 - (NSString *)lastParameter:(NSString *)parameter value:(NSString *)value;
@@ -24,7 +25,9 @@
 
 @synthesize delegate = _delegate;
 @synthesize connection = _connection;
+@synthesize preferencesRequest = _preferencesRequest;
 
+@synthesize dateFormat = _dateFormat;
 @synthesize arrivalDate = _arrivalDate;
 @synthesize departureDate = _departureDate;
 
@@ -39,7 +42,9 @@
 - (void)dealloc {
 	self.connection.delegate = nil;
 	self.connection = nil;
+	self.preferencesRequest = nil;
 	
+	self.dateFormat = nil;
 	self.arrivalDate = nil;
 	self.departureDate = nil;
 	
@@ -57,7 +62,11 @@
 	[request setHTTPMethod:@"POST"];
 	
 	NSDateFormatter *dateFormatter = [[[NSDateFormatter alloc] init] autorelease];
-	[dateFormatter setDateFormat:@"MM/dd/yyyy"];
+	if (self.dateFormat == nil) {
+		[dateFormatter setDateFormat:@"MM/dd/yyyy"];		
+	} else {
+		[dateFormatter setDateFormat:self.dateFormat];
+	}
 	NSString *arrivalDateString = [dateFormatter stringFromDate:self.arrivalDate];
 	NSString *departureDateString = [dateFormatter stringFromDate:self.departureDate];
 	
@@ -104,13 +113,27 @@
 				NSString *messageStr = [dataDict objectForKey:@"message"];
 				if ([messageStr isEqual:@"CouchRequest Sent!"]) {
 					if ([self.delegate respondsToSelector:@selector(couchRequestRequestDidSent:)]) {
+						
+						if (_isRepaired) {
+							NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+							[userDefaults setObject:self.dateFormat forKey:@"dateFormat"];
+							[userDefaults synchronize];
+						}
+						
 						[self.delegate couchRequestRequestDidSent:self];
 						couchRequestRequestDidSent = YES;
 					}
 				} else {
 					NSDictionary *errors = [dataDict objectForKey:@"errors"];
 					if (![errors isEqual:[NSNull null]]) {
-						if ([self.delegate respondsToSelector:@selector(couchRequestDidFailedWithErrors:)]) {
+						NSString *arrivalError = [errors valueForKey:@"arrival"];
+						NSString *departureError = [errors valueForKey:@"departure"];
+						
+						if ((arrivalError != nil || departureError != nil) && _isRepaired == NO) {
+							self.preferencesRequest = [[[PreferencesRequest alloc] init] autorelease];
+							self.preferencesRequest.delegate = self;
+							[self.preferencesRequest loadPreferences];
+						} else if ([self.delegate respondsToSelector:@selector(couchRequestDidFailedWithErrors:)]) {
 							[self.delegate couchRequestDidFailedWithErrors:errors];
 						}							
 					}
@@ -120,6 +143,14 @@
 	}
 	
 
+}
+
+#pragma PreferencesRequestDelegate methods
+
+- (void)preferencesRequest:(PreferencesRequest *)request didLoadResult:(NSDictionary *)result {
+	self.dateFormat = [result objectForKey:@"dateFormat"];
+	_isRepaired = YES;
+	[self sendCouchRequest];
 }
 
 #pragma Mark Private methods

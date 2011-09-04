@@ -11,6 +11,7 @@
 #import "LogoutRequest.h"
 #import "HomeRequest.h"
 #import "CSImageDownloader.h"
+#import "PreferencesRequest.h"
 
 @class ActivityOverlap;
 @class AuthControllersFactory;
@@ -19,12 +20,14 @@
 @class CouchSearchResultController;
 @protocol ActiveControllersSetter;
 
-@interface HomeController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate> {
+@interface HomeController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, PreferencesRequestDelegate> {
     AuthControllersFactory *_authControllersFactory;
     HomeRequestFactory *_profileRequestFactory;
     
     ActivityOverlap *_loadingOverlap;
     HomeRequest *_profileRequest;
+	
+	PreferencesRequest *_preferencesRequest;
     
     ActivityOverlap *_logoutOverlap;
     LogoutRequest *_logoutRequest;
@@ -39,6 +42,10 @@
 	
 	CouchSearchResultController *_couchSearchController;
 	id<ActiveControllersSetter> _activeControllersSetter;
+	
+	BOOL _profileLoaded;
+	BOOL _preferencesLoaded;
+	
 	BOOL _shouldReload;
 	BOOL _isActive;
 }

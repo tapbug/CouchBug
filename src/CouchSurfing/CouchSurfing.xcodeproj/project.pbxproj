@@ -137,6 +137,7 @@
 		6CE8A5F913C3985F00BF66DC /* references.css in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5F613C3985F00BF66DC /* references.css */; };
 		6CE8A5FC13C3A06C00BF66DC /* csLogo.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5FA13C3A06C00BF66DC /* csLogo.png */; };
 		6CE8A5FD13C3A06C00BF66DC /* csLogo@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5FB13C3A06C00BF66DC /* csLogo@2x.png */; };
+		6CEAE7BE14125FC5004A673D /* PreferencesRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CEAE7BD14125FC5004A673D /* PreferencesRequest.m */; };
 		6CF1E0B413B6830400704662 /* Languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B313B6830400704662 /* Languages.plist */; };
 		6CF1E0B713B72E2900704662 /* LanguagesListController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B613B72E2900704662 /* LanguagesListController.m */; };
 		6CF39A4713A7F01D008148ED /* photoFrame.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4113A7F01D008148ED /* photoFrame.png */; };
@@ -411,6 +412,8 @@
 		6CE8A5F613C3985F00BF66DC /* references.css */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.css; name = references.css; path = Shared/references.css; sourceTree = "<group>"; };
 		6CE8A5FA13C3A06C00BF66DC /* csLogo.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = csLogo.png; sourceTree = "<group>"; };
 		6CE8A5FB13C3A06C00BF66DC /* csLogo@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "csLogo@2x.png"; sourceTree = "<group>"; };
+		6CEAE7BC14125FC5004A673D /* PreferencesRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PreferencesRequest.h; path = Shared/Classes/PreferencesRequest.h; sourceTree = "<group>"; };
+		6CEAE7BD14125FC5004A673D /* PreferencesRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PreferencesRequest.m; path = Shared/Classes/PreferencesRequest.m; sourceTree = "<group>"; };
 		6CF1E0B313B6830400704662 /* Languages.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Languages.plist; sourceTree = "<group>"; };
 		6CF1E0B513B72E2900704662 /* LanguagesListController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LanguagesListController.h; sourceTree = "<group>"; };
 		6CF1E0B613B72E2900704662 /* LanguagesListController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LanguagesListController.m; sourceTree = "<group>"; };
@@ -872,6 +875,8 @@
 				6C9EAD0613A0FCF900C1B19D /* LoginInformation.h */,
 				6C9EAD0713A0FCF900C1B19D /* LoginRequest.h */,
 				6C9EAD0813A0FCF900C1B19D /* LoginRequest.m */,
+				6CEAE7BC14125FC5004A673D /* PreferencesRequest.h */,
+				6CEAE7BD14125FC5004A673D /* PreferencesRequest.m */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -1230,6 +1235,7 @@
 				6CA6AEC413FD7B6600FAF1A0 /* MVIOCProperty.m in Sources */,
 				6CA6AEC513FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.m in Sources */,
 				6CA6AEC613FD7B6600FAF1A0 /* MVIOCSingletonCache.m in Sources */,
+				6CEAE7BE14125FC5004A673D /* PreferencesRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

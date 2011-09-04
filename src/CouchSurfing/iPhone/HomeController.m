@@ -26,6 +26,8 @@
 @property (nonatomic, retain) ActivityOverlap *loadingOverlap;
 @property (nonatomic, retain) HomeRequest *profileRequest;
 
+@property (nonatomic, retain) PreferencesRequest *preferencesRequest;
+
 @property (nonatomic, retain) ActivityOverlap *logoutOverlap;
 @property (nonatomic, retain) LogoutRequest *logoutRequest;
 @property (nonatomic, assign) id<LoginAnnouncer> loginAnnouncer;
@@ -33,6 +35,9 @@
 @property (nonatomic, retain) CSImageDownloader *avatarDownloader;
 
 @property (nonatomic, retain) NSArray *items;
+
+//	Pokud vsechny requesty nutne pro praci jsou hotove
+- (void)tryLoadingDone;
 
 - (void)logoutAction;
 - (void)loadHomeInformation;
@@ -46,6 +51,8 @@
 
 @synthesize loadingOverlap = _loadingOverlap;
 @synthesize profileRequest = _profileRequest;
+
+@synthesize preferencesRequest = _preferencesRequest;
 
 @synthesize logoutOverlap = _logoutOverlap;
 @synthesize logoutRequest = _logoutRequest;
@@ -79,6 +86,8 @@
     self.profileRequest.delegate = nil;
     self.profileRequest = nil;
     
+	self.preferencesRequest = nil;
+	
     self.logoutRequest.delegate = nil;
     self.logoutRequest = nil;
     self.logoutOverlap = nil;
@@ -152,6 +161,16 @@
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
 	
 	[self loadHomeInformation];
+	
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	if ([userDefaults boolForKey:@"hasLoadedPreferences"] == NO) {
+		_preferencesLoaded = NO;
+		self.preferencesRequest = [[[PreferencesRequest alloc] init] autorelease];
+		self.preferencesRequest.delegate = self;
+		[self.preferencesRequest loadPreferences];
+	} else {
+		_preferencesLoaded = YES;
+	}
 	
     [super viewDidLoad];
      
@@ -274,10 +293,7 @@
 
 - (void)profileRequest:(HomeRequest *)profileRequest didLoadProfile:(NSDictionary *)profile {
     self.navigationItem.title = [NSString stringWithFormat:@"%@", [profile objectForKey:@"name"]];
-    
-    self.navigationItem.leftBarButtonItem.enabled = YES;
-    [self.loadingOverlap removeOverlap];
-    
+        
     self.avatarDownloader = [[[CSImageDownloader alloc] init] autorelease];
     self.avatarDownloader.delegate = self;
     [self.avatarDownloader downloadWithSrc:[profile objectForKey:@"avatar"] position:0];
@@ -336,6 +352,9 @@
     [_tableView reloadData];
 	
 	[FlurryAPI setUserID:[NSString stringWithFormat:@"%@", [profile objectForKey:@"name"]]];
+
+	_profileLoaded = YES;
+	[self tryLoadingDone];
 	//[FlurryAPI setAge:21];
 	//[FlurryAPI setGender:@"m"];
 }
@@ -344,9 +363,25 @@
     
 }
 
+#pragma Mark PreferencesRequestDelegate methods
+
+- (void)preferencesRequest:(PreferencesRequest *)request didLoadResult:(NSDictionary *)result {
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	[userDefaults setBool:YES forKey:@"hasLoadedPreferences"];
+	[userDefaults setObject:[result objectForKey:@"dateFormat"] forKey:@"dateFormat"];
+	[userDefaults synchronize];
+	
+	_preferencesLoaded = YES;
+	[self tryLoadingDone];
+}
+
 #pragma Mark LogoutRequestDelegate methods
 
 - (void)logoutDidFinnish:(LogoutRequest *)logoutReqeust {
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	[userDefaults setBool:NO forKey:@"hasLoadedPreferences"];
+	[userDefaults synchronize];
+	
 	[self.couchSearchController shouldReload];
     [self.loginAnnouncer userHasLoggedOut];
     [self.logoutOverlap removeOverlap];
@@ -378,6 +413,13 @@
     self.profileRequest = [self.profileRequestFactory createHomeRequest];
     self.profileRequest.delegate = self;
     [self.profileRequest loadProfile];
+}
+
+- (void)tryLoadingDone {
+	if (_profileLoaded && _preferencesLoaded) {
+		self.navigationItem.leftBarButtonItem.enabled = YES;
+		[self.loadingOverlap removeOverlap];
+	}
 }
 
 #pragma Mark Public methods

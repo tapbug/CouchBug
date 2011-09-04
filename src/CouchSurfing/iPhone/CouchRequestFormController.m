@@ -580,6 +580,14 @@
 	self.couchRequest.numberOfSurfers = _numberOfSurfers;
 	self.couchRequest.arrivalViaId = _arrivingViaId;
 	self.couchRequest.surfer = self.surfer;
+	
+	NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+	
+	NSString *dateFormat = [userDefaults stringForKey:@"dateFormat"];
+	if (dateFormat != nil) {
+		self.couchRequest.dateFormat = dateFormat;
+	}
+	
 	self.couchRequest.delegate = self;
 	[self.couchRequest sendCouchRequest];
 	[self.activityOverlap overlapView];
