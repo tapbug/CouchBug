@@ -146,9 +146,6 @@
 		6CF39A4B13A7F01D008148ED /* verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4513A7F01D008148ED /* verified.png */; };
 		6CF39A4C13A7F01D008148ED /* verified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4613A7F01D008148ED /* verified@2x.png */; };
 		6CF8341713B32D9900C2A446 /* CSEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8341613B32D9900C2A446 /* CSEditableCell.m */; };
-		D01ADC3313EC9CC8000906BD /* couchInfo.css in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5F413C3985F00BF66DC /* couchInfo.css */; };
-		D01ADC3413EC9CC8000906BD /* personalDescription.css in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5F513C3985F00BF66DC /* personalDescription.css */; };
-		D01ADC3513EC9CC8000906BD /* references.css in Resources */ = {isa = PBXBuildFile; fileRef = 6CE8A5F613C3985F00BF66DC /* references.css */; };
 		D01ADC3613EC9CC8000906BD /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACEE13A0FC4200C1B19D /* Icon-72.png */; };
 		D01ADC3713EC9CC8000906BD /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACEF13A0FC4200C1B19D /* Icon-Small-50.png */; };
 		D01ADC3813EC9CC8000906BD /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACF013A0FC4200C1B19D /* Icon-Small.png */; };
@@ -1107,9 +1104,6 @@
 				D0FE2EFA13CA864900D633E3 /* appIconRounded.png in Resources */,
 				D0FE2EFB13CA864900D633E3 /* appIconRounded@2x.png in Resources */,
 				D0B7961A13E4DFE100DA111D /* Languages.plist in Resources */,
-				D01ADC3313EC9CC8000906BD /* couchInfo.css in Resources */,
-				D01ADC3413EC9CC8000906BD /* personalDescription.css in Resources */,
-				D01ADC3513EC9CC8000906BD /* references.css in Resources */,
 				D01ADC3613EC9CC8000906BD /* Icon-72.png in Resources */,
 				D01ADC3713EC9CC8000906BD /* Icon-Small-50.png in Resources */,
 				D01ADC3813EC9CC8000906BD /* Icon-Small.png in Resources */,
