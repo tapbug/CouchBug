@@ -371,7 +371,7 @@
 
 - (void)hideKeyboard {
 	[_activeResponder resignFirstResponder];
-	[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:NO];
+	//[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:NO];
 }
 
 - (void)keyboardDidShow:(NSNotification *)notification {
