@@ -136,6 +136,10 @@
 						} else if ([self.delegate respondsToSelector:@selector(couchRequestDidFailedWithErrors:)]) {
 							[self.delegate couchRequestDidFailedWithErrors:errors];
 						}							
+					} else {
+						NSDictionary *error = [NSDictionary dictionaryWithObject:messageStr
+																		  forKey:NSLocalizedString(@"ERROR", nil)];
+						[self.delegate couchRequestDidFailedWithErrors:error];
 					}
 				}
 			}

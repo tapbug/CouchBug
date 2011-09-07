@@ -91,13 +91,13 @@
 	self.sections = sections;
 	
 	if (self.loginInformation.isLogged) {
-		if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
+		//if (self.surfer.couchStatus == CouchSurferHasCouchYes || self.surfer.couchStatus == CouchSurferHasCouchMaybe) {
 			UIBarButtonItem *couchRequestBarButton = [[[UIBarButtonItem alloc] initWithTitle:NSLocalizedString(@"COUCHREQUEST", nil)
 																					   style:UIBarButtonItemStyleBordered
 																					  target:self 
 																					  action:@selector(sendCouchRequest)] autorelease];
 			self.navigationItem.rightBarButtonItem = couchRequestBarButton;
-		}		
+		//}		
 	}
 	
     CGRect viewFrame = self.view.frame;
