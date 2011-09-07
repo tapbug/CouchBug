@@ -572,6 +572,8 @@
 }
 
 - (void)sendAction {
+	[self hideDialogView];
+	
 	self.couchRequest = [[[CouchRequestRequest alloc] init] autorelease];
 	self.couchRequest.arrivalDate = self.arrivalDate;
 	self.couchRequest.departureDate = self.departureDate;
