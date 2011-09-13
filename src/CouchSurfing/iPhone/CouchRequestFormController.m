@@ -465,25 +465,28 @@
 }
 
 - (void)hideDialogView {
-	dialogViewOn = NO;
-	[UIView beginAnimations:@"hideDialog" context:nil];
-	CGRect dialogViewFrame = _dialogView.frame;
-	dialogViewFrame.origin.y += dialogViewFrame.size.height;
-	_dialogView.frame = dialogViewFrame;
-	[UIView commitAnimations];
-	
-	[self extendViewSizeByHeight:dialogViewFrame.size.height];
-	[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:YES];
-
-	//	DialogDidHide
-	
-	if ([self.departureDate earlierDate:self.arrivalDate] == self.departureDate) {
-		self.departureDate = self.arrivalDate;
-		[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]]
-							  withRowAnimation:UITableViewRowAnimationNone];
+	if (dialogViewOn) {
+		[UIView beginAnimations:@"hideDialog" context:nil];
+		CGRect dialogViewFrame = _dialogView.frame;
+		dialogViewFrame.origin.y += dialogViewFrame.size.height;
+		_dialogView.frame = dialogViewFrame;
+		[UIView commitAnimations];
+		
+		[self extendViewSizeByHeight:dialogViewFrame.size.height];
+		[_formTableView deselectRowAtIndexPath:[_formTableView indexPathForSelectedRow] animated:YES];
+		
+		//	DialogDidHide
+		
+		if ([self.departureDate earlierDate:self.arrivalDate] == self.departureDate) {
+			self.departureDate = self.arrivalDate;
+			[_formTableView reloadRowsAtIndexPaths:[NSArray arrayWithObject:[NSIndexPath indexPathForRow:1 inSection:0]]
+								  withRowAnimation:UITableViewRowAnimationNone];
+		}
+		
+		//TODO nil pickers
+		
+		dialogViewOn = NO;		
 	}
-	
-	//TODO nil pickers
 }
 
 #pragma Mark UIPickerViewDataSource / Delegate methods
@@ -567,8 +570,8 @@
 #pragma Mark Actions methods
 
 - (void)cancelAction {
-	[self.parentViewController dismissModalViewControllerAnimated:YES];
 	[self hideDialogView];
+	[self dismissModalViewControllerAnimated:YES];
 }
 
 - (void)sendAction {
