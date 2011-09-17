@@ -116,6 +116,7 @@ enum HeaderViewTags {
     self.usernameField.delegate = self;
     self.usernameField.returnKeyType = UIReturnKeyNext;
     self.usernameField.text = self.loginInformation.username;
+	self.usernameField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
     self.passwordField = [[[UITextField alloc] init] autorelease];
     self.passwordField.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
@@ -124,6 +125,7 @@ enum HeaderViewTags {
     self.passwordField.delegate = self;
     self.passwordField.returnKeyType = UIReturnKeyJoin;
     self.passwordField.text = self.loginInformation.password;
+	self.passwordField.clearButtonMode = UITextFieldViewModeWhileEditing;
     
 	CGFloat tableViewWidth = self.view.frame.size.width;
 	CGFloat footerViewWidth = tableViewWidth;
@@ -198,24 +200,26 @@ enum HeaderViewTags {
     if (indexPath.row == 0) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"usernameCell"];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"usernameCell"] autorelease];
-            self.usernameField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"usernameCell"] autorelease];
+            self.usernameField.frame = CGRectMake(10, 0, cell.contentView.frame.size.width - 10, cell.contentView.frame.size.height);
+			self.usernameField.placeholder = NSLocalizedString(@"USERNAME", nil);
             [cell.contentView addSubview:self.usernameField];
         }
-        cell.textLabel.text = NSLocalizedString(@"USERNAME", nil);
+        //cell.textLabel.text = NSLocalizedString(@"USERNAME", nil);
     } else if (indexPath.row == 1) {
         cell = [tableView dequeueReusableCellWithIdentifier:@"passwordCell"];
         if (cell == nil) {
-            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:@"passwordCell"] autorelease];
-            self.passwordField.frame = CGRectMake(110, 0, cell.contentView.frame.size.width - 110, cell.contentView.frame.size.height);
+            cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:@"passwordCell"] autorelease];
+            self.passwordField.frame = CGRectMake(10, 0, cell.contentView.frame.size.width - 10, cell.contentView.frame.size.height);
+			self.passwordField.placeholder = NSLocalizedString(@"PASSWORD", nil);
             [cell.contentView addSubview:self.passwordField];
         }
-        cell.textLabel.text = NSLocalizedString(@"PASSWORD", nil);
+        //cell.textLabel.text = NSLocalizedString(@"PASSWORD", nil);
         
     }
     
     cell.textLabel.textColor = [UIColor grayColor];
-    cell.selectionStyle = UITableViewCellEditingStyleNone;
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     return cell;
 }
 
