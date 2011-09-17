@@ -78,8 +78,12 @@
     if (_isSuccessfull) {
         [self.delegate loginRequestDidFinnishLogin:self];
     } else {
-        CXMLDocument *doc = [[[CXMLDocument alloc] initWithData:[_data dataByCleanUTF8] options:0 error:nil] autorelease];
-        NSString *titleValue = [[doc nodeForXPath:@"//title/text()" error:nil] stringValue];
+		NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
+		NSError *error;
+		NSString *responseString = [[NSString alloc] initWithData:[_data dataByCleanUTF8] encoding:NSUTF8StringEncoding];
+		CXMLDocument *doc = [[[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error] autorelease];
+		
+        NSString *titleValue = [[[doc nodesForXPath:@"//x:title/text()" namespaceMappings:ns error:nil] lastObject] stringValue];
         if ([titleValue stringByMatching:@".*Login"]) {
             [self.delegate loginRequestDidFail:self];
         } else {
