@@ -49,7 +49,7 @@
 }
 
 - (void)loadProfile {
-    self.homeConnection = [[[MVUrlConnection alloc] initWithUrlString:@"http://www.couchsurfing.org/home.html?default_language=en"] autorelease];
+    self.homeConnection = [[[MVUrlConnection alloc] initWithUrlString:@"http://www.couchsurfing.org/home.html?language_locale=en_US"] autorelease];
     self.homeConnection.delegate = self;
     [self.homeConnection sendRequest];
 }
