@@ -73,6 +73,8 @@
 	NSDictionary *encodedDict = [NSDictionary dictionaryWithObjectsAndKeys:
 		self.surfer.ident, @"host_id",
 		@"classic", @"current_formstyle",
+		@"%d/%m/%Y", @"date_arrival_format",
+		@"%d/%m/%Y", @"date_departure_format",
 		arrivalDateString, @"date_arrival",
 		departureDateString, @"date_departure", 
 		[NSString stringWithFormat:@"%d", self.numberOfSurfers], @"number_in_party", 
