@@ -123,6 +123,7 @@
 		6CAA940C128591BD00CB1737 /* CouchSearchResultControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA940B128591BD00CB1737 /* CouchSearchResultControllerFactory.m */; };
 		6CAA94D81285A07E00CB1737 /* CouchSearchFormControllerFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */; };
 		6CAFE7A913BA551D0089559B /* CouchRequestRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CAFE7A813BA551C0089559B /* CouchRequestRequest.m */; };
+		6CC19216148249B50055310C /* NSDictionary+URL.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC19215148249B50055310C /* NSDictionary+URL.m */; };
 		6CC1DA1313A09276008F659F /* JSONKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC1DA1213A09276008F659F /* JSONKit.m */; };
 		6CC8B60813B8BA3100E9A556 /* LocationSearchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8B60713B8BA3100E9A556 /* LocationSearchController.m */; };
 		6CC8B60C13B90D6800E9A556 /* CouchRequestFormController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CC8B60B13B90D6800E9A556 /* CouchRequestFormController.m */; };
@@ -385,6 +386,8 @@
 		6CAA94D71285A07E00CB1737 /* CouchSearchFormControllerFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchSearchFormControllerFactory.m; sourceTree = "<group>"; };
 		6CAFE7A713BA551C0089559B /* CouchRequestRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CouchRequestRequest.h; sourceTree = "<group>"; };
 		6CAFE7A813BA551C0089559B /* CouchRequestRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CouchRequestRequest.m; sourceTree = "<group>"; };
+		6CC19214148249B50055310C /* NSDictionary+URL.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSDictionary+URL.h"; path = "Shared/Classes/NSDictionary+URL.h"; sourceTree = "<group>"; };
+		6CC19215148249B50055310C /* NSDictionary+URL.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSDictionary+URL.m"; path = "Shared/Classes/NSDictionary+URL.m"; sourceTree = "<group>"; };
 		6CC1DA1113A09276008F659F /* JSONKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JSONKit.h; sourceTree = "<group>"; };
 		6CC1DA1213A09276008F659F /* JSONKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JSONKit.m; sourceTree = "<group>"; };
 		6CC8B60613B8BA3100E9A556 /* LocationSearchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocationSearchController.h; sourceTree = "<group>"; };
@@ -832,6 +835,8 @@
 		6C9EACFA13A0FCD200C1B19D /* CouchSurf */ = {
 			isa = PBXGroup;
 			children = (
+				6CC19214148249B50055310C /* NSDictionary+URL.h */,
+				6CC19215148249B50055310C /* NSDictionary+URL.m */,
 				6C3A52D213BF7BBF00ABA77C /* ProfileRequest.h */,
 				6C3A52D313BF7BBF00ABA77C /* ProfileRequest.m */,
 				6C9EAD1013A0FD3A00C1B19D /* Auth */,
@@ -1230,6 +1235,7 @@
 				6CA6AEC513FD7B6600FAF1A0 /* MVIOCPropertyInjectionType.m in Sources */,
 				6CA6AEC613FD7B6600FAF1A0 /* MVIOCSingletonCache.m in Sources */,
 				6CEAE7BE14125FC5004A673D /* PreferencesRequest.m in Sources */,
+				6CC19216148249B50055310C /* NSDictionary+URL.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

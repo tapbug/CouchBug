@@ -10,6 +10,8 @@
 #import "TouchXML.h"
 #import "RegexKitLite.h"
 #import "NSData+UTF8.h"
+#import "JSONKit.h"
+#import "NSDictionary+URL.h"
 
 @interface LoginRequest ()
 
@@ -35,18 +37,31 @@
     [super dealloc];
 }
 
-- (void)login {
-    NSMutableString *requestString = [NSMutableString string];
+- (void)login {   
+	NSDictionary *encoded_data = [NSDictionary dictionaryWithObjectsAndKeys:
+								  self.username, @"user",
+								  self.password, @"password",
+								  @"manual", @"submitted",
+								  @"submit", @"submit_button",
+								  nil];
     
-    [requestString appendFormat:@"auth_login[un]=%@", self.username];
-    [requestString appendFormat:@"&auth_login[pw]=%@", self.password];
-    [requestString appendFormat:@"&auth_login[persistant]=%@", @"yes"];
-    [requestString appendFormat:@"&auth_login[action]=%@", @"Secure login..."];
+	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
+							[encoded_data JSONString], @"encoded_data",
+							@"true", @"csstandard_request",
+							@"json", @"type",
+							@"false", @"dataonly",
+							nil];
+	
+	NSString *requestString = [params URLQueryStringWithoutMark];
+	
     //vyzjistit zda je to nutne
     //[requestString appendFormat:@"&auth_login[timezone_offset]=%@", @"-60"];
     
-    NSURL *url = [NSURL URLWithString:@"https://www.couchsurfing.org/login.html"];
+    NSURL *url = [NSURL URLWithString:@"https://www.couchsurfing.org/login/authenticate"];
     NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+	[request addValue:@"application/x-www-form-urlencoded; charset=UTF-8" forHTTPHeaderField:@"Content-Type"];
+	[request addValue:@"text/javascript, text/html, application/xml, text/xml, */*" forHTTPHeaderField:@"Accept"];
+	
     [request setHTTPMethod:@"POST"];
     [request setHTTPBody:[requestString dataUsingEncoding:NSUTF8StringEncoding]];
     _connection = [[NSURLConnection alloc] initWithRequest:request delegate:self];
