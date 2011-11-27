@@ -61,7 +61,7 @@
     CXMLDocument * doc = [[CXMLDocument alloc] initWithData:[responseData dataByCleanUTF8] options:CXMLDocumentTidyHTML error:nil];
     if (connection == self.homeConnection) {
         self.profileDictionary = [NSMutableDictionary dictionary];
-        CXMLNode *isNotLoggedNode = [doc nodeForXPath:@"//*[@id='auth_loginaction']" error:nil];
+        CXMLNode *isNotLoggedNode = [doc nodeForXPath:@"//*[@id='login_form']" error:nil];
         if (isNotLoggedNode) {
             if (self.loginRequest == nil) {
                 self.loginRequest = [[[LoginRequest alloc] init] autorelease];

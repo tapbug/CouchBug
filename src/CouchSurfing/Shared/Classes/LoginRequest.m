@@ -43,6 +43,7 @@
 								  self.password, @"password",
 								  @"manual", @"submitted",
 								  @"submit", @"submit_button",
+								  @"1", @"persistent",
 								  nil];
     
 	NSDictionary *params = [NSDictionary dictionaryWithObjectsAndKeys:
