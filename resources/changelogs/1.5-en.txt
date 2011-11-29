@@ -1,0 +1,4 @@
+✦ Fix - No more broken login
+✦ Fix - CouchRequests are working again
+
+Thanks for your support! Please leave us review in AppStore after every update…
