@@ -148,20 +148,12 @@
 		6CF39A4B13A7F01D008148ED /* verified.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4513A7F01D008148ED /* verified.png */; };
 		6CF39A4C13A7F01D008148ED /* verified@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6CF39A4613A7F01D008148ED /* verified@2x.png */; };
 		6CF8341713B32D9900C2A446 /* CSEditableCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6CF8341613B32D9900C2A446 /* CSEditableCell.m */; };
-		D01ADC3613EC9CC8000906BD /* Icon-72.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACEE13A0FC4200C1B19D /* Icon-72.png */; };
-		D01ADC3713EC9CC8000906BD /* Icon-Small-50.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACEF13A0FC4200C1B19D /* Icon-Small-50.png */; };
-		D01ADC3813EC9CC8000906BD /* Icon-Small.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACF013A0FC4200C1B19D /* Icon-Small.png */; };
-		D01ADC3913EC9CC8000906BD /* Icon-Small@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACF113A0FC4200C1B19D /* Icon-Small@2x.png */; };
-		D01ADC3A13EC9CC8000906BD /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACF213A0FC4200C1B19D /* Icon.png */; };
-		D01ADC3B13EC9CC8000906BD /* Icon@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 6C9EACF313A0FC4200C1B19D /* Icon@2x.png */; };
 		D0553BE513FB70A6006207FE /* photoNoneProfile.png in Resources */ = {isa = PBXBuildFile; fileRef = D0553BE313FB70A6006207FE /* photoNoneProfile.png */; };
 		D0553BE613FB70A6006207FE /* photoNoneProfile@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0553BE413FB70A6006207FE /* photoNoneProfile@2x.png */; };
 		D073DF3C13AAAC9E002D00F9 /* photoNone.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3813AAAC9E002D00F9 /* photoNone.png */; };
 		D073DF3D13AAAC9E002D00F9 /* photoNone@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3913AAAC9E002D00F9 /* photoNone@2x.png */; };
 		D073DF3E13AAAC9E002D00F9 /* worldBg.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3A13AAAC9E002D00F9 /* worldBg.png */; };
 		D073DF3F13AAAC9E002D00F9 /* worldBg@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D073DF3B13AAAC9E002D00F9 /* worldBg@2x.png */; };
-		D0B7961A13E4DFE100DA111D /* Languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B313B6830400704662 /* Languages.plist */; };
-		D0B8B88D13FB7B6000717B3C /* Languages.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6CF1E0B313B6830400704662 /* Languages.plist */; };
 		D0C0B469140429A600937813 /* LinkFacebook.png in Resources */ = {isa = PBXBuildFile; fileRef = D0C0B465140429A600937813 /* LinkFacebook.png */; };
 		D0C0B46A140429A600937813 /* LinkFacebook@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = D0C0B466140429A600937813 /* LinkFacebook@2x.png */; };
 		D0C0B46B140429A600937813 /* LinkTwitter.png in Resources */ = {isa = PBXBuildFile; fileRef = D0C0B467140429A600937813 /* LinkTwitter.png */; };
@@ -1031,7 +1023,7 @@
 		29B97313FDCFA39411CA2CEA /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0410;
+				LastUpgradeCheck = 0420;
 			};
 			buildConfigurationList = C01FCF4E08A954540054247B /* Build configuration list for PBXProject "CouchSurfing" */;
 			compatibilityVersion = "Xcode 3.2";
@@ -1113,16 +1105,8 @@
 				D0DD3A3213C3E29D00EE5C94 /* Default@2x.png in Resources */,
 				D0FE2EFA13CA864900D633E3 /* appIconRounded.png in Resources */,
 				D0FE2EFB13CA864900D633E3 /* appIconRounded@2x.png in Resources */,
-				D0B7961A13E4DFE100DA111D /* Languages.plist in Resources */,
-				D01ADC3613EC9CC8000906BD /* Icon-72.png in Resources */,
-				D01ADC3713EC9CC8000906BD /* Icon-Small-50.png in Resources */,
-				D01ADC3813EC9CC8000906BD /* Icon-Small.png in Resources */,
-				D01ADC3913EC9CC8000906BD /* Icon-Small@2x.png in Resources */,
-				D01ADC3A13EC9CC8000906BD /* Icon.png in Resources */,
-				D01ADC3B13EC9CC8000906BD /* Icon@2x.png in Resources */,
 				D0553BE513FB70A6006207FE /* photoNoneProfile.png in Resources */,
 				D0553BE613FB70A6006207FE /* photoNoneProfile@2x.png in Resources */,
-				D0B8B88D13FB7B6000717B3C /* Languages.plist in Resources */,
 				D0C0B469140429A600937813 /* LinkFacebook.png in Resources */,
 				D0C0B46A140429A600937813 /* LinkFacebook@2x.png in Resources */,
 				D0C0B46B140429A600937813 /* LinkTwitter.png in Resources */,
@@ -1269,7 +1253,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CouchSurfing_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TOUCHXMLUSETIDY=1";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					../../libs/xpathfinder/Classes,
 					../../libs/objectiveioc/MVIOC,
@@ -1301,7 +1285,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = CouchSurfing_Prefix.pch;
 				GCC_PREPROCESSOR_DEFINITIONS = "TOUCHXMLUSETIDY=1";
-				GCC_VERSION = com.apple.compilers.llvmgcc42;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				HEADER_SEARCH_PATHS = (
 					../../libs/xpathfinder/Classes,
 					../../libs/objectiveioc/MVIOC,
