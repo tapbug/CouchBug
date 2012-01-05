@@ -22,17 +22,20 @@
         _keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.font = [UIFont systemFontOfSize:12];
 		_keyLabel.textColor = [UIColor lightGrayColor];
+		_keyLabel.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:_keyLabel];
 		
 		_valueLabel = [[[UILabel alloc] init] autorelease];
 		_valueLabel.font = [UIFont boldSystemFontOfSize:12];
 		_valueLabel.autoresizingMask = UIViewAutoresizingFlexibleWidth;
+		_valueLabel.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:_valueLabel];
 		
 		_dateLabel = [[[UILabel alloc] init] autorelease];
 		_dateLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 		_dateLabel.font = [UIFont systemFontOfSize:12];
 		_dateLabel.textColor = UIColorFromRGB(0x2957ff);
+		_dateLabel.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:_dateLabel];
 		
     }

@@ -363,6 +363,7 @@
 			textLabel.font = [UIFont systemFontOfSize:12];
 			textLabel.numberOfLines = 0;
 			textLabel.tag = 1;
+			textLabel.backgroundColor = [UIColor clearColor];
 			[cell.contentView addSubview:textLabel];
 		}
 
@@ -383,7 +384,7 @@
 			}
 			customCell.keyLabel.text = [pair objectAtIndex:1];
 			customCell.selectedValueLabel.text = [pair objectAtIndex:0];
-			customCell.selectionStyle = UITableViewCellEditingStyleNone;
+			customCell.selectionStyle = UITableViewCellSelectionStyleNone;
 			[customCell makeLayout];
 			cell = customCell;
 		} else if (indexPath.row - [self.couchInfoValues count] == 0) {
@@ -395,6 +396,7 @@
 				textLabel.font = [UIFont systemFontOfSize:12];
 				textLabel.numberOfLines = 0;
 				textLabel.tag = 1;
+				textLabel.backgroundColor = [UIColor clearColor];
 				[cell.contentView addSubview:textLabel];
 			}
 			

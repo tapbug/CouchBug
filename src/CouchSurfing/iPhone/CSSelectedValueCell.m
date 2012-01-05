@@ -22,11 +22,13 @@
 		_keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		_keyLabel.font = [UIFont boldSystemFontOfSize:17];
+		_keyLabel.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:_keyLabel];
 		
 		_selectedValueLabel = [[[UILabel alloc] init] autorelease];
 		_selectedValueLabel.autoresizingMask = UIViewAutoresizingFlexibleLeftMargin;
 		_selectedValueLabel.textColor = UIColorFromRGB(0x385487);
+		_selectedValueLabel.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:_selectedValueLabel];
     }
     return self;
