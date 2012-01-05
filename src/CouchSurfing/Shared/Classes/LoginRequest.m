@@ -82,7 +82,7 @@
     if (response != nil) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         NSDictionary *headers = [httpResponse allHeaderFields];
-        if ([[headers objectForKey:@"Location"] isEqual:@"/home.html?login=1"]) {
+        if ([[headers objectForKey:@"Location"] isEqual:@"/classic_home.html?login=1"]) {
             _isSuccessfull = YES;
         }
         return nil;

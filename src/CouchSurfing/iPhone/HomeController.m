@@ -157,7 +157,6 @@
                                         target:self
                                         action:@selector(logoutAction)];
     
-    self.navigationItem.leftBarButtonItem.enabled = NO;
     self.navigationController.navigationBar.tintColor = UIColorFromRGB(0x3d4041);
 	
 	[self loadHomeInformation];
@@ -417,7 +416,6 @@
 
 - (void)tryLoadingDone {
 	if (_profileLoaded && _preferencesLoaded) {
-		self.navigationItem.leftBarButtonItem.enabled = YES;
 		[self.loadingOverlap removeOverlap];
 	}
 }

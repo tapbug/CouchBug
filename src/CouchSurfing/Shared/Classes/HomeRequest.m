@@ -49,7 +49,7 @@
 }
 
 - (void)loadProfile {
-    self.homeConnection = [[[MVUrlConnection alloc] initWithUrlString:@"http://www.couchsurfing.org/home.html?language_locale=en_US"] autorelease];
+    self.homeConnection = [[[MVUrlConnection alloc] initWithUrlString:@"http://www.couchsurfing.org/classic_home.html?make_default=1&language_locale=en_US"] autorelease];
     self.homeConnection.delegate = self;
     [self.homeConnection sendRequest];
 }
@@ -119,7 +119,7 @@
         }
 		
 		//	Avatar obrazek a Jmeno a Prijmeni
-		NSString *personalImgNodeQuery = [NSString stringWithFormat:@"//x:a[contains(@href, '/people/%@')][contains(@class, 'profile-image')]/x:img", [self.loginInformation.username lowercaseString]];
+		NSString *personalImgNodeQuery = [NSString stringWithFormat:@"//x:a[contains(@href, '/people/%@')]/x:img", [self.loginInformation.username lowercaseString]];
         CXMLNode *personalImgNode = [[doc nodesForXPath:personalImgNodeQuery namespaceMappings:ns error:nil] lastObject];
         NSString *avatarUrl = [[[personalImgNode nodeForXPath:@"./@src" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"_t_" withString:@"_m_"];
         NSString *name = [[personalImgNode nodeForXPath:@"./@alt" error:nil] stringValue];
