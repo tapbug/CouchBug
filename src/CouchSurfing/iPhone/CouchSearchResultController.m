@@ -41,6 +41,7 @@
 @property (nonatomic, retain) CLLocation *currentLocationLatLng;
 
 @property (nonatomic, retain) CouchSearchRequest *searchRequest;
+@property (nonatomic, retain) AdBannerViewOverlap *adOverlap;
 
 //	Zjisti  current lokaci jako objekt (nazev, id ...) pro CouchSurfing
 - (void)gatherCurrentLocationObjectAndSearch;
@@ -75,6 +76,8 @@
 
 @synthesize searchRequest = _searchRequest;
 
+@synthesize adOverlap = _adOverlap;
+
 - (void)viewDidLoad {
     _currentPage = 1;
 	self.navigationItem.title = NSLocalizedString(@"COUCHSEARCH", nil);
@@ -105,7 +108,15 @@
     
     self.imageDownloaders = [NSMutableDictionary dictionary];
 	self.navigationController.delegate = self;
+	
+	self.adOverlap = [[[AdBannerViewOverlap alloc] initWithContentView:_tableView] autorelease];
+	self.adOverlap.adBannerView.delegate = self;
     [super viewDidLoad];
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[self.adOverlap setCurrentContentSize];
 }
 
 - (void)viewDidAppear:(BOOL)animated {
@@ -304,6 +315,16 @@
     // e.g. self.myOutlet = nil;
 }
 
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+								duration:(NSTimeInterval)duration
+{
+	[self.adOverlap willRotateAnimation:toInterfaceOrientation duration:duration];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+	[self.adOverlap didRotateAnimation];
+}
 
 - (void)dealloc {
 	self.locationObjectRequest.delegate = nil;
@@ -319,7 +340,20 @@
     self.sourfers = nil;
 	self.formControllerFactory = nil;
 	self.profileControllerFactory = nil;
+	self.adOverlap = nil;
     [super dealloc];
+}
+
+#pragma Mark ADBannerViewDelegate methods
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+	self.adOverlap.adLoaded = YES;
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+	self.adOverlap.adLoaded = NO;
 }
 
 #pragma Mark CurrentLocationRequestDelegate methods

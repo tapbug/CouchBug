@@ -6,7 +6,9 @@
 //  Copyright 2011 tapbug. All rights reserved.
 //
 
+
 #import "HomeController.h"
+
 #import "AuthControllersFactory.h"
 #import "ActivityOverlap.h"
 #import "HomeRequestFactory.h"
@@ -36,6 +38,8 @@
 
 @property (nonatomic, retain) NSArray *items;
 
+@property (nonatomic, retain) AdBannerViewOverlap *adBannerViewOverlap;
+
 //	Pokud vsechny requesty nutne pro praci jsou hotove
 - (void)tryLoadingDone;
 
@@ -62,7 +66,7 @@
 @synthesize avatarDownloader = _avatarDownloader;
 
 @synthesize items = _items;
-
+@synthesize adBannerViewOverlap = _adBannerViewOverlap;
 @synthesize couchSearchController = _couchSearchController;
 
 - (id)initWithAuthControllersFactory:(AuthControllersFactory *)authControllersFactory
@@ -94,6 +98,7 @@
     
     self.avatarDownloader = nil;
     self.items = nil;
+	self.adBannerViewOverlap = nil;
     [super dealloc];
 }
 
@@ -108,8 +113,14 @@
 #pragma mark - View lifecycle
 
 - (void)viewDidLoad {
+	_contentView = [[UIView alloc] initWithFrame:CGRectMake(0,
+															0,
+															self.view.frame.size.width,
+															self.view.frame.size.height)];
+	_contentView.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleHeight;
+	_contentView.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
 	
-	self.view.backgroundColor = [UIColor colorWithPatternImage:[UIImage imageNamed:@"clothBg"]];
+	[self.view addSubview:_contentView];
 	
     CGRect viewFrame = self.view.frame;
     _tableView = [[[UITableView alloc] initWithFrame:CGRectMake(0, 0, viewFrame.size.width, viewFrame.size.height)] autorelease];
@@ -142,7 +153,7 @@
     [headerView addSubview:photoFrameView];
     
     
-    [self.view addSubview:_tableView];
+    [_contentView addSubview:_tableView];
     
     self.loadingOverlap = 
         [[[ActivityOverlap alloc] initWithView:self.view
@@ -171,6 +182,8 @@
 		_preferencesLoaded = YES;
 	}
 	
+	self.adBannerViewOverlap = [[AdBannerViewOverlap alloc] initWithContentView:_contentView];
+	self.adBannerViewOverlap.adBannerView.delegate = self;
     [super viewDidLoad];
      
 }
@@ -196,6 +209,23 @@
 
 - (void)viewDidDisappear:(BOOL)animated {
 	_isActive = NO;
+}
+
+- (void)viewWillAppear:(BOOL)animated
+{
+	[self.adBannerViewOverlap setCurrentContentSize];
+}
+
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation 
+								duration:(NSTimeInterval)duration
+{
+	[self.adBannerViewOverlap willRotateAnimation:toInterfaceOrientation 
+										 duration:duration];
+}
+
+- (void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{	
+	[self.adBannerViewOverlap didRotateAnimation];
 }
 
 #pragma Mark UITableViewDataSource methods
@@ -393,6 +423,18 @@
 
 - (void)imageDownloader:(CSImageDownloader *)imageDownloader didDownloadImage:(UIImage *)image forPosition:(NSInteger)position {
     _photoView.image = [CSImageCropper scaleToSize:CGSizeMake(130, 130) image:image];
+}
+
+#pragma Mark ADBannerView methods
+
+- (void)bannerViewDidLoadAd:(ADBannerView *)banner
+{
+	self.adBannerViewOverlap.adLoaded = YES;
+}
+
+- (void)bannerView:(ADBannerView *)banner didFailToReceiveAdWithError:(NSError *)error
+{
+	self.adBannerViewOverlap.adLoaded = NO;
 }
 
 #pragma Mark Action methods

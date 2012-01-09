@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "AdBannerViewOverlap.h"
 
 #import "LogoutRequest.h"
 #import "HomeRequest.h"
@@ -20,8 +21,9 @@
 @class CouchSearchResultController;
 @protocol ActiveControllersSetter;
 
-@interface HomeController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, PreferencesRequestDelegate> {
-    AuthControllersFactory *_authControllersFactory;
+@interface HomeController : UIViewController <LogoutRequestDelegate, ProfileRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, PreferencesRequestDelegate, ADBannerViewDelegate> {
+    UIView *_contentView;
+	AuthControllersFactory *_authControllersFactory;
     HomeRequestFactory *_profileRequestFactory;
     
     ActivityOverlap *_loadingOverlap;
@@ -48,6 +50,8 @@
 	
 	BOOL _shouldReload;
 	BOOL _isActive;
+	
+	AdBannerViewOverlap *_adBannerViewOverlap;
 }
 
 @property (nonatomic, assign) CouchSearchResultController *couchSearchController;

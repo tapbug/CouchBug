@@ -13,6 +13,8 @@
 #import "CSImageDownloader.h"
 #import "CurrentLocationObjectRequest.h"
 
+#import "AdBannerViewOverlap.h"
+
 //  Konstanty stavu, ktere rikaji co se zrovna deje
 typedef enum {
     CouchSearchResultControllerFirst,   //prvni loading
@@ -26,7 +28,7 @@ typedef enum {
 @class ProfileControllerFactory;
 @class LocationDisabledOverlap;
 
-@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationObjectRequestDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate> {
+@interface CouchSearchResultController : UIViewController <CouchSearchRequestDelegate, UITableViewDelegate, UITableViewDataSource, CSImageDownloaderDelegate, CurrentLocationObjectRequestDelegate, UINavigationControllerDelegate, CLLocationManagerDelegate, ADBannerViewDelegate> {
     CouchSearchFilter *_filter;
     CouchSearchFormControllerFactory *_formControllerFactory;
 	ProfileControllerFactory *_profileControllerFactory;
@@ -58,6 +60,8 @@ typedef enum {
     BOOL _initialLoadDone;
 	//ukazuje se zrovna hlaska  o locationDisabled
 	BOOL _locationDisabled;
+	
+	AdBannerViewOverlap *_adOverlap;
 }
 
 @property (nonatomic, assign) CouchSearchFilter *filter;
