@@ -1,0 +1,9 @@
+New in 1.7
+✦ Fix - Faster profile loading
+✦ Added iAd
+
+New in 1.6
+✦ Fix - Crash on Login
+✦ Fix - Support for new CS homepage
+
+Thanks for your support! Please leave us review in AppStore after every update…
