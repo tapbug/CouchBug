@@ -49,7 +49,7 @@
 }
 
 - (void)loadProfile {
-    self.homeConnection = [[[MVUrlConnection alloc] initWithUrlString:@"http://www.couchsurfing.org/classic_home.html?make_default=1&language_locale=en_US"] autorelease];
+    self.homeConnection = [[[MVUrlConnection alloc] initWithUrlString:@"http://www.couchsurfing.org/home"] autorelease];
     self.homeConnection.delegate = self;
     [self.homeConnection sendRequest];
 }
@@ -74,20 +74,21 @@
             }
             return;
         }
-        
         //  Zjisteni poctu CouchSurferu na webu
-        NSArray *visitorsCountNodes = [doc nodesForXPath:@"//*[text()='Online Visitors']/following-sibling::*//*[number(text())=text()]/text()" error:nil];
-        if ([visitorsCountNodes count] == 2) {
+        //NSArray *visitorsCountNodes = [doc nodesForXPath:@"//*[text()='Online Visitors']/following-sibling::*//*[number(text())=text()]/text()" error:nil];
+		/*
+		 if ([visitorsCountNodes count] == 2) {
             NSInteger sumVisitors = [[[visitorsCountNodes objectAtIndex:0] stringValue] integerValue];
             NSInteger nonLoggedVisitors = [[[visitorsCountNodes objectAtIndex:1] stringValue] integerValue];
             NSInteger loggedVisitors = sumVisitors - nonLoggedVisitors;
             
             [self.profileDictionary setObject:[NSString stringWithFormat:@"%d", loggedVisitors] forKey:@"loggedVisitors"];            
         }        
-        
+        */
+		
         //  Zjisteni poctu visitu meho profilu a zjisteni od kdy jsem clenem
-        NSArray *profilesViewNodes = [doc nodesForXPath:@"//*[text()='My Profile at a Glance']/../following-sibling::*//text()" namespaceMappings:ns error:nil];
-        for (CXMLNode *profileNode in profilesViewNodes) {
+        //NSArray *profilesViewNodes = [doc nodesForXPath:@"//*[text()='My Profile at a Glance']/../following-sibling::*//text()" namespaceMappings:ns error:nil];
+        /*for (CXMLNode *profileNode in profilesViewNodes) {
             NSString *profileViewsRegex = @"^([0-9,]+) profile views since(.+?)$";
             NSString *profileString = [profileNode stringValue];
             NSString *profileViews = [profileString stringByMatching:profileViewsRegex capture:1];
@@ -105,10 +106,10 @@
             if (pendingFriends != nil) {
                 [self.profileDictionary setObject:pendingFriends forKey:@"pendingFriends"];
             }
-        }
+        }*/
         
-        NSArray *bubbleNodes = [doc nodesForXPath:@"//*[@class='item_bubble']" namespaceMappings:ns error:nil];
-        for (CXMLNode *bubbleNode in bubbleNodes) {
+        //NSArray *bubbleNodes = [doc nodesForXPath:@"//*[@class='item_bubble']" namespaceMappings:ns error:nil];
+        /*for (CXMLNode *bubbleNode in bubbleNodes) {
             NSString *href = [[[bubbleNode nodesForXPath:@".//x:a/@href" namespaceMappings:ns error:nil] lastObject] stringValue];
             NSString *value = [[[bubbleNode nodesForXPath:@".//x:a/text()" namespaceMappings:ns error:nil] lastObject] stringValue];
             if ([href stringByMatching:@"messages"] != nil) {
@@ -116,18 +117,20 @@
             } else if([href stringByMatching:@"couchmanager"] != nil) {
                 [self.profileDictionary setObject:value forKey:@"couchRequestCount"];
             }
-        }
+        }*/
 		
 		//	Avatar obrazek a Jmeno a Prijmeni
 		NSString *personalImgNodeQuery = [NSString stringWithFormat:@"//x:a[contains(@href, '/people/%@')]/x:img", [self.loginInformation.username lowercaseString]];
         CXMLNode *personalImgNode = [[doc nodesForXPath:personalImgNodeQuery namespaceMappings:ns error:nil] lastObject];
         NSString *avatarUrl = [[[personalImgNode nodeForXPath:@"./@src" error:nil] stringValue] stringByReplacingOccurrencesOfString:@"_t_" withString:@"_m_"];
-        NSString *name = [[personalImgNode nodeForXPath:@"./@alt" error:nil] stringValue];
         
         if (avatarUrl != nil) {
             [self.profileDictionary setObject:avatarUrl forKey:@"avatar"];            
         }
         
+        CXMLNode *personalNameNode = [[doc nodesForXPath:@"//x:title/text()" namespaceMappings:ns error:nil] lastObject];
+        NSString *name = [[[personalNameNode stringValue] stringByReplacingOccurrencesOfString:@"CouchSurfing -" withString:@""] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceCharacterSet]];
+		
         if (name != nil) {
             [self.profileDictionary setObject:name forKey:@"name"];            
         }

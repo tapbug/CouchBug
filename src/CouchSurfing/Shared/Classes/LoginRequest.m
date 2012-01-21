@@ -17,6 +17,10 @@
 
 @property (nonatomic, retain) NSURLConnection *connection;
 
+// It is used when login is success, but we still need to set language
+// before we inform delegate
+- (void)loginRequestDidSuccess;
+
 @end
 
 @implementation LoginRequest
@@ -27,6 +31,8 @@
 
 @synthesize connection = _connection;
 
+@synthesize setLanguageRequest = _setLanguageRequest;
+
 - (void)dealloc {
     self.username = nil;
     self.password = nil;
@@ -34,6 +40,8 @@
     [self.connection cancel];
     self.connection = nil;
     
+	self.setLanguageRequest = nil;
+	
     [super dealloc];
 }
 
@@ -82,7 +90,7 @@
     if (response != nil) {
         NSHTTPURLResponse *httpResponse = (NSHTTPURLResponse *)response;
         NSDictionary *headers = [httpResponse allHeaderFields];
-        if ([[headers objectForKey:@"Location"] isEqual:@"/classic_home.html?login=1"]) {
+        if ([[headers objectForKey:@"Location"] isEqual:@"https://www.couchsurfing.org/home?login=1"]) {
             _isSuccessfull = YES;
         }
         return nil;
@@ -92,18 +100,14 @@
 
 - (void)connectionDidFinishLoading:(NSURLConnection *)connection {
     if (_isSuccessfull) {
-        [self.delegate loginRequestDidFinnishLogin:self];
+        [self loginRequestDidSuccess];
     } else {
-		NSDictionary *ns = [NSDictionary dictionaryWithObject:@"http://www.w3.org/1999/xhtml" forKey:@"x"];
-		NSError *error;
-		NSString *responseString = [[NSString alloc] initWithData:[_data dataByCleanUTF8] encoding:NSUTF8StringEncoding];
-		CXMLDocument *doc = [[[CXMLDocument alloc] initWithXMLString:responseString options:CXMLDocumentTidyHTML error:&error] autorelease];
-		
-        NSString *titleValue = [[[doc nodesForXPath:@"//x:title/text()" namespaceMappings:ns error:nil] lastObject] stringValue];
-        if ([titleValue stringByMatching:@".*Login"]) {
+		NSDictionary *responseJson = [[_data objectFromJSONData] lastObject];
+
+        if ([[responseJson objectForKey:@"errors"] count] > 0) {
             [self.delegate loginRequestDidFail:self];
         } else {
-            [self.delegate loginRequestDidFinnishLogin:self];
+            [self loginRequestDidSuccess];
         }
         
     }
@@ -122,5 +126,22 @@
     [challenge.sender continueWithoutCredentialForAuthenticationChallenge:challenge];
 }
 
+#pragma Mark SetLanguageRequestDelegate methods
+
+- (void)setLanguageRequestDidSent:(SetLanguageRequest *)request
+{
+	if ([self.delegate respondsToSelector:@selector(loginRequestDidFinnishLogin:)]) {
+		[self.delegate loginRequestDidFinnishLogin:self];
+	}
+}
+
+#pragma Mark Private methods
+
+- (void)loginRequestDidSuccess
+{
+	self.setLanguageRequest = [[[SetLanguageRequest alloc] init] autorelease];
+	self.setLanguageRequest.delegate = self;
+	[self.setLanguageRequest setDefaultLanguage];
+}
 
 @end

@@ -71,6 +71,7 @@
 		6C7E868313B244F4000ED485 /* CSCheckboxCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E868213B244F4000ED485 /* CSCheckboxCell.m */; };
 		6C7E868613B262C0000ED485 /* CSSelectedValueCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C7E868513B262C0000ED485 /* CSSelectedValueCell.m */; };
 		6C87AEF2130BB8420015B471 /* LoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C87AEF1130BB8420015B471 /* LoginController.m */; };
+		6C8ADE2314CB24FC00C80BEC /* SetLanguageRequest.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C8ADE2214CB24FC00C80BEC /* SetLanguageRequest.m */; };
 		6C93661813A22EA700FA8960 /* CXMLDocument_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9365FD13A22EA700FA8960 /* CXMLDocument_CreationExtensions.m */; };
 		6C93661913A22EA700FA8960 /* CXMLNode_CreationExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C9365FF13A22EA700FA8960 /* CXMLNode_CreationExtensions.m */; };
 		6C93661A13A22EA700FA8960 /* CXHTMLDocument.m in Sources */ = {isa = PBXBuildFile; fileRef = 6C93660113A22EA700FA8960 /* CXHTMLDocument.m */; };
@@ -287,6 +288,8 @@
 		6C7E868513B262C0000ED485 /* CSSelectedValueCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CSSelectedValueCell.m; sourceTree = "<group>"; };
 		6C87AEF0130BB8420015B471 /* LoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginController.h; sourceTree = "<group>"; };
 		6C87AEF1130BB8420015B471 /* LoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; lineEnding = 0; path = LoginController.m; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.objc; };
+		6C8ADE2114CB24FC00C80BEC /* SetLanguageRequest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SetLanguageRequest.h; path = Shared/Classes/SetLanguageRequest.h; sourceTree = "<group>"; };
+		6C8ADE2214CB24FC00C80BEC /* SetLanguageRequest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SetLanguageRequest.m; path = Shared/Classes/SetLanguageRequest.m; sourceTree = "<group>"; };
 		6C9365FC13A22EA700FA8960 /* CXMLDocument_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLDocument_CreationExtensions.h; sourceTree = "<group>"; };
 		6C9365FD13A22EA700FA8960 /* CXMLDocument_CreationExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CXMLDocument_CreationExtensions.m; sourceTree = "<group>"; };
 		6C9365FE13A22EA700FA8960 /* CXMLNode_CreationExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CXMLNode_CreationExtensions.h; sourceTree = "<group>"; };
@@ -846,6 +849,8 @@
 				6C9EAD0013A0FCF900C1B19D /* CouchSurfer.m */,
 				6C99163813B7B9C300E35900 /* NSDictionary+Location.h */,
 				6C99163913B7B9C300E35900 /* NSDictionary+Location.m */,
+				6C8ADE2114CB24FC00C80BEC /* SetLanguageRequest.h */,
+				6C8ADE2214CB24FC00C80BEC /* SetLanguageRequest.m */,
 			);
 			name = CouchSurf;
 			sourceTree = "<group>";
@@ -1230,6 +1235,7 @@
 				6CEAE7BE14125FC5004A673D /* PreferencesRequest.m in Sources */,
 				6CC19216148249B50055310C /* NSDictionary+URL.m in Sources */,
 				6C78EB9514BAD5280000BE76 /* AdBannerViewOverlap.m in Sources */,
+				6C8ADE2314CB24FC00C80BEC /* SetLanguageRequest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
