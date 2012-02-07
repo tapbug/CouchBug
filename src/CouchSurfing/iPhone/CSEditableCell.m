@@ -21,6 +21,7 @@
 		_keyLabel = [[[UILabel alloc] init] autorelease];
 		_keyLabel.autoresizingMask = UIViewAutoresizingFlexibleRightMargin;
 		_keyLabel.font = [UIFont boldSystemFontOfSize:17];
+		_keyLabel.backgroundColor = [UIColor clearColor];
 		[self.contentView addSubview:_keyLabel];
     }
     return self;
