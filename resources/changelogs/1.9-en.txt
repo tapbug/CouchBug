@@ -1,0 +1,8 @@
+New in 1.9
+✦ Minor Bug Fix
+
+New in 1.8
+✦ Fix - Infinite loading in CouchSearch
+✦ Fix - Support for new CS homepage
+
+Thanks for your support! Please leave us review in AppStore after every update…
